@@ -1,3 +1,8 @@
+# Welcome to Flamelog
+
+![freepik__the-style-is-modern-and-it-is-a-detailed-illustrat__74091 (1)](https://github.com/user-attachments/assets/18d3341c-a1dd-4097-ba4a-f7edbc0c1177)
+
+
 # Turborepo starter
 
 This Turborepo starter is maintained by the Turborepo core team.
