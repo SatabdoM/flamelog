@@ -7,15 +7,34 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
     "check-types": {
       "dependsOn": ["^check-types"]
     },
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "inputs": ["src/**/*.{ts,tsx}", "*.js", ".eslintrc*"],
+      "outputs": [],
+      "cache": true
+    },
+    "format": {
+      "dependsOn": ["^format"],
+      "inputs": ["**/*.{js,jsx,ts,tsx,css,scss,md,json}", ".prettierrc*"],
+      "outputs": [],
+      "cache": true
+    },
+    "format:check": {
+      "dependsOn": ["^format:check"],
+      "inputs": ["**/*.{js,jsx,ts,tsx,css,scss,md,json}", ".prettierrc*"],
+      "outputs": [],
+      "cache": true
+    },
+    "validate": {
+      "dependsOn": ["lint", "format:check", "check-types"],
+      "cache": false
     }
   }
 }

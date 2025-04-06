@@ -4,17 +4,22 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "clean": "rm -rf .next .turbo node_modules",
     "dev": "next dev --turbopack",
+    "dev:clean": "pnpm clean && pnpm install && pnpm dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit --incremental",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\" --ignore-path ../../.prettierignore",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\" --ignore-path ../../.prettierignore",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "format:lint": "npm run format && npm run lint:fix"
   },
   "dependencies": {
     "@workspace/ui": "workspace:*",
     "lucide-react": "^0.475.0",
-    "next": "^15.2.3",
+    "next": "^15.2.4",
     "next-themes": "^0.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

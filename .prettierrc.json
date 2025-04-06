@@ -1,0 +1,32 @@
+{
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "overrides": [
+     {
+      "files": ["*.json"],
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "proseWrap": "always"
+      }
+    },
+    {
+      "files": "*.{css,scss}",
+      "options": {
+        "parser": "css",
+        "singleQuote": false,
+        "tabWidth": 2
+      }
+    }
+  ]
+}

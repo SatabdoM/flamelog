@@ -1,14 +1,14 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from 'next/server';
 
 // Flexible token extraction (can be extended)
 export function getAuthToken(request: NextRequest): string | null {
   // Check cookies first
-  const cookieToken = request.cookies.get("authToken")?.value;
+  const cookieToken = request.cookies.get('authToken')?.value;
   if (cookieToken) return cookieToken;
 
   // Fallback to Authorization header
-  const authHeader = request.headers.get("Authorization");
-  if (authHeader?.startsWith("Bearer ")) {
+  const authHeader = request.headers.get('Authorization');
+  if (authHeader?.startsWith('Bearer ')) {
     return authHeader.substring(7);
   }
 
@@ -38,8 +38,8 @@ export async function verifyAuthToken(token: string | null): Promise<{
   try {
     // This would be your actual token verification logic
     const mockUser = {
-      id: "user123",
-      roles: ["user"], // Default role
+      id: 'user123',
+      roles: ['user'], // Default role
     };
 
     return {
@@ -47,7 +47,7 @@ export async function verifyAuthToken(token: string | null): Promise<{
       user: mockUser,
     };
   } catch (error) {
-    console.log("MIDDLEWARE_ERROR: ", error);
+    console.error('MIDDLEWARE_ERROR: ', error);
     return { isAuthenticated: false };
   }
 }
