@@ -2,6 +2,7 @@
   "name": "flamelog",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "setup": "pnpm clean && pnpm install",
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name '.turbo' -type d -prune -exec rm -rf '{}' + && find . -name '.next' -type d -prune -exec rm -rf '{}' +",
@@ -26,8 +27,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
+    "eslint": "^9.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
