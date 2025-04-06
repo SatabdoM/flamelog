@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "clean": "rm -rf .next .turbo node_modules",
+    "clean": "rm -rf .next node_modules .turbo",
     "dev": "next dev --turbopack",
     "dev:clean": "pnpm clean && pnpm install && pnpm dev",
     "build": "next build",
