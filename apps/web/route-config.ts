@@ -6,7 +6,7 @@ interface RouteConfig {
 
 export const ROUTE_CONFIGS: RouteConfig[] = [
   {
-    matcher: ["/api/auth/:path*", "/auth/:path*"],
+    matcher: ["/", "/api/auth/:path*", "/auth/:path*"],
     public: true,
   },
   {
