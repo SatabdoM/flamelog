@@ -5,14 +5,17 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "check-types": "turbo check-types",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo check-types"
+    "format": "turbo format",
+    "format:check": "turbo format:check",
+    "validate": "turbo validate"
   },
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "turbo": "^2.4.4",
     "typescript": "5.8.2"
   },
