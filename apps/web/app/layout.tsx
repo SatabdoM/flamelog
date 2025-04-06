@@ -1,8 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "@workspace/ui/globals.css";
-import { Providers } from "@/components/providers";
 import { cn } from "@workspace/ui/lib/utils";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -28,7 +28,7 @@ const RootLayout = ({
           fontMono.variable
         )}
       >
-        <Providers>{children}</Providers>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
