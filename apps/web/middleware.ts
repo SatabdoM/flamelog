@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { pathnameMatches, ROUTE_CONFIGS } from './route-config';
+import { LOGIN_PATH_URL, pathnameMatches, ROUTE_CONFIGS } from './route-config';
 import { getAuthToken, verifyAuthToken } from './lib/auth';
 
 export async function middleware(request: NextRequest) {
@@ -38,7 +38,7 @@ export async function middleware(request: NextRequest) {
     }
 
     // Create login URL with encoded callback
-    const loginUrl = new URL('/auth/login', request.url);
+    const loginUrl = new URL(LOGIN_PATH_URL, request.url);
     loginUrl.searchParams.set('callbackUrl', encodeURIComponent(callbackUrl));
 
     return NextResponse.redirect(loginUrl);
