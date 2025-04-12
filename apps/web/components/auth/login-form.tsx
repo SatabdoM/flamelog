@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -17,8 +18,13 @@ import {
   FormMessage,
 } from '@workspace/ui/components/form';
 import { loginSchema, type LoginFormData } from '@workspace/schemas';
+import { useAuthStore } from '@/store/auth';
+import { api } from '@/lib/axios';
 
 export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>) => {
+  const router = useRouter();
+  const setAuth = useAuthStore((state) => state.setAuth);
+
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -27,9 +33,20 @@ export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>)
     },
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log(data);
-    // Handle login logic here
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      const response = await api.post('/auth/login', data);
+      const { user, token } = response.data;
+
+      // Set auth state
+      setAuth(user, token);
+
+      // Redirect to feed page
+      router.push('/feed');
+    } catch (error) {
+      console.error('Login failed:', error);
+      // Handle error (show error message, etc.)
+    }
   };
 
   return (
