@@ -67,10 +67,5 @@
       "@typescript-eslint/utils": "^7.1.0",
       "@typescript-eslint/type-utils": "^7.1.0"
     }
-  },
-  "dependencies": {
-    "@hookform/resolvers": "^5.0.1",
-    "react-hook-form": "^7.55.0",
-    "zod": "^3.24.2"
   }
 }
