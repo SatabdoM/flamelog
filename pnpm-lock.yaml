@@ -21,6 +21,10 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      prisma:
+        specifier: ^6.5.0
+        version: 6.5.0(typescript@5.7.3)
     devDependencies:
       '@babel/core':
         specifier: ^7.24.0

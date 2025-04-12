@@ -67,5 +67,8 @@
       "@typescript-eslint/utils": "^7.1.0",
       "@typescript-eslint/type-utils": "^7.1.0"
     }
+  },
+  "dependencies": {
+    "prisma": "^6.5.0"
   }
 }
