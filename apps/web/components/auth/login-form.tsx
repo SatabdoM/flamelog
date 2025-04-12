@@ -1,13 +1,36 @@
+'use client';
+
 import React from 'react';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { cn } from '@workspace/ui/lib/utils';
 import { Button } from '@workspace/ui/components/button';
 import { Input } from '@workspace/ui/components/input';
 import { Label } from '@workspace/ui/components/label';
+import { loginSchema, type LoginFormData } from '@workspace/schemas';
 
 export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = (data: LoginFormData) => {
+    console.log(data);
+    // Handle login logic here
+  };
+
   return (
-    <form className={cn('flex flex-col gap-6', className)} {...props}>
+    <form
+      className={cn('flex flex-col gap-6', className)}
+      onSubmit={handleSubmit(onSubmit)}
+      {...props}
+    >
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Login to your account</h1>
         <p className="text-muted-foreground text-sm text-balance">
@@ -17,7 +40,8 @@ export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>)
       <div className="grid gap-6">
         <div className="grid gap-3">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Input id="email" type="email" placeholder="m@example.com" {...register('email')} />
+          {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
         </div>
         <div className="grid gap-3">
           <div className="flex items-center">
@@ -26,7 +50,8 @@ export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>)
               Forgot your password?
             </a>
           </div>
-          <Input id="password" type="password" required />
+          <Input id="password" type="password" {...register('password')} />
+          {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
         </div>
         <Button type="submit" className="w-full">
           Login
@@ -48,9 +73,9 @@ export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>)
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{' '}
-        <a href="#" className="underline underline-offset-4">
+        <Link href="/auth/register" className="underline underline-offset-4">
           Sign up
-        </a>
+        </Link>
       </div>
     </form>
   );

@@ -17,12 +17,16 @@
     "format:lint": "npm run format && npm run lint:fix"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
+    "@workspace/schemas": "workspace:*",
     "@workspace/ui": "workspace:*",
     "lucide-react": "^0.475.0",
     "next": "^15.2.4",
     "next-themes": "^0.4.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.55.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/node": "^20",

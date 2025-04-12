@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 
 import { cn } from '@workspace/ui/lib/utils';
 import logo from '@workspace/ui/assets/images/logo.png';
@@ -44,16 +44,20 @@ const logoVariants = cva('flex items-center justify-center overflow-hidden bg-[#
 // Define the size type that includes both predefined sizes and numeric values
 type LogoSize = 'sm' | 'default' | 'lg' | 'xl' | number;
 
-export interface LogoProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size'> {
+type LogoBaseProps = {
   text?: string;
   className?: string;
   size?: LogoSize;
   variant?: 'default' | 'outline';
   shape?: 'default' | 'circle' | 'squircle' | 'square';
+};
+
+export interface LogoProps extends LogoBaseProps {
+  href?: string;
 }
 
-const Logo = React.forwardRef<HTMLDivElement, LogoProps>(
-  ({ className, variant, size = 'default', shape, text, ...props }, ref) => {
+const Logo = React.forwardRef<HTMLDivElement | HTMLAnchorElement, LogoProps>(
+  ({ className, variant, size = 'default', shape, text, href, ...props }, ref) => {
     // Handle numeric size
     const isNumericSize = typeof size === 'number';
     const sizeValue = isNumericSize ? size : undefined;
@@ -66,12 +70,34 @@ const Logo = React.forwardRef<HTMLDivElement, LogoProps>(
     // Determine which size variant to use
     const sizeVariant = isNumericSize ? undefined : (size as 'sm' | 'default' | 'lg' | 'xl');
 
-    return (
-      <div ref={ref} className={cn('flex items-center gap-2', className)} {...props}>
+    const LogoContent = (
+      <>
         <div className={cn(logoVariants({ variant, size: sizeVariant, shape }))} style={sizeStyle}>
           <img src={logoUrl} alt="Logo" className="h-full w-full object-contain" />
         </div>
         {text && <span className="font-medium">{text}</span>}
+      </>
+    );
+
+    if (href) {
+      return (
+        <a
+          ref={ref as React.Ref<HTMLAnchorElement>}
+          href={href}
+          className={cn('flex items-center gap-2', className)}
+        >
+          {LogoContent}
+        </a>
+      );
+    }
+
+    return (
+      <div
+        ref={ref as React.Ref<HTMLDivElement>}
+        className={cn('flex items-center gap-2', className)}
+        {...props}
+      >
+        {LogoContent}
       </div>
     );
   }
