@@ -19,7 +19,7 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
 
       <div className="flex flex-col gap-4 p-6 md:p-10 lg:col-span-4 lg:col-start-4">
         <div className="flex justify-center gap-2">
-          <Logo href="/" text="FlameLog" shape="circle" />
+          <Logo text="FlameLog" shape="circle" />
         </div>
         <div className="flex flex-1 items-center justify-center">{children}</div>
       </div>
