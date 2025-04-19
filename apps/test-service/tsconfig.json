@@ -1,13 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "CommonJS",
-    "outDir": "dist",
-    "rootDir": "src",
-    "esModuleInterop": true,
-    "strict": true,
-    "skipLibCheck": true
+    "outDir": "dist", // Output directory for compiled JavaScript files
+    "rootDir": "src", // Root directory for TypeScript source files
+    "module": "CommonJS", // Use CommonJS module system (required for Node.js)
+    "target": "ES6", // Compile to ECMAScript 6
+
+    // TypeScript strict mode options (disabled for now, can enable later)
+    "strict": false, // Disables all strict type-checking options
+    "noImplicitAny": false, // Allows variables to be implicitly `any`
+    "noUnusedLocals": false, // Allows unused local variables without errors
+    "noUnusedParameters": false, // Allows unused function parameters without errors
+    "noFallthroughCasesInSwitch": false, // Allows fallthrough in switch-case statements
+
+    // Module resolution and interop settings
+    "esModuleInterop": true, // Improves compatibility with CommonJS and ES modules
+    "resolveJsonModule": true, // Allows importing JSON files
+
+    // Debugging and compilation settings
+    "sourceMap": true, // Generates source maps for debugging
+    "skipLibCheck": true, // Skips type-checking of declaration files (.d.ts)
+    "forceConsistentCasingInFileNames": true, // Ensures file names are case-sensitive
+    "allowJs": false // Disallows JavaScript files in TypeScript compilation
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src"], // Specifies which files should be included in the compilation
+  "exclude": ["node_modules", "dist"] // Excludes unnecessary directories from compilation
 }

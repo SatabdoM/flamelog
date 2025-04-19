@@ -5,14 +5,19 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["apps/web/.next/**", "!apps/web/.next/cache/**", "apps/server/dist/**"]
+      "outputs": [
+        "apps/web/.next/**",
+        "!apps/web/.next/cache/**",
+        "apps/server/dist/**",
+        "apps/test-service/dist/**"
+      ]
     },
     "check-types": {
       "dependsOn": ["^check-types"]
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": false
     },
     "lint": {
       "dependsOn": ["^lint"],
