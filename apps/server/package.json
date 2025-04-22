@@ -8,7 +8,9 @@
     "dev": "nodemon",
     "build": "tsc",
     "start": "node dist/server.js",
-    "clean": "rm -rf node_modules .turbo"
+    "clean": "rm -rf node_modules .turbo",
+    "prisma:generate": "prisma generate --schema=./prisma/schema.prisma",
+    "prisma:dev": "prisma migrate dev --schema=./prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",
