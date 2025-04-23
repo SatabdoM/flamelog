@@ -4,6 +4,9 @@ interface RouteConfig {
   roles?: string[];
 }
 
+export const LOGIN_PATH_URL = '/auth/login';
+export const REGISTER_PATH_URL = '/auth/register';
+
 export const ROUTE_CONFIGS: RouteConfig[] = [
   {
     matcher: ['/', '/api/auth/:path*', '/auth/:path*'],
