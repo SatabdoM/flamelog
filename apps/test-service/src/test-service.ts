@@ -12,7 +12,6 @@ app.use(cors());
 app.use(express.json());
 app.use('/api', router);
 
-// Basic route
 app.get('/', (_, res) => {
   res.send('Working apis start with /api');
 });
