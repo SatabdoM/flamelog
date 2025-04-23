@@ -16,7 +16,6 @@ app.use('/api', router);
 app.get('/', (_, res) => {
   res.send('Working apis start with /api');
 });
-
 // Start server
 app.listen(PORT, () => {
   console.log(`Flamelog Test-Service running on http://localhost:${PORT}`);
