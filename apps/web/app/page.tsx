@@ -1,13 +1,15 @@
-import { Button } from '@workspace/ui/components/button';
+import { Logo } from '@workspace/ui/components/logo';
 
 const HomePage = () => {
   return (
-    <div className="flex min-h-svh items-center justify-center">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">This is web app</h1>
-        <Button>Button</Button>
+    <div className="p-16">
+      <div className="flex items-center gap-6">
+        <Logo size={80} shape="circle" />
 
-        <div className="flex" />
+        <div className="space-y-1.5">
+          <h1 className="text-4xl font-bold">FlameLog</h1>
+          <p className="text-muted-foreground text-xl">The start of something great</p>
+        </div>
       </div>
     </div>
   );

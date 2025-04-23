@@ -1,11 +1,30 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { pathnameMatches, ROUTE_CONFIGS } from './route-config';
+import { LOGIN_PATH_URL, pathnameMatches, ROUTE_CONFIGS } from './route-config';
 import { getAuthToken, verifyAuthToken } from './lib/auth';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Get authentication token (flexible for cookies or headers)
+  const authToken = getAuthToken(request);
+
+  // Verify authentication
+  const { isAuthenticated, user } = await verifyAuthToken(authToken);
+
+  // Handle authenticated users
+  if (isAuthenticated) {
+    // Redirect authenticated users away from auth routes
+    if (pathname.startsWith('/auth')) {
+      return NextResponse.redirect(new URL('/feed', request.url));
+    }
+
+    // Redirect authenticated users from home to feed
+    if (pathname === '/') {
+      return NextResponse.redirect(new URL('/feed', request.url));
+    }
+  }
 
   // Find matching route configuration
   const routeConfig = ROUTE_CONFIGS.find((config) =>
@@ -18,12 +37,6 @@ export async function middleware(request: NextRequest) {
   if (routeConfig?.public) {
     return NextResponse.next();
   }
-
-  // Get authentication token (flexible for cookies or headers)
-  const authToken = getAuthToken(request);
-
-  // Verify authentication
-  const { isAuthenticated, user } = await verifyAuthToken(authToken);
 
   if (!isAuthenticated) {
     // Redirect to login or return 401 based on route
@@ -38,7 +51,7 @@ export async function middleware(request: NextRequest) {
     }
 
     // Create login URL with encoded callback
-    const loginUrl = new URL('/auth/login', request.url);
+    const loginUrl = new URL(LOGIN_PATH_URL, request.url);
     loginUrl.searchParams.set('callbackUrl', encodeURIComponent(callbackUrl));
 
     return NextResponse.redirect(loginUrl);

@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 
 import '@workspace/ui/globals.css';
 import { cn } from '@workspace/ui/lib/utils';
+import { QueryProvider } from '@/providers/query-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 
 const fontSans = Geist({
@@ -32,7 +33,9 @@ const RootLayout = ({
         <meta name="apple-mobile-web-app-title" content="FlameLog" />
       </head>
       <body className={cn('font-sans antialiased', fontSans.variable, fontMono.variable)}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
