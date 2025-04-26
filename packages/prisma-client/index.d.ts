@@ -17,10 +17,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>;
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>;
 /**
- * Model Test_User
+ * Model TestUser
  *
  */
-export type Test_User = $Result.DefaultSelection<Prisma.$Test_UserPayload>;
+export type TestUser = $Result.DefaultSelection<Prisma.$TestUserPayload>;
 
 /**
  * ##  Prisma Client ʲˢ
@@ -187,14 +187,14 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.test_User`: Exposes CRUD operations for the **Test_User** model.
+   * `prisma.testUser`: Exposes CRUD operations for the **TestUser** model.
    * Example usage:
    * ```ts
-   * // Fetch zero or more Test_Users
-   * const test_Users = await prisma.test_User.findMany()
+   * // Fetch zero or more TestUsers
+   * const testUsers = await prisma.testUser.findMany()
    * ```
    */
-  get test_User(): Prisma.Test_UserDelegate<ExtArgs, ClientOptions>;
+  get testUser(): Prisma.TestUserDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -630,7 +630,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User';
-    Test_User: 'Test_User';
+    TestUser: 'TestUser';
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -655,7 +655,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions;
     };
     meta: {
-      modelProps: 'user' | 'test_User';
+      modelProps: 'user' | 'testUser';
       txIsolationLevel: Prisma.TransactionIsolationLevel;
     };
     model: {
@@ -733,77 +733,77 @@ export namespace Prisma {
           };
         };
       };
-      Test_User: {
-        payload: Prisma.$Test_UserPayload<ExtArgs>;
-        fields: Prisma.Test_UserFieldRefs;
+      TestUser: {
+        payload: Prisma.$TestUserPayload<ExtArgs>;
+        fields: Prisma.TestUserFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.Test_UserFindUniqueArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload> | null;
+            args: Prisma.TestUserFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload> | null;
           };
           findUniqueOrThrow: {
-            args: Prisma.Test_UserFindUniqueOrThrowArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload>;
+            args: Prisma.TestUserFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload>;
           };
           findFirst: {
-            args: Prisma.Test_UserFindFirstArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload> | null;
+            args: Prisma.TestUserFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload> | null;
           };
           findFirstOrThrow: {
-            args: Prisma.Test_UserFindFirstOrThrowArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload>;
+            args: Prisma.TestUserFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload>;
           };
           findMany: {
-            args: Prisma.Test_UserFindManyArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload>[];
+            args: Prisma.TestUserFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload>[];
           };
           create: {
-            args: Prisma.Test_UserCreateArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload>;
+            args: Prisma.TestUserCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload>;
           };
           createMany: {
-            args: Prisma.Test_UserCreateManyArgs<ExtArgs>;
+            args: Prisma.TestUserCreateManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           createManyAndReturn: {
-            args: Prisma.Test_UserCreateManyAndReturnArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload>[];
+            args: Prisma.TestUserCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload>[];
           };
           delete: {
-            args: Prisma.Test_UserDeleteArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload>;
+            args: Prisma.TestUserDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload>;
           };
           update: {
-            args: Prisma.Test_UserUpdateArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload>;
+            args: Prisma.TestUserUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload>;
           };
           deleteMany: {
-            args: Prisma.Test_UserDeleteManyArgs<ExtArgs>;
+            args: Prisma.TestUserDeleteManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           updateMany: {
-            args: Prisma.Test_UserUpdateManyArgs<ExtArgs>;
+            args: Prisma.TestUserUpdateManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           updateManyAndReturn: {
-            args: Prisma.Test_UserUpdateManyAndReturnArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload>[];
+            args: Prisma.TestUserUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload>[];
           };
           upsert: {
-            args: Prisma.Test_UserUpsertArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$Test_UserPayload>;
+            args: Prisma.TestUserUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$TestUserPayload>;
           };
           aggregate: {
-            args: Prisma.Test_UserAggregateArgs<ExtArgs>;
-            result: $Utils.Optional<AggregateTest_User>;
+            args: Prisma.TestUserAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateTestUser>;
           };
           groupBy: {
-            args: Prisma.Test_UserGroupByArgs<ExtArgs>;
-            result: $Utils.Optional<Test_UserGroupByOutputType>[];
+            args: Prisma.TestUserGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<TestUserGroupByOutputType>[];
           };
           count: {
-            args: Prisma.Test_UserCountArgs<ExtArgs>;
-            result: $Utils.Optional<Test_UserCountAggregateOutputType> | number;
+            args: Prisma.TestUserCountArgs<ExtArgs>;
+            result: $Utils.Optional<TestUserCountAggregateOutputType> | number;
           };
         };
       };
@@ -896,7 +896,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit;
-    test_User?: Test_UserOmit;
+    testUser?: TestUserOmit;
   };
 
   /* Types for Logging */
@@ -2114,270 +2114,283 @@ export namespace Prisma {
     };
 
   /**
-   * Model Test_User
+   * Model TestUser
    */
 
-  export type AggregateTest_User = {
-    _count: Test_UserCountAggregateOutputType | null;
-    _avg: Test_UserAvgAggregateOutputType | null;
-    _sum: Test_UserSumAggregateOutputType | null;
-    _min: Test_UserMinAggregateOutputType | null;
-    _max: Test_UserMaxAggregateOutputType | null;
+  export type AggregateTestUser = {
+    _count: TestUserCountAggregateOutputType | null;
+    _avg: TestUserAvgAggregateOutputType | null;
+    _sum: TestUserSumAggregateOutputType | null;
+    _min: TestUserMinAggregateOutputType | null;
+    _max: TestUserMaxAggregateOutputType | null;
   };
 
-  export type Test_UserAvgAggregateOutputType = {
+  export type TestUserAvgAggregateOutputType = {
     id: number | null;
   };
 
-  export type Test_UserSumAggregateOutputType = {
+  export type TestUserSumAggregateOutputType = {
     id: number | null;
   };
 
-  export type Test_UserMinAggregateOutputType = {
+  export type TestUserMinAggregateOutputType = {
     id: number | null;
     email: string | null;
+    password: string | null;
     name: string | null;
   };
 
-  export type Test_UserMaxAggregateOutputType = {
+  export type TestUserMaxAggregateOutputType = {
     id: number | null;
     email: string | null;
+    password: string | null;
     name: string | null;
   };
 
-  export type Test_UserCountAggregateOutputType = {
+  export type TestUserCountAggregateOutputType = {
     id: number;
     email: number;
+    password: number;
     name: number;
     _all: number;
   };
 
-  export type Test_UserAvgAggregateInputType = {
+  export type TestUserAvgAggregateInputType = {
     id?: true;
   };
 
-  export type Test_UserSumAggregateInputType = {
+  export type TestUserSumAggregateInputType = {
     id?: true;
   };
 
-  export type Test_UserMinAggregateInputType = {
+  export type TestUserMinAggregateInputType = {
     id?: true;
     email?: true;
+    password?: true;
     name?: true;
   };
 
-  export type Test_UserMaxAggregateInputType = {
+  export type TestUserMaxAggregateInputType = {
     id?: true;
     email?: true;
+    password?: true;
     name?: true;
   };
 
-  export type Test_UserCountAggregateInputType = {
+  export type TestUserCountAggregateInputType = {
     id?: true;
     email?: true;
+    password?: true;
     name?: true;
     _all?: true;
   };
 
-  export type Test_UserAggregateArgs<
+  export type TestUserAggregateArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Filter which Test_User to aggregate.
+     * Filter which TestUser to aggregate.
      */
-    where?: Test_UserWhereInput;
+    where?: TestUserWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of Test_Users to fetch.
+     * Determine the order of TestUsers to fetch.
      */
-    orderBy?: Test_UserOrderByWithRelationInput | Test_UserOrderByWithRelationInput[];
+    orderBy?: TestUserOrderByWithRelationInput | TestUserOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
      * Sets the start position
      */
-    cursor?: Test_UserWhereUniqueInput;
+    cursor?: TestUserWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` Test_Users from the position of the cursor.
+     * Take `±n` TestUsers from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` Test_Users.
+     * Skip the first `n` TestUsers.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
-     * Count returned Test_Users
+     * Count returned TestUsers
      **/
-    _count?: true | Test_UserCountAggregateInputType;
+    _count?: true | TestUserCountAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
      * Select which fields to average
      **/
-    _avg?: Test_UserAvgAggregateInputType;
+    _avg?: TestUserAvgAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
      * Select which fields to sum
      **/
-    _sum?: Test_UserSumAggregateInputType;
+    _sum?: TestUserSumAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
      * Select which fields to find the minimum value
      **/
-    _min?: Test_UserMinAggregateInputType;
+    _min?: TestUserMinAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
      * Select which fields to find the maximum value
      **/
-    _max?: Test_UserMaxAggregateInputType;
+    _max?: TestUserMaxAggregateInputType;
   };
 
-  export type GetTest_UserAggregateType<T extends Test_UserAggregateArgs> = {
-    [P in keyof T & keyof AggregateTest_User]: P extends '_count' | 'count'
+  export type GetTestUserAggregateType<T extends TestUserAggregateArgs> = {
+    [P in keyof T & keyof AggregateTestUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTest_User[P]>
-      : GetScalarType<T[P], AggregateTest_User[P]>;
+        : GetScalarType<T[P], AggregateTestUser[P]>
+      : GetScalarType<T[P], AggregateTestUser[P]>;
   };
 
-  export type Test_UserGroupByArgs<
+  export type TestUserGroupByArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    where?: Test_UserWhereInput;
-    orderBy?: Test_UserOrderByWithAggregationInput | Test_UserOrderByWithAggregationInput[];
-    by: Test_UserScalarFieldEnum[] | Test_UserScalarFieldEnum;
-    having?: Test_UserScalarWhereWithAggregatesInput;
+    where?: TestUserWhereInput;
+    orderBy?: TestUserOrderByWithAggregationInput | TestUserOrderByWithAggregationInput[];
+    by: TestUserScalarFieldEnum[] | TestUserScalarFieldEnum;
+    having?: TestUserScalarWhereWithAggregatesInput;
     take?: number;
     skip?: number;
-    _count?: Test_UserCountAggregateInputType | true;
-    _avg?: Test_UserAvgAggregateInputType;
-    _sum?: Test_UserSumAggregateInputType;
-    _min?: Test_UserMinAggregateInputType;
-    _max?: Test_UserMaxAggregateInputType;
+    _count?: TestUserCountAggregateInputType | true;
+    _avg?: TestUserAvgAggregateInputType;
+    _sum?: TestUserSumAggregateInputType;
+    _min?: TestUserMinAggregateInputType;
+    _max?: TestUserMaxAggregateInputType;
   };
 
-  export type Test_UserGroupByOutputType = {
+  export type TestUserGroupByOutputType = {
     id: number;
     email: string;
+    password: string;
     name: string | null;
-    _count: Test_UserCountAggregateOutputType | null;
-    _avg: Test_UserAvgAggregateOutputType | null;
-    _sum: Test_UserSumAggregateOutputType | null;
-    _min: Test_UserMinAggregateOutputType | null;
-    _max: Test_UserMaxAggregateOutputType | null;
+    _count: TestUserCountAggregateOutputType | null;
+    _avg: TestUserAvgAggregateOutputType | null;
+    _sum: TestUserSumAggregateOutputType | null;
+    _min: TestUserMinAggregateOutputType | null;
+    _max: TestUserMaxAggregateOutputType | null;
   };
 
-  type GetTest_UserGroupByPayload<T extends Test_UserGroupByArgs> = Prisma.PrismaPromise<
+  type GetTestUserGroupByPayload<T extends TestUserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<Test_UserGroupByOutputType, T['by']> & {
-        [P in keyof T & keyof Test_UserGroupByOutputType]: P extends '_count'
+      PickEnumerable<TestUserGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof TestUserGroupByOutputType]: P extends '_count'
           ? T[P] extends boolean
             ? number
-            : GetScalarType<T[P], Test_UserGroupByOutputType[P]>
-          : GetScalarType<T[P], Test_UserGroupByOutputType[P]>;
+            : GetScalarType<T[P], TestUserGroupByOutputType[P]>
+          : GetScalarType<T[P], TestUserGroupByOutputType[P]>;
       }
     >
   >;
 
-  export type Test_UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type TestUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetSelect<
       {
         id?: boolean;
         email?: boolean;
+        password?: boolean;
         name?: boolean;
       },
-      ExtArgs['result']['test_User']
+      ExtArgs['result']['testUser']
     >;
 
-  export type Test_UserSelectCreateManyAndReturn<
+  export type TestUserSelectCreateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
       id?: boolean;
       email?: boolean;
+      password?: boolean;
       name?: boolean;
     },
-    ExtArgs['result']['test_User']
+    ExtArgs['result']['testUser']
   >;
 
-  export type Test_UserSelectUpdateManyAndReturn<
+  export type TestUserSelectUpdateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
       id?: boolean;
       email?: boolean;
+      password?: boolean;
       name?: boolean;
     },
-    ExtArgs['result']['test_User']
+    ExtArgs['result']['testUser']
   >;
 
-  export type Test_UserSelectScalar = {
+  export type TestUserSelectScalar = {
     id?: boolean;
     email?: boolean;
+    password?: boolean;
     name?: boolean;
   };
 
-  export type Test_UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    $Extensions.GetOmit<'id' | 'email' | 'name', ExtArgs['result']['test_User']>;
+  export type TestUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<'id' | 'email' | 'password' | 'name', ExtArgs['result']['testUser']>;
 
-  export type $Test_UserPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    name: 'Test_User';
-    objects: {};
-    scalars: $Extensions.GetPayloadResult<
-      {
-        id: number;
-        email: string;
-        name: string | null;
-      },
-      ExtArgs['result']['test_User']
-    >;
-    composites: {};
-  };
-
-  type Test_UserGetPayload<S extends boolean | null | undefined | Test_UserDefaultArgs> =
-    $Result.GetResult<Prisma.$Test_UserPayload, S>;
-
-  type Test_UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<Test_UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Test_UserCountAggregateInputType | true;
+  export type $TestUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      name: 'TestUser';
+      objects: {};
+      scalars: $Extensions.GetPayloadResult<
+        {
+          id: number;
+          email: string;
+          password: string;
+          name: string | null;
+        },
+        ExtArgs['result']['testUser']
+      >;
+      composites: {};
     };
 
-  export interface Test_UserDelegate<
+  type TestUserGetPayload<S extends boolean | null | undefined | TestUserDefaultArgs> =
+    $Result.GetResult<Prisma.$TestUserPayload, S>;
+
+  type TestUserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    TestUserFindManyArgs,
+    'select' | 'include' | 'distinct' | 'omit'
+  > & {
+    select?: TestUserCountAggregateInputType | true;
+  };
+
+  export interface TestUserDelegate<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
     [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>['model']['Test_User'];
-      meta: { name: 'Test_User' };
+      types: Prisma.TypeMap<ExtArgs>['model']['TestUser'];
+      meta: { name: 'TestUser' };
     };
     /**
-     * Find zero or one Test_User that matches the filter.
-     * @param {Test_UserFindUniqueArgs} args - Arguments to find a Test_User
+     * Find zero or one TestUser that matches the filter.
+     * @param {TestUserFindUniqueArgs} args - Arguments to find a TestUser
      * @example
-     * // Get one Test_User
-     * const test_User = await prisma.test_User.findUnique({
+     * // Get one TestUser
+     * const testUser = await prisma.testUser.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends Test_UserFindUniqueArgs>(
-      args: SelectSubset<T, Test_UserFindUniqueArgs<ExtArgs>>
-    ): Prisma__Test_UserClient<
+    findUnique<T extends TestUserFindUniqueArgs>(
+      args: SelectSubset<T, TestUserFindUniqueArgs<ExtArgs>>
+    ): Prisma__TestUserClient<
       $Result.GetResult<
-        Prisma.$Test_UserPayload<ExtArgs>,
+        Prisma.$TestUserPayload<ExtArgs>,
         T,
         'findUnique',
         GlobalOmitOptions
@@ -2388,22 +2401,22 @@ export namespace Prisma {
     >;
 
     /**
-     * Find one Test_User that matches the filter or throw an error with `error.code='P2025'`
+     * Find one TestUser that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {Test_UserFindUniqueOrThrowArgs} args - Arguments to find a Test_User
+     * @param {TestUserFindUniqueOrThrowArgs} args - Arguments to find a TestUser
      * @example
-     * // Get one Test_User
-     * const test_User = await prisma.test_User.findUniqueOrThrow({
+     * // Get one TestUser
+     * const testUser = await prisma.testUser.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends Test_UserFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, Test_UserFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__Test_UserClient<
+    findUniqueOrThrow<T extends TestUserFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, TestUserFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__TestUserClient<
       $Result.GetResult<
-        Prisma.$Test_UserPayload<ExtArgs>,
+        Prisma.$TestUserPayload<ExtArgs>,
         T,
         'findUniqueOrThrow',
         GlobalOmitOptions
@@ -2414,132 +2427,122 @@ export namespace Prisma {
     >;
 
     /**
-     * Find the first Test_User that matches the filter.
+     * Find the first TestUser that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Test_UserFindFirstArgs} args - Arguments to find a Test_User
+     * @param {TestUserFindFirstArgs} args - Arguments to find a TestUser
      * @example
-     * // Get one Test_User
-     * const test_User = await prisma.test_User.findFirst({
+     * // Get one TestUser
+     * const testUser = await prisma.testUser.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends Test_UserFindFirstArgs>(
-      args?: SelectSubset<T, Test_UserFindFirstArgs<ExtArgs>>
-    ): Prisma__Test_UserClient<
-      $Result.GetResult<
-        Prisma.$Test_UserPayload<ExtArgs>,
-        T,
-        'findFirst',
-        GlobalOmitOptions
-      > | null,
+    findFirst<T extends TestUserFindFirstArgs>(
+      args?: SelectSubset<T, TestUserFindFirstArgs<ExtArgs>>
+    ): Prisma__TestUserClient<
+      $Result.GetResult<Prisma.$TestUserPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
 
     /**
-     * Find the first Test_User that matches the filter or
+     * Find the first TestUser that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Test_UserFindFirstOrThrowArgs} args - Arguments to find a Test_User
+     * @param {TestUserFindFirstOrThrowArgs} args - Arguments to find a TestUser
      * @example
-     * // Get one Test_User
-     * const test_User = await prisma.test_User.findFirstOrThrow({
+     * // Get one TestUser
+     * const testUser = await prisma.testUser.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends Test_UserFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, Test_UserFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__Test_UserClient<
-      $Result.GetResult<
-        Prisma.$Test_UserPayload<ExtArgs>,
-        T,
-        'findFirstOrThrow',
-        GlobalOmitOptions
-      >,
+    findFirstOrThrow<T extends TestUserFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, TestUserFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__TestUserClient<
+      $Result.GetResult<Prisma.$TestUserPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
     >;
 
     /**
-     * Find zero or more Test_Users that matches the filter.
+     * Find zero or more TestUsers that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Test_UserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {TestUserFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Test_Users
-     * const test_Users = await prisma.test_User.findMany()
+     * // Get all TestUsers
+     * const testUsers = await prisma.testUser.findMany()
      *
-     * // Get first 10 Test_Users
-     * const test_Users = await prisma.test_User.findMany({ take: 10 })
+     * // Get first 10 TestUsers
+     * const testUsers = await prisma.testUser.findMany({ take: 10 })
      *
      * // Only select the `id`
-     * const test_UserWithIdOnly = await prisma.test_User.findMany({ select: { id: true } })
+     * const testUserWithIdOnly = await prisma.testUser.findMany({ select: { id: true } })
      *
      */
-    findMany<T extends Test_UserFindManyArgs>(
-      args?: SelectSubset<T, Test_UserFindManyArgs<ExtArgs>>
+    findMany<T extends TestUserFindManyArgs>(
+      args?: SelectSubset<T, TestUserFindManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$Test_UserPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+      $Result.GetResult<Prisma.$TestUserPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
     >;
 
     /**
-     * Create a Test_User.
-     * @param {Test_UserCreateArgs} args - Arguments to create a Test_User.
+     * Create a TestUser.
+     * @param {TestUserCreateArgs} args - Arguments to create a TestUser.
      * @example
-     * // Create one Test_User
-     * const Test_User = await prisma.test_User.create({
+     * // Create one TestUser
+     * const TestUser = await prisma.testUser.create({
      *   data: {
-     *     // ... data to create a Test_User
+     *     // ... data to create a TestUser
      *   }
      * })
      *
      */
-    create<T extends Test_UserCreateArgs>(
-      args: SelectSubset<T, Test_UserCreateArgs<ExtArgs>>
-    ): Prisma__Test_UserClient<
-      $Result.GetResult<Prisma.$Test_UserPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+    create<T extends TestUserCreateArgs>(
+      args: SelectSubset<T, TestUserCreateArgs<ExtArgs>>
+    ): Prisma__TestUserClient<
+      $Result.GetResult<Prisma.$TestUserPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
     >;
 
     /**
-     * Create many Test_Users.
-     * @param {Test_UserCreateManyArgs} args - Arguments to create many Test_Users.
+     * Create many TestUsers.
+     * @param {TestUserCreateManyArgs} args - Arguments to create many TestUsers.
      * @example
-     * // Create many Test_Users
-     * const test_User = await prisma.test_User.createMany({
+     * // Create many TestUsers
+     * const testUser = await prisma.testUser.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *
      */
-    createMany<T extends Test_UserCreateManyArgs>(
-      args?: SelectSubset<T, Test_UserCreateManyArgs<ExtArgs>>
+    createMany<T extends TestUserCreateManyArgs>(
+      args?: SelectSubset<T, TestUserCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
-     * Create many Test_Users and returns the data saved in the database.
-     * @param {Test_UserCreateManyAndReturnArgs} args - Arguments to create many Test_Users.
+     * Create many TestUsers and returns the data saved in the database.
+     * @param {TestUserCreateManyAndReturnArgs} args - Arguments to create many TestUsers.
      * @example
-     * // Create many Test_Users
-     * const test_User = await prisma.test_User.createManyAndReturn({
+     * // Create many TestUsers
+     * const testUser = await prisma.testUser.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *
-     * // Create many Test_Users and only return the `id`
-     * const test_UserWithIdOnly = await prisma.test_User.createManyAndReturn({
+     * // Create many TestUsers and only return the `id`
+     * const testUserWithIdOnly = await prisma.testUser.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -2549,11 +2552,11 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      *
      */
-    createManyAndReturn<T extends Test_UserCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, Test_UserCreateManyAndReturnArgs<ExtArgs>>
+    createManyAndReturn<T extends TestUserCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, TestUserCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
       $Result.GetResult<
-        Prisma.$Test_UserPayload<ExtArgs>,
+        Prisma.$TestUserPayload<ExtArgs>,
         T,
         'createManyAndReturn',
         GlobalOmitOptions
@@ -2561,32 +2564,32 @@ export namespace Prisma {
     >;
 
     /**
-     * Delete a Test_User.
-     * @param {Test_UserDeleteArgs} args - Arguments to delete one Test_User.
+     * Delete a TestUser.
+     * @param {TestUserDeleteArgs} args - Arguments to delete one TestUser.
      * @example
-     * // Delete one Test_User
-     * const Test_User = await prisma.test_User.delete({
+     * // Delete one TestUser
+     * const TestUser = await prisma.testUser.delete({
      *   where: {
-     *     // ... filter to delete one Test_User
+     *     // ... filter to delete one TestUser
      *   }
      * })
      *
      */
-    delete<T extends Test_UserDeleteArgs>(
-      args: SelectSubset<T, Test_UserDeleteArgs<ExtArgs>>
-    ): Prisma__Test_UserClient<
-      $Result.GetResult<Prisma.$Test_UserPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+    delete<T extends TestUserDeleteArgs>(
+      args: SelectSubset<T, TestUserDeleteArgs<ExtArgs>>
+    ): Prisma__TestUserClient<
+      $Result.GetResult<Prisma.$TestUserPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
     >;
 
     /**
-     * Update one Test_User.
-     * @param {Test_UserUpdateArgs} args - Arguments to update one Test_User.
+     * Update one TestUser.
+     * @param {TestUserUpdateArgs} args - Arguments to update one TestUser.
      * @example
-     * // Update one Test_User
-     * const test_User = await prisma.test_User.update({
+     * // Update one TestUser
+     * const testUser = await prisma.testUser.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2596,39 +2599,39 @@ export namespace Prisma {
      * })
      *
      */
-    update<T extends Test_UserUpdateArgs>(
-      args: SelectSubset<T, Test_UserUpdateArgs<ExtArgs>>
-    ): Prisma__Test_UserClient<
-      $Result.GetResult<Prisma.$Test_UserPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+    update<T extends TestUserUpdateArgs>(
+      args: SelectSubset<T, TestUserUpdateArgs<ExtArgs>>
+    ): Prisma__TestUserClient<
+      $Result.GetResult<Prisma.$TestUserPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
     >;
 
     /**
-     * Delete zero or more Test_Users.
-     * @param {Test_UserDeleteManyArgs} args - Arguments to filter Test_Users to delete.
+     * Delete zero or more TestUsers.
+     * @param {TestUserDeleteManyArgs} args - Arguments to filter TestUsers to delete.
      * @example
-     * // Delete a few Test_Users
-     * const { count } = await prisma.test_User.deleteMany({
+     * // Delete a few TestUsers
+     * const { count } = await prisma.testUser.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      *
      */
-    deleteMany<T extends Test_UserDeleteManyArgs>(
-      args?: SelectSubset<T, Test_UserDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends TestUserDeleteManyArgs>(
+      args?: SelectSubset<T, TestUserDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
-     * Update zero or more Test_Users.
+     * Update zero or more TestUsers.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Test_UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {TestUserUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Test_Users
-     * const test_User = await prisma.test_User.updateMany({
+     * // Update many TestUsers
+     * const testUser = await prisma.testUser.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2638,16 +2641,16 @@ export namespace Prisma {
      * })
      *
      */
-    updateMany<T extends Test_UserUpdateManyArgs>(
-      args: SelectSubset<T, Test_UserUpdateManyArgs<ExtArgs>>
+    updateMany<T extends TestUserUpdateManyArgs>(
+      args: SelectSubset<T, TestUserUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
-     * Update zero or more Test_Users and returns the data updated in the database.
-     * @param {Test_UserUpdateManyAndReturnArgs} args - Arguments to update many Test_Users.
+     * Update zero or more TestUsers and returns the data updated in the database.
+     * @param {TestUserUpdateManyAndReturnArgs} args - Arguments to update many TestUsers.
      * @example
-     * // Update many Test_Users
-     * const test_User = await prisma.test_User.updateManyAndReturn({
+     * // Update many TestUsers
+     * const testUser = await prisma.testUser.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2656,8 +2659,8 @@ export namespace Prisma {
      *   ]
      * })
      *
-     * // Update zero or more Test_Users and only return the `id`
-     * const test_UserWithIdOnly = await prisma.test_User.updateManyAndReturn({
+     * // Update zero or more TestUsers and only return the `id`
+     * const testUserWithIdOnly = await prisma.testUser.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -2670,11 +2673,11 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      *
      */
-    updateManyAndReturn<T extends Test_UserUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, Test_UserUpdateManyAndReturnArgs<ExtArgs>>
+    updateManyAndReturn<T extends TestUserUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, TestUserUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
       $Result.GetResult<
-        Prisma.$Test_UserPayload<ExtArgs>,
+        Prisma.$TestUserPayload<ExtArgs>,
         T,
         'updateManyAndReturn',
         GlobalOmitOptions
@@ -2682,59 +2685,59 @@ export namespace Prisma {
     >;
 
     /**
-     * Create or update one Test_User.
-     * @param {Test_UserUpsertArgs} args - Arguments to update or create a Test_User.
+     * Create or update one TestUser.
+     * @param {TestUserUpsertArgs} args - Arguments to update or create a TestUser.
      * @example
-     * // Update or create a Test_User
-     * const test_User = await prisma.test_User.upsert({
+     * // Update or create a TestUser
+     * const testUser = await prisma.testUser.upsert({
      *   create: {
-     *     // ... data to create a Test_User
+     *     // ... data to create a TestUser
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Test_User we want to update
+     *     // ... the filter for the TestUser we want to update
      *   }
      * })
      */
-    upsert<T extends Test_UserUpsertArgs>(
-      args: SelectSubset<T, Test_UserUpsertArgs<ExtArgs>>
-    ): Prisma__Test_UserClient<
-      $Result.GetResult<Prisma.$Test_UserPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+    upsert<T extends TestUserUpsertArgs>(
+      args: SelectSubset<T, TestUserUpsertArgs<ExtArgs>>
+    ): Prisma__TestUserClient<
+      $Result.GetResult<Prisma.$TestUserPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
     >;
 
     /**
-     * Count the number of Test_Users.
+     * Count the number of TestUsers.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Test_UserCountArgs} args - Arguments to filter Test_Users to count.
+     * @param {TestUserCountArgs} args - Arguments to filter TestUsers to count.
      * @example
-     * // Count the number of Test_Users
-     * const count = await prisma.test_User.count({
+     * // Count the number of TestUsers
+     * const count = await prisma.testUser.count({
      *   where: {
-     *     // ... the filter for the Test_Users we want to count
+     *     // ... the filter for the TestUsers we want to count
      *   }
      * })
      **/
-    count<T extends Test_UserCountArgs>(
-      args?: Subset<T, Test_UserCountArgs>
+    count<T extends TestUserCountArgs>(
+      args?: Subset<T, TestUserCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], Test_UserCountAggregateOutputType>
+          : GetScalarType<T['select'], TestUserCountAggregateOutputType>
         : number
     >;
 
     /**
-     * Allows you to perform aggregations operations on a Test_User.
+     * Allows you to perform aggregations operations on a TestUser.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Test_UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {TestUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2754,15 +2757,15 @@ export namespace Prisma {
      *   take: 10,
      * })
      **/
-    aggregate<T extends Test_UserAggregateArgs>(
-      args: Subset<T, Test_UserAggregateArgs>
-    ): Prisma.PrismaPromise<GetTest_UserAggregateType<T>>;
+    aggregate<T extends TestUserAggregateArgs>(
+      args: Subset<T, TestUserAggregateArgs>
+    ): Prisma.PrismaPromise<GetTestUserAggregateType<T>>;
 
     /**
-     * Group by Test_User.
+     * Group by TestUser.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Test_UserGroupByArgs} args - Group by arguments.
+     * @param {TestUserGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2777,11 +2780,11 @@ export namespace Prisma {
      *
      **/
     groupBy<
-      T extends Test_UserGroupByArgs,
+      T extends TestUserGroupByArgs,
       HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: Test_UserGroupByArgs['orderBy'] }
-        : { orderBy?: Test_UserGroupByArgs['orderBy'] },
+        ? { orderBy: TestUserGroupByArgs['orderBy'] }
+        : { orderBy?: TestUserGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2826,21 +2829,21 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, Test_UserGroupByArgs, OrderByArg> & InputErrors
-    ): {} extends InputErrors ? GetTest_UserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, TestUserGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetTestUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
-     * Fields of the Test_User model
+     * Fields of the TestUser model
      */
-    readonly fields: Test_UserFieldRefs;
+    readonly fields: TestUserFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Test_User.
+   * The delegate class that acts as a "Promise-like" for TestUser.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__Test_UserClient<
+  export interface Prisma__TestUserClient<
     T,
     Null = never,
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
@@ -2875,404 +2878,405 @@ export namespace Prisma {
   }
 
   /**
-   * Fields of the Test_User model
+   * Fields of the TestUser model
    */
-  interface Test_UserFieldRefs {
-    readonly id: FieldRef<'Test_User', 'Int'>;
-    readonly email: FieldRef<'Test_User', 'String'>;
-    readonly name: FieldRef<'Test_User', 'String'>;
+  interface TestUserFieldRefs {
+    readonly id: FieldRef<'TestUser', 'Int'>;
+    readonly email: FieldRef<'TestUser', 'String'>;
+    readonly password: FieldRef<'TestUser', 'String'>;
+    readonly name: FieldRef<'TestUser', 'String'>;
   }
 
   // Custom InputTypes
   /**
-   * Test_User findUnique
+   * TestUser findUnique
    */
-  export type Test_UserFindUniqueArgs<
+  export type TestUserFindUniqueArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelect<ExtArgs> | null;
+    select?: TestUserSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * Filter, which Test_User to fetch.
+     * Filter, which TestUser to fetch.
      */
-    where: Test_UserWhereUniqueInput;
+    where: TestUserWhereUniqueInput;
   };
 
   /**
-   * Test_User findUniqueOrThrow
+   * TestUser findUniqueOrThrow
    */
-  export type Test_UserFindUniqueOrThrowArgs<
+  export type TestUserFindUniqueOrThrowArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelect<ExtArgs> | null;
+    select?: TestUserSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * Filter, which Test_User to fetch.
+     * Filter, which TestUser to fetch.
      */
-    where: Test_UserWhereUniqueInput;
+    where: TestUserWhereUniqueInput;
   };
 
   /**
-   * Test_User findFirst
+   * TestUser findFirst
    */
-  export type Test_UserFindFirstArgs<
+  export type TestUserFindFirstArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelect<ExtArgs> | null;
+    select?: TestUserSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * Filter, which Test_User to fetch.
+     * Filter, which TestUser to fetch.
      */
-    where?: Test_UserWhereInput;
+    where?: TestUserWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of Test_Users to fetch.
+     * Determine the order of TestUsers to fetch.
      */
-    orderBy?: Test_UserOrderByWithRelationInput | Test_UserOrderByWithRelationInput[];
+    orderBy?: TestUserOrderByWithRelationInput | TestUserOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for searching for Test_Users.
+     * Sets the position for searching for TestUsers.
      */
-    cursor?: Test_UserWhereUniqueInput;
+    cursor?: TestUserWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` Test_Users from the position of the cursor.
+     * Take `±n` TestUsers from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` Test_Users.
+     * Skip the first `n` TestUsers.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      *
-     * Filter by unique combinations of Test_Users.
+     * Filter by unique combinations of TestUsers.
      */
-    distinct?: Test_UserScalarFieldEnum | Test_UserScalarFieldEnum[];
+    distinct?: TestUserScalarFieldEnum | TestUserScalarFieldEnum[];
   };
 
   /**
-   * Test_User findFirstOrThrow
+   * TestUser findFirstOrThrow
    */
-  export type Test_UserFindFirstOrThrowArgs<
+  export type TestUserFindFirstOrThrowArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelect<ExtArgs> | null;
+    select?: TestUserSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * Filter, which Test_User to fetch.
+     * Filter, which TestUser to fetch.
      */
-    where?: Test_UserWhereInput;
+    where?: TestUserWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of Test_Users to fetch.
+     * Determine the order of TestUsers to fetch.
      */
-    orderBy?: Test_UserOrderByWithRelationInput | Test_UserOrderByWithRelationInput[];
+    orderBy?: TestUserOrderByWithRelationInput | TestUserOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for searching for Test_Users.
+     * Sets the position for searching for TestUsers.
      */
-    cursor?: Test_UserWhereUniqueInput;
+    cursor?: TestUserWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` Test_Users from the position of the cursor.
+     * Take `±n` TestUsers from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` Test_Users.
+     * Skip the first `n` TestUsers.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      *
-     * Filter by unique combinations of Test_Users.
+     * Filter by unique combinations of TestUsers.
      */
-    distinct?: Test_UserScalarFieldEnum | Test_UserScalarFieldEnum[];
+    distinct?: TestUserScalarFieldEnum | TestUserScalarFieldEnum[];
   };
 
   /**
-   * Test_User findMany
+   * TestUser findMany
    */
-  export type Test_UserFindManyArgs<
+  export type TestUserFindManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelect<ExtArgs> | null;
+    select?: TestUserSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * Filter, which Test_Users to fetch.
+     * Filter, which TestUsers to fetch.
      */
-    where?: Test_UserWhereInput;
+    where?: TestUserWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of Test_Users to fetch.
+     * Determine the order of TestUsers to fetch.
      */
-    orderBy?: Test_UserOrderByWithRelationInput | Test_UserOrderByWithRelationInput[];
+    orderBy?: TestUserOrderByWithRelationInput | TestUserOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for listing Test_Users.
+     * Sets the position for listing TestUsers.
      */
-    cursor?: Test_UserWhereUniqueInput;
+    cursor?: TestUserWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` Test_Users from the position of the cursor.
+     * Take `±n` TestUsers from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` Test_Users.
+     * Skip the first `n` TestUsers.
      */
     skip?: number;
-    distinct?: Test_UserScalarFieldEnum | Test_UserScalarFieldEnum[];
+    distinct?: TestUserScalarFieldEnum | TestUserScalarFieldEnum[];
   };
 
   /**
-   * Test_User create
+   * TestUser create
    */
-  export type Test_UserCreateArgs<
+  export type TestUserCreateArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelect<ExtArgs> | null;
+    select?: TestUserSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * The data needed to create a Test_User.
+     * The data needed to create a TestUser.
      */
-    data: XOR<Test_UserCreateInput, Test_UserUncheckedCreateInput>;
+    data: XOR<TestUserCreateInput, TestUserUncheckedCreateInput>;
   };
 
   /**
-   * Test_User createMany
+   * TestUser createMany
    */
-  export type Test_UserCreateManyArgs<
+  export type TestUserCreateManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * The data used to create many Test_Users.
+     * The data used to create many TestUsers.
      */
-    data: Test_UserCreateManyInput | Test_UserCreateManyInput[];
+    data: TestUserCreateManyInput | TestUserCreateManyInput[];
     skipDuplicates?: boolean;
   };
 
   /**
-   * Test_User createManyAndReturn
+   * TestUser createManyAndReturn
    */
-  export type Test_UserCreateManyAndReturnArgs<
+  export type TestUserCreateManyAndReturnArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelectCreateManyAndReturn<ExtArgs> | null;
+    select?: TestUserSelectCreateManyAndReturn<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * The data used to create many Test_Users.
+     * The data used to create many TestUsers.
      */
-    data: Test_UserCreateManyInput | Test_UserCreateManyInput[];
+    data: TestUserCreateManyInput | TestUserCreateManyInput[];
     skipDuplicates?: boolean;
   };
 
   /**
-   * Test_User update
+   * TestUser update
    */
-  export type Test_UserUpdateArgs<
+  export type TestUserUpdateArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelect<ExtArgs> | null;
+    select?: TestUserSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * The data needed to update a Test_User.
+     * The data needed to update a TestUser.
      */
-    data: XOR<Test_UserUpdateInput, Test_UserUncheckedUpdateInput>;
+    data: XOR<TestUserUpdateInput, TestUserUncheckedUpdateInput>;
     /**
-     * Choose, which Test_User to update.
+     * Choose, which TestUser to update.
      */
-    where: Test_UserWhereUniqueInput;
+    where: TestUserWhereUniqueInput;
   };
 
   /**
-   * Test_User updateMany
+   * TestUser updateMany
    */
-  export type Test_UserUpdateManyArgs<
+  export type TestUserUpdateManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * The data used to update Test_Users.
+     * The data used to update TestUsers.
      */
-    data: XOR<Test_UserUpdateManyMutationInput, Test_UserUncheckedUpdateManyInput>;
+    data: XOR<TestUserUpdateManyMutationInput, TestUserUncheckedUpdateManyInput>;
     /**
-     * Filter which Test_Users to update
+     * Filter which TestUsers to update
      */
-    where?: Test_UserWhereInput;
+    where?: TestUserWhereInput;
     /**
-     * Limit how many Test_Users to update.
+     * Limit how many TestUsers to update.
      */
     limit?: number;
   };
 
   /**
-   * Test_User updateManyAndReturn
+   * TestUser updateManyAndReturn
    */
-  export type Test_UserUpdateManyAndReturnArgs<
+  export type TestUserUpdateManyAndReturnArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelectUpdateManyAndReturn<ExtArgs> | null;
+    select?: TestUserSelectUpdateManyAndReturn<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * The data used to update Test_Users.
+     * The data used to update TestUsers.
      */
-    data: XOR<Test_UserUpdateManyMutationInput, Test_UserUncheckedUpdateManyInput>;
+    data: XOR<TestUserUpdateManyMutationInput, TestUserUncheckedUpdateManyInput>;
     /**
-     * Filter which Test_Users to update
+     * Filter which TestUsers to update
      */
-    where?: Test_UserWhereInput;
+    where?: TestUserWhereInput;
     /**
-     * Limit how many Test_Users to update.
+     * Limit how many TestUsers to update.
      */
     limit?: number;
   };
 
   /**
-   * Test_User upsert
+   * TestUser upsert
    */
-  export type Test_UserUpsertArgs<
+  export type TestUserUpsertArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelect<ExtArgs> | null;
+    select?: TestUserSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * The filter to search for the Test_User to update in case it exists.
+     * The filter to search for the TestUser to update in case it exists.
      */
-    where: Test_UserWhereUniqueInput;
+    where: TestUserWhereUniqueInput;
     /**
-     * In case the Test_User found by the `where` argument doesn't exist, create a new Test_User with this data.
+     * In case the TestUser found by the `where` argument doesn't exist, create a new TestUser with this data.
      */
-    create: XOR<Test_UserCreateInput, Test_UserUncheckedCreateInput>;
+    create: XOR<TestUserCreateInput, TestUserUncheckedCreateInput>;
     /**
-     * In case the Test_User was found with the provided `where` argument, update it with this data.
+     * In case the TestUser was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<Test_UserUpdateInput, Test_UserUncheckedUpdateInput>;
+    update: XOR<TestUserUpdateInput, TestUserUncheckedUpdateInput>;
   };
 
   /**
-   * Test_User delete
+   * TestUser delete
    */
-  export type Test_UserDeleteArgs<
+  export type TestUserDeleteArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelect<ExtArgs> | null;
+    select?: TestUserSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
     /**
-     * Filter which Test_User to delete.
+     * Filter which TestUser to delete.
      */
-    where: Test_UserWhereUniqueInput;
+    where: TestUserWhereUniqueInput;
   };
 
   /**
-   * Test_User deleteMany
+   * TestUser deleteMany
    */
-  export type Test_UserDeleteManyArgs<
+  export type TestUserDeleteManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Filter which Test_Users to delete
+     * Filter which TestUsers to delete
      */
-    where?: Test_UserWhereInput;
+    where?: TestUserWhereInput;
     /**
-     * Limit how many Test_Users to delete.
+     * Limit how many TestUsers to delete.
      */
     limit?: number;
   };
 
   /**
-   * Test_User without action
+   * TestUser without action
    */
-  export type Test_UserDefaultArgs<
+  export type TestUserDefaultArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Test_User
+     * Select specific fields to fetch from the TestUser
      */
-    select?: Test_UserSelect<ExtArgs> | null;
+    select?: TestUserSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the Test_User
+     * Omit specific fields from the TestUser
      */
-    omit?: Test_UserOmit<ExtArgs> | null;
+    omit?: TestUserOmit<ExtArgs> | null;
   };
 
   /**
@@ -3297,14 +3301,15 @@ export namespace Prisma {
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 
-  export const Test_UserScalarFieldEnum: {
+  export const TestUserScalarFieldEnum: {
     id: 'id';
     email: 'email';
+    password: 'password';
     name: 'name';
   };
 
-  export type Test_UserScalarFieldEnum =
-    (typeof Test_UserScalarFieldEnum)[keyof typeof Test_UserScalarFieldEnum];
+  export type TestUserScalarFieldEnum =
+    (typeof TestUserScalarFieldEnum)[keyof typeof TestUserScalarFieldEnum];
 
   export const SortOrder: {
     asc: 'asc';
@@ -3412,51 +3417,56 @@ export namespace Prisma {
     name?: StringNullableWithAggregatesFilter<'User'> | string | null;
   };
 
-  export type Test_UserWhereInput = {
-    AND?: Test_UserWhereInput | Test_UserWhereInput[];
-    OR?: Test_UserWhereInput[];
-    NOT?: Test_UserWhereInput | Test_UserWhereInput[];
-    id?: IntFilter<'Test_User'> | number;
-    email?: StringFilter<'Test_User'> | string;
-    name?: StringNullableFilter<'Test_User'> | string | null;
+  export type TestUserWhereInput = {
+    AND?: TestUserWhereInput | TestUserWhereInput[];
+    OR?: TestUserWhereInput[];
+    NOT?: TestUserWhereInput | TestUserWhereInput[];
+    id?: IntFilter<'TestUser'> | number;
+    email?: StringFilter<'TestUser'> | string;
+    password?: StringFilter<'TestUser'> | string;
+    name?: StringNullableFilter<'TestUser'> | string | null;
   };
 
-  export type Test_UserOrderByWithRelationInput = {
+  export type TestUserOrderByWithRelationInput = {
     id?: SortOrder;
     email?: SortOrder;
+    password?: SortOrder;
     name?: SortOrderInput | SortOrder;
   };
 
-  export type Test_UserWhereUniqueInput = Prisma.AtLeast<
+  export type TestUserWhereUniqueInput = Prisma.AtLeast<
     {
       id?: number;
       email?: string;
-      AND?: Test_UserWhereInput | Test_UserWhereInput[];
-      OR?: Test_UserWhereInput[];
-      NOT?: Test_UserWhereInput | Test_UserWhereInput[];
-      name?: StringNullableFilter<'Test_User'> | string | null;
+      password?: string;
+      AND?: TestUserWhereInput | TestUserWhereInput[];
+      OR?: TestUserWhereInput[];
+      NOT?: TestUserWhereInput | TestUserWhereInput[];
+      name?: StringNullableFilter<'TestUser'> | string | null;
     },
-    'id' | 'email'
+    'id' | 'email' | 'password'
   >;
 
-  export type Test_UserOrderByWithAggregationInput = {
+  export type TestUserOrderByWithAggregationInput = {
     id?: SortOrder;
     email?: SortOrder;
+    password?: SortOrder;
     name?: SortOrderInput | SortOrder;
-    _count?: Test_UserCountOrderByAggregateInput;
-    _avg?: Test_UserAvgOrderByAggregateInput;
-    _max?: Test_UserMaxOrderByAggregateInput;
-    _min?: Test_UserMinOrderByAggregateInput;
-    _sum?: Test_UserSumOrderByAggregateInput;
+    _count?: TestUserCountOrderByAggregateInput;
+    _avg?: TestUserAvgOrderByAggregateInput;
+    _max?: TestUserMaxOrderByAggregateInput;
+    _min?: TestUserMinOrderByAggregateInput;
+    _sum?: TestUserSumOrderByAggregateInput;
   };
 
-  export type Test_UserScalarWhereWithAggregatesInput = {
-    AND?: Test_UserScalarWhereWithAggregatesInput | Test_UserScalarWhereWithAggregatesInput[];
-    OR?: Test_UserScalarWhereWithAggregatesInput[];
-    NOT?: Test_UserScalarWhereWithAggregatesInput | Test_UserScalarWhereWithAggregatesInput[];
-    id?: IntWithAggregatesFilter<'Test_User'> | number;
-    email?: StringWithAggregatesFilter<'Test_User'> | string;
-    name?: StringNullableWithAggregatesFilter<'Test_User'> | string | null;
+  export type TestUserScalarWhereWithAggregatesInput = {
+    AND?: TestUserScalarWhereWithAggregatesInput | TestUserScalarWhereWithAggregatesInput[];
+    OR?: TestUserScalarWhereWithAggregatesInput[];
+    NOT?: TestUserScalarWhereWithAggregatesInput | TestUserScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<'TestUser'> | number;
+    email?: StringWithAggregatesFilter<'TestUser'> | string;
+    password?: StringWithAggregatesFilter<'TestUser'> | string;
+    name?: StringNullableWithAggregatesFilter<'TestUser'> | string | null;
   };
 
   export type UserCreateInput = {
@@ -3498,42 +3508,49 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
-  export type Test_UserCreateInput = {
+  export type TestUserCreateInput = {
     email: string;
+    password: string;
     name?: string | null;
   };
 
-  export type Test_UserUncheckedCreateInput = {
+  export type TestUserUncheckedCreateInput = {
     id?: number;
     email: string;
+    password: string;
     name?: string | null;
   };
 
-  export type Test_UserUpdateInput = {
+  export type TestUserUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
-  export type Test_UserUncheckedUpdateInput = {
+  export type TestUserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number;
     email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
-  export type Test_UserCreateManyInput = {
+  export type TestUserCreateManyInput = {
     id?: number;
     email: string;
+    password: string;
     name?: string | null;
   };
 
-  export type Test_UserUpdateManyMutationInput = {
+  export type TestUserUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
-  export type Test_UserUncheckedUpdateManyInput = {
+  export type TestUserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number;
     email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
@@ -3661,29 +3678,32 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>;
   };
 
-  export type Test_UserCountOrderByAggregateInput = {
+  export type TestUserCountOrderByAggregateInput = {
     id?: SortOrder;
     email?: SortOrder;
+    password?: SortOrder;
     name?: SortOrder;
   };
 
-  export type Test_UserAvgOrderByAggregateInput = {
+  export type TestUserAvgOrderByAggregateInput = {
     id?: SortOrder;
   };
 
-  export type Test_UserMaxOrderByAggregateInput = {
+  export type TestUserMaxOrderByAggregateInput = {
     id?: SortOrder;
     email?: SortOrder;
+    password?: SortOrder;
     name?: SortOrder;
   };
 
-  export type Test_UserMinOrderByAggregateInput = {
+  export type TestUserMinOrderByAggregateInput = {
     id?: SortOrder;
     email?: SortOrder;
+    password?: SortOrder;
     name?: SortOrder;
   };
 
-  export type Test_UserSumOrderByAggregateInput = {
+  export type TestUserSumOrderByAggregateInput = {
     id?: SortOrder;
   };
 

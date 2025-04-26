@@ -119,9 +119,10 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
 };
 
-exports.Prisma.Test_UserScalarFieldEnum = {
+exports.Prisma.TestUserScalarFieldEnum = {
   id: 'id',
   email: 'email',
+  password: 'password',
   name: 'name',
 };
 
@@ -142,7 +143,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Test_User: 'Test_User',
+  TestUser: 'TestUser',
 };
 
 /**
