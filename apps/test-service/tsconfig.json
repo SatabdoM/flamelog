@@ -20,7 +20,12 @@
     "sourceMap": true, // Generates source maps for debugging
     "skipLibCheck": true, // Skips type-checking of declaration files (.d.ts)
     "forceConsistentCasingInFileNames": true, // Ensures file names are case-sensitive
-    "allowJs": false // Disallows JavaScript files in TypeScript compilation
+    "allowJs": false, // Disallows JavaScript files in TypeScript compilation
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "baseUrl": "../../",
+    "paths": {
+      "@packages/prisma-client": ["packages/prisma-client"]
+    }
   },
   "include": ["src"], // Specifies which files should be included in the compilation
   "exclude": ["node_modules", "dist"] // Excludes unnecessary directories from compilation
