@@ -16,7 +16,7 @@ export const config = [
       turbo: turboPlugin,
     },
     rules: {
-      "turbo/no-undeclared-env-vars": "warn",
+      'turbo/no-undeclared-env-vars': 'warn',
     },
   },
   {
@@ -26,20 +26,26 @@ export const config = [
   },
   {
     ignores: [
-      "**/dist/**",
-      "**/.next/**",
-      "**/node_modules/**",
-      "**/build/**",
-      "**/coverage/**",
-      "**/.turbo/**",
-      "**/out/**",
+      '**/dist/**',
+      '**/.next/**',
+      '**/node_modules/**',
+      '**/build/**',
+      '**/coverage/**',
+      '**/.turbo/**',
+      '**/out/**',
     ],
   },
   {
     settings: {
       react: {
-        version: "detect",
+        version: 'detect',
       },
+    },
+  },
+  {
+    files: ['packages/prisma-client//*.js'],
+    env: {
+      node: true,
     },
   },
 ];
