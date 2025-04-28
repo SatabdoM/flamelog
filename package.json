@@ -32,6 +32,7 @@
     "@typescript-eslint/parser": "^7.1.0",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
+    "@workspace/prisma-client": "workspace:*",
     "eslint": "^9.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",

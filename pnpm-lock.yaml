@@ -41,6 +41,9 @@ importers:
       '@workspace/eslint-config':
         specifier: workspace:*
         version: link:packages/eslint-config
+      '@workspace/prisma-client':
+        specifier: workspace:*
+        version: link:packages/prisma-client
       '@workspace/typescript-config':
         specifier: workspace:*
         version: link:packages/typescript-config
@@ -117,9 +120,9 @@ importers:
       '@prisma/client':
         specifier: ^6.5.0
         version: 6.5.0(prisma@6.5.0(typescript@5.7.3))(typescript@5.7.3)
-      '@workspace/db':
+      '@workspace/prisma-client':
         specifier: workspace:*
-        version: link:../../packages/database
+        version: link:../../packages/prisma-client
       bcryptjs:
         specifier: ^3.0.2
         version: 3.0.2

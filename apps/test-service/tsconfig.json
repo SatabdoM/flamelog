@@ -26,7 +26,7 @@
     "typeRoots": ["./node_modules/@types", "./src/types"],
     "baseUrl": "../../",
     "paths": {
-      "@packages/prisma-client": ["packages/prisma-client"]
+      "@workspace/prisma-client/*": ["packages/prisma-client/*"]
     }
   },
   "include": ["src"], // Specifies which files should be included in the compilation
