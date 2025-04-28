@@ -3,12 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./apps/*"
-      ],
-      "@workspace/*": [
-        "./packages/*"
-      ]
+      "@/*": ["apps/*"],
+      "@workspace/*": ["packages/*"]
     }
-  }
+  },
+  "include": ["apps", "packages"]
 }
