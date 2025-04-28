@@ -1,8 +1,10 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist", // Output directory for compiled JavaScript files
     "rootDir": "src", // Root directory for TypeScript source files
-    "module": "CommonJS", // Use CommonJS module system (required for Node.js)
+    "module": "NodeNext", // Use NodeNext module system (required for Node.js)
+    "moduleResolution": "NodeNext", // Use NodeNext module resolution
     "target": "ES6", // Compile to ECMAScript 6
 
     // TypeScript strict mode options (disabled for now, can enable later)
