@@ -18,4 +18,13 @@ model TestUser {
   email String  @unique
   password String @unique
   name  String?
+  post Post[]
+}
+model Post{
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  createdAt DateTime @default(now())
+  author    TestUser  @relation(fields: [authorId], references: [id])
+  authorId  Int
 }
