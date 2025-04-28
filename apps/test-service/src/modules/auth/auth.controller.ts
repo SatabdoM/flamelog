@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import * as AuthService from './auth.service';
-import { TestUser } from '@packages/prisma-client';
 
 export async function signup(req: Request, res: Response) {
   const user = await AuthService.signup(req.body);
@@ -12,7 +11,7 @@ export async function login(req: Request, res: Response) {
 }
 export async function getMe(req: Request, res: Response) {
   if (!req.user) {
-    return res.status(401).json({ message: 'Unauthorized user. Please Log in/Sign Up' });
+    res.status(401).json({ message: 'Unauthorized user. Please Log in/Sign Up' });
   }
   res.json({ user: req?.user });
 }
