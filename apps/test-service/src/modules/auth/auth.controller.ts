@@ -11,8 +11,8 @@ export async function login(req: Request, res: Response) {
   res.status(200).json({ token, user });
 }
 export async function getMe(req: Request, res: Response) {
-  if (!req.user) {
-    return res.status(401).json({ message: 'Unauthorized user. Please Log in/Sign Up' });
-  }
-  res.json({ user: req?.user });
+  //   if (!req.user) {
+  //     return res.status(401).json({ message: 'Unauthorized user. Please Log in/Sign Up' });
+  //   }
+  //   res.json({ user: req?.user });
 }

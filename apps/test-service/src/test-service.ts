@@ -14,7 +14,7 @@ app.use(express.json());
 app.use('/api', router);
 
 app.get('/', (_, res) => {
-  res.send('Working apis start with /api');
+  res.send('Welcome to Flamelog Test Service. Working apis start with /api');
 });
 
 app.listen(PORT, async () => {
