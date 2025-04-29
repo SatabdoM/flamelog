@@ -15,8 +15,18 @@ export async function signup(req: Request, res: Response) {
   }
 }
 export async function login(req: Request, res: Response) {
-  const { token, user } = await AuthService.login(req.body);
-  res.status(200).json({ token, user });
+  try {
+    const user = await AuthService.login(req.body);
+    res.status(200).json({ user });
+  } catch (error: any) {
+    if (error.message === 'User does not exist') {
+      res.status(400).json({ message: error.message });
+    } else if (error.message === 'Incorrect Password') {
+      res.status(401).json({ message: error.message });
+    }
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 }
 export async function getMe(req: Request, res: Response) {
   //   if (!req.user) {

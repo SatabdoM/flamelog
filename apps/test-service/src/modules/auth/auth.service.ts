@@ -32,7 +32,7 @@ export async function signup(data: signupData) {
 
 export async function login(data: loginData) {
   const user = await prisma.testUser.findUnique({ where: { email: data?.email } });
-  if (!user) throw new Error('User with this email does not exist!');
+  if (!user) throw new Error('User does not exist');
 
   const passwordMatched = await bcrypt.compare(data?.password, user.password);
   if (!passwordMatched) throw new Error('Incorrect Password!');
