@@ -1,8 +1,10 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist", // Output directory for compiled JavaScript files
     "rootDir": "src", // Root directory for TypeScript source files
-    "module": "CommonJS", // Use CommonJS module system (required for Node.js)
+    "module": "NodeNext", // Use NodeNext module system (required for Node.js)
+    "moduleResolution": "NodeNext", // Use NodeNext module resolution
     "target": "ES6", // Compile to ECMAScript 6
 
     // TypeScript strict mode options (disabled for now, can enable later)
@@ -20,7 +22,12 @@
     "sourceMap": true, // Generates source maps for debugging
     "skipLibCheck": true, // Skips type-checking of declaration files (.d.ts)
     "forceConsistentCasingInFileNames": true, // Ensures file names are case-sensitive
-    "allowJs": false // Disallows JavaScript files in TypeScript compilation
+    "allowJs": false, // Disallows JavaScript files in TypeScript compilation
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "baseUrl": "../../",
+    "paths": {
+      "@packages/prisma-client": ["packages/prisma-client"]
+    }
   },
   "include": ["src"], // Specifies which files should be included in the compilation
   "exclude": ["node_modules", "dist"] // Excludes unnecessary directories from compilation

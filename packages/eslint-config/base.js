@@ -42,10 +42,4 @@ export const config = [
       },
     },
   },
-  {
-    files: ['packages/prisma-client/**/*.js'],
-    env: {
-      node: true,
-    },
-  },
 ];
