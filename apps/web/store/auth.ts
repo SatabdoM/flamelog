@@ -21,8 +21,16 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       isAuthenticated: false,
       token: null,
-      setAuth: (user, token) => set({ user, isAuthenticated: true, token }),
-      clearAuth: () => set({ user: null, isAuthenticated: false, token: null }),
+      setAuth: (user, token) => {
+        set({ user, isAuthenticated: true, token });
+        // Set cookie for middleware
+        document.cookie = `authToken=${token}; path=/`;
+      },
+      clearAuth: () => {
+        set({ user: null, isAuthenticated: false, token: null });
+        // Set cookie for middleware
+        document.cookie = `authToken=; path=/`;
+      },
     }),
     {
       name: 'auth-storage',
