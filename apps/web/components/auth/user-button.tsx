@@ -23,7 +23,7 @@ export const UserButton = () => {
 
   const onLogoutClick = async () => {
     clearAuth();
-    router.refresh();
+    router.push('/');
   };
 
   return (
