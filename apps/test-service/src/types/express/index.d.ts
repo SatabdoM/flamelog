@@ -1,4 +1,4 @@
-import { TestUser } from '@prisma/client';
+import { TestUser } from '@workspace/db';
 
 declare global {
   namespace Express {
