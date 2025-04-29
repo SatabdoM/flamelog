@@ -16,8 +16,13 @@ import {
 
 import { Logo } from '@workspace/ui/components/logo';
 import { UserButton } from './auth/user-button';
+import { useAuthStore } from '@/store/auth';
+import { Button } from '@workspace/ui/components/button';
+import { ThemeToggle } from './theme-toggle';
 
 export const Navbar = () => {
+  const { isAuthenticated } = useAuthStore();
+
   return (
     <div className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 flex h-15 w-full items-center justify-between border-b px-10 backdrop-blur">
       <div>
@@ -28,8 +33,16 @@ export const Navbar = () => {
         <NavMenus />
       </div>
 
-      <div>
-        <UserButton />
+      <div className="flex items-center gap-2">
+        <ThemeToggle />
+
+        {isAuthenticated ? (
+          <UserButton />
+        ) : (
+          <Button asChild>
+            <Link href="/auth/login">Login</Link>
+          </Button>
+        )}
       </div>
     </div>
   );
