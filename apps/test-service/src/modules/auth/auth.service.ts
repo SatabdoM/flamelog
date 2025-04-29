@@ -15,7 +15,11 @@ type loginData = {
 };
 
 export async function signup(data: signupData) {
+  const existingUser = await prisma.testUser.findUnique({ where: { email: data?.email } });
+  if (existingUser) throw new Error('User exists');
+
   const hashedPassword = await bcrypt.hash(data.password, 10);
+
   const user = await prisma.testUser.create({
     data: {
       email: data.email,
@@ -23,7 +27,7 @@ export async function signup(data: signupData) {
       name: data?.name,
     },
   });
-  return user?.id;
+  return user;
 }
 
 export async function login(data: loginData) {

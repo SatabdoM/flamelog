@@ -3,8 +3,16 @@ import * as AuthService from './auth.service';
 import { TestUser } from '@packages/prisma-client';
 
 export async function signup(req: Request, res: Response) {
-  const user = await AuthService.signup(req.body);
-  res.status(200).json({ user });
+  try {
+    const user = await AuthService.signup(req.body);
+    res.status(200).json({ user });
+  } catch (error: any) {
+    if (error.message === 'User exists') {
+      res.status(400).json({ message: error.message });
+    }
+    console.error('Error during signup:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 }
 export async function login(req: Request, res: Response) {
   const { token, user } = await AuthService.login(req.body);
