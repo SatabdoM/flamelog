@@ -41,6 +41,8 @@ export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>)
           id: 'some random id',
           email: data.email,
           name: 'Test User',
+          image:
+            'https://images.pexels.com/users/avatars/107012776/alan-jose-kayyanickal-781.jpeg?auto=compress&fit=crop&h=50&w=50&dpr=1',
           roles: ['admin', 'user'],
         },
         token: '98709870979',
