@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 import { cn } from '@workspace/ui/lib/utils';
@@ -14,11 +14,11 @@ import {
   navigationMenuTriggerStyle,
 } from '@workspace/ui/components/navigation-menu';
 import { Logo } from '@workspace/ui/components/logo';
-import { UserButton } from './auth/user-button';
+import { UserButton } from '../auth/user-button';
 import { useAuthStore } from '@/store/auth';
 import { Button } from '@workspace/ui/components/button';
-import { ThemeToggle } from './theme-toggle';
-import { SearchBox } from './search-box';
+import { ThemeToggle } from '../theme-toggle';
+import { SearchBox } from '../search/search-box';
 
 export const Navbar = () => {
   const { isAuthenticated } = useAuthStore();

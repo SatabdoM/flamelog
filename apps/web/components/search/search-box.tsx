@@ -3,9 +3,9 @@
 import { useEffect } from 'react';
 import { SearchIcon } from 'lucide-react';
 
-import { Input } from '@workspace/ui/components/input';
 import { useUIStore } from '@/store/ui';
 import { useWindowSize } from '@/hooks/use-window-size';
+import { Input } from '@workspace/ui/components/input';
 
 export const SearchBox = () => {
   const openMobileSearch = useUIStore((state) => state.openMobileSearch);

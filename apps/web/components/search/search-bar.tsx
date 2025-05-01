@@ -2,12 +2,24 @@
 
 import { useEffect, useRef } from 'react';
 import { ArrowLeft, SearchIcon } from 'lucide-react';
+
 import { useUIStore } from '@/store/ui';
+import { useWindowSize } from '@/hooks/use-window-size';
 import { Button } from '@workspace/ui/components/button';
 
 export const SearchBar = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const closeMobileSearch = useUIStore((state) => state.closeMobileSearch);
+
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    const isMobile = windowSize.width <= 640;
+
+    if (!isMobile) {
+      closeMobileSearch();
+    }
+  }, [windowSize, closeMobileSearch]);
 
   useEffect(() => {
     if (searchInputRef.current) {
