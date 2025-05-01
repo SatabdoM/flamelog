@@ -127,6 +127,14 @@ exports.Prisma.TestUserScalarFieldEnum = {
   roles: 'roles',
 };
 
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  createdAt: 'createdAt',
+  authorId: 'authorId',
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc',
@@ -145,6 +153,7 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   TestUser: 'TestUser',
+  Post: 'Post',
 };
 
 /**

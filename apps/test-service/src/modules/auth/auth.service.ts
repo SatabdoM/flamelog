@@ -1,20 +1,21 @@
 import { prisma } from '@workspace/db';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { signupSchema, loginSchema } from './auth.schema';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
-type signupData = {
-  email: string;
-  password: string;
-  name?: string;
-};
-type loginData = {
-  email: string;
-  password: string;
-};
+// type signupData = {
+//   email: string;
+//   password: string;
+//   name?: string;
+// };
+// type loginData = {
+//   email: string;
+//   password: string;
+// };
 
-export async function signup(data: signupData) {
+export async function signup(data: signupSchema) {
   const existingUser = await prisma.testUser.findUnique({ where: { email: data?.email } });
   if (existingUser) throw new Error('User exists');
 
@@ -30,8 +31,8 @@ export async function signup(data: signupData) {
   });
   return user;
 }
-//Add roles
-export async function login(data: loginData) {
+
+export async function login(data: loginSchema) {
   const user = await prisma.testUser.findUnique({ where: { email: data?.email } });
   if (!user) throw new Error('User does not exist');
 
