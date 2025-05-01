@@ -2152,6 +2152,7 @@ export namespace Prisma {
     email: number;
     password: number;
     name: number;
+    roles: number;
     _all: number;
   };
 
@@ -2182,6 +2183,7 @@ export namespace Prisma {
     email?: true;
     password?: true;
     name?: true;
+    roles?: true;
     _all?: true;
   };
 
@@ -2277,6 +2279,7 @@ export namespace Prisma {
     email: string;
     password: string;
     name: string | null;
+    roles: string[];
     _count: TestUserCountAggregateOutputType | null;
     _avg: TestUserAvgAggregateOutputType | null;
     _sum: TestUserSumAggregateOutputType | null;
@@ -2303,6 +2306,7 @@ export namespace Prisma {
         email?: boolean;
         password?: boolean;
         name?: boolean;
+        roles?: boolean;
       },
       ExtArgs['result']['testUser']
     >;
@@ -2315,6 +2319,7 @@ export namespace Prisma {
       email?: boolean;
       password?: boolean;
       name?: boolean;
+      roles?: boolean;
     },
     ExtArgs['result']['testUser']
   >;
@@ -2327,6 +2332,7 @@ export namespace Prisma {
       email?: boolean;
       password?: boolean;
       name?: boolean;
+      roles?: boolean;
     },
     ExtArgs['result']['testUser']
   >;
@@ -2336,10 +2342,14 @@ export namespace Prisma {
     email?: boolean;
     password?: boolean;
     name?: boolean;
+    roles?: boolean;
   };
 
   export type TestUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    $Extensions.GetOmit<'id' | 'email' | 'password' | 'name', ExtArgs['result']['testUser']>;
+    $Extensions.GetOmit<
+      'id' | 'email' | 'password' | 'name' | 'roles',
+      ExtArgs['result']['testUser']
+    >;
 
   export type $TestUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
@@ -2351,6 +2361,7 @@ export namespace Prisma {
           email: string;
           password: string;
           name: string | null;
+          roles: string[];
         },
         ExtArgs['result']['testUser']
       >;
@@ -2885,6 +2896,7 @@ export namespace Prisma {
     readonly email: FieldRef<'TestUser', 'String'>;
     readonly password: FieldRef<'TestUser', 'String'>;
     readonly name: FieldRef<'TestUser', 'String'>;
+    readonly roles: FieldRef<'TestUser', 'String[]'>;
   }
 
   // Custom InputTypes
@@ -3306,6 +3318,7 @@ export namespace Prisma {
     email: 'email';
     password: 'password';
     name: 'name';
+    roles: 'roles';
   };
 
   export type TestUserScalarFieldEnum =
@@ -3425,6 +3438,7 @@ export namespace Prisma {
     email?: StringFilter<'TestUser'> | string;
     password?: StringFilter<'TestUser'> | string;
     name?: StringNullableFilter<'TestUser'> | string | null;
+    roles?: StringNullableListFilter<'TestUser'>;
   };
 
   export type TestUserOrderByWithRelationInput = {
@@ -3432,6 +3446,7 @@ export namespace Prisma {
     email?: SortOrder;
     password?: SortOrder;
     name?: SortOrderInput | SortOrder;
+    roles?: SortOrder;
   };
 
   export type TestUserWhereUniqueInput = Prisma.AtLeast<
@@ -3443,6 +3458,7 @@ export namespace Prisma {
       OR?: TestUserWhereInput[];
       NOT?: TestUserWhereInput | TestUserWhereInput[];
       name?: StringNullableFilter<'TestUser'> | string | null;
+      roles?: StringNullableListFilter<'TestUser'>;
     },
     'id' | 'email' | 'password'
   >;
@@ -3452,6 +3468,7 @@ export namespace Prisma {
     email?: SortOrder;
     password?: SortOrder;
     name?: SortOrderInput | SortOrder;
+    roles?: SortOrder;
     _count?: TestUserCountOrderByAggregateInput;
     _avg?: TestUserAvgOrderByAggregateInput;
     _max?: TestUserMaxOrderByAggregateInput;
@@ -3467,6 +3484,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<'TestUser'> | string;
     password?: StringWithAggregatesFilter<'TestUser'> | string;
     name?: StringNullableWithAggregatesFilter<'TestUser'> | string | null;
+    roles?: StringNullableListFilter<'TestUser'>;
   };
 
   export type UserCreateInput = {
@@ -3512,6 +3530,7 @@ export namespace Prisma {
     email: string;
     password: string;
     name?: string | null;
+    roles?: TestUserCreaterolesInput | string[];
   };
 
   export type TestUserUncheckedCreateInput = {
@@ -3519,12 +3538,14 @@ export namespace Prisma {
     email: string;
     password: string;
     name?: string | null;
+    roles?: TestUserCreaterolesInput | string[];
   };
 
   export type TestUserUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: TestUserUpdaterolesInput | string[];
   };
 
   export type TestUserUncheckedUpdateInput = {
@@ -3532,6 +3553,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: TestUserUpdaterolesInput | string[];
   };
 
   export type TestUserCreateManyInput = {
@@ -3539,12 +3561,14 @@ export namespace Prisma {
     email: string;
     password: string;
     name?: string | null;
+    roles?: TestUserCreaterolesInput | string[];
   };
 
   export type TestUserUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: TestUserUpdaterolesInput | string[];
   };
 
   export type TestUserUncheckedUpdateManyInput = {
@@ -3552,6 +3576,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: TestUserUpdaterolesInput | string[];
   };
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3678,11 +3703,20 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>;
   };
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    has?: string | StringFieldRefInput<$PrismaModel> | null;
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    isEmpty?: boolean;
+  };
+
   export type TestUserCountOrderByAggregateInput = {
     id?: SortOrder;
     email?: SortOrder;
     password?: SortOrder;
     name?: SortOrder;
+    roles?: SortOrder;
   };
 
   export type TestUserAvgOrderByAggregateInput = {
@@ -3721,6 +3755,15 @@ export namespace Prisma {
     decrement?: number;
     multiply?: number;
     divide?: number;
+  };
+
+  export type TestUserCreaterolesInput = {
+    set: string[];
+  };
+
+  export type TestUserUpdaterolesInput = {
+    set?: string[];
+    push?: string | string[];
   };
 
   export type NestedIntFilter<$PrismaModel = never> = {

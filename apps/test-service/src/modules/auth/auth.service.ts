@@ -25,11 +25,12 @@ export async function signup(data: signupData) {
       email: data.email,
       password: hashedPassword,
       name: data?.name,
+      roles: ['USER'],
     },
   });
   return user;
 }
-
+//Add roles
 export async function login(data: loginData) {
   const user = await prisma.testUser.findUnique({ where: { email: data?.email } });
   if (!user) throw new Error('User does not exist');

@@ -124,6 +124,7 @@ exports.Prisma.TestUserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   name: 'name',
+  roles: 'roles',
 };
 
 exports.Prisma.SortOrder = {

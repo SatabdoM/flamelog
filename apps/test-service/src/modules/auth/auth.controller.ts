@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as AuthService from './auth.service';
-import { TestUser } from '@packages/prisma-client';
+import { AuthentictedRequest } from '../../types/auth';
 
 export async function signup(req: Request, res: Response) {
   try {
@@ -28,9 +28,12 @@ export async function login(req: Request, res: Response) {
     res.status(500).json({ message: 'Internal server error' });
   }
 }
-export async function getMe(req: Request, res: Response) {
-  //   if (!req.user) {
-  //     return res.status(401).json({ message: 'Unauthorized user. Please Log in/Sign Up' });
-  //   }
-  //   res.json({ user: req?.user });
+export async function getMe(req: AuthentictedRequest, res: Response) {
+  if (!req.user) {
+    res.status(401).json({ message: 'Unauthorized user. Please Log in/Sign Up' });
+  }
+  res.json({ user: req?.user });
+}
+export async function adminAccess(req: Request, res: Response) {
+  res.json({ message: 'Admin access granted' });
 }
