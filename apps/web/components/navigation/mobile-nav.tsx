@@ -13,7 +13,7 @@ export const MobileNav = () => {
             className="hover:bg-accent flex w-12 flex-grow flex-col items-center gap-1 rounded-md p-2 transition-all"
           >
             <menu.icon className="size-5" />
-            <span className="line-clamp-1 text-[10px] font-extralight">{menu.label}</span>
+            <span className="line-clamp-1 text-[10px] font-light">{menu.label}</span>
           </Link>
         ))}
       </div>
