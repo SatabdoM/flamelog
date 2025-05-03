@@ -1,6 +1,21 @@
+# Mark JavaScript config files as generated or documentation to exclude them from stats
+*.config.js linguist-generated=true
+*.config.cjs linguist-generated=true
+*.config.mjs linguist-generated=true
+*.eslintrc.js linguist-generated=true
+*.eslintrc.cjs linguist-generated=true
+*.eslintrc.mjs linguist-generated=true
+*.prettierrc.js linguist-generated=true
+*.prettierrc.cjs linguist-generated=true
+*.prettierrc.mjs linguist-generated=true
 
+# Optionally mark entire config folders as generated
+config/** linguist-generated=true
+
+# Force TypeScript as the main language
 *.ts linguist-language=TypeScript
 *.tsx linguist-language=TypeScript
 
+# Exclude dist or build folders
 dist/** linguist-generated=true
 build/** linguist-generated=true
