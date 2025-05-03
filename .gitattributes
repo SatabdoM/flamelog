@@ -1,0 +1,6 @@
+
+*.ts linguist-language=TypeScript
+*.tsx linguist-language=TypeScript
+
+dist/** linguist-generated=true
+build/** linguist-generated=true
