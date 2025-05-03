@@ -21,6 +21,9 @@ model TestUser {
   name     String?
   roles    String[]
   post     Post[]
+
+  followers Follow[] @relation("Followers")
+  following Follow[] @relation("Following")
 }
 
 model Post {
@@ -30,4 +33,19 @@ model Post {
   createdAt DateTime @default(now())
   author    TestUser @relation(fields: [authorId], references: [id])
   authorId  Int
+}
+
+model Follow {
+  id         Int @id @default(autoincrement())
+  followerId Int
+  followedId Int
+
+  follower TestUser @relation("Followers", fields: [followerId], references: [id])
+  followed TestUser @relation("Following", fields: [followedId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([followerId, followedId])
+  @@index([followerId])
+  @@index([followedId])
 }
