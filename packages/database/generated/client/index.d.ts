@@ -17,6 +17,21 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>;
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>;
 /**
+ * Model UserProfile
+ *
+ */
+export type UserProfile = $Result.DefaultSelection<Prisma.$UserProfilePayload>;
+/**
+ * Model UserHeatmap
+ *
+ */
+export type UserHeatmap = $Result.DefaultSelection<Prisma.$UserHeatmapPayload>;
+/**
+ * Model UserTagStats
+ *
+ */
+export type UserTagStats = $Result.DefaultSelection<Prisma.$UserTagStatsPayload>;
+/**
  * Model Post
  *
  */
@@ -47,20 +62,65 @@ export type TagFollow = $Result.DefaultSelection<Prisma.$TagFollowPayload>;
  */
 export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>;
 /**
- * Model like
+ * Model Like
  *
  */
-export type like = $Result.DefaultSelection<Prisma.$likePayload>;
+export type Like = $Result.DefaultSelection<Prisma.$LikePayload>;
 /**
- * Model share
+ * Model Share
  *
  */
-export type share = $Result.DefaultSelection<Prisma.$sharePayload>;
+export type Share = $Result.DefaultSelection<Prisma.$SharePayload>;
 /**
- * Model feed
+ * Model Feed
  *
  */
-export type feed = $Result.DefaultSelection<Prisma.$feedPayload>;
+export type Feed = $Result.DefaultSelection<Prisma.$FeedPayload>;
+/**
+ * Model FeedTrack
+ *
+ */
+export type FeedTrack = $Result.DefaultSelection<Prisma.$FeedTrackPayload>;
+/**
+ * Model Notification
+ *
+ */
+export type Notification = $Result.DefaultSelection<Prisma.$NotificationPayload>;
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const Gender: {
+    MALE: 'MALE';
+    FEMLALE: 'FEMLALE';
+    OTHER: 'OTHER';
+    PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY';
+  };
+
+  export type Gender = (typeof Gender)[keyof typeof Gender];
+
+  export const NotificationType: {
+    FOLLOW: 'FOLLOW';
+    LIKE: 'LIKE';
+    COMMENT: 'COMMENT';
+    TAG_FOLLOWED: 'TAG_FOLLOWED';
+    POST_TAGGED: 'POST_TAGGED';
+    MENTION: 'MENTION';
+    REPLY: 'REPLY';
+    SHARE: 'SHARE';
+  };
+
+  export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType];
+}
+
+export type Gender = $Enums.Gender;
+
+export const Gender: typeof $Enums.Gender;
+
+export type NotificationType = $Enums.NotificationType;
+
+export const NotificationType: typeof $Enums.NotificationType;
 
 /**
  * ##  Prisma Client ʲˢ
@@ -227,6 +287,36 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.userProfile`: Exposes CRUD operations for the **UserProfile** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more UserProfiles
+   * const userProfiles = await prisma.userProfile.findMany()
+   * ```
+   */
+  get userProfile(): Prisma.UserProfileDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userHeatmap`: Exposes CRUD operations for the **UserHeatmap** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more UserHeatmaps
+   * const userHeatmaps = await prisma.userHeatmap.findMany()
+   * ```
+   */
+  get userHeatmap(): Prisma.UserHeatmapDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userTagStats`: Exposes CRUD operations for the **UserTagStats** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more UserTagStats
+   * const userTagStats = await prisma.userTagStats.findMany()
+   * ```
+   */
+  get userTagStats(): Prisma.UserTagStatsDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.post`: Exposes CRUD operations for the **Post** model.
    * Example usage:
    * ```ts
@@ -287,34 +377,54 @@ export class PrismaClient<
   get comment(): Prisma.CommentDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.like`: Exposes CRUD operations for the **like** model.
+   * `prisma.like`: Exposes CRUD operations for the **Like** model.
    * Example usage:
    * ```ts
    * // Fetch zero or more Likes
    * const likes = await prisma.like.findMany()
    * ```
    */
-  get like(): Prisma.likeDelegate<ExtArgs, ClientOptions>;
+  get like(): Prisma.LikeDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.share`: Exposes CRUD operations for the **share** model.
+   * `prisma.share`: Exposes CRUD operations for the **Share** model.
    * Example usage:
    * ```ts
    * // Fetch zero or more Shares
    * const shares = await prisma.share.findMany()
    * ```
    */
-  get share(): Prisma.shareDelegate<ExtArgs, ClientOptions>;
+  get share(): Prisma.ShareDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.feed`: Exposes CRUD operations for the **feed** model.
+   * `prisma.feed`: Exposes CRUD operations for the **Feed** model.
    * Example usage:
    * ```ts
    * // Fetch zero or more Feeds
    * const feeds = await prisma.feed.findMany()
    * ```
    */
-  get feed(): Prisma.feedDelegate<ExtArgs, ClientOptions>;
+  get feed(): Prisma.FeedDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.feedTrack`: Exposes CRUD operations for the **FeedTrack** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more FeedTracks
+   * const feedTracks = await prisma.feedTrack.findMany()
+   * ```
+   */
+  get feedTrack(): Prisma.FeedTrackDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.notification`: Exposes CRUD operations for the **Notification** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Notifications
+   * const notifications = await prisma.notification.findMany()
+   * ```
+   */
+  get notification(): Prisma.NotificationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -750,15 +860,20 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User';
+    UserProfile: 'UserProfile';
+    UserHeatmap: 'UserHeatmap';
+    UserTagStats: 'UserTagStats';
     Post: 'Post';
     Follow: 'Follow';
     Tag: 'Tag';
     PostTag: 'PostTag';
     TagFollow: 'TagFollow';
     Comment: 'Comment';
-    like: 'like';
-    share: 'share';
-    feed: 'feed';
+    Like: 'Like';
+    Share: 'Share';
+    Feed: 'Feed';
+    FeedTrack: 'FeedTrack';
+    Notification: 'Notification';
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -785,6 +900,9 @@ export namespace Prisma {
     meta: {
       modelProps:
         | 'user'
+        | 'userProfile'
+        | 'userHeatmap'
+        | 'userTagStats'
         | 'post'
         | 'follow'
         | 'tag'
@@ -793,7 +911,9 @@ export namespace Prisma {
         | 'comment'
         | 'like'
         | 'share'
-        | 'feed';
+        | 'feed'
+        | 'feedTrack'
+        | 'notification';
       txIsolationLevel: Prisma.TransactionIsolationLevel;
     };
     model: {
@@ -868,6 +988,228 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>;
             result: $Utils.Optional<UserCountAggregateOutputType> | number;
+          };
+        };
+      };
+      UserProfile: {
+        payload: Prisma.$UserProfilePayload<ExtArgs>;
+        fields: Prisma.UserProfileFieldRefs;
+        operations: {
+          findUnique: {
+            args: Prisma.UserProfileFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload> | null;
+          };
+          findUniqueOrThrow: {
+            args: Prisma.UserProfileFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload>;
+          };
+          findFirst: {
+            args: Prisma.UserProfileFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload> | null;
+          };
+          findFirstOrThrow: {
+            args: Prisma.UserProfileFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload>;
+          };
+          findMany: {
+            args: Prisma.UserProfileFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload>[];
+          };
+          create: {
+            args: Prisma.UserProfileCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload>;
+          };
+          createMany: {
+            args: Prisma.UserProfileCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          createManyAndReturn: {
+            args: Prisma.UserProfileCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload>[];
+          };
+          delete: {
+            args: Prisma.UserProfileDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload>;
+          };
+          update: {
+            args: Prisma.UserProfileUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload>;
+          };
+          deleteMany: {
+            args: Prisma.UserProfileDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateMany: {
+            args: Prisma.UserProfileUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateManyAndReturn: {
+            args: Prisma.UserProfileUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload>[];
+          };
+          upsert: {
+            args: Prisma.UserProfileUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserProfilePayload>;
+          };
+          aggregate: {
+            args: Prisma.UserProfileAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateUserProfile>;
+          };
+          groupBy: {
+            args: Prisma.UserProfileGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<UserProfileGroupByOutputType>[];
+          };
+          count: {
+            args: Prisma.UserProfileCountArgs<ExtArgs>;
+            result: $Utils.Optional<UserProfileCountAggregateOutputType> | number;
+          };
+        };
+      };
+      UserHeatmap: {
+        payload: Prisma.$UserHeatmapPayload<ExtArgs>;
+        fields: Prisma.UserHeatmapFieldRefs;
+        operations: {
+          findUnique: {
+            args: Prisma.UserHeatmapFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload> | null;
+          };
+          findUniqueOrThrow: {
+            args: Prisma.UserHeatmapFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload>;
+          };
+          findFirst: {
+            args: Prisma.UserHeatmapFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload> | null;
+          };
+          findFirstOrThrow: {
+            args: Prisma.UserHeatmapFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload>;
+          };
+          findMany: {
+            args: Prisma.UserHeatmapFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload>[];
+          };
+          create: {
+            args: Prisma.UserHeatmapCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload>;
+          };
+          createMany: {
+            args: Prisma.UserHeatmapCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          createManyAndReturn: {
+            args: Prisma.UserHeatmapCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload>[];
+          };
+          delete: {
+            args: Prisma.UserHeatmapDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload>;
+          };
+          update: {
+            args: Prisma.UserHeatmapUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload>;
+          };
+          deleteMany: {
+            args: Prisma.UserHeatmapDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateMany: {
+            args: Prisma.UserHeatmapUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateManyAndReturn: {
+            args: Prisma.UserHeatmapUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload>[];
+          };
+          upsert: {
+            args: Prisma.UserHeatmapUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserHeatmapPayload>;
+          };
+          aggregate: {
+            args: Prisma.UserHeatmapAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateUserHeatmap>;
+          };
+          groupBy: {
+            args: Prisma.UserHeatmapGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<UserHeatmapGroupByOutputType>[];
+          };
+          count: {
+            args: Prisma.UserHeatmapCountArgs<ExtArgs>;
+            result: $Utils.Optional<UserHeatmapCountAggregateOutputType> | number;
+          };
+        };
+      };
+      UserTagStats: {
+        payload: Prisma.$UserTagStatsPayload<ExtArgs>;
+        fields: Prisma.UserTagStatsFieldRefs;
+        operations: {
+          findUnique: {
+            args: Prisma.UserTagStatsFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload> | null;
+          };
+          findUniqueOrThrow: {
+            args: Prisma.UserTagStatsFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload>;
+          };
+          findFirst: {
+            args: Prisma.UserTagStatsFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload> | null;
+          };
+          findFirstOrThrow: {
+            args: Prisma.UserTagStatsFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload>;
+          };
+          findMany: {
+            args: Prisma.UserTagStatsFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload>[];
+          };
+          create: {
+            args: Prisma.UserTagStatsCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload>;
+          };
+          createMany: {
+            args: Prisma.UserTagStatsCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          createManyAndReturn: {
+            args: Prisma.UserTagStatsCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload>[];
+          };
+          delete: {
+            args: Prisma.UserTagStatsDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload>;
+          };
+          update: {
+            args: Prisma.UserTagStatsUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload>;
+          };
+          deleteMany: {
+            args: Prisma.UserTagStatsDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateMany: {
+            args: Prisma.UserTagStatsUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateManyAndReturn: {
+            args: Prisma.UserTagStatsUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload>[];
+          };
+          upsert: {
+            args: Prisma.UserTagStatsUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$UserTagStatsPayload>;
+          };
+          aggregate: {
+            args: Prisma.UserTagStatsAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateUserTagStats>;
+          };
+          groupBy: {
+            args: Prisma.UserTagStatsGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<UserTagStatsGroupByOutputType>[];
+          };
+          count: {
+            args: Prisma.UserTagStatsCountArgs<ExtArgs>;
+            result: $Utils.Optional<UserTagStatsCountAggregateOutputType> | number;
           };
         };
       };
@@ -1315,225 +1657,373 @@ export namespace Prisma {
           };
         };
       };
-      like: {
-        payload: Prisma.$likePayload<ExtArgs>;
-        fields: Prisma.likeFieldRefs;
+      Like: {
+        payload: Prisma.$LikePayload<ExtArgs>;
+        fields: Prisma.LikeFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.likeFindUniqueArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload> | null;
+            args: Prisma.LikeFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload> | null;
           };
           findUniqueOrThrow: {
-            args: Prisma.likeFindUniqueOrThrowArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload>;
+            args: Prisma.LikeFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload>;
           };
           findFirst: {
-            args: Prisma.likeFindFirstArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload> | null;
+            args: Prisma.LikeFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload> | null;
           };
           findFirstOrThrow: {
-            args: Prisma.likeFindFirstOrThrowArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload>;
+            args: Prisma.LikeFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload>;
           };
           findMany: {
-            args: Prisma.likeFindManyArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload>[];
+            args: Prisma.LikeFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload>[];
           };
           create: {
-            args: Prisma.likeCreateArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload>;
+            args: Prisma.LikeCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload>;
           };
           createMany: {
-            args: Prisma.likeCreateManyArgs<ExtArgs>;
+            args: Prisma.LikeCreateManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           createManyAndReturn: {
-            args: Prisma.likeCreateManyAndReturnArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload>[];
+            args: Prisma.LikeCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload>[];
           };
           delete: {
-            args: Prisma.likeDeleteArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload>;
+            args: Prisma.LikeDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload>;
           };
           update: {
-            args: Prisma.likeUpdateArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload>;
+            args: Prisma.LikeUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload>;
           };
           deleteMany: {
-            args: Prisma.likeDeleteManyArgs<ExtArgs>;
+            args: Prisma.LikeDeleteManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           updateMany: {
-            args: Prisma.likeUpdateManyArgs<ExtArgs>;
+            args: Prisma.LikeUpdateManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           updateManyAndReturn: {
-            args: Prisma.likeUpdateManyAndReturnArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload>[];
+            args: Prisma.LikeUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload>[];
           };
           upsert: {
-            args: Prisma.likeUpsertArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$likePayload>;
+            args: Prisma.LikeUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$LikePayload>;
           };
           aggregate: {
             args: Prisma.LikeAggregateArgs<ExtArgs>;
             result: $Utils.Optional<AggregateLike>;
           };
           groupBy: {
-            args: Prisma.likeGroupByArgs<ExtArgs>;
+            args: Prisma.LikeGroupByArgs<ExtArgs>;
             result: $Utils.Optional<LikeGroupByOutputType>[];
           };
           count: {
-            args: Prisma.likeCountArgs<ExtArgs>;
+            args: Prisma.LikeCountArgs<ExtArgs>;
             result: $Utils.Optional<LikeCountAggregateOutputType> | number;
           };
         };
       };
-      share: {
-        payload: Prisma.$sharePayload<ExtArgs>;
-        fields: Prisma.shareFieldRefs;
+      Share: {
+        payload: Prisma.$SharePayload<ExtArgs>;
+        fields: Prisma.ShareFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.shareFindUniqueArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload> | null;
+            args: Prisma.ShareFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload> | null;
           };
           findUniqueOrThrow: {
-            args: Prisma.shareFindUniqueOrThrowArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload>;
+            args: Prisma.ShareFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload>;
           };
           findFirst: {
-            args: Prisma.shareFindFirstArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload> | null;
+            args: Prisma.ShareFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload> | null;
           };
           findFirstOrThrow: {
-            args: Prisma.shareFindFirstOrThrowArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload>;
+            args: Prisma.ShareFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload>;
           };
           findMany: {
-            args: Prisma.shareFindManyArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload>[];
+            args: Prisma.ShareFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload>[];
           };
           create: {
-            args: Prisma.shareCreateArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload>;
+            args: Prisma.ShareCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload>;
           };
           createMany: {
-            args: Prisma.shareCreateManyArgs<ExtArgs>;
+            args: Prisma.ShareCreateManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           createManyAndReturn: {
-            args: Prisma.shareCreateManyAndReturnArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload>[];
+            args: Prisma.ShareCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload>[];
           };
           delete: {
-            args: Prisma.shareDeleteArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload>;
+            args: Prisma.ShareDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload>;
           };
           update: {
-            args: Prisma.shareUpdateArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload>;
+            args: Prisma.ShareUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload>;
           };
           deleteMany: {
-            args: Prisma.shareDeleteManyArgs<ExtArgs>;
+            args: Prisma.ShareDeleteManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           updateMany: {
-            args: Prisma.shareUpdateManyArgs<ExtArgs>;
+            args: Prisma.ShareUpdateManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           updateManyAndReturn: {
-            args: Prisma.shareUpdateManyAndReturnArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload>[];
+            args: Prisma.ShareUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload>[];
           };
           upsert: {
-            args: Prisma.shareUpsertArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$sharePayload>;
+            args: Prisma.ShareUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$SharePayload>;
           };
           aggregate: {
             args: Prisma.ShareAggregateArgs<ExtArgs>;
             result: $Utils.Optional<AggregateShare>;
           };
           groupBy: {
-            args: Prisma.shareGroupByArgs<ExtArgs>;
+            args: Prisma.ShareGroupByArgs<ExtArgs>;
             result: $Utils.Optional<ShareGroupByOutputType>[];
           };
           count: {
-            args: Prisma.shareCountArgs<ExtArgs>;
+            args: Prisma.ShareCountArgs<ExtArgs>;
             result: $Utils.Optional<ShareCountAggregateOutputType> | number;
           };
         };
       };
-      feed: {
-        payload: Prisma.$feedPayload<ExtArgs>;
-        fields: Prisma.feedFieldRefs;
+      Feed: {
+        payload: Prisma.$FeedPayload<ExtArgs>;
+        fields: Prisma.FeedFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.feedFindUniqueArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload> | null;
+            args: Prisma.FeedFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload> | null;
           };
           findUniqueOrThrow: {
-            args: Prisma.feedFindUniqueOrThrowArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload>;
+            args: Prisma.FeedFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload>;
           };
           findFirst: {
-            args: Prisma.feedFindFirstArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload> | null;
+            args: Prisma.FeedFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload> | null;
           };
           findFirstOrThrow: {
-            args: Prisma.feedFindFirstOrThrowArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload>;
+            args: Prisma.FeedFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload>;
           };
           findMany: {
-            args: Prisma.feedFindManyArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload>[];
+            args: Prisma.FeedFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload>[];
           };
           create: {
-            args: Prisma.feedCreateArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload>;
+            args: Prisma.FeedCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload>;
           };
           createMany: {
-            args: Prisma.feedCreateManyArgs<ExtArgs>;
+            args: Prisma.FeedCreateManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           createManyAndReturn: {
-            args: Prisma.feedCreateManyAndReturnArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload>[];
+            args: Prisma.FeedCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload>[];
           };
           delete: {
-            args: Prisma.feedDeleteArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload>;
+            args: Prisma.FeedDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload>;
           };
           update: {
-            args: Prisma.feedUpdateArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload>;
+            args: Prisma.FeedUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload>;
           };
           deleteMany: {
-            args: Prisma.feedDeleteManyArgs<ExtArgs>;
+            args: Prisma.FeedDeleteManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           updateMany: {
-            args: Prisma.feedUpdateManyArgs<ExtArgs>;
+            args: Prisma.FeedUpdateManyArgs<ExtArgs>;
             result: BatchPayload;
           };
           updateManyAndReturn: {
-            args: Prisma.feedUpdateManyAndReturnArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload>[];
+            args: Prisma.FeedUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload>[];
           };
           upsert: {
-            args: Prisma.feedUpsertArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$feedPayload>;
+            args: Prisma.FeedUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedPayload>;
           };
           aggregate: {
             args: Prisma.FeedAggregateArgs<ExtArgs>;
             result: $Utils.Optional<AggregateFeed>;
           };
           groupBy: {
-            args: Prisma.feedGroupByArgs<ExtArgs>;
+            args: Prisma.FeedGroupByArgs<ExtArgs>;
             result: $Utils.Optional<FeedGroupByOutputType>[];
           };
           count: {
-            args: Prisma.feedCountArgs<ExtArgs>;
+            args: Prisma.FeedCountArgs<ExtArgs>;
             result: $Utils.Optional<FeedCountAggregateOutputType> | number;
+          };
+        };
+      };
+      FeedTrack: {
+        payload: Prisma.$FeedTrackPayload<ExtArgs>;
+        fields: Prisma.FeedTrackFieldRefs;
+        operations: {
+          findUnique: {
+            args: Prisma.FeedTrackFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload> | null;
+          };
+          findUniqueOrThrow: {
+            args: Prisma.FeedTrackFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload>;
+          };
+          findFirst: {
+            args: Prisma.FeedTrackFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload> | null;
+          };
+          findFirstOrThrow: {
+            args: Prisma.FeedTrackFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload>;
+          };
+          findMany: {
+            args: Prisma.FeedTrackFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload>[];
+          };
+          create: {
+            args: Prisma.FeedTrackCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload>;
+          };
+          createMany: {
+            args: Prisma.FeedTrackCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          createManyAndReturn: {
+            args: Prisma.FeedTrackCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload>[];
+          };
+          delete: {
+            args: Prisma.FeedTrackDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload>;
+          };
+          update: {
+            args: Prisma.FeedTrackUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload>;
+          };
+          deleteMany: {
+            args: Prisma.FeedTrackDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateMany: {
+            args: Prisma.FeedTrackUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateManyAndReturn: {
+            args: Prisma.FeedTrackUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload>[];
+          };
+          upsert: {
+            args: Prisma.FeedTrackUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$FeedTrackPayload>;
+          };
+          aggregate: {
+            args: Prisma.FeedTrackAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateFeedTrack>;
+          };
+          groupBy: {
+            args: Prisma.FeedTrackGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<FeedTrackGroupByOutputType>[];
+          };
+          count: {
+            args: Prisma.FeedTrackCountArgs<ExtArgs>;
+            result: $Utils.Optional<FeedTrackCountAggregateOutputType> | number;
+          };
+        };
+      };
+      Notification: {
+        payload: Prisma.$NotificationPayload<ExtArgs>;
+        fields: Prisma.NotificationFieldRefs;
+        operations: {
+          findUnique: {
+            args: Prisma.NotificationFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload> | null;
+          };
+          findUniqueOrThrow: {
+            args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>;
+          };
+          findFirst: {
+            args: Prisma.NotificationFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload> | null;
+          };
+          findFirstOrThrow: {
+            args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>;
+          };
+          findMany: {
+            args: Prisma.NotificationFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[];
+          };
+          create: {
+            args: Prisma.NotificationCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>;
+          };
+          createMany: {
+            args: Prisma.NotificationCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          createManyAndReturn: {
+            args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[];
+          };
+          delete: {
+            args: Prisma.NotificationDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>;
+          };
+          update: {
+            args: Prisma.NotificationUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>;
+          };
+          deleteMany: {
+            args: Prisma.NotificationDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateMany: {
+            args: Prisma.NotificationUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateManyAndReturn: {
+            args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[];
+          };
+          upsert: {
+            args: Prisma.NotificationUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>;
+          };
+          aggregate: {
+            args: Prisma.NotificationAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateNotification>;
+          };
+          groupBy: {
+            args: Prisma.NotificationGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<NotificationGroupByOutputType>[];
+          };
+          count: {
+            args: Prisma.NotificationCountArgs<ExtArgs>;
+            result: $Utils.Optional<NotificationCountAggregateOutputType> | number;
           };
         };
       };
@@ -1626,15 +2116,20 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit;
+    userProfile?: UserProfileOmit;
+    userHeatmap?: UserHeatmapOmit;
+    userTagStats?: UserTagStatsOmit;
     post?: PostOmit;
     follow?: FollowOmit;
     tag?: TagOmit;
     postTag?: PostTagOmit;
     tagFollow?: TagFollowOmit;
     comment?: CommentOmit;
-    like?: likeOmit;
-    share?: shareOmit;
-    feed?: feedOmit;
+    like?: LikeOmit;
+    share?: ShareOmit;
+    feed?: FeedOmit;
+    feedTrack?: FeedTrackOmit;
+    notification?: NotificationOmit;
   };
 
   /* Types for Logging */
@@ -1733,26 +2228,36 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     post: number;
+    tagStats: number;
     feed: number;
+    feedTrack: number;
+    heapmap: number;
     like: number;
     comment: number;
     shared: number;
     tagFollows: number;
     followers: number;
     following: number;
+    notificationsSent: number;
+    notificationsReceived: number;
   };
 
   export type UserCountOutputTypeSelect<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     post?: boolean | UserCountOutputTypeCountPostArgs;
+    tagStats?: boolean | UserCountOutputTypeCountTagStatsArgs;
     feed?: boolean | UserCountOutputTypeCountFeedArgs;
+    feedTrack?: boolean | UserCountOutputTypeCountFeedTrackArgs;
+    heapmap?: boolean | UserCountOutputTypeCountHeapmapArgs;
     like?: boolean | UserCountOutputTypeCountLikeArgs;
     comment?: boolean | UserCountOutputTypeCountCommentArgs;
     shared?: boolean | UserCountOutputTypeCountSharedArgs;
     tagFollows?: boolean | UserCountOutputTypeCountTagFollowsArgs;
     followers?: boolean | UserCountOutputTypeCountFollowersArgs;
     following?: boolean | UserCountOutputTypeCountFollowingArgs;
+    notificationsSent?: boolean | UserCountOutputTypeCountNotificationsSentArgs;
+    notificationsReceived?: boolean | UserCountOutputTypeCountNotificationsReceivedArgs;
   };
 
   // Custom InputTypes
@@ -1780,10 +2285,37 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountTagStatsArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: UserTagStatsWhereInput;
+  };
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountFeedArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    where?: feedWhereInput;
+    where?: FeedWhereInput;
+  };
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFeedTrackArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: FeedTrackWhereInput;
+  };
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountHeapmapArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: UserHeatmapWhereInput;
   };
 
   /**
@@ -1792,7 +2324,7 @@ export namespace Prisma {
   export type UserCountOutputTypeCountLikeArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    where?: likeWhereInput;
+    where?: LikeWhereInput;
   };
 
   /**
@@ -1810,7 +2342,7 @@ export namespace Prisma {
   export type UserCountOutputTypeCountSharedArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    where?: shareWhereInput;
+    where?: ShareWhereInput;
   };
 
   /**
@@ -1838,6 +2370,24 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: FollowWhereInput;
+  };
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNotificationsSentArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: NotificationWhereInput;
+  };
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNotificationsReceivedArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: NotificationWhereInput;
   };
 
   /**
@@ -1899,7 +2449,7 @@ export namespace Prisma {
   export type PostCountOutputTypeCountLikesArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    where?: likeWhereInput;
+    where?: LikeWhereInput;
   };
 
   /**
@@ -1908,7 +2458,7 @@ export namespace Prisma {
   export type PostCountOutputTypeCountSharesArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    where?: shareWhereInput;
+    where?: ShareWhereInput;
   };
 
   /**
@@ -1917,7 +2467,7 @@ export namespace Prisma {
   export type PostCountOutputTypeCountFeedArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    where?: feedWhereInput;
+    where?: FeedWhereInput;
   };
 
   /**
@@ -1926,6 +2476,7 @@ export namespace Prisma {
 
   export type TagCountOutputType = {
     posts: number;
+    users: number;
     followers: number;
   };
 
@@ -1933,6 +2484,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     posts?: boolean | TagCountOutputTypeCountPostsArgs;
+    users?: boolean | TagCountOutputTypeCountUsersArgs;
     followers?: boolean | TagCountOutputTypeCountFollowersArgs;
   };
 
@@ -1956,6 +2508,15 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: PostTagWhereInput;
+  };
+
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeCountUsersArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: UserTagStatsWhereInput;
   };
 
   /**
@@ -2164,14 +2725,20 @@ export namespace Prisma {
         password?: boolean;
         name?: boolean;
         roles?: boolean;
+        userProfile?: boolean | User$userProfileArgs<ExtArgs>;
         post?: boolean | User$postArgs<ExtArgs>;
+        tagStats?: boolean | User$tagStatsArgs<ExtArgs>;
         feed?: boolean | User$feedArgs<ExtArgs>;
+        feedTrack?: boolean | User$feedTrackArgs<ExtArgs>;
+        heapmap?: boolean | User$heapmapArgs<ExtArgs>;
         like?: boolean | User$likeArgs<ExtArgs>;
         comment?: boolean | User$commentArgs<ExtArgs>;
         shared?: boolean | User$sharedArgs<ExtArgs>;
         tagFollows?: boolean | User$tagFollowsArgs<ExtArgs>;
         followers?: boolean | User$followersArgs<ExtArgs>;
         following?: boolean | User$followingArgs<ExtArgs>;
+        notificationsSent?: boolean | User$notificationsSentArgs<ExtArgs>;
+        notificationsReceived?: boolean | User$notificationsReceivedArgs<ExtArgs>;
         _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>;
       },
       ExtArgs['result']['user']
@@ -2214,14 +2781,20 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetOmit<'id' | 'email' | 'password' | 'name' | 'roles', ExtArgs['result']['user']>;
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    userProfile?: boolean | User$userProfileArgs<ExtArgs>;
     post?: boolean | User$postArgs<ExtArgs>;
+    tagStats?: boolean | User$tagStatsArgs<ExtArgs>;
     feed?: boolean | User$feedArgs<ExtArgs>;
+    feedTrack?: boolean | User$feedTrackArgs<ExtArgs>;
+    heapmap?: boolean | User$heapmapArgs<ExtArgs>;
     like?: boolean | User$likeArgs<ExtArgs>;
     comment?: boolean | User$commentArgs<ExtArgs>;
     shared?: boolean | User$sharedArgs<ExtArgs>;
     tagFollows?: boolean | User$tagFollowsArgs<ExtArgs>;
     followers?: boolean | User$followersArgs<ExtArgs>;
     following?: boolean | User$followingArgs<ExtArgs>;
+    notificationsSent?: boolean | User$notificationsSentArgs<ExtArgs>;
+    notificationsReceived?: boolean | User$notificationsReceivedArgs<ExtArgs>;
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>;
   };
   export type UserIncludeCreateManyAndReturn<
@@ -2234,14 +2807,20 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: 'User';
     objects: {
+      userProfile: Prisma.$UserProfilePayload<ExtArgs> | null;
       post: Prisma.$PostPayload<ExtArgs>[];
-      feed: Prisma.$feedPayload<ExtArgs>[];
-      like: Prisma.$likePayload<ExtArgs>[];
+      tagStats: Prisma.$UserTagStatsPayload<ExtArgs>[];
+      feed: Prisma.$FeedPayload<ExtArgs>[];
+      feedTrack: Prisma.$FeedTrackPayload<ExtArgs>[];
+      heapmap: Prisma.$UserHeatmapPayload<ExtArgs>[];
+      like: Prisma.$LikePayload<ExtArgs>[];
       comment: Prisma.$CommentPayload<ExtArgs>[];
-      shared: Prisma.$sharePayload<ExtArgs>[];
+      shared: Prisma.$SharePayload<ExtArgs>[];
       tagFollows: Prisma.$TagFollowPayload<ExtArgs>[];
       followers: Prisma.$FollowPayload<ExtArgs>[];
       following: Prisma.$FollowPayload<ExtArgs>[];
+      notificationsSent: Prisma.$NotificationPayload<ExtArgs>[];
+      notificationsReceived: Prisma.$NotificationPayload<ExtArgs>[];
     };
     scalars: $Extensions.GetPayloadResult<
       {
@@ -2728,20 +3307,50 @@ export namespace Prisma {
     GlobalOmitOptions = {},
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    userProfile<T extends User$userProfileArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$userProfileArgs<ExtArgs>>
+    ): Prisma__UserProfileClient<
+      $Result.GetResult<
+        Prisma.$UserProfilePayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
     post<T extends User$postArgs<ExtArgs> = {}>(
       args?: Subset<T, User$postArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
       $Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
     >;
+    tagStats<T extends User$tagStatsArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$tagStatsArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<Prisma.$UserTagStatsPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+      | Null
+    >;
     feed<T extends User$feedArgs<ExtArgs> = {}>(
       args?: Subset<T, User$feedArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+    >;
+    feedTrack<T extends User$feedTrackArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$feedTrackArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$FeedTrackPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+    >;
+    heapmap<T extends User$heapmapArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$heapmapArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<Prisma.$UserHeatmapPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+      | Null
     >;
     like<T extends User$likeArgs<ExtArgs> = {}>(
       args?: Subset<T, User$likeArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
     >;
     comment<T extends User$commentArgs<ExtArgs> = {}>(
       args?: Subset<T, User$commentArgs<ExtArgs>>
@@ -2751,7 +3360,7 @@ export namespace Prisma {
     shared<T extends User$sharedArgs<ExtArgs> = {}>(
       args?: Subset<T, User$sharedArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
     >;
     tagFollows<T extends User$tagFollowsArgs<ExtArgs> = {}>(
       args?: Subset<T, User$tagFollowsArgs<ExtArgs>>
@@ -2767,6 +3376,18 @@ export namespace Prisma {
       args?: Subset<T, User$followingArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
       $Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+    >;
+    notificationsSent<T extends User$notificationsSentArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$notificationsSentArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+      | Null
+    >;
+    notificationsReceived<T extends User$notificationsReceivedArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$notificationsReceivedArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+      | Null
     >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3210,6 +3831,27 @@ export namespace Prisma {
   };
 
   /**
+   * User.userProfile
+   */
+  export type User$userProfileArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+    where?: UserProfileWhereInput;
+  };
+
+  /**
    * User.post
    */
   export type User$postArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3234,48 +3876,125 @@ export namespace Prisma {
   };
 
   /**
+   * User.tagStats
+   */
+  export type User$tagStatsArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    where?: UserTagStatsWhereInput;
+    orderBy?: UserTagStatsOrderByWithRelationInput | UserTagStatsOrderByWithRelationInput[];
+    cursor?: UserTagStatsWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: UserTagStatsScalarFieldEnum | UserTagStatsScalarFieldEnum[];
+  };
+
+  /**
    * User.feed
    */
   export type User$feedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelect<ExtArgs> | null;
+    select?: FeedSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedInclude<ExtArgs> | null;
-    where?: feedWhereInput;
-    orderBy?: feedOrderByWithRelationInput | feedOrderByWithRelationInput[];
-    cursor?: feedWhereUniqueInput;
+    include?: FeedInclude<ExtArgs> | null;
+    where?: FeedWhereInput;
+    orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[];
+    cursor?: FeedWhereUniqueInput;
     take?: number;
     skip?: number;
     distinct?: FeedScalarFieldEnum | FeedScalarFieldEnum[];
   };
 
   /**
+   * User.feedTrack
+   */
+  export type User$feedTrackArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+    where?: FeedTrackWhereInput;
+    orderBy?: FeedTrackOrderByWithRelationInput | FeedTrackOrderByWithRelationInput[];
+    cursor?: FeedTrackWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: FeedTrackScalarFieldEnum | FeedTrackScalarFieldEnum[];
+  };
+
+  /**
+   * User.heapmap
+   */
+  export type User$heapmapArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the UserHeatmap
+       */
+      select?: UserHeatmapSelect<ExtArgs> | null;
+      /**
+       * Omit specific fields from the UserHeatmap
+       */
+      omit?: UserHeatmapOmit<ExtArgs> | null;
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: UserHeatmapInclude<ExtArgs> | null;
+      where?: UserHeatmapWhereInput;
+      orderBy?: UserHeatmapOrderByWithRelationInput | UserHeatmapOrderByWithRelationInput[];
+      cursor?: UserHeatmapWhereUniqueInput;
+      take?: number;
+      skip?: number;
+      distinct?: UserHeatmapScalarFieldEnum | UserHeatmapScalarFieldEnum[];
+    };
+
+  /**
    * User.like
    */
   export type User$likeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelect<ExtArgs> | null;
+    select?: LikeSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeInclude<ExtArgs> | null;
-    where?: likeWhereInput;
-    orderBy?: likeOrderByWithRelationInput | likeOrderByWithRelationInput[];
-    cursor?: likeWhereUniqueInput;
+    include?: LikeInclude<ExtArgs> | null;
+    where?: LikeWhereInput;
+    orderBy?: LikeOrderByWithRelationInput | LikeOrderByWithRelationInput[];
+    cursor?: LikeWhereUniqueInput;
     take?: number;
     skip?: number;
     distinct?: LikeScalarFieldEnum | LikeScalarFieldEnum[];
@@ -3312,20 +4031,20 @@ export namespace Prisma {
   export type User$sharedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the share
+       * Select specific fields to fetch from the Share
        */
-      select?: shareSelect<ExtArgs> | null;
+      select?: ShareSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the share
+       * Omit specific fields from the Share
        */
-      omit?: shareOmit<ExtArgs> | null;
+      omit?: ShareOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: shareInclude<ExtArgs> | null;
-      where?: shareWhereInput;
-      orderBy?: shareOrderByWithRelationInput | shareOrderByWithRelationInput[];
-      cursor?: shareWhereUniqueInput;
+      include?: ShareInclude<ExtArgs> | null;
+      where?: ShareWhereInput;
+      orderBy?: ShareOrderByWithRelationInput | ShareOrderByWithRelationInput[];
+      cursor?: ShareWhereUniqueInput;
       take?: number;
       skip?: number;
       distinct?: ShareScalarFieldEnum | ShareScalarFieldEnum[];
@@ -3410,6 +4129,58 @@ export namespace Prisma {
   };
 
   /**
+   * User.notificationsSent
+   */
+  export type User$notificationsSentArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    where?: NotificationWhereInput;
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[];
+    cursor?: NotificationWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[];
+  };
+
+  /**
+   * User.notificationsReceived
+   */
+  export type User$notificationsReceivedArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    where?: NotificationWhereInput;
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[];
+    cursor?: NotificationWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[];
+  };
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
@@ -3427,6 +4198,4062 @@ export namespace Prisma {
        */
       include?: UserInclude<ExtArgs> | null;
     };
+
+  /**
+   * Model UserProfile
+   */
+
+  export type AggregateUserProfile = {
+    _count: UserProfileCountAggregateOutputType | null;
+    _avg: UserProfileAvgAggregateOutputType | null;
+    _sum: UserProfileSumAggregateOutputType | null;
+    _min: UserProfileMinAggregateOutputType | null;
+    _max: UserProfileMaxAggregateOutputType | null;
+  };
+
+  export type UserProfileAvgAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+  };
+
+  export type UserProfileSumAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+  };
+
+  export type UserProfileMinAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    bio: string | null;
+    company: string | null;
+    location: string | null;
+    profilePic: string | null;
+    coverPic: string | null;
+    birthDate: Date | null;
+    gender: $Enums.Gender | null;
+    phone: string | null;
+    github: string | null;
+    linkedin: string | null;
+    twitter: string | null;
+    leetcode: string | null;
+    instagram: string | null;
+    website: string | null;
+    resumeLink: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+  };
+
+  export type UserProfileMaxAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    bio: string | null;
+    company: string | null;
+    location: string | null;
+    profilePic: string | null;
+    coverPic: string | null;
+    birthDate: Date | null;
+    gender: $Enums.Gender | null;
+    phone: string | null;
+    github: string | null;
+    linkedin: string | null;
+    twitter: string | null;
+    leetcode: string | null;
+    instagram: string | null;
+    website: string | null;
+    resumeLink: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+  };
+
+  export type UserProfileCountAggregateOutputType = {
+    id: number;
+    userId: number;
+    bio: number;
+    company: number;
+    location: number;
+    profilePic: number;
+    coverPic: number;
+    birthDate: number;
+    gender: number;
+    phone: number;
+    interests: number;
+    github: number;
+    linkedin: number;
+    twitter: number;
+    leetcode: number;
+    instagram: number;
+    website: number;
+    resumeLink: number;
+    createdAt: number;
+    updatedAt: number;
+    _all: number;
+  };
+
+  export type UserProfileAvgAggregateInputType = {
+    id?: true;
+    userId?: true;
+  };
+
+  export type UserProfileSumAggregateInputType = {
+    id?: true;
+    userId?: true;
+  };
+
+  export type UserProfileMinAggregateInputType = {
+    id?: true;
+    userId?: true;
+    bio?: true;
+    company?: true;
+    location?: true;
+    profilePic?: true;
+    coverPic?: true;
+    birthDate?: true;
+    gender?: true;
+    phone?: true;
+    github?: true;
+    linkedin?: true;
+    twitter?: true;
+    leetcode?: true;
+    instagram?: true;
+    website?: true;
+    resumeLink?: true;
+    createdAt?: true;
+    updatedAt?: true;
+  };
+
+  export type UserProfileMaxAggregateInputType = {
+    id?: true;
+    userId?: true;
+    bio?: true;
+    company?: true;
+    location?: true;
+    profilePic?: true;
+    coverPic?: true;
+    birthDate?: true;
+    gender?: true;
+    phone?: true;
+    github?: true;
+    linkedin?: true;
+    twitter?: true;
+    leetcode?: true;
+    instagram?: true;
+    website?: true;
+    resumeLink?: true;
+    createdAt?: true;
+    updatedAt?: true;
+  };
+
+  export type UserProfileCountAggregateInputType = {
+    id?: true;
+    userId?: true;
+    bio?: true;
+    company?: true;
+    location?: true;
+    profilePic?: true;
+    coverPic?: true;
+    birthDate?: true;
+    gender?: true;
+    phone?: true;
+    interests?: true;
+    github?: true;
+    linkedin?: true;
+    twitter?: true;
+    leetcode?: true;
+    instagram?: true;
+    website?: true;
+    resumeLink?: true;
+    createdAt?: true;
+    updatedAt?: true;
+    _all?: true;
+  };
+
+  export type UserProfileAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which UserProfile to aggregate.
+     */
+    where?: UserProfileWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserProfiles to fetch.
+     */
+    orderBy?: UserProfileOrderByWithRelationInput | UserProfileOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: UserProfileWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserProfiles from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserProfiles.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned UserProfiles
+     **/
+    _count?: true | UserProfileCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+     **/
+    _avg?: UserProfileAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: UserProfileSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: UserProfileMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: UserProfileMaxAggregateInputType;
+  };
+
+  export type GetUserProfileAggregateType<T extends UserProfileAggregateArgs> = {
+    [P in keyof T & keyof AggregateUserProfile]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserProfile[P]>
+      : GetScalarType<T[P], AggregateUserProfile[P]>;
+  };
+
+  export type UserProfileGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: UserProfileWhereInput;
+    orderBy?: UserProfileOrderByWithAggregationInput | UserProfileOrderByWithAggregationInput[];
+    by: UserProfileScalarFieldEnum[] | UserProfileScalarFieldEnum;
+    having?: UserProfileScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: UserProfileCountAggregateInputType | true;
+    _avg?: UserProfileAvgAggregateInputType;
+    _sum?: UserProfileSumAggregateInputType;
+    _min?: UserProfileMinAggregateInputType;
+    _max?: UserProfileMaxAggregateInputType;
+  };
+
+  export type UserProfileGroupByOutputType = {
+    id: number;
+    userId: number;
+    bio: string | null;
+    company: string | null;
+    location: string | null;
+    profilePic: string | null;
+    coverPic: string | null;
+    birthDate: Date | null;
+    gender: $Enums.Gender | null;
+    phone: string | null;
+    interests: string[];
+    github: string | null;
+    linkedin: string | null;
+    twitter: string | null;
+    leetcode: string | null;
+    instagram: string | null;
+    website: string | null;
+    resumeLink: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+    _count: UserProfileCountAggregateOutputType | null;
+    _avg: UserProfileAvgAggregateOutputType | null;
+    _sum: UserProfileSumAggregateOutputType | null;
+    _min: UserProfileMinAggregateOutputType | null;
+    _max: UserProfileMaxAggregateOutputType | null;
+  };
+
+  type GetUserProfileGroupByPayload<T extends UserProfileGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserProfileGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof UserProfileGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], UserProfileGroupByOutputType[P]>
+          : GetScalarType<T[P], UserProfileGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type UserProfileSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      bio?: boolean;
+      company?: boolean;
+      location?: boolean;
+      profilePic?: boolean;
+      coverPic?: boolean;
+      birthDate?: boolean;
+      gender?: boolean;
+      phone?: boolean;
+      interests?: boolean;
+      github?: boolean;
+      linkedin?: boolean;
+      twitter?: boolean;
+      leetcode?: boolean;
+      instagram?: boolean;
+      website?: boolean;
+      resumeLink?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['userProfile']
+  >;
+
+  export type UserProfileSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      bio?: boolean;
+      company?: boolean;
+      location?: boolean;
+      profilePic?: boolean;
+      coverPic?: boolean;
+      birthDate?: boolean;
+      gender?: boolean;
+      phone?: boolean;
+      interests?: boolean;
+      github?: boolean;
+      linkedin?: boolean;
+      twitter?: boolean;
+      leetcode?: boolean;
+      instagram?: boolean;
+      website?: boolean;
+      resumeLink?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['userProfile']
+  >;
+
+  export type UserProfileSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      bio?: boolean;
+      company?: boolean;
+      location?: boolean;
+      profilePic?: boolean;
+      coverPic?: boolean;
+      birthDate?: boolean;
+      gender?: boolean;
+      phone?: boolean;
+      interests?: boolean;
+      github?: boolean;
+      linkedin?: boolean;
+      twitter?: boolean;
+      leetcode?: boolean;
+      instagram?: boolean;
+      website?: boolean;
+      resumeLink?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['userProfile']
+  >;
+
+  export type UserProfileSelectScalar = {
+    id?: boolean;
+    userId?: boolean;
+    bio?: boolean;
+    company?: boolean;
+    location?: boolean;
+    profilePic?: boolean;
+    coverPic?: boolean;
+    birthDate?: boolean;
+    gender?: boolean;
+    phone?: boolean;
+    interests?: boolean;
+    github?: boolean;
+    linkedin?: boolean;
+    twitter?: boolean;
+    leetcode?: boolean;
+    instagram?: boolean;
+    website?: boolean;
+    resumeLink?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+  };
+
+  export type UserProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<
+      | 'id'
+      | 'userId'
+      | 'bio'
+      | 'company'
+      | 'location'
+      | 'profilePic'
+      | 'coverPic'
+      | 'birthDate'
+      | 'gender'
+      | 'phone'
+      | 'interests'
+      | 'github'
+      | 'linkedin'
+      | 'twitter'
+      | 'leetcode'
+      | 'instagram'
+      | 'website'
+      | 'resumeLink'
+      | 'createdAt'
+      | 'updatedAt',
+      ExtArgs['result']['userProfile']
+    >;
+  export type UserProfileInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+  };
+  export type UserProfileIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+  };
+  export type UserProfileIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+  };
+
+  export type $UserProfilePayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'UserProfile';
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: number;
+        userId: number;
+        bio: string | null;
+        company: string | null;
+        location: string | null;
+        profilePic: string | null;
+        coverPic: string | null;
+        birthDate: Date | null;
+        gender: $Enums.Gender | null;
+        phone: string | null;
+        interests: string[];
+        github: string | null;
+        linkedin: string | null;
+        twitter: string | null;
+        leetcode: string | null;
+        instagram: string | null;
+        website: string | null;
+        resumeLink: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+      },
+      ExtArgs['result']['userProfile']
+    >;
+    composites: {};
+  };
+
+  type UserProfileGetPayload<S extends boolean | null | undefined | UserProfileDefaultArgs> =
+    $Result.GetResult<Prisma.$UserProfilePayload, S>;
+
+  type UserProfileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserProfileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserProfileCountAggregateInputType | true;
+    };
+
+  export interface UserProfileDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['UserProfile'];
+      meta: { name: 'UserProfile' };
+    };
+    /**
+     * Find zero or one UserProfile that matches the filter.
+     * @param {UserProfileFindUniqueArgs} args - Arguments to find a UserProfile
+     * @example
+     * // Get one UserProfile
+     * const userProfile = await prisma.userProfile.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserProfileFindUniqueArgs>(
+      args: SelectSubset<T, UserProfileFindUniqueArgs<ExtArgs>>
+    ): Prisma__UserProfileClient<
+      $Result.GetResult<
+        Prisma.$UserProfilePayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find one UserProfile that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserProfileFindUniqueOrThrowArgs} args - Arguments to find a UserProfile
+     * @example
+     * // Get one UserProfile
+     * const userProfile = await prisma.userProfile.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserProfileFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, UserProfileFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserProfileClient<
+      $Result.GetResult<
+        Prisma.$UserProfilePayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first UserProfile that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileFindFirstArgs} args - Arguments to find a UserProfile
+     * @example
+     * // Get one UserProfile
+     * const userProfile = await prisma.userProfile.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserProfileFindFirstArgs>(
+      args?: SelectSubset<T, UserProfileFindFirstArgs<ExtArgs>>
+    ): Prisma__UserProfileClient<
+      $Result.GetResult<
+        Prisma.$UserProfilePayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first UserProfile that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileFindFirstOrThrowArgs} args - Arguments to find a UserProfile
+     * @example
+     * // Get one UserProfile
+     * const userProfile = await prisma.userProfile.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserProfileFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, UserProfileFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserProfileClient<
+      $Result.GetResult<
+        Prisma.$UserProfilePayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find zero or more UserProfiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserProfiles
+     * const userProfiles = await prisma.userProfile.findMany()
+     *
+     * // Get first 10 UserProfiles
+     * const userProfiles = await prisma.userProfile.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const userProfileWithIdOnly = await prisma.userProfile.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends UserProfileFindManyArgs>(
+      args?: SelectSubset<T, UserProfileFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$UserProfilePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+    >;
+
+    /**
+     * Create a UserProfile.
+     * @param {UserProfileCreateArgs} args - Arguments to create a UserProfile.
+     * @example
+     * // Create one UserProfile
+     * const UserProfile = await prisma.userProfile.create({
+     *   data: {
+     *     // ... data to create a UserProfile
+     *   }
+     * })
+     *
+     */
+    create<T extends UserProfileCreateArgs>(
+      args: SelectSubset<T, UserProfileCreateArgs<ExtArgs>>
+    ): Prisma__UserProfileClient<
+      $Result.GetResult<Prisma.$UserProfilePayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Create many UserProfiles.
+     * @param {UserProfileCreateManyArgs} args - Arguments to create many UserProfiles.
+     * @example
+     * // Create many UserProfiles
+     * const userProfile = await prisma.userProfile.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends UserProfileCreateManyArgs>(
+      args?: SelectSubset<T, UserProfileCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Create many UserProfiles and returns the data saved in the database.
+     * @param {UserProfileCreateManyAndReturnArgs} args - Arguments to create many UserProfiles.
+     * @example
+     * // Create many UserProfiles
+     * const userProfile = await prisma.userProfile.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many UserProfiles and only return the `id`
+     * const userProfileWithIdOnly = await prisma.userProfile.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends UserProfileCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, UserProfileCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$UserProfilePayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Delete a UserProfile.
+     * @param {UserProfileDeleteArgs} args - Arguments to delete one UserProfile.
+     * @example
+     * // Delete one UserProfile
+     * const UserProfile = await prisma.userProfile.delete({
+     *   where: {
+     *     // ... filter to delete one UserProfile
+     *   }
+     * })
+     *
+     */
+    delete<T extends UserProfileDeleteArgs>(
+      args: SelectSubset<T, UserProfileDeleteArgs<ExtArgs>>
+    ): Prisma__UserProfileClient<
+      $Result.GetResult<Prisma.$UserProfilePayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Update one UserProfile.
+     * @param {UserProfileUpdateArgs} args - Arguments to update one UserProfile.
+     * @example
+     * // Update one UserProfile
+     * const userProfile = await prisma.userProfile.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends UserProfileUpdateArgs>(
+      args: SelectSubset<T, UserProfileUpdateArgs<ExtArgs>>
+    ): Prisma__UserProfileClient<
+      $Result.GetResult<Prisma.$UserProfilePayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Delete zero or more UserProfiles.
+     * @param {UserProfileDeleteManyArgs} args - Arguments to filter UserProfiles to delete.
+     * @example
+     * // Delete a few UserProfiles
+     * const { count } = await prisma.userProfile.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends UserProfileDeleteManyArgs>(
+      args?: SelectSubset<T, UserProfileDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more UserProfiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserProfiles
+     * const userProfile = await prisma.userProfile.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends UserProfileUpdateManyArgs>(
+      args: SelectSubset<T, UserProfileUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more UserProfiles and returns the data updated in the database.
+     * @param {UserProfileUpdateManyAndReturnArgs} args - Arguments to update many UserProfiles.
+     * @example
+     * // Update many UserProfiles
+     * const userProfile = await prisma.userProfile.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more UserProfiles and only return the `id`
+     * const userProfileWithIdOnly = await prisma.userProfile.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends UserProfileUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, UserProfileUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$UserProfilePayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Create or update one UserProfile.
+     * @param {UserProfileUpsertArgs} args - Arguments to update or create a UserProfile.
+     * @example
+     * // Update or create a UserProfile
+     * const userProfile = await prisma.userProfile.upsert({
+     *   create: {
+     *     // ... data to create a UserProfile
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserProfile we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserProfileUpsertArgs>(
+      args: SelectSubset<T, UserProfileUpsertArgs<ExtArgs>>
+    ): Prisma__UserProfileClient<
+      $Result.GetResult<Prisma.$UserProfilePayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Count the number of UserProfiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileCountArgs} args - Arguments to filter UserProfiles to count.
+     * @example
+     * // Count the number of UserProfiles
+     * const count = await prisma.userProfile.count({
+     *   where: {
+     *     // ... the filter for the UserProfiles we want to count
+     *   }
+     * })
+     **/
+    count<T extends UserProfileCountArgs>(
+      args?: Subset<T, UserProfileCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserProfileCountAggregateOutputType>
+        : number
+    >;
+
+    /**
+     * Allows you to perform aggregations operations on a UserProfile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends UserProfileAggregateArgs>(
+      args: Subset<T, UserProfileAggregateArgs>
+    ): Prisma.PrismaPromise<GetUserProfileAggregateType<T>>;
+
+    /**
+     * Group by UserProfile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends UserProfileGroupByArgs,
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserProfileGroupByArgs['orderBy'] }
+        : { orderBy?: UserProfileGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, UserProfileGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetUserProfileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the UserProfile model
+     */
+    readonly fields: UserProfileFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserProfile.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserProfileClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      | $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+  /**
+   * Fields of the UserProfile model
+   */
+  interface UserProfileFieldRefs {
+    readonly id: FieldRef<'UserProfile', 'Int'>;
+    readonly userId: FieldRef<'UserProfile', 'Int'>;
+    readonly bio: FieldRef<'UserProfile', 'String'>;
+    readonly company: FieldRef<'UserProfile', 'String'>;
+    readonly location: FieldRef<'UserProfile', 'String'>;
+    readonly profilePic: FieldRef<'UserProfile', 'String'>;
+    readonly coverPic: FieldRef<'UserProfile', 'String'>;
+    readonly birthDate: FieldRef<'UserProfile', 'DateTime'>;
+    readonly gender: FieldRef<'UserProfile', 'Gender'>;
+    readonly phone: FieldRef<'UserProfile', 'String'>;
+    readonly interests: FieldRef<'UserProfile', 'String[]'>;
+    readonly github: FieldRef<'UserProfile', 'String'>;
+    readonly linkedin: FieldRef<'UserProfile', 'String'>;
+    readonly twitter: FieldRef<'UserProfile', 'String'>;
+    readonly leetcode: FieldRef<'UserProfile', 'String'>;
+    readonly instagram: FieldRef<'UserProfile', 'String'>;
+    readonly website: FieldRef<'UserProfile', 'String'>;
+    readonly resumeLink: FieldRef<'UserProfile', 'String'>;
+    readonly createdAt: FieldRef<'UserProfile', 'DateTime'>;
+    readonly updatedAt: FieldRef<'UserProfile', 'DateTime'>;
+  }
+
+  // Custom InputTypes
+  /**
+   * UserProfile findUnique
+   */
+  export type UserProfileFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserProfile to fetch.
+     */
+    where: UserProfileWhereUniqueInput;
+  };
+
+  /**
+   * UserProfile findUniqueOrThrow
+   */
+  export type UserProfileFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserProfile to fetch.
+     */
+    where: UserProfileWhereUniqueInput;
+  };
+
+  /**
+   * UserProfile findFirst
+   */
+  export type UserProfileFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserProfile to fetch.
+     */
+    where?: UserProfileWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserProfiles to fetch.
+     */
+    orderBy?: UserProfileOrderByWithRelationInput | UserProfileOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for UserProfiles.
+     */
+    cursor?: UserProfileWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserProfiles from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserProfiles.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of UserProfiles.
+     */
+    distinct?: UserProfileScalarFieldEnum | UserProfileScalarFieldEnum[];
+  };
+
+  /**
+   * UserProfile findFirstOrThrow
+   */
+  export type UserProfileFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserProfile to fetch.
+     */
+    where?: UserProfileWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserProfiles to fetch.
+     */
+    orderBy?: UserProfileOrderByWithRelationInput | UserProfileOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for UserProfiles.
+     */
+    cursor?: UserProfileWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserProfiles from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserProfiles.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of UserProfiles.
+     */
+    distinct?: UserProfileScalarFieldEnum | UserProfileScalarFieldEnum[];
+  };
+
+  /**
+   * UserProfile findMany
+   */
+  export type UserProfileFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserProfiles to fetch.
+     */
+    where?: UserProfileWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserProfiles to fetch.
+     */
+    orderBy?: UserProfileOrderByWithRelationInput | UserProfileOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing UserProfiles.
+     */
+    cursor?: UserProfileWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserProfiles from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserProfiles.
+     */
+    skip?: number;
+    distinct?: UserProfileScalarFieldEnum | UserProfileScalarFieldEnum[];
+  };
+
+  /**
+   * UserProfile create
+   */
+  export type UserProfileCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a UserProfile.
+     */
+    data: XOR<UserProfileCreateInput, UserProfileUncheckedCreateInput>;
+  };
+
+  /**
+   * UserProfile createMany
+   */
+  export type UserProfileCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to create many UserProfiles.
+     */
+    data: UserProfileCreateManyInput | UserProfileCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
+
+  /**
+   * UserProfile createManyAndReturn
+   */
+  export type UserProfileCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * The data used to create many UserProfiles.
+     */
+    data: UserProfileCreateManyInput | UserProfileCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * UserProfile update
+   */
+  export type UserProfileUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a UserProfile.
+     */
+    data: XOR<UserProfileUpdateInput, UserProfileUncheckedUpdateInput>;
+    /**
+     * Choose, which UserProfile to update.
+     */
+    where: UserProfileWhereUniqueInput;
+  };
+
+  /**
+   * UserProfile updateMany
+   */
+  export type UserProfileUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to update UserProfiles.
+     */
+    data: XOR<UserProfileUpdateManyMutationInput, UserProfileUncheckedUpdateManyInput>;
+    /**
+     * Filter which UserProfiles to update
+     */
+    where?: UserProfileWhereInput;
+    /**
+     * Limit how many UserProfiles to update.
+     */
+    limit?: number;
+  };
+
+  /**
+   * UserProfile updateManyAndReturn
+   */
+  export type UserProfileUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * The data used to update UserProfiles.
+     */
+    data: XOR<UserProfileUpdateManyMutationInput, UserProfileUncheckedUpdateManyInput>;
+    /**
+     * Filter which UserProfiles to update
+     */
+    where?: UserProfileWhereInput;
+    /**
+     * Limit how many UserProfiles to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * UserProfile upsert
+   */
+  export type UserProfileUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the UserProfile to update in case it exists.
+     */
+    where: UserProfileWhereUniqueInput;
+    /**
+     * In case the UserProfile found by the `where` argument doesn't exist, create a new UserProfile with this data.
+     */
+    create: XOR<UserProfileCreateInput, UserProfileUncheckedCreateInput>;
+    /**
+     * In case the UserProfile was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserProfileUpdateInput, UserProfileUncheckedUpdateInput>;
+  };
+
+  /**
+   * UserProfile delete
+   */
+  export type UserProfileDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+    /**
+     * Filter which UserProfile to delete.
+     */
+    where: UserProfileWhereUniqueInput;
+  };
+
+  /**
+   * UserProfile deleteMany
+   */
+  export type UserProfileDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which UserProfiles to delete
+     */
+    where?: UserProfileWhereInput;
+    /**
+     * Limit how many UserProfiles to delete.
+     */
+    limit?: number;
+  };
+
+  /**
+   * UserProfile without action
+   */
+  export type UserProfileDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserProfile
+     */
+    select?: UserProfileSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserProfile
+     */
+    omit?: UserProfileOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileInclude<ExtArgs> | null;
+  };
+
+  /**
+   * Model UserHeatmap
+   */
+
+  export type AggregateUserHeatmap = {
+    _count: UserHeatmapCountAggregateOutputType | null;
+    _avg: UserHeatmapAvgAggregateOutputType | null;
+    _sum: UserHeatmapSumAggregateOutputType | null;
+    _min: UserHeatmapMinAggregateOutputType | null;
+    _max: UserHeatmapMaxAggregateOutputType | null;
+  };
+
+  export type UserHeatmapAvgAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    count: number | null;
+  };
+
+  export type UserHeatmapSumAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    count: number | null;
+  };
+
+  export type UserHeatmapMinAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    date: Date | null;
+    count: number | null;
+  };
+
+  export type UserHeatmapMaxAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    date: Date | null;
+    count: number | null;
+  };
+
+  export type UserHeatmapCountAggregateOutputType = {
+    id: number;
+    userId: number;
+    date: number;
+    count: number;
+    _all: number;
+  };
+
+  export type UserHeatmapAvgAggregateInputType = {
+    id?: true;
+    userId?: true;
+    count?: true;
+  };
+
+  export type UserHeatmapSumAggregateInputType = {
+    id?: true;
+    userId?: true;
+    count?: true;
+  };
+
+  export type UserHeatmapMinAggregateInputType = {
+    id?: true;
+    userId?: true;
+    date?: true;
+    count?: true;
+  };
+
+  export type UserHeatmapMaxAggregateInputType = {
+    id?: true;
+    userId?: true;
+    date?: true;
+    count?: true;
+  };
+
+  export type UserHeatmapCountAggregateInputType = {
+    id?: true;
+    userId?: true;
+    date?: true;
+    count?: true;
+    _all?: true;
+  };
+
+  export type UserHeatmapAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which UserHeatmap to aggregate.
+     */
+    where?: UserHeatmapWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserHeatmaps to fetch.
+     */
+    orderBy?: UserHeatmapOrderByWithRelationInput | UserHeatmapOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: UserHeatmapWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserHeatmaps from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserHeatmaps.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned UserHeatmaps
+     **/
+    _count?: true | UserHeatmapCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+     **/
+    _avg?: UserHeatmapAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: UserHeatmapSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: UserHeatmapMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: UserHeatmapMaxAggregateInputType;
+  };
+
+  export type GetUserHeatmapAggregateType<T extends UserHeatmapAggregateArgs> = {
+    [P in keyof T & keyof AggregateUserHeatmap]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserHeatmap[P]>
+      : GetScalarType<T[P], AggregateUserHeatmap[P]>;
+  };
+
+  export type UserHeatmapGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: UserHeatmapWhereInput;
+    orderBy?: UserHeatmapOrderByWithAggregationInput | UserHeatmapOrderByWithAggregationInput[];
+    by: UserHeatmapScalarFieldEnum[] | UserHeatmapScalarFieldEnum;
+    having?: UserHeatmapScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: UserHeatmapCountAggregateInputType | true;
+    _avg?: UserHeatmapAvgAggregateInputType;
+    _sum?: UserHeatmapSumAggregateInputType;
+    _min?: UserHeatmapMinAggregateInputType;
+    _max?: UserHeatmapMaxAggregateInputType;
+  };
+
+  export type UserHeatmapGroupByOutputType = {
+    id: number;
+    userId: number;
+    date: Date;
+    count: number;
+    _count: UserHeatmapCountAggregateOutputType | null;
+    _avg: UserHeatmapAvgAggregateOutputType | null;
+    _sum: UserHeatmapSumAggregateOutputType | null;
+    _min: UserHeatmapMinAggregateOutputType | null;
+    _max: UserHeatmapMaxAggregateOutputType | null;
+  };
+
+  type GetUserHeatmapGroupByPayload<T extends UserHeatmapGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserHeatmapGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof UserHeatmapGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], UserHeatmapGroupByOutputType[P]>
+          : GetScalarType<T[P], UserHeatmapGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type UserHeatmapSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      date?: boolean;
+      count?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['userHeatmap']
+  >;
+
+  export type UserHeatmapSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      date?: boolean;
+      count?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['userHeatmap']
+  >;
+
+  export type UserHeatmapSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      date?: boolean;
+      count?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['userHeatmap']
+  >;
+
+  export type UserHeatmapSelectScalar = {
+    id?: boolean;
+    userId?: boolean;
+    date?: boolean;
+    count?: boolean;
+  };
+
+  export type UserHeatmapOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<'id' | 'userId' | 'date' | 'count', ExtArgs['result']['userHeatmap']>;
+  export type UserHeatmapInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+  };
+  export type UserHeatmapIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+  };
+  export type UserHeatmapIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+  };
+
+  export type $UserHeatmapPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'UserHeatmap';
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: number;
+        userId: number;
+        date: Date;
+        count: number;
+      },
+      ExtArgs['result']['userHeatmap']
+    >;
+    composites: {};
+  };
+
+  type UserHeatmapGetPayload<S extends boolean | null | undefined | UserHeatmapDefaultArgs> =
+    $Result.GetResult<Prisma.$UserHeatmapPayload, S>;
+
+  type UserHeatmapCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserHeatmapFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserHeatmapCountAggregateInputType | true;
+    };
+
+  export interface UserHeatmapDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['UserHeatmap'];
+      meta: { name: 'UserHeatmap' };
+    };
+    /**
+     * Find zero or one UserHeatmap that matches the filter.
+     * @param {UserHeatmapFindUniqueArgs} args - Arguments to find a UserHeatmap
+     * @example
+     * // Get one UserHeatmap
+     * const userHeatmap = await prisma.userHeatmap.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserHeatmapFindUniqueArgs>(
+      args: SelectSubset<T, UserHeatmapFindUniqueArgs<ExtArgs>>
+    ): Prisma__UserHeatmapClient<
+      $Result.GetResult<
+        Prisma.$UserHeatmapPayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find one UserHeatmap that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserHeatmapFindUniqueOrThrowArgs} args - Arguments to find a UserHeatmap
+     * @example
+     * // Get one UserHeatmap
+     * const userHeatmap = await prisma.userHeatmap.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserHeatmapFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, UserHeatmapFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserHeatmapClient<
+      $Result.GetResult<
+        Prisma.$UserHeatmapPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first UserHeatmap that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserHeatmapFindFirstArgs} args - Arguments to find a UserHeatmap
+     * @example
+     * // Get one UserHeatmap
+     * const userHeatmap = await prisma.userHeatmap.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserHeatmapFindFirstArgs>(
+      args?: SelectSubset<T, UserHeatmapFindFirstArgs<ExtArgs>>
+    ): Prisma__UserHeatmapClient<
+      $Result.GetResult<
+        Prisma.$UserHeatmapPayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first UserHeatmap that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserHeatmapFindFirstOrThrowArgs} args - Arguments to find a UserHeatmap
+     * @example
+     * // Get one UserHeatmap
+     * const userHeatmap = await prisma.userHeatmap.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserHeatmapFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, UserHeatmapFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserHeatmapClient<
+      $Result.GetResult<
+        Prisma.$UserHeatmapPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find zero or more UserHeatmaps that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserHeatmapFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserHeatmaps
+     * const userHeatmaps = await prisma.userHeatmap.findMany()
+     *
+     * // Get first 10 UserHeatmaps
+     * const userHeatmaps = await prisma.userHeatmap.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const userHeatmapWithIdOnly = await prisma.userHeatmap.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends UserHeatmapFindManyArgs>(
+      args?: SelectSubset<T, UserHeatmapFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$UserHeatmapPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+    >;
+
+    /**
+     * Create a UserHeatmap.
+     * @param {UserHeatmapCreateArgs} args - Arguments to create a UserHeatmap.
+     * @example
+     * // Create one UserHeatmap
+     * const UserHeatmap = await prisma.userHeatmap.create({
+     *   data: {
+     *     // ... data to create a UserHeatmap
+     *   }
+     * })
+     *
+     */
+    create<T extends UserHeatmapCreateArgs>(
+      args: SelectSubset<T, UserHeatmapCreateArgs<ExtArgs>>
+    ): Prisma__UserHeatmapClient<
+      $Result.GetResult<Prisma.$UserHeatmapPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Create many UserHeatmaps.
+     * @param {UserHeatmapCreateManyArgs} args - Arguments to create many UserHeatmaps.
+     * @example
+     * // Create many UserHeatmaps
+     * const userHeatmap = await prisma.userHeatmap.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends UserHeatmapCreateManyArgs>(
+      args?: SelectSubset<T, UserHeatmapCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Create many UserHeatmaps and returns the data saved in the database.
+     * @param {UserHeatmapCreateManyAndReturnArgs} args - Arguments to create many UserHeatmaps.
+     * @example
+     * // Create many UserHeatmaps
+     * const userHeatmap = await prisma.userHeatmap.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many UserHeatmaps and only return the `id`
+     * const userHeatmapWithIdOnly = await prisma.userHeatmap.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends UserHeatmapCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, UserHeatmapCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$UserHeatmapPayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Delete a UserHeatmap.
+     * @param {UserHeatmapDeleteArgs} args - Arguments to delete one UserHeatmap.
+     * @example
+     * // Delete one UserHeatmap
+     * const UserHeatmap = await prisma.userHeatmap.delete({
+     *   where: {
+     *     // ... filter to delete one UserHeatmap
+     *   }
+     * })
+     *
+     */
+    delete<T extends UserHeatmapDeleteArgs>(
+      args: SelectSubset<T, UserHeatmapDeleteArgs<ExtArgs>>
+    ): Prisma__UserHeatmapClient<
+      $Result.GetResult<Prisma.$UserHeatmapPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Update one UserHeatmap.
+     * @param {UserHeatmapUpdateArgs} args - Arguments to update one UserHeatmap.
+     * @example
+     * // Update one UserHeatmap
+     * const userHeatmap = await prisma.userHeatmap.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends UserHeatmapUpdateArgs>(
+      args: SelectSubset<T, UserHeatmapUpdateArgs<ExtArgs>>
+    ): Prisma__UserHeatmapClient<
+      $Result.GetResult<Prisma.$UserHeatmapPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Delete zero or more UserHeatmaps.
+     * @param {UserHeatmapDeleteManyArgs} args - Arguments to filter UserHeatmaps to delete.
+     * @example
+     * // Delete a few UserHeatmaps
+     * const { count } = await prisma.userHeatmap.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends UserHeatmapDeleteManyArgs>(
+      args?: SelectSubset<T, UserHeatmapDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more UserHeatmaps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserHeatmapUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserHeatmaps
+     * const userHeatmap = await prisma.userHeatmap.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends UserHeatmapUpdateManyArgs>(
+      args: SelectSubset<T, UserHeatmapUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more UserHeatmaps and returns the data updated in the database.
+     * @param {UserHeatmapUpdateManyAndReturnArgs} args - Arguments to update many UserHeatmaps.
+     * @example
+     * // Update many UserHeatmaps
+     * const userHeatmap = await prisma.userHeatmap.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more UserHeatmaps and only return the `id`
+     * const userHeatmapWithIdOnly = await prisma.userHeatmap.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends UserHeatmapUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, UserHeatmapUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$UserHeatmapPayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Create or update one UserHeatmap.
+     * @param {UserHeatmapUpsertArgs} args - Arguments to update or create a UserHeatmap.
+     * @example
+     * // Update or create a UserHeatmap
+     * const userHeatmap = await prisma.userHeatmap.upsert({
+     *   create: {
+     *     // ... data to create a UserHeatmap
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserHeatmap we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserHeatmapUpsertArgs>(
+      args: SelectSubset<T, UserHeatmapUpsertArgs<ExtArgs>>
+    ): Prisma__UserHeatmapClient<
+      $Result.GetResult<Prisma.$UserHeatmapPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Count the number of UserHeatmaps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserHeatmapCountArgs} args - Arguments to filter UserHeatmaps to count.
+     * @example
+     * // Count the number of UserHeatmaps
+     * const count = await prisma.userHeatmap.count({
+     *   where: {
+     *     // ... the filter for the UserHeatmaps we want to count
+     *   }
+     * })
+     **/
+    count<T extends UserHeatmapCountArgs>(
+      args?: Subset<T, UserHeatmapCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserHeatmapCountAggregateOutputType>
+        : number
+    >;
+
+    /**
+     * Allows you to perform aggregations operations on a UserHeatmap.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserHeatmapAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends UserHeatmapAggregateArgs>(
+      args: Subset<T, UserHeatmapAggregateArgs>
+    ): Prisma.PrismaPromise<GetUserHeatmapAggregateType<T>>;
+
+    /**
+     * Group by UserHeatmap.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserHeatmapGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends UserHeatmapGroupByArgs,
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserHeatmapGroupByArgs['orderBy'] }
+        : { orderBy?: UserHeatmapGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, UserHeatmapGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetUserHeatmapGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the UserHeatmap model
+     */
+    readonly fields: UserHeatmapFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserHeatmap.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserHeatmapClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      | $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+  /**
+   * Fields of the UserHeatmap model
+   */
+  interface UserHeatmapFieldRefs {
+    readonly id: FieldRef<'UserHeatmap', 'Int'>;
+    readonly userId: FieldRef<'UserHeatmap', 'Int'>;
+    readonly date: FieldRef<'UserHeatmap', 'DateTime'>;
+    readonly count: FieldRef<'UserHeatmap', 'Int'>;
+  }
+
+  // Custom InputTypes
+  /**
+   * UserHeatmap findUnique
+   */
+  export type UserHeatmapFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserHeatmap to fetch.
+     */
+    where: UserHeatmapWhereUniqueInput;
+  };
+
+  /**
+   * UserHeatmap findUniqueOrThrow
+   */
+  export type UserHeatmapFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserHeatmap to fetch.
+     */
+    where: UserHeatmapWhereUniqueInput;
+  };
+
+  /**
+   * UserHeatmap findFirst
+   */
+  export type UserHeatmapFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserHeatmap to fetch.
+     */
+    where?: UserHeatmapWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserHeatmaps to fetch.
+     */
+    orderBy?: UserHeatmapOrderByWithRelationInput | UserHeatmapOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for UserHeatmaps.
+     */
+    cursor?: UserHeatmapWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserHeatmaps from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserHeatmaps.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of UserHeatmaps.
+     */
+    distinct?: UserHeatmapScalarFieldEnum | UserHeatmapScalarFieldEnum[];
+  };
+
+  /**
+   * UserHeatmap findFirstOrThrow
+   */
+  export type UserHeatmapFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserHeatmap to fetch.
+     */
+    where?: UserHeatmapWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserHeatmaps to fetch.
+     */
+    orderBy?: UserHeatmapOrderByWithRelationInput | UserHeatmapOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for UserHeatmaps.
+     */
+    cursor?: UserHeatmapWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserHeatmaps from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserHeatmaps.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of UserHeatmaps.
+     */
+    distinct?: UserHeatmapScalarFieldEnum | UserHeatmapScalarFieldEnum[];
+  };
+
+  /**
+   * UserHeatmap findMany
+   */
+  export type UserHeatmapFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserHeatmaps to fetch.
+     */
+    where?: UserHeatmapWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserHeatmaps to fetch.
+     */
+    orderBy?: UserHeatmapOrderByWithRelationInput | UserHeatmapOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing UserHeatmaps.
+     */
+    cursor?: UserHeatmapWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserHeatmaps from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserHeatmaps.
+     */
+    skip?: number;
+    distinct?: UserHeatmapScalarFieldEnum | UserHeatmapScalarFieldEnum[];
+  };
+
+  /**
+   * UserHeatmap create
+   */
+  export type UserHeatmapCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a UserHeatmap.
+     */
+    data: XOR<UserHeatmapCreateInput, UserHeatmapUncheckedCreateInput>;
+  };
+
+  /**
+   * UserHeatmap createMany
+   */
+  export type UserHeatmapCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to create many UserHeatmaps.
+     */
+    data: UserHeatmapCreateManyInput | UserHeatmapCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
+
+  /**
+   * UserHeatmap createManyAndReturn
+   */
+  export type UserHeatmapCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * The data used to create many UserHeatmaps.
+     */
+    data: UserHeatmapCreateManyInput | UserHeatmapCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * UserHeatmap update
+   */
+  export type UserHeatmapUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a UserHeatmap.
+     */
+    data: XOR<UserHeatmapUpdateInput, UserHeatmapUncheckedUpdateInput>;
+    /**
+     * Choose, which UserHeatmap to update.
+     */
+    where: UserHeatmapWhereUniqueInput;
+  };
+
+  /**
+   * UserHeatmap updateMany
+   */
+  export type UserHeatmapUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to update UserHeatmaps.
+     */
+    data: XOR<UserHeatmapUpdateManyMutationInput, UserHeatmapUncheckedUpdateManyInput>;
+    /**
+     * Filter which UserHeatmaps to update
+     */
+    where?: UserHeatmapWhereInput;
+    /**
+     * Limit how many UserHeatmaps to update.
+     */
+    limit?: number;
+  };
+
+  /**
+   * UserHeatmap updateManyAndReturn
+   */
+  export type UserHeatmapUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * The data used to update UserHeatmaps.
+     */
+    data: XOR<UserHeatmapUpdateManyMutationInput, UserHeatmapUncheckedUpdateManyInput>;
+    /**
+     * Filter which UserHeatmaps to update
+     */
+    where?: UserHeatmapWhereInput;
+    /**
+     * Limit how many UserHeatmaps to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * UserHeatmap upsert
+   */
+  export type UserHeatmapUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the UserHeatmap to update in case it exists.
+     */
+    where: UserHeatmapWhereUniqueInput;
+    /**
+     * In case the UserHeatmap found by the `where` argument doesn't exist, create a new UserHeatmap with this data.
+     */
+    create: XOR<UserHeatmapCreateInput, UserHeatmapUncheckedCreateInput>;
+    /**
+     * In case the UserHeatmap was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserHeatmapUpdateInput, UserHeatmapUncheckedUpdateInput>;
+  };
+
+  /**
+   * UserHeatmap delete
+   */
+  export type UserHeatmapDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapInclude<ExtArgs> | null;
+    /**
+     * Filter which UserHeatmap to delete.
+     */
+    where: UserHeatmapWhereUniqueInput;
+  };
+
+  /**
+   * UserHeatmap deleteMany
+   */
+  export type UserHeatmapDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which UserHeatmaps to delete
+     */
+    where?: UserHeatmapWhereInput;
+    /**
+     * Limit how many UserHeatmaps to delete.
+     */
+    limit?: number;
+  };
+
+  /**
+   * UserHeatmap without action
+   */
+  export type UserHeatmapDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserHeatmap
+     */
+    select?: UserHeatmapSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserHeatmap
+     */
+    omit?: UserHeatmapOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserHeatmapInclude<ExtArgs> | null;
+  };
+
+  /**
+   * Model UserTagStats
+   */
+
+  export type AggregateUserTagStats = {
+    _count: UserTagStatsCountAggregateOutputType | null;
+    _avg: UserTagStatsAvgAggregateOutputType | null;
+    _sum: UserTagStatsSumAggregateOutputType | null;
+    _min: UserTagStatsMinAggregateOutputType | null;
+    _max: UserTagStatsMaxAggregateOutputType | null;
+  };
+
+  export type UserTagStatsAvgAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    tagId: number | null;
+    postCount: number | null;
+  };
+
+  export type UserTagStatsSumAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    tagId: number | null;
+    postCount: number | null;
+  };
+
+  export type UserTagStatsMinAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    tagId: number | null;
+    postCount: number | null;
+    updatedAt: Date | null;
+    createdAt: Date | null;
+  };
+
+  export type UserTagStatsMaxAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    tagId: number | null;
+    postCount: number | null;
+    updatedAt: Date | null;
+    createdAt: Date | null;
+  };
+
+  export type UserTagStatsCountAggregateOutputType = {
+    id: number;
+    userId: number;
+    tagId: number;
+    postCount: number;
+    updatedAt: number;
+    createdAt: number;
+    _all: number;
+  };
+
+  export type UserTagStatsAvgAggregateInputType = {
+    id?: true;
+    userId?: true;
+    tagId?: true;
+    postCount?: true;
+  };
+
+  export type UserTagStatsSumAggregateInputType = {
+    id?: true;
+    userId?: true;
+    tagId?: true;
+    postCount?: true;
+  };
+
+  export type UserTagStatsMinAggregateInputType = {
+    id?: true;
+    userId?: true;
+    tagId?: true;
+    postCount?: true;
+    updatedAt?: true;
+    createdAt?: true;
+  };
+
+  export type UserTagStatsMaxAggregateInputType = {
+    id?: true;
+    userId?: true;
+    tagId?: true;
+    postCount?: true;
+    updatedAt?: true;
+    createdAt?: true;
+  };
+
+  export type UserTagStatsCountAggregateInputType = {
+    id?: true;
+    userId?: true;
+    tagId?: true;
+    postCount?: true;
+    updatedAt?: true;
+    createdAt?: true;
+    _all?: true;
+  };
+
+  export type UserTagStatsAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which UserTagStats to aggregate.
+     */
+    where?: UserTagStatsWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserTagStats to fetch.
+     */
+    orderBy?: UserTagStatsOrderByWithRelationInput | UserTagStatsOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: UserTagStatsWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserTagStats from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserTagStats.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned UserTagStats
+     **/
+    _count?: true | UserTagStatsCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+     **/
+    _avg?: UserTagStatsAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: UserTagStatsSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: UserTagStatsMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: UserTagStatsMaxAggregateInputType;
+  };
+
+  export type GetUserTagStatsAggregateType<T extends UserTagStatsAggregateArgs> = {
+    [P in keyof T & keyof AggregateUserTagStats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserTagStats[P]>
+      : GetScalarType<T[P], AggregateUserTagStats[P]>;
+  };
+
+  export type UserTagStatsGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: UserTagStatsWhereInput;
+    orderBy?: UserTagStatsOrderByWithAggregationInput | UserTagStatsOrderByWithAggregationInput[];
+    by: UserTagStatsScalarFieldEnum[] | UserTagStatsScalarFieldEnum;
+    having?: UserTagStatsScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: UserTagStatsCountAggregateInputType | true;
+    _avg?: UserTagStatsAvgAggregateInputType;
+    _sum?: UserTagStatsSumAggregateInputType;
+    _min?: UserTagStatsMinAggregateInputType;
+    _max?: UserTagStatsMaxAggregateInputType;
+  };
+
+  export type UserTagStatsGroupByOutputType = {
+    id: number;
+    userId: number;
+    tagId: number;
+    postCount: number;
+    updatedAt: Date;
+    createdAt: Date;
+    _count: UserTagStatsCountAggregateOutputType | null;
+    _avg: UserTagStatsAvgAggregateOutputType | null;
+    _sum: UserTagStatsSumAggregateOutputType | null;
+    _min: UserTagStatsMinAggregateOutputType | null;
+    _max: UserTagStatsMaxAggregateOutputType | null;
+  };
+
+  type GetUserTagStatsGroupByPayload<T extends UserTagStatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserTagStatsGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof UserTagStatsGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], UserTagStatsGroupByOutputType[P]>
+          : GetScalarType<T[P], UserTagStatsGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type UserTagStatsSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      tagId?: boolean;
+      postCount?: boolean;
+      updatedAt?: boolean;
+      createdAt?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+      tag?: boolean | TagDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['userTagStats']
+  >;
+
+  export type UserTagStatsSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      tagId?: boolean;
+      postCount?: boolean;
+      updatedAt?: boolean;
+      createdAt?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+      tag?: boolean | TagDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['userTagStats']
+  >;
+
+  export type UserTagStatsSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      tagId?: boolean;
+      postCount?: boolean;
+      updatedAt?: boolean;
+      createdAt?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+      tag?: boolean | TagDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['userTagStats']
+  >;
+
+  export type UserTagStatsSelectScalar = {
+    id?: boolean;
+    userId?: boolean;
+    tagId?: boolean;
+    postCount?: boolean;
+    updatedAt?: boolean;
+    createdAt?: boolean;
+  };
+
+  export type UserTagStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<
+      'id' | 'userId' | 'tagId' | 'postCount' | 'updatedAt' | 'createdAt',
+      ExtArgs['result']['userTagStats']
+    >;
+  export type UserTagStatsInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+    tag?: boolean | TagDefaultArgs<ExtArgs>;
+  };
+  export type UserTagStatsIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+    tag?: boolean | TagDefaultArgs<ExtArgs>;
+  };
+  export type UserTagStatsIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+    tag?: boolean | TagDefaultArgs<ExtArgs>;
+  };
+
+  export type $UserTagStatsPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'UserTagStats';
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>;
+      tag: Prisma.$TagPayload<ExtArgs>;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: number;
+        userId: number;
+        tagId: number;
+        postCount: number;
+        updatedAt: Date;
+        createdAt: Date;
+      },
+      ExtArgs['result']['userTagStats']
+    >;
+    composites: {};
+  };
+
+  type UserTagStatsGetPayload<S extends boolean | null | undefined | UserTagStatsDefaultArgs> =
+    $Result.GetResult<Prisma.$UserTagStatsPayload, S>;
+
+  type UserTagStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserTagStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserTagStatsCountAggregateInputType | true;
+    };
+
+  export interface UserTagStatsDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['UserTagStats'];
+      meta: { name: 'UserTagStats' };
+    };
+    /**
+     * Find zero or one UserTagStats that matches the filter.
+     * @param {UserTagStatsFindUniqueArgs} args - Arguments to find a UserTagStats
+     * @example
+     * // Get one UserTagStats
+     * const userTagStats = await prisma.userTagStats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserTagStatsFindUniqueArgs>(
+      args: SelectSubset<T, UserTagStatsFindUniqueArgs<ExtArgs>>
+    ): Prisma__UserTagStatsClient<
+      $Result.GetResult<
+        Prisma.$UserTagStatsPayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find one UserTagStats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserTagStatsFindUniqueOrThrowArgs} args - Arguments to find a UserTagStats
+     * @example
+     * // Get one UserTagStats
+     * const userTagStats = await prisma.userTagStats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserTagStatsFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, UserTagStatsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserTagStatsClient<
+      $Result.GetResult<
+        Prisma.$UserTagStatsPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first UserTagStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTagStatsFindFirstArgs} args - Arguments to find a UserTagStats
+     * @example
+     * // Get one UserTagStats
+     * const userTagStats = await prisma.userTagStats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserTagStatsFindFirstArgs>(
+      args?: SelectSubset<T, UserTagStatsFindFirstArgs<ExtArgs>>
+    ): Prisma__UserTagStatsClient<
+      $Result.GetResult<
+        Prisma.$UserTagStatsPayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first UserTagStats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTagStatsFindFirstOrThrowArgs} args - Arguments to find a UserTagStats
+     * @example
+     * // Get one UserTagStats
+     * const userTagStats = await prisma.userTagStats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserTagStatsFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, UserTagStatsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserTagStatsClient<
+      $Result.GetResult<
+        Prisma.$UserTagStatsPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find zero or more UserTagStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTagStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserTagStats
+     * const userTagStats = await prisma.userTagStats.findMany()
+     *
+     * // Get first 10 UserTagStats
+     * const userTagStats = await prisma.userTagStats.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const userTagStatsWithIdOnly = await prisma.userTagStats.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends UserTagStatsFindManyArgs>(
+      args?: SelectSubset<T, UserTagStatsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$UserTagStatsPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+    >;
+
+    /**
+     * Create a UserTagStats.
+     * @param {UserTagStatsCreateArgs} args - Arguments to create a UserTagStats.
+     * @example
+     * // Create one UserTagStats
+     * const UserTagStats = await prisma.userTagStats.create({
+     *   data: {
+     *     // ... data to create a UserTagStats
+     *   }
+     * })
+     *
+     */
+    create<T extends UserTagStatsCreateArgs>(
+      args: SelectSubset<T, UserTagStatsCreateArgs<ExtArgs>>
+    ): Prisma__UserTagStatsClient<
+      $Result.GetResult<Prisma.$UserTagStatsPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Create many UserTagStats.
+     * @param {UserTagStatsCreateManyArgs} args - Arguments to create many UserTagStats.
+     * @example
+     * // Create many UserTagStats
+     * const userTagStats = await prisma.userTagStats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends UserTagStatsCreateManyArgs>(
+      args?: SelectSubset<T, UserTagStatsCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Create many UserTagStats and returns the data saved in the database.
+     * @param {UserTagStatsCreateManyAndReturnArgs} args - Arguments to create many UserTagStats.
+     * @example
+     * // Create many UserTagStats
+     * const userTagStats = await prisma.userTagStats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many UserTagStats and only return the `id`
+     * const userTagStatsWithIdOnly = await prisma.userTagStats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends UserTagStatsCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, UserTagStatsCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$UserTagStatsPayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Delete a UserTagStats.
+     * @param {UserTagStatsDeleteArgs} args - Arguments to delete one UserTagStats.
+     * @example
+     * // Delete one UserTagStats
+     * const UserTagStats = await prisma.userTagStats.delete({
+     *   where: {
+     *     // ... filter to delete one UserTagStats
+     *   }
+     * })
+     *
+     */
+    delete<T extends UserTagStatsDeleteArgs>(
+      args: SelectSubset<T, UserTagStatsDeleteArgs<ExtArgs>>
+    ): Prisma__UserTagStatsClient<
+      $Result.GetResult<Prisma.$UserTagStatsPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Update one UserTagStats.
+     * @param {UserTagStatsUpdateArgs} args - Arguments to update one UserTagStats.
+     * @example
+     * // Update one UserTagStats
+     * const userTagStats = await prisma.userTagStats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends UserTagStatsUpdateArgs>(
+      args: SelectSubset<T, UserTagStatsUpdateArgs<ExtArgs>>
+    ): Prisma__UserTagStatsClient<
+      $Result.GetResult<Prisma.$UserTagStatsPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Delete zero or more UserTagStats.
+     * @param {UserTagStatsDeleteManyArgs} args - Arguments to filter UserTagStats to delete.
+     * @example
+     * // Delete a few UserTagStats
+     * const { count } = await prisma.userTagStats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends UserTagStatsDeleteManyArgs>(
+      args?: SelectSubset<T, UserTagStatsDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more UserTagStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTagStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserTagStats
+     * const userTagStats = await prisma.userTagStats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends UserTagStatsUpdateManyArgs>(
+      args: SelectSubset<T, UserTagStatsUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more UserTagStats and returns the data updated in the database.
+     * @param {UserTagStatsUpdateManyAndReturnArgs} args - Arguments to update many UserTagStats.
+     * @example
+     * // Update many UserTagStats
+     * const userTagStats = await prisma.userTagStats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more UserTagStats and only return the `id`
+     * const userTagStatsWithIdOnly = await prisma.userTagStats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends UserTagStatsUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, UserTagStatsUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$UserTagStatsPayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Create or update one UserTagStats.
+     * @param {UserTagStatsUpsertArgs} args - Arguments to update or create a UserTagStats.
+     * @example
+     * // Update or create a UserTagStats
+     * const userTagStats = await prisma.userTagStats.upsert({
+     *   create: {
+     *     // ... data to create a UserTagStats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserTagStats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserTagStatsUpsertArgs>(
+      args: SelectSubset<T, UserTagStatsUpsertArgs<ExtArgs>>
+    ): Prisma__UserTagStatsClient<
+      $Result.GetResult<Prisma.$UserTagStatsPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Count the number of UserTagStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTagStatsCountArgs} args - Arguments to filter UserTagStats to count.
+     * @example
+     * // Count the number of UserTagStats
+     * const count = await prisma.userTagStats.count({
+     *   where: {
+     *     // ... the filter for the UserTagStats we want to count
+     *   }
+     * })
+     **/
+    count<T extends UserTagStatsCountArgs>(
+      args?: Subset<T, UserTagStatsCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserTagStatsCountAggregateOutputType>
+        : number
+    >;
+
+    /**
+     * Allows you to perform aggregations operations on a UserTagStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTagStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends UserTagStatsAggregateArgs>(
+      args: Subset<T, UserTagStatsAggregateArgs>
+    ): Prisma.PrismaPromise<GetUserTagStatsAggregateType<T>>;
+
+    /**
+     * Group by UserTagStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTagStatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends UserTagStatsGroupByArgs,
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserTagStatsGroupByArgs['orderBy'] }
+        : { orderBy?: UserTagStatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, UserTagStatsGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors
+      ? GetUserTagStatsGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the UserTagStats model
+     */
+    readonly fields: UserTagStatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserTagStats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserTagStatsClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      | $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    tag<T extends TagDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, TagDefaultArgs<ExtArgs>>
+    ): Prisma__TagClient<
+      | $Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+  /**
+   * Fields of the UserTagStats model
+   */
+  interface UserTagStatsFieldRefs {
+    readonly id: FieldRef<'UserTagStats', 'Int'>;
+    readonly userId: FieldRef<'UserTagStats', 'Int'>;
+    readonly tagId: FieldRef<'UserTagStats', 'Int'>;
+    readonly postCount: FieldRef<'UserTagStats', 'Int'>;
+    readonly updatedAt: FieldRef<'UserTagStats', 'DateTime'>;
+    readonly createdAt: FieldRef<'UserTagStats', 'DateTime'>;
+  }
+
+  // Custom InputTypes
+  /**
+   * UserTagStats findUnique
+   */
+  export type UserTagStatsFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserTagStats to fetch.
+     */
+    where: UserTagStatsWhereUniqueInput;
+  };
+
+  /**
+   * UserTagStats findUniqueOrThrow
+   */
+  export type UserTagStatsFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserTagStats to fetch.
+     */
+    where: UserTagStatsWhereUniqueInput;
+  };
+
+  /**
+   * UserTagStats findFirst
+   */
+  export type UserTagStatsFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserTagStats to fetch.
+     */
+    where?: UserTagStatsWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserTagStats to fetch.
+     */
+    orderBy?: UserTagStatsOrderByWithRelationInput | UserTagStatsOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for UserTagStats.
+     */
+    cursor?: UserTagStatsWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserTagStats from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserTagStats.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of UserTagStats.
+     */
+    distinct?: UserTagStatsScalarFieldEnum | UserTagStatsScalarFieldEnum[];
+  };
+
+  /**
+   * UserTagStats findFirstOrThrow
+   */
+  export type UserTagStatsFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserTagStats to fetch.
+     */
+    where?: UserTagStatsWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserTagStats to fetch.
+     */
+    orderBy?: UserTagStatsOrderByWithRelationInput | UserTagStatsOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for UserTagStats.
+     */
+    cursor?: UserTagStatsWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserTagStats from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserTagStats.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of UserTagStats.
+     */
+    distinct?: UserTagStatsScalarFieldEnum | UserTagStatsScalarFieldEnum[];
+  };
+
+  /**
+   * UserTagStats findMany
+   */
+  export type UserTagStatsFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    /**
+     * Filter, which UserTagStats to fetch.
+     */
+    where?: UserTagStatsWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of UserTagStats to fetch.
+     */
+    orderBy?: UserTagStatsOrderByWithRelationInput | UserTagStatsOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing UserTagStats.
+     */
+    cursor?: UserTagStatsWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` UserTagStats from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` UserTagStats.
+     */
+    skip?: number;
+    distinct?: UserTagStatsScalarFieldEnum | UserTagStatsScalarFieldEnum[];
+  };
+
+  /**
+   * UserTagStats create
+   */
+  export type UserTagStatsCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a UserTagStats.
+     */
+    data: XOR<UserTagStatsCreateInput, UserTagStatsUncheckedCreateInput>;
+  };
+
+  /**
+   * UserTagStats createMany
+   */
+  export type UserTagStatsCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to create many UserTagStats.
+     */
+    data: UserTagStatsCreateManyInput | UserTagStatsCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
+
+  /**
+   * UserTagStats createManyAndReturn
+   */
+  export type UserTagStatsCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * The data used to create many UserTagStats.
+     */
+    data: UserTagStatsCreateManyInput | UserTagStatsCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * UserTagStats update
+   */
+  export type UserTagStatsUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a UserTagStats.
+     */
+    data: XOR<UserTagStatsUpdateInput, UserTagStatsUncheckedUpdateInput>;
+    /**
+     * Choose, which UserTagStats to update.
+     */
+    where: UserTagStatsWhereUniqueInput;
+  };
+
+  /**
+   * UserTagStats updateMany
+   */
+  export type UserTagStatsUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to update UserTagStats.
+     */
+    data: XOR<UserTagStatsUpdateManyMutationInput, UserTagStatsUncheckedUpdateManyInput>;
+    /**
+     * Filter which UserTagStats to update
+     */
+    where?: UserTagStatsWhereInput;
+    /**
+     * Limit how many UserTagStats to update.
+     */
+    limit?: number;
+  };
+
+  /**
+   * UserTagStats updateManyAndReturn
+   */
+  export type UserTagStatsUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * The data used to update UserTagStats.
+     */
+    data: XOR<UserTagStatsUpdateManyMutationInput, UserTagStatsUncheckedUpdateManyInput>;
+    /**
+     * Filter which UserTagStats to update
+     */
+    where?: UserTagStatsWhereInput;
+    /**
+     * Limit how many UserTagStats to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * UserTagStats upsert
+   */
+  export type UserTagStatsUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the UserTagStats to update in case it exists.
+     */
+    where: UserTagStatsWhereUniqueInput;
+    /**
+     * In case the UserTagStats found by the `where` argument doesn't exist, create a new UserTagStats with this data.
+     */
+    create: XOR<UserTagStatsCreateInput, UserTagStatsUncheckedCreateInput>;
+    /**
+     * In case the UserTagStats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserTagStatsUpdateInput, UserTagStatsUncheckedUpdateInput>;
+  };
+
+  /**
+   * UserTagStats delete
+   */
+  export type UserTagStatsDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    /**
+     * Filter which UserTagStats to delete.
+     */
+    where: UserTagStatsWhereUniqueInput;
+  };
+
+  /**
+   * UserTagStats deleteMany
+   */
+  export type UserTagStatsDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which UserTagStats to delete
+     */
+    where?: UserTagStatsWhereInput;
+    /**
+     * Limit how many UserTagStats to delete.
+     */
+    limit?: number;
+  };
+
+  /**
+   * UserTagStats without action
+   */
+  export type UserTagStatsDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+  };
 
   /**
    * Model Post
@@ -3737,9 +8564,9 @@ export namespace Prisma {
       author: Prisma.$UserPayload<ExtArgs>;
       tags: Prisma.$PostTagPayload<ExtArgs>[];
       comments: Prisma.$CommentPayload<ExtArgs>[];
-      likes: Prisma.$likePayload<ExtArgs>[];
-      shares: Prisma.$sharePayload<ExtArgs>[];
-      feed: Prisma.$feedPayload<ExtArgs>[];
+      likes: Prisma.$LikePayload<ExtArgs>[];
+      shares: Prisma.$SharePayload<ExtArgs>[];
+      feed: Prisma.$FeedPayload<ExtArgs>[];
     };
     scalars: $Extensions.GetPayloadResult<
       {
@@ -4250,17 +9077,17 @@ export namespace Prisma {
     likes<T extends Post$likesArgs<ExtArgs> = {}>(
       args?: Subset<T, Post$likesArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
     >;
     shares<T extends Post$sharesArgs<ExtArgs> = {}>(
       args?: Subset<T, Post$sharesArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
     >;
     feed<T extends Post$feedArgs<ExtArgs> = {}>(
       args?: Subset<T, Post$feedArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
     >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4768,20 +9595,20 @@ export namespace Prisma {
    */
   export type Post$likesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelect<ExtArgs> | null;
+    select?: LikeSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeInclude<ExtArgs> | null;
-    where?: likeWhereInput;
-    orderBy?: likeOrderByWithRelationInput | likeOrderByWithRelationInput[];
-    cursor?: likeWhereUniqueInput;
+    include?: LikeInclude<ExtArgs> | null;
+    where?: LikeWhereInput;
+    orderBy?: LikeOrderByWithRelationInput | LikeOrderByWithRelationInput[];
+    cursor?: LikeWhereUniqueInput;
     take?: number;
     skip?: number;
     distinct?: LikeScalarFieldEnum | LikeScalarFieldEnum[];
@@ -4793,20 +9620,20 @@ export namespace Prisma {
   export type Post$sharesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the share
+       * Select specific fields to fetch from the Share
        */
-      select?: shareSelect<ExtArgs> | null;
+      select?: ShareSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the share
+       * Omit specific fields from the Share
        */
-      omit?: shareOmit<ExtArgs> | null;
+      omit?: ShareOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: shareInclude<ExtArgs> | null;
-      where?: shareWhereInput;
-      orderBy?: shareOrderByWithRelationInput | shareOrderByWithRelationInput[];
-      cursor?: shareWhereUniqueInput;
+      include?: ShareInclude<ExtArgs> | null;
+      where?: ShareWhereInput;
+      orderBy?: ShareOrderByWithRelationInput | ShareOrderByWithRelationInput[];
+      cursor?: ShareWhereUniqueInput;
       take?: number;
       skip?: number;
       distinct?: ShareScalarFieldEnum | ShareScalarFieldEnum[];
@@ -4817,20 +9644,20 @@ export namespace Prisma {
    */
   export type Post$feedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelect<ExtArgs> | null;
+    select?: FeedSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedInclude<ExtArgs> | null;
-    where?: feedWhereInput;
-    orderBy?: feedOrderByWithRelationInput | feedOrderByWithRelationInput[];
-    cursor?: feedWhereUniqueInput;
+    include?: FeedInclude<ExtArgs> | null;
+    where?: FeedWhereInput;
+    orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[];
+    cursor?: FeedWhereUniqueInput;
     take?: number;
     skip?: number;
     distinct?: FeedScalarFieldEnum | FeedScalarFieldEnum[];
@@ -6275,6 +11102,7 @@ export namespace Prisma {
         name?: boolean;
         createdAt?: boolean;
         posts?: boolean | Tag$postsArgs<ExtArgs>;
+        users?: boolean | Tag$usersArgs<ExtArgs>;
         followers?: boolean | Tag$followersArgs<ExtArgs>;
         _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>;
       },
@@ -6313,6 +11141,7 @@ export namespace Prisma {
     $Extensions.GetOmit<'id' | 'name' | 'createdAt', ExtArgs['result']['tag']>;
   export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | Tag$postsArgs<ExtArgs>;
+    users?: boolean | Tag$usersArgs<ExtArgs>;
     followers?: boolean | Tag$followersArgs<ExtArgs>;
     _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>;
   };
@@ -6327,6 +11156,7 @@ export namespace Prisma {
     name: 'Tag';
     objects: {
       posts: Prisma.$PostTagPayload<ExtArgs>[];
+      users: Prisma.$UserTagStatsPayload<ExtArgs>[];
       followers: Prisma.$TagFollowPayload<ExtArgs>[];
     };
     scalars: $Extensions.GetPayloadResult<
@@ -6817,6 +11647,12 @@ export namespace Prisma {
     ): Prisma.PrismaPromise<
       $Result.GetResult<Prisma.$PostTagPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
     >;
+    users<T extends Tag$usersArgs<ExtArgs> = {}>(
+      args?: Subset<T, Tag$usersArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<Prisma.$UserTagStatsPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+      | Null
+    >;
     followers<T extends Tag$followersArgs<ExtArgs> = {}>(
       args?: Subset<T, Tag$followersArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
@@ -7282,6 +12118,30 @@ export namespace Prisma {
     take?: number;
     skip?: number;
     distinct?: PostTagScalarFieldEnum | PostTagScalarFieldEnum[];
+  };
+
+  /**
+   * Tag.users
+   */
+  export type Tag$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTagStats
+     */
+    select?: UserTagStatsSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserTagStats
+     */
+    omit?: UserTagStatsOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTagStatsInclude<ExtArgs> | null;
+    where?: UserTagStatsWhereInput;
+    orderBy?: UserTagStatsOrderByWithRelationInput | UserTagStatsOrderByWithRelationInput[];
+    cursor?: UserTagStatsWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: UserTagStatsScalarFieldEnum | UserTagStatsScalarFieldEnum[];
   };
 
   /**
@@ -11124,7 +15984,7 @@ export namespace Prisma {
   };
 
   /**
-   * Model like
+   * Model Like
    */
 
   export type AggregateLike = {
@@ -11207,37 +16067,37 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Filter which like to aggregate.
+     * Filter which Like to aggregate.
      */
-    where?: likeWhereInput;
+    where?: LikeWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of likes to fetch.
+     * Determine the order of Likes to fetch.
      */
-    orderBy?: likeOrderByWithRelationInput | likeOrderByWithRelationInput[];
+    orderBy?: LikeOrderByWithRelationInput | LikeOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
      * Sets the start position
      */
-    cursor?: likeWhereUniqueInput;
+    cursor?: LikeWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` likes from the position of the cursor.
+     * Take `±n` Likes from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` likes.
+     * Skip the first `n` Likes.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
-     * Count returned likes
+     * Count returned Likes
      **/
     _count?: true | LikeCountAggregateInputType;
     /**
@@ -11274,12 +16134,12 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateLike[P]>;
   };
 
-  export type likeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type LikeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
-      where?: likeWhereInput;
-      orderBy?: likeOrderByWithAggregationInput | likeOrderByWithAggregationInput[];
+      where?: LikeWhereInput;
+      orderBy?: LikeOrderByWithAggregationInput | LikeOrderByWithAggregationInput[];
       by: LikeScalarFieldEnum[] | LikeScalarFieldEnum;
-      having?: likeScalarWhereWithAggregatesInput;
+      having?: LikeScalarWhereWithAggregatesInput;
       take?: number;
       skip?: number;
       _count?: LikeCountAggregateInputType | true;
@@ -11301,7 +16161,7 @@ export namespace Prisma {
     _max: LikeMaxAggregateOutputType | null;
   };
 
-  type GetLikeGroupByPayload<T extends likeGroupByArgs> = Prisma.PrismaPromise<
+  type GetLikeGroupByPayload<T extends LikeGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickEnumerable<LikeGroupByOutputType, T['by']> & {
         [P in keyof T & keyof LikeGroupByOutputType]: P extends '_count'
@@ -11313,7 +16173,7 @@ export namespace Prisma {
     >
   >;
 
-  export type likeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type LikeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetSelect<
       {
         id?: boolean;
@@ -11326,7 +16186,7 @@ export namespace Prisma {
       ExtArgs['result']['like']
     >;
 
-  export type likeSelectCreateManyAndReturn<
+  export type LikeSelectCreateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
@@ -11340,7 +16200,7 @@ export namespace Prisma {
     ExtArgs['result']['like']
   >;
 
-  export type likeSelectUpdateManyAndReturn<
+  export type LikeSelectUpdateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
@@ -11354,34 +16214,34 @@ export namespace Prisma {
     ExtArgs['result']['like']
   >;
 
-  export type likeSelectScalar = {
+  export type LikeSelectScalar = {
     id?: boolean;
     postId?: boolean;
     userId?: boolean;
     createdAt?: boolean;
   };
 
-  export type likeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type LikeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetOmit<'id' | 'postId' | 'userId' | 'createdAt', ExtArgs['result']['like']>;
-  export type likeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LikeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     post?: boolean | PostDefaultArgs<ExtArgs>;
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
-  export type likeIncludeCreateManyAndReturn<
+  export type LikeIncludeCreateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     post?: boolean | PostDefaultArgs<ExtArgs>;
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
-  export type likeIncludeUpdateManyAndReturn<
+  export type LikeIncludeUpdateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     post?: boolean | PostDefaultArgs<ExtArgs>;
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
 
-  export type $likePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: 'like';
+  export type $LikePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: 'Like';
     objects: {
       post: Prisma.$PostPayload<ExtArgs>;
       user: Prisma.$UserPayload<ExtArgs>;
@@ -11398,26 +16258,26 @@ export namespace Prisma {
     composites: {};
   };
 
-  type likeGetPayload<S extends boolean | null | undefined | likeDefaultArgs> = $Result.GetResult<
-    Prisma.$likePayload,
+  type LikeGetPayload<S extends boolean | null | undefined | LikeDefaultArgs> = $Result.GetResult<
+    Prisma.$LikePayload,
     S
   >;
 
-  type likeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
-    likeFindManyArgs,
+  type LikeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    LikeFindManyArgs,
     'select' | 'include' | 'distinct' | 'omit'
   > & {
     select?: LikeCountAggregateInputType | true;
   };
 
-  export interface likeDelegate<
+  export interface LikeDelegate<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['like']; meta: { name: 'like' } };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Like']; meta: { name: 'Like' } };
     /**
      * Find zero or one Like that matches the filter.
-     * @param {likeFindUniqueArgs} args - Arguments to find a Like
+     * @param {LikeFindUniqueArgs} args - Arguments to find a Like
      * @example
      * // Get one Like
      * const like = await prisma.like.findUnique({
@@ -11426,10 +16286,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends likeFindUniqueArgs>(
-      args: SelectSubset<T, likeFindUniqueArgs<ExtArgs>>
-    ): Prisma__likeClient<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
+    findUnique<T extends LikeFindUniqueArgs>(
+      args: SelectSubset<T, LikeFindUniqueArgs<ExtArgs>>
+    ): Prisma__LikeClient<
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -11438,7 +16298,7 @@ export namespace Prisma {
     /**
      * Find one Like that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {likeFindUniqueOrThrowArgs} args - Arguments to find a Like
+     * @param {LikeFindUniqueOrThrowArgs} args - Arguments to find a Like
      * @example
      * // Get one Like
      * const like = await prisma.like.findUniqueOrThrow({
@@ -11447,10 +16307,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends likeFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, likeFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__likeClient<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
+    findUniqueOrThrow<T extends LikeFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, LikeFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__LikeClient<
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -11460,7 +16320,7 @@ export namespace Prisma {
      * Find the first Like that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {likeFindFirstArgs} args - Arguments to find a Like
+     * @param {LikeFindFirstArgs} args - Arguments to find a Like
      * @example
      * // Get one Like
      * const like = await prisma.like.findFirst({
@@ -11469,10 +16329,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends likeFindFirstArgs>(
-      args?: SelectSubset<T, likeFindFirstArgs<ExtArgs>>
-    ): Prisma__likeClient<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
+    findFirst<T extends LikeFindFirstArgs>(
+      args?: SelectSubset<T, LikeFindFirstArgs<ExtArgs>>
+    ): Prisma__LikeClient<
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -11483,7 +16343,7 @@ export namespace Prisma {
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {likeFindFirstOrThrowArgs} args - Arguments to find a Like
+     * @param {LikeFindFirstOrThrowArgs} args - Arguments to find a Like
      * @example
      * // Get one Like
      * const like = await prisma.like.findFirstOrThrow({
@@ -11492,10 +16352,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends likeFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, likeFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__likeClient<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
+    findFirstOrThrow<T extends LikeFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, LikeFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__LikeClient<
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -11505,7 +16365,7 @@ export namespace Prisma {
      * Find zero or more Likes that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {likeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {LikeFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Likes
      * const likes = await prisma.like.findMany()
@@ -11517,15 +16377,15 @@ export namespace Prisma {
      * const likeWithIdOnly = await prisma.like.findMany({ select: { id: true } })
      *
      */
-    findMany<T extends likeFindManyArgs>(
-      args?: SelectSubset<T, likeFindManyArgs<ExtArgs>>
+    findMany<T extends LikeFindManyArgs>(
+      args?: SelectSubset<T, LikeFindManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
     >;
 
     /**
      * Create a Like.
-     * @param {likeCreateArgs} args - Arguments to create a Like.
+     * @param {LikeCreateArgs} args - Arguments to create a Like.
      * @example
      * // Create one Like
      * const Like = await prisma.like.create({
@@ -11535,10 +16395,10 @@ export namespace Prisma {
      * })
      *
      */
-    create<T extends likeCreateArgs>(
-      args: SelectSubset<T, likeCreateArgs<ExtArgs>>
-    ): Prisma__likeClient<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+    create<T extends LikeCreateArgs>(
+      args: SelectSubset<T, LikeCreateArgs<ExtArgs>>
+    ): Prisma__LikeClient<
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -11546,7 +16406,7 @@ export namespace Prisma {
 
     /**
      * Create many Likes.
-     * @param {likeCreateManyArgs} args - Arguments to create many Likes.
+     * @param {LikeCreateManyArgs} args - Arguments to create many Likes.
      * @example
      * // Create many Likes
      * const like = await prisma.like.createMany({
@@ -11556,13 +16416,13 @@ export namespace Prisma {
      * })
      *
      */
-    createMany<T extends likeCreateManyArgs>(
-      args?: SelectSubset<T, likeCreateManyArgs<ExtArgs>>
+    createMany<T extends LikeCreateManyArgs>(
+      args?: SelectSubset<T, LikeCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Create many Likes and returns the data saved in the database.
-     * @param {likeCreateManyAndReturnArgs} args - Arguments to create many Likes.
+     * @param {LikeCreateManyAndReturnArgs} args - Arguments to create many Likes.
      * @example
      * // Create many Likes
      * const like = await prisma.like.createManyAndReturn({
@@ -11582,15 +16442,15 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      *
      */
-    createManyAndReturn<T extends likeCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, likeCreateManyAndReturnArgs<ExtArgs>>
+    createManyAndReturn<T extends LikeCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, LikeCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
     >;
 
     /**
      * Delete a Like.
-     * @param {likeDeleteArgs} args - Arguments to delete one Like.
+     * @param {LikeDeleteArgs} args - Arguments to delete one Like.
      * @example
      * // Delete one Like
      * const Like = await prisma.like.delete({
@@ -11600,10 +16460,10 @@ export namespace Prisma {
      * })
      *
      */
-    delete<T extends likeDeleteArgs>(
-      args: SelectSubset<T, likeDeleteArgs<ExtArgs>>
-    ): Prisma__likeClient<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+    delete<T extends LikeDeleteArgs>(
+      args: SelectSubset<T, LikeDeleteArgs<ExtArgs>>
+    ): Prisma__LikeClient<
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -11611,7 +16471,7 @@ export namespace Prisma {
 
     /**
      * Update one Like.
-     * @param {likeUpdateArgs} args - Arguments to update one Like.
+     * @param {LikeUpdateArgs} args - Arguments to update one Like.
      * @example
      * // Update one Like
      * const like = await prisma.like.update({
@@ -11624,10 +16484,10 @@ export namespace Prisma {
      * })
      *
      */
-    update<T extends likeUpdateArgs>(
-      args: SelectSubset<T, likeUpdateArgs<ExtArgs>>
-    ): Prisma__likeClient<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+    update<T extends LikeUpdateArgs>(
+      args: SelectSubset<T, LikeUpdateArgs<ExtArgs>>
+    ): Prisma__LikeClient<
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -11635,7 +16495,7 @@ export namespace Prisma {
 
     /**
      * Delete zero or more Likes.
-     * @param {likeDeleteManyArgs} args - Arguments to filter Likes to delete.
+     * @param {LikeDeleteManyArgs} args - Arguments to filter Likes to delete.
      * @example
      * // Delete a few Likes
      * const { count } = await prisma.like.deleteMany({
@@ -11645,15 +16505,15 @@ export namespace Prisma {
      * })
      *
      */
-    deleteMany<T extends likeDeleteManyArgs>(
-      args?: SelectSubset<T, likeDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends LikeDeleteManyArgs>(
+      args?: SelectSubset<T, LikeDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Likes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {likeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {LikeUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Likes
      * const like = await prisma.like.updateMany({
@@ -11666,13 +16526,13 @@ export namespace Prisma {
      * })
      *
      */
-    updateMany<T extends likeUpdateManyArgs>(
-      args: SelectSubset<T, likeUpdateManyArgs<ExtArgs>>
+    updateMany<T extends LikeUpdateManyArgs>(
+      args: SelectSubset<T, LikeUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Likes and returns the data updated in the database.
-     * @param {likeUpdateManyAndReturnArgs} args - Arguments to update many Likes.
+     * @param {LikeUpdateManyAndReturnArgs} args - Arguments to update many Likes.
      * @example
      * // Update many Likes
      * const like = await prisma.like.updateManyAndReturn({
@@ -11698,15 +16558,15 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      *
      */
-    updateManyAndReturn<T extends likeUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, likeUpdateManyAndReturnArgs<ExtArgs>>
+    updateManyAndReturn<T extends LikeUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, LikeUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
     >;
 
     /**
      * Create or update one Like.
-     * @param {likeUpsertArgs} args - Arguments to update or create a Like.
+     * @param {LikeUpsertArgs} args - Arguments to update or create a Like.
      * @example
      * // Update or create a Like
      * const like = await prisma.like.upsert({
@@ -11721,10 +16581,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends likeUpsertArgs>(
-      args: SelectSubset<T, likeUpsertArgs<ExtArgs>>
-    ): Prisma__likeClient<
-      $Result.GetResult<Prisma.$likePayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+    upsert<T extends LikeUpsertArgs>(
+      args: SelectSubset<T, LikeUpsertArgs<ExtArgs>>
+    ): Prisma__LikeClient<
+      $Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -11734,7 +16594,7 @@ export namespace Prisma {
      * Count the number of Likes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {likeCountArgs} args - Arguments to filter Likes to count.
+     * @param {LikeCountArgs} args - Arguments to filter Likes to count.
      * @example
      * // Count the number of Likes
      * const count = await prisma.like.count({
@@ -11743,8 +16603,8 @@ export namespace Prisma {
      *   }
      * })
      **/
-    count<T extends likeCountArgs>(
-      args?: Subset<T, likeCountArgs>
+    count<T extends LikeCountArgs>(
+      args?: Subset<T, LikeCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -11785,7 +16645,7 @@ export namespace Prisma {
      * Group by Like.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {likeGroupByArgs} args - Group by arguments.
+     * @param {LikeGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -11800,11 +16660,11 @@ export namespace Prisma {
      *
      **/
     groupBy<
-      T extends likeGroupByArgs,
+      T extends LikeGroupByArgs,
       HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: likeGroupByArgs['orderBy'] }
-        : { orderBy?: likeGroupByArgs['orderBy'] },
+        ? { orderBy: LikeGroupByArgs['orderBy'] }
+        : { orderBy?: LikeGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -11849,21 +16709,21 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, likeGroupByArgs, OrderByArg> & InputErrors
+      args: SubsetIntersection<T, LikeGroupByArgs, OrderByArg> & InputErrors
     ): {} extends InputErrors ? GetLikeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
-     * Fields of the like model
+     * Fields of the Like model
      */
-    readonly fields: likeFieldRefs;
+    readonly fields: LikeFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for like.
+   * The delegate class that acts as a "Promise-like" for Like.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__likeClient<
+  export interface Prisma__LikeClient<
     T,
     Null = never,
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
@@ -11916,447 +16776,447 @@ export namespace Prisma {
   }
 
   /**
-   * Fields of the like model
+   * Fields of the Like model
    */
-  interface likeFieldRefs {
-    readonly id: FieldRef<'like', 'Int'>;
-    readonly postId: FieldRef<'like', 'Int'>;
-    readonly userId: FieldRef<'like', 'Int'>;
-    readonly createdAt: FieldRef<'like', 'DateTime'>;
+  interface LikeFieldRefs {
+    readonly id: FieldRef<'Like', 'Int'>;
+    readonly postId: FieldRef<'Like', 'Int'>;
+    readonly userId: FieldRef<'Like', 'Int'>;
+    readonly createdAt: FieldRef<'Like', 'DateTime'>;
   }
 
   // Custom InputTypes
   /**
-   * like findUnique
+   * Like findUnique
    */
-  export type likeFindUniqueArgs<
+  export type LikeFindUniqueArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelect<ExtArgs> | null;
+    select?: LikeSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeInclude<ExtArgs> | null;
+    include?: LikeInclude<ExtArgs> | null;
     /**
-     * Filter, which like to fetch.
+     * Filter, which Like to fetch.
      */
-    where: likeWhereUniqueInput;
+    where: LikeWhereUniqueInput;
   };
 
   /**
-   * like findUniqueOrThrow
+   * Like findUniqueOrThrow
    */
-  export type likeFindUniqueOrThrowArgs<
+  export type LikeFindUniqueOrThrowArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelect<ExtArgs> | null;
+    select?: LikeSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeInclude<ExtArgs> | null;
+    include?: LikeInclude<ExtArgs> | null;
     /**
-     * Filter, which like to fetch.
+     * Filter, which Like to fetch.
      */
-    where: likeWhereUniqueInput;
+    where: LikeWhereUniqueInput;
   };
 
   /**
-   * like findFirst
+   * Like findFirst
    */
-  export type likeFindFirstArgs<
+  export type LikeFindFirstArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelect<ExtArgs> | null;
+    select?: LikeSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeInclude<ExtArgs> | null;
+    include?: LikeInclude<ExtArgs> | null;
     /**
-     * Filter, which like to fetch.
+     * Filter, which Like to fetch.
      */
-    where?: likeWhereInput;
+    where?: LikeWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of likes to fetch.
+     * Determine the order of Likes to fetch.
      */
-    orderBy?: likeOrderByWithRelationInput | likeOrderByWithRelationInput[];
+    orderBy?: LikeOrderByWithRelationInput | LikeOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for searching for likes.
+     * Sets the position for searching for Likes.
      */
-    cursor?: likeWhereUniqueInput;
+    cursor?: LikeWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` likes from the position of the cursor.
+     * Take `±n` Likes from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` likes.
+     * Skip the first `n` Likes.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      *
-     * Filter by unique combinations of likes.
+     * Filter by unique combinations of Likes.
      */
     distinct?: LikeScalarFieldEnum | LikeScalarFieldEnum[];
   };
 
   /**
-   * like findFirstOrThrow
+   * Like findFirstOrThrow
    */
-  export type likeFindFirstOrThrowArgs<
+  export type LikeFindFirstOrThrowArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelect<ExtArgs> | null;
+    select?: LikeSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeInclude<ExtArgs> | null;
+    include?: LikeInclude<ExtArgs> | null;
     /**
-     * Filter, which like to fetch.
+     * Filter, which Like to fetch.
      */
-    where?: likeWhereInput;
+    where?: LikeWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of likes to fetch.
+     * Determine the order of Likes to fetch.
      */
-    orderBy?: likeOrderByWithRelationInput | likeOrderByWithRelationInput[];
+    orderBy?: LikeOrderByWithRelationInput | LikeOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for searching for likes.
+     * Sets the position for searching for Likes.
      */
-    cursor?: likeWhereUniqueInput;
+    cursor?: LikeWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` likes from the position of the cursor.
+     * Take `±n` Likes from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` likes.
+     * Skip the first `n` Likes.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      *
-     * Filter by unique combinations of likes.
+     * Filter by unique combinations of Likes.
      */
     distinct?: LikeScalarFieldEnum | LikeScalarFieldEnum[];
   };
 
   /**
-   * like findMany
+   * Like findMany
    */
-  export type likeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type LikeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the like
+       * Select specific fields to fetch from the Like
        */
-      select?: likeSelect<ExtArgs> | null;
+      select?: LikeSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the like
+       * Omit specific fields from the Like
        */
-      omit?: likeOmit<ExtArgs> | null;
+      omit?: LikeOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: likeInclude<ExtArgs> | null;
+      include?: LikeInclude<ExtArgs> | null;
       /**
-       * Filter, which likes to fetch.
+       * Filter, which Likes to fetch.
        */
-      where?: likeWhereInput;
+      where?: LikeWhereInput;
       /**
        * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
        *
-       * Determine the order of likes to fetch.
+       * Determine the order of Likes to fetch.
        */
-      orderBy?: likeOrderByWithRelationInput | likeOrderByWithRelationInput[];
+      orderBy?: LikeOrderByWithRelationInput | LikeOrderByWithRelationInput[];
       /**
        * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
        *
-       * Sets the position for listing likes.
+       * Sets the position for listing Likes.
        */
-      cursor?: likeWhereUniqueInput;
+      cursor?: LikeWhereUniqueInput;
       /**
        * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
        *
-       * Take `±n` likes from the position of the cursor.
+       * Take `±n` Likes from the position of the cursor.
        */
       take?: number;
       /**
        * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
        *
-       * Skip the first `n` likes.
+       * Skip the first `n` Likes.
        */
       skip?: number;
       distinct?: LikeScalarFieldEnum | LikeScalarFieldEnum[];
     };
 
   /**
-   * like create
+   * Like create
    */
-  export type likeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LikeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelect<ExtArgs> | null;
+    select?: LikeSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeInclude<ExtArgs> | null;
+    include?: LikeInclude<ExtArgs> | null;
     /**
-     * The data needed to create a like.
+     * The data needed to create a Like.
      */
-    data: XOR<likeCreateInput, likeUncheckedCreateInput>;
+    data: XOR<LikeCreateInput, LikeUncheckedCreateInput>;
   };
 
   /**
-   * like createMany
+   * Like createMany
    */
-  export type likeCreateManyArgs<
+  export type LikeCreateManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * The data used to create many likes.
+     * The data used to create many Likes.
      */
-    data: likeCreateManyInput | likeCreateManyInput[];
+    data: LikeCreateManyInput | LikeCreateManyInput[];
     skipDuplicates?: boolean;
   };
 
   /**
-   * like createManyAndReturn
+   * Like createManyAndReturn
    */
-  export type likeCreateManyAndReturnArgs<
+  export type LikeCreateManyAndReturnArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelectCreateManyAndReturn<ExtArgs> | null;
+    select?: LikeSelectCreateManyAndReturn<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
-     * The data used to create many likes.
+     * The data used to create many Likes.
      */
-    data: likeCreateManyInput | likeCreateManyInput[];
+    data: LikeCreateManyInput | LikeCreateManyInput[];
     skipDuplicates?: boolean;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeIncludeCreateManyAndReturn<ExtArgs> | null;
+    include?: LikeIncludeCreateManyAndReturn<ExtArgs> | null;
   };
 
   /**
-   * like update
+   * Like update
    */
-  export type likeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LikeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelect<ExtArgs> | null;
+    select?: LikeSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeInclude<ExtArgs> | null;
+    include?: LikeInclude<ExtArgs> | null;
     /**
-     * The data needed to update a like.
+     * The data needed to update a Like.
      */
-    data: XOR<likeUpdateInput, likeUncheckedUpdateInput>;
+    data: XOR<LikeUpdateInput, LikeUncheckedUpdateInput>;
     /**
-     * Choose, which like to update.
+     * Choose, which Like to update.
      */
-    where: likeWhereUniqueInput;
+    where: LikeWhereUniqueInput;
   };
 
   /**
-   * like updateMany
+   * Like updateMany
    */
-  export type likeUpdateManyArgs<
+  export type LikeUpdateManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * The data used to update likes.
+     * The data used to update Likes.
      */
-    data: XOR<likeUpdateManyMutationInput, likeUncheckedUpdateManyInput>;
+    data: XOR<LikeUpdateManyMutationInput, LikeUncheckedUpdateManyInput>;
     /**
-     * Filter which likes to update
+     * Filter which Likes to update
      */
-    where?: likeWhereInput;
+    where?: LikeWhereInput;
     /**
-     * Limit how many likes to update.
+     * Limit how many Likes to update.
      */
     limit?: number;
   };
 
   /**
-   * like updateManyAndReturn
+   * Like updateManyAndReturn
    */
-  export type likeUpdateManyAndReturnArgs<
+  export type LikeUpdateManyAndReturnArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelectUpdateManyAndReturn<ExtArgs> | null;
+    select?: LikeSelectUpdateManyAndReturn<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
-     * The data used to update likes.
+     * The data used to update Likes.
      */
-    data: XOR<likeUpdateManyMutationInput, likeUncheckedUpdateManyInput>;
+    data: XOR<LikeUpdateManyMutationInput, LikeUncheckedUpdateManyInput>;
     /**
-     * Filter which likes to update
+     * Filter which Likes to update
      */
-    where?: likeWhereInput;
+    where?: LikeWhereInput;
     /**
-     * Limit how many likes to update.
+     * Limit how many Likes to update.
      */
     limit?: number;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeIncludeUpdateManyAndReturn<ExtArgs> | null;
+    include?: LikeIncludeUpdateManyAndReturn<ExtArgs> | null;
   };
 
   /**
-   * like upsert
+   * Like upsert
    */
-  export type likeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LikeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelect<ExtArgs> | null;
+    select?: LikeSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeInclude<ExtArgs> | null;
+    include?: LikeInclude<ExtArgs> | null;
     /**
-     * The filter to search for the like to update in case it exists.
+     * The filter to search for the Like to update in case it exists.
      */
-    where: likeWhereUniqueInput;
+    where: LikeWhereUniqueInput;
     /**
-     * In case the like found by the `where` argument doesn't exist, create a new like with this data.
+     * In case the Like found by the `where` argument doesn't exist, create a new Like with this data.
      */
-    create: XOR<likeCreateInput, likeUncheckedCreateInput>;
+    create: XOR<LikeCreateInput, LikeUncheckedCreateInput>;
     /**
-     * In case the like was found with the provided `where` argument, update it with this data.
+     * In case the Like was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<likeUpdateInput, likeUncheckedUpdateInput>;
+    update: XOR<LikeUpdateInput, LikeUncheckedUpdateInput>;
   };
 
   /**
-   * like delete
+   * Like delete
    */
-  export type likeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LikeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the like
+     * Select specific fields to fetch from the Like
      */
-    select?: likeSelect<ExtArgs> | null;
+    select?: LikeSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the like
+     * Omit specific fields from the Like
      */
-    omit?: likeOmit<ExtArgs> | null;
+    omit?: LikeOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: likeInclude<ExtArgs> | null;
+    include?: LikeInclude<ExtArgs> | null;
     /**
-     * Filter which like to delete.
+     * Filter which Like to delete.
      */
-    where: likeWhereUniqueInput;
+    where: LikeWhereUniqueInput;
   };
 
   /**
-   * like deleteMany
+   * Like deleteMany
    */
-  export type likeDeleteManyArgs<
+  export type LikeDeleteManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Filter which likes to delete
+     * Filter which Likes to delete
      */
-    where?: likeWhereInput;
+    where?: LikeWhereInput;
     /**
-     * Limit how many likes to delete.
+     * Limit how many Likes to delete.
      */
     limit?: number;
   };
 
   /**
-   * like without action
+   * Like without action
    */
-  export type likeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type LikeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the like
+       * Select specific fields to fetch from the Like
        */
-      select?: likeSelect<ExtArgs> | null;
+      select?: LikeSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the like
+       * Omit specific fields from the Like
        */
-      omit?: likeOmit<ExtArgs> | null;
+      omit?: LikeOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: likeInclude<ExtArgs> | null;
+      include?: LikeInclude<ExtArgs> | null;
     };
 
   /**
-   * Model share
+   * Model Share
    */
 
   export type AggregateShare = {
@@ -12439,37 +17299,37 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Filter which share to aggregate.
+     * Filter which Share to aggregate.
      */
-    where?: shareWhereInput;
+    where?: ShareWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of shares to fetch.
+     * Determine the order of Shares to fetch.
      */
-    orderBy?: shareOrderByWithRelationInput | shareOrderByWithRelationInput[];
+    orderBy?: ShareOrderByWithRelationInput | ShareOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
      * Sets the start position
      */
-    cursor?: shareWhereUniqueInput;
+    cursor?: ShareWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` shares from the position of the cursor.
+     * Take `±n` Shares from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` shares.
+     * Skip the first `n` Shares.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
-     * Count returned shares
+     * Count returned Shares
      **/
     _count?: true | ShareCountAggregateInputType;
     /**
@@ -12506,12 +17366,12 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateShare[P]>;
   };
 
-  export type shareGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type ShareGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
-      where?: shareWhereInput;
-      orderBy?: shareOrderByWithAggregationInput | shareOrderByWithAggregationInput[];
+      where?: ShareWhereInput;
+      orderBy?: ShareOrderByWithAggregationInput | ShareOrderByWithAggregationInput[];
       by: ShareScalarFieldEnum[] | ShareScalarFieldEnum;
-      having?: shareScalarWhereWithAggregatesInput;
+      having?: ShareScalarWhereWithAggregatesInput;
       take?: number;
       skip?: number;
       _count?: ShareCountAggregateInputType | true;
@@ -12533,7 +17393,7 @@ export namespace Prisma {
     _max: ShareMaxAggregateOutputType | null;
   };
 
-  type GetShareGroupByPayload<T extends shareGroupByArgs> = Prisma.PrismaPromise<
+  type GetShareGroupByPayload<T extends ShareGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickEnumerable<ShareGroupByOutputType, T['by']> & {
         [P in keyof T & keyof ShareGroupByOutputType]: P extends '_count'
@@ -12545,7 +17405,7 @@ export namespace Prisma {
     >
   >;
 
-  export type shareSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type ShareSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetSelect<
       {
         id?: boolean;
@@ -12558,7 +17418,7 @@ export namespace Prisma {
       ExtArgs['result']['share']
     >;
 
-  export type shareSelectCreateManyAndReturn<
+  export type ShareSelectCreateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
@@ -12572,7 +17432,7 @@ export namespace Prisma {
     ExtArgs['result']['share']
   >;
 
-  export type shareSelectUpdateManyAndReturn<
+  export type ShareSelectUpdateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
@@ -12586,34 +17446,34 @@ export namespace Prisma {
     ExtArgs['result']['share']
   >;
 
-  export type shareSelectScalar = {
+  export type ShareSelectScalar = {
     id?: boolean;
     postId?: boolean;
     userId?: boolean;
     createdAt?: boolean;
   };
 
-  export type shareOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type ShareOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetOmit<'id' | 'postId' | 'userId' | 'createdAt', ExtArgs['result']['share']>;
-  export type shareInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ShareInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     post?: boolean | PostDefaultArgs<ExtArgs>;
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
-  export type shareIncludeCreateManyAndReturn<
+  export type ShareIncludeCreateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     post?: boolean | PostDefaultArgs<ExtArgs>;
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
-  export type shareIncludeUpdateManyAndReturn<
+  export type ShareIncludeUpdateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     post?: boolean | PostDefaultArgs<ExtArgs>;
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
 
-  export type $sharePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: 'share';
+  export type $SharePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: 'Share';
     objects: {
       post: Prisma.$PostPayload<ExtArgs>;
       user: Prisma.$UserPayload<ExtArgs>;
@@ -12630,26 +17490,26 @@ export namespace Prisma {
     composites: {};
   };
 
-  type shareGetPayload<S extends boolean | null | undefined | shareDefaultArgs> = $Result.GetResult<
-    Prisma.$sharePayload,
+  type ShareGetPayload<S extends boolean | null | undefined | ShareDefaultArgs> = $Result.GetResult<
+    Prisma.$SharePayload,
     S
   >;
 
-  type shareCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
-    shareFindManyArgs,
+  type ShareCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    ShareFindManyArgs,
     'select' | 'include' | 'distinct' | 'omit'
   > & {
     select?: ShareCountAggregateInputType | true;
   };
 
-  export interface shareDelegate<
+  export interface ShareDelegate<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['share']; meta: { name: 'share' } };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Share']; meta: { name: 'Share' } };
     /**
      * Find zero or one Share that matches the filter.
-     * @param {shareFindUniqueArgs} args - Arguments to find a Share
+     * @param {ShareFindUniqueArgs} args - Arguments to find a Share
      * @example
      * // Get one Share
      * const share = await prisma.share.findUnique({
@@ -12658,10 +17518,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends shareFindUniqueArgs>(
-      args: SelectSubset<T, shareFindUniqueArgs<ExtArgs>>
-    ): Prisma__shareClient<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
+    findUnique<T extends ShareFindUniqueArgs>(
+      args: SelectSubset<T, ShareFindUniqueArgs<ExtArgs>>
+    ): Prisma__ShareClient<
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -12670,7 +17530,7 @@ export namespace Prisma {
     /**
      * Find one Share that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {shareFindUniqueOrThrowArgs} args - Arguments to find a Share
+     * @param {ShareFindUniqueOrThrowArgs} args - Arguments to find a Share
      * @example
      * // Get one Share
      * const share = await prisma.share.findUniqueOrThrow({
@@ -12679,10 +17539,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends shareFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, shareFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__shareClient<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
+    findUniqueOrThrow<T extends ShareFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, ShareFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ShareClient<
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12692,7 +17552,7 @@ export namespace Prisma {
      * Find the first Share that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {shareFindFirstArgs} args - Arguments to find a Share
+     * @param {ShareFindFirstArgs} args - Arguments to find a Share
      * @example
      * // Get one Share
      * const share = await prisma.share.findFirst({
@@ -12701,10 +17561,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends shareFindFirstArgs>(
-      args?: SelectSubset<T, shareFindFirstArgs<ExtArgs>>
-    ): Prisma__shareClient<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
+    findFirst<T extends ShareFindFirstArgs>(
+      args?: SelectSubset<T, ShareFindFirstArgs<ExtArgs>>
+    ): Prisma__ShareClient<
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -12715,7 +17575,7 @@ export namespace Prisma {
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {shareFindFirstOrThrowArgs} args - Arguments to find a Share
+     * @param {ShareFindFirstOrThrowArgs} args - Arguments to find a Share
      * @example
      * // Get one Share
      * const share = await prisma.share.findFirstOrThrow({
@@ -12724,10 +17584,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends shareFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, shareFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__shareClient<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
+    findFirstOrThrow<T extends ShareFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, ShareFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ShareClient<
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12737,7 +17597,7 @@ export namespace Prisma {
      * Find zero or more Shares that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {shareFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ShareFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Shares
      * const shares = await prisma.share.findMany()
@@ -12749,15 +17609,15 @@ export namespace Prisma {
      * const shareWithIdOnly = await prisma.share.findMany({ select: { id: true } })
      *
      */
-    findMany<T extends shareFindManyArgs>(
-      args?: SelectSubset<T, shareFindManyArgs<ExtArgs>>
+    findMany<T extends ShareFindManyArgs>(
+      args?: SelectSubset<T, ShareFindManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
     >;
 
     /**
      * Create a Share.
-     * @param {shareCreateArgs} args - Arguments to create a Share.
+     * @param {ShareCreateArgs} args - Arguments to create a Share.
      * @example
      * // Create one Share
      * const Share = await prisma.share.create({
@@ -12767,10 +17627,10 @@ export namespace Prisma {
      * })
      *
      */
-    create<T extends shareCreateArgs>(
-      args: SelectSubset<T, shareCreateArgs<ExtArgs>>
-    ): Prisma__shareClient<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+    create<T extends ShareCreateArgs>(
+      args: SelectSubset<T, ShareCreateArgs<ExtArgs>>
+    ): Prisma__ShareClient<
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12778,7 +17638,7 @@ export namespace Prisma {
 
     /**
      * Create many Shares.
-     * @param {shareCreateManyArgs} args - Arguments to create many Shares.
+     * @param {ShareCreateManyArgs} args - Arguments to create many Shares.
      * @example
      * // Create many Shares
      * const share = await prisma.share.createMany({
@@ -12788,13 +17648,13 @@ export namespace Prisma {
      * })
      *
      */
-    createMany<T extends shareCreateManyArgs>(
-      args?: SelectSubset<T, shareCreateManyArgs<ExtArgs>>
+    createMany<T extends ShareCreateManyArgs>(
+      args?: SelectSubset<T, ShareCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Create many Shares and returns the data saved in the database.
-     * @param {shareCreateManyAndReturnArgs} args - Arguments to create many Shares.
+     * @param {ShareCreateManyAndReturnArgs} args - Arguments to create many Shares.
      * @example
      * // Create many Shares
      * const share = await prisma.share.createManyAndReturn({
@@ -12814,15 +17674,15 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      *
      */
-    createManyAndReturn<T extends shareCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, shareCreateManyAndReturnArgs<ExtArgs>>
+    createManyAndReturn<T extends ShareCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, ShareCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
     >;
 
     /**
      * Delete a Share.
-     * @param {shareDeleteArgs} args - Arguments to delete one Share.
+     * @param {ShareDeleteArgs} args - Arguments to delete one Share.
      * @example
      * // Delete one Share
      * const Share = await prisma.share.delete({
@@ -12832,10 +17692,10 @@ export namespace Prisma {
      * })
      *
      */
-    delete<T extends shareDeleteArgs>(
-      args: SelectSubset<T, shareDeleteArgs<ExtArgs>>
-    ): Prisma__shareClient<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+    delete<T extends ShareDeleteArgs>(
+      args: SelectSubset<T, ShareDeleteArgs<ExtArgs>>
+    ): Prisma__ShareClient<
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12843,7 +17703,7 @@ export namespace Prisma {
 
     /**
      * Update one Share.
-     * @param {shareUpdateArgs} args - Arguments to update one Share.
+     * @param {ShareUpdateArgs} args - Arguments to update one Share.
      * @example
      * // Update one Share
      * const share = await prisma.share.update({
@@ -12856,10 +17716,10 @@ export namespace Prisma {
      * })
      *
      */
-    update<T extends shareUpdateArgs>(
-      args: SelectSubset<T, shareUpdateArgs<ExtArgs>>
-    ): Prisma__shareClient<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+    update<T extends ShareUpdateArgs>(
+      args: SelectSubset<T, ShareUpdateArgs<ExtArgs>>
+    ): Prisma__ShareClient<
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12867,7 +17727,7 @@ export namespace Prisma {
 
     /**
      * Delete zero or more Shares.
-     * @param {shareDeleteManyArgs} args - Arguments to filter Shares to delete.
+     * @param {ShareDeleteManyArgs} args - Arguments to filter Shares to delete.
      * @example
      * // Delete a few Shares
      * const { count } = await prisma.share.deleteMany({
@@ -12877,15 +17737,15 @@ export namespace Prisma {
      * })
      *
      */
-    deleteMany<T extends shareDeleteManyArgs>(
-      args?: SelectSubset<T, shareDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends ShareDeleteManyArgs>(
+      args?: SelectSubset<T, ShareDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Shares.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {shareUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ShareUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Shares
      * const share = await prisma.share.updateMany({
@@ -12898,13 +17758,13 @@ export namespace Prisma {
      * })
      *
      */
-    updateMany<T extends shareUpdateManyArgs>(
-      args: SelectSubset<T, shareUpdateManyArgs<ExtArgs>>
+    updateMany<T extends ShareUpdateManyArgs>(
+      args: SelectSubset<T, ShareUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Shares and returns the data updated in the database.
-     * @param {shareUpdateManyAndReturnArgs} args - Arguments to update many Shares.
+     * @param {ShareUpdateManyAndReturnArgs} args - Arguments to update many Shares.
      * @example
      * // Update many Shares
      * const share = await prisma.share.updateManyAndReturn({
@@ -12930,15 +17790,15 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      *
      */
-    updateManyAndReturn<T extends shareUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, shareUpdateManyAndReturnArgs<ExtArgs>>
+    updateManyAndReturn<T extends ShareUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, ShareUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
     >;
 
     /**
      * Create or update one Share.
-     * @param {shareUpsertArgs} args - Arguments to update or create a Share.
+     * @param {ShareUpsertArgs} args - Arguments to update or create a Share.
      * @example
      * // Update or create a Share
      * const share = await prisma.share.upsert({
@@ -12953,10 +17813,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends shareUpsertArgs>(
-      args: SelectSubset<T, shareUpsertArgs<ExtArgs>>
-    ): Prisma__shareClient<
-      $Result.GetResult<Prisma.$sharePayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+    upsert<T extends ShareUpsertArgs>(
+      args: SelectSubset<T, ShareUpsertArgs<ExtArgs>>
+    ): Prisma__ShareClient<
+      $Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12966,7 +17826,7 @@ export namespace Prisma {
      * Count the number of Shares.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {shareCountArgs} args - Arguments to filter Shares to count.
+     * @param {ShareCountArgs} args - Arguments to filter Shares to count.
      * @example
      * // Count the number of Shares
      * const count = await prisma.share.count({
@@ -12975,8 +17835,8 @@ export namespace Prisma {
      *   }
      * })
      **/
-    count<T extends shareCountArgs>(
-      args?: Subset<T, shareCountArgs>
+    count<T extends ShareCountArgs>(
+      args?: Subset<T, ShareCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -13017,7 +17877,7 @@ export namespace Prisma {
      * Group by Share.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {shareGroupByArgs} args - Group by arguments.
+     * @param {ShareGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -13032,11 +17892,11 @@ export namespace Prisma {
      *
      **/
     groupBy<
-      T extends shareGroupByArgs,
+      T extends ShareGroupByArgs,
       HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: shareGroupByArgs['orderBy'] }
-        : { orderBy?: shareGroupByArgs['orderBy'] },
+        ? { orderBy: ShareGroupByArgs['orderBy'] }
+        : { orderBy?: ShareGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -13081,21 +17941,21 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, shareGroupByArgs, OrderByArg> & InputErrors
+      args: SubsetIntersection<T, ShareGroupByArgs, OrderByArg> & InputErrors
     ): {} extends InputErrors ? GetShareGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
-     * Fields of the share model
+     * Fields of the Share model
      */
-    readonly fields: shareFieldRefs;
+    readonly fields: ShareFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for share.
+   * The delegate class that acts as a "Promise-like" for Share.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__shareClient<
+  export interface Prisma__ShareClient<
     T,
     Null = never,
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
@@ -13148,452 +18008,452 @@ export namespace Prisma {
   }
 
   /**
-   * Fields of the share model
+   * Fields of the Share model
    */
-  interface shareFieldRefs {
-    readonly id: FieldRef<'share', 'Int'>;
-    readonly postId: FieldRef<'share', 'Int'>;
-    readonly userId: FieldRef<'share', 'Int'>;
-    readonly createdAt: FieldRef<'share', 'DateTime'>;
+  interface ShareFieldRefs {
+    readonly id: FieldRef<'Share', 'Int'>;
+    readonly postId: FieldRef<'Share', 'Int'>;
+    readonly userId: FieldRef<'Share', 'Int'>;
+    readonly createdAt: FieldRef<'Share', 'DateTime'>;
   }
 
   // Custom InputTypes
   /**
-   * share findUnique
+   * Share findUnique
    */
-  export type shareFindUniqueArgs<
+  export type ShareFindUniqueArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the share
+     * Select specific fields to fetch from the Share
      */
-    select?: shareSelect<ExtArgs> | null;
+    select?: ShareSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the share
+     * Omit specific fields from the Share
      */
-    omit?: shareOmit<ExtArgs> | null;
+    omit?: ShareOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: shareInclude<ExtArgs> | null;
+    include?: ShareInclude<ExtArgs> | null;
     /**
-     * Filter, which share to fetch.
+     * Filter, which Share to fetch.
      */
-    where: shareWhereUniqueInput;
+    where: ShareWhereUniqueInput;
   };
 
   /**
-   * share findUniqueOrThrow
+   * Share findUniqueOrThrow
    */
-  export type shareFindUniqueOrThrowArgs<
+  export type ShareFindUniqueOrThrowArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the share
+     * Select specific fields to fetch from the Share
      */
-    select?: shareSelect<ExtArgs> | null;
+    select?: ShareSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the share
+     * Omit specific fields from the Share
      */
-    omit?: shareOmit<ExtArgs> | null;
+    omit?: ShareOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: shareInclude<ExtArgs> | null;
+    include?: ShareInclude<ExtArgs> | null;
     /**
-     * Filter, which share to fetch.
+     * Filter, which Share to fetch.
      */
-    where: shareWhereUniqueInput;
+    where: ShareWhereUniqueInput;
   };
 
   /**
-   * share findFirst
+   * Share findFirst
    */
-  export type shareFindFirstArgs<
+  export type ShareFindFirstArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the share
+     * Select specific fields to fetch from the Share
      */
-    select?: shareSelect<ExtArgs> | null;
+    select?: ShareSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the share
+     * Omit specific fields from the Share
      */
-    omit?: shareOmit<ExtArgs> | null;
+    omit?: ShareOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: shareInclude<ExtArgs> | null;
+    include?: ShareInclude<ExtArgs> | null;
     /**
-     * Filter, which share to fetch.
+     * Filter, which Share to fetch.
      */
-    where?: shareWhereInput;
+    where?: ShareWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of shares to fetch.
+     * Determine the order of Shares to fetch.
      */
-    orderBy?: shareOrderByWithRelationInput | shareOrderByWithRelationInput[];
+    orderBy?: ShareOrderByWithRelationInput | ShareOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for searching for shares.
+     * Sets the position for searching for Shares.
      */
-    cursor?: shareWhereUniqueInput;
+    cursor?: ShareWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` shares from the position of the cursor.
+     * Take `±n` Shares from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` shares.
+     * Skip the first `n` Shares.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      *
-     * Filter by unique combinations of shares.
+     * Filter by unique combinations of Shares.
      */
     distinct?: ShareScalarFieldEnum | ShareScalarFieldEnum[];
   };
 
   /**
-   * share findFirstOrThrow
+   * Share findFirstOrThrow
    */
-  export type shareFindFirstOrThrowArgs<
+  export type ShareFindFirstOrThrowArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the share
+     * Select specific fields to fetch from the Share
      */
-    select?: shareSelect<ExtArgs> | null;
+    select?: ShareSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the share
+     * Omit specific fields from the Share
      */
-    omit?: shareOmit<ExtArgs> | null;
+    omit?: ShareOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: shareInclude<ExtArgs> | null;
+    include?: ShareInclude<ExtArgs> | null;
     /**
-     * Filter, which share to fetch.
+     * Filter, which Share to fetch.
      */
-    where?: shareWhereInput;
+    where?: ShareWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of shares to fetch.
+     * Determine the order of Shares to fetch.
      */
-    orderBy?: shareOrderByWithRelationInput | shareOrderByWithRelationInput[];
+    orderBy?: ShareOrderByWithRelationInput | ShareOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for searching for shares.
+     * Sets the position for searching for Shares.
      */
-    cursor?: shareWhereUniqueInput;
+    cursor?: ShareWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` shares from the position of the cursor.
+     * Take `±n` Shares from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` shares.
+     * Skip the first `n` Shares.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      *
-     * Filter by unique combinations of shares.
+     * Filter by unique combinations of Shares.
      */
     distinct?: ShareScalarFieldEnum | ShareScalarFieldEnum[];
   };
 
   /**
-   * share findMany
+   * Share findMany
    */
-  export type shareFindManyArgs<
+  export type ShareFindManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the share
+     * Select specific fields to fetch from the Share
      */
-    select?: shareSelect<ExtArgs> | null;
+    select?: ShareSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the share
+     * Omit specific fields from the Share
      */
-    omit?: shareOmit<ExtArgs> | null;
+    omit?: ShareOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: shareInclude<ExtArgs> | null;
+    include?: ShareInclude<ExtArgs> | null;
     /**
-     * Filter, which shares to fetch.
+     * Filter, which Shares to fetch.
      */
-    where?: shareWhereInput;
+    where?: ShareWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of shares to fetch.
+     * Determine the order of Shares to fetch.
      */
-    orderBy?: shareOrderByWithRelationInput | shareOrderByWithRelationInput[];
+    orderBy?: ShareOrderByWithRelationInput | ShareOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for listing shares.
+     * Sets the position for listing Shares.
      */
-    cursor?: shareWhereUniqueInput;
+    cursor?: ShareWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` shares from the position of the cursor.
+     * Take `±n` Shares from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` shares.
+     * Skip the first `n` Shares.
      */
     skip?: number;
     distinct?: ShareScalarFieldEnum | ShareScalarFieldEnum[];
   };
 
   /**
-   * share create
+   * Share create
    */
-  export type shareCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type ShareCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the share
+       * Select specific fields to fetch from the Share
        */
-      select?: shareSelect<ExtArgs> | null;
+      select?: ShareSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the share
+       * Omit specific fields from the Share
        */
-      omit?: shareOmit<ExtArgs> | null;
+      omit?: ShareOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: shareInclude<ExtArgs> | null;
+      include?: ShareInclude<ExtArgs> | null;
       /**
-       * The data needed to create a share.
+       * The data needed to create a Share.
        */
-      data: XOR<shareCreateInput, shareUncheckedCreateInput>;
+      data: XOR<ShareCreateInput, ShareUncheckedCreateInput>;
     };
 
   /**
-   * share createMany
+   * Share createMany
    */
-  export type shareCreateManyArgs<
+  export type ShareCreateManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * The data used to create many shares.
+     * The data used to create many Shares.
      */
-    data: shareCreateManyInput | shareCreateManyInput[];
+    data: ShareCreateManyInput | ShareCreateManyInput[];
     skipDuplicates?: boolean;
   };
 
   /**
-   * share createManyAndReturn
+   * Share createManyAndReturn
    */
-  export type shareCreateManyAndReturnArgs<
+  export type ShareCreateManyAndReturnArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the share
+     * Select specific fields to fetch from the Share
      */
-    select?: shareSelectCreateManyAndReturn<ExtArgs> | null;
+    select?: ShareSelectCreateManyAndReturn<ExtArgs> | null;
     /**
-     * Omit specific fields from the share
+     * Omit specific fields from the Share
      */
-    omit?: shareOmit<ExtArgs> | null;
+    omit?: ShareOmit<ExtArgs> | null;
     /**
-     * The data used to create many shares.
+     * The data used to create many Shares.
      */
-    data: shareCreateManyInput | shareCreateManyInput[];
+    data: ShareCreateManyInput | ShareCreateManyInput[];
     skipDuplicates?: boolean;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: shareIncludeCreateManyAndReturn<ExtArgs> | null;
+    include?: ShareIncludeCreateManyAndReturn<ExtArgs> | null;
   };
 
   /**
-   * share update
+   * Share update
    */
-  export type shareUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type ShareUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the share
+       * Select specific fields to fetch from the Share
        */
-      select?: shareSelect<ExtArgs> | null;
+      select?: ShareSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the share
+       * Omit specific fields from the Share
        */
-      omit?: shareOmit<ExtArgs> | null;
+      omit?: ShareOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: shareInclude<ExtArgs> | null;
+      include?: ShareInclude<ExtArgs> | null;
       /**
-       * The data needed to update a share.
+       * The data needed to update a Share.
        */
-      data: XOR<shareUpdateInput, shareUncheckedUpdateInput>;
+      data: XOR<ShareUpdateInput, ShareUncheckedUpdateInput>;
       /**
-       * Choose, which share to update.
+       * Choose, which Share to update.
        */
-      where: shareWhereUniqueInput;
+      where: ShareWhereUniqueInput;
     };
 
   /**
-   * share updateMany
+   * Share updateMany
    */
-  export type shareUpdateManyArgs<
+  export type ShareUpdateManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * The data used to update shares.
+     * The data used to update Shares.
      */
-    data: XOR<shareUpdateManyMutationInput, shareUncheckedUpdateManyInput>;
+    data: XOR<ShareUpdateManyMutationInput, ShareUncheckedUpdateManyInput>;
     /**
-     * Filter which shares to update
+     * Filter which Shares to update
      */
-    where?: shareWhereInput;
+    where?: ShareWhereInput;
     /**
-     * Limit how many shares to update.
+     * Limit how many Shares to update.
      */
     limit?: number;
   };
 
   /**
-   * share updateManyAndReturn
+   * Share updateManyAndReturn
    */
-  export type shareUpdateManyAndReturnArgs<
+  export type ShareUpdateManyAndReturnArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the share
+     * Select specific fields to fetch from the Share
      */
-    select?: shareSelectUpdateManyAndReturn<ExtArgs> | null;
+    select?: ShareSelectUpdateManyAndReturn<ExtArgs> | null;
     /**
-     * Omit specific fields from the share
+     * Omit specific fields from the Share
      */
-    omit?: shareOmit<ExtArgs> | null;
+    omit?: ShareOmit<ExtArgs> | null;
     /**
-     * The data used to update shares.
+     * The data used to update Shares.
      */
-    data: XOR<shareUpdateManyMutationInput, shareUncheckedUpdateManyInput>;
+    data: XOR<ShareUpdateManyMutationInput, ShareUncheckedUpdateManyInput>;
     /**
-     * Filter which shares to update
+     * Filter which Shares to update
      */
-    where?: shareWhereInput;
+    where?: ShareWhereInput;
     /**
-     * Limit how many shares to update.
+     * Limit how many Shares to update.
      */
     limit?: number;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: shareIncludeUpdateManyAndReturn<ExtArgs> | null;
+    include?: ShareIncludeUpdateManyAndReturn<ExtArgs> | null;
   };
 
   /**
-   * share upsert
+   * Share upsert
    */
-  export type shareUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type ShareUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the share
+       * Select specific fields to fetch from the Share
        */
-      select?: shareSelect<ExtArgs> | null;
+      select?: ShareSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the share
+       * Omit specific fields from the Share
        */
-      omit?: shareOmit<ExtArgs> | null;
+      omit?: ShareOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: shareInclude<ExtArgs> | null;
+      include?: ShareInclude<ExtArgs> | null;
       /**
-       * The filter to search for the share to update in case it exists.
+       * The filter to search for the Share to update in case it exists.
        */
-      where: shareWhereUniqueInput;
+      where: ShareWhereUniqueInput;
       /**
-       * In case the share found by the `where` argument doesn't exist, create a new share with this data.
+       * In case the Share found by the `where` argument doesn't exist, create a new Share with this data.
        */
-      create: XOR<shareCreateInput, shareUncheckedCreateInput>;
+      create: XOR<ShareCreateInput, ShareUncheckedCreateInput>;
       /**
-       * In case the share was found with the provided `where` argument, update it with this data.
+       * In case the Share was found with the provided `where` argument, update it with this data.
        */
-      update: XOR<shareUpdateInput, shareUncheckedUpdateInput>;
+      update: XOR<ShareUpdateInput, ShareUncheckedUpdateInput>;
     };
 
   /**
-   * share delete
+   * Share delete
    */
-  export type shareDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type ShareDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the share
+       * Select specific fields to fetch from the Share
        */
-      select?: shareSelect<ExtArgs> | null;
+      select?: ShareSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the share
+       * Omit specific fields from the Share
        */
-      omit?: shareOmit<ExtArgs> | null;
+      omit?: ShareOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: shareInclude<ExtArgs> | null;
+      include?: ShareInclude<ExtArgs> | null;
       /**
-       * Filter which share to delete.
+       * Filter which Share to delete.
        */
-      where: shareWhereUniqueInput;
+      where: ShareWhereUniqueInput;
     };
 
   /**
-   * share deleteMany
+   * Share deleteMany
    */
-  export type shareDeleteManyArgs<
+  export type ShareDeleteManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Filter which shares to delete
+     * Filter which Shares to delete
      */
-    where?: shareWhereInput;
+    where?: ShareWhereInput;
     /**
-     * Limit how many shares to delete.
+     * Limit how many Shares to delete.
      */
     limit?: number;
   };
 
   /**
-   * share without action
+   * Share without action
    */
-  export type shareDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type ShareDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the share
+       * Select specific fields to fetch from the Share
        */
-      select?: shareSelect<ExtArgs> | null;
+      select?: ShareSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the share
+       * Omit specific fields from the Share
        */
-      omit?: shareOmit<ExtArgs> | null;
+      omit?: ShareOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: shareInclude<ExtArgs> | null;
+      include?: ShareInclude<ExtArgs> | null;
     };
 
   /**
-   * Model feed
+   * Model Feed
    */
 
   export type AggregateFeed = {
@@ -13676,37 +18536,37 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Filter which feed to aggregate.
+     * Filter which Feed to aggregate.
      */
-    where?: feedWhereInput;
+    where?: FeedWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of feeds to fetch.
+     * Determine the order of Feeds to fetch.
      */
-    orderBy?: feedOrderByWithRelationInput | feedOrderByWithRelationInput[];
+    orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
      * Sets the start position
      */
-    cursor?: feedWhereUniqueInput;
+    cursor?: FeedWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` feeds from the position of the cursor.
+     * Take `±n` Feeds from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` feeds.
+     * Skip the first `n` Feeds.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
-     * Count returned feeds
+     * Count returned Feeds
      **/
     _count?: true | FeedCountAggregateInputType;
     /**
@@ -13743,12 +18603,12 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateFeed[P]>;
   };
 
-  export type feedGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type FeedGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
-      where?: feedWhereInput;
-      orderBy?: feedOrderByWithAggregationInput | feedOrderByWithAggregationInput[];
+      where?: FeedWhereInput;
+      orderBy?: FeedOrderByWithAggregationInput | FeedOrderByWithAggregationInput[];
       by: FeedScalarFieldEnum[] | FeedScalarFieldEnum;
-      having?: feedScalarWhereWithAggregatesInput;
+      having?: FeedScalarWhereWithAggregatesInput;
       take?: number;
       skip?: number;
       _count?: FeedCountAggregateInputType | true;
@@ -13770,7 +18630,7 @@ export namespace Prisma {
     _max: FeedMaxAggregateOutputType | null;
   };
 
-  type GetFeedGroupByPayload<T extends feedGroupByArgs> = Prisma.PrismaPromise<
+  type GetFeedGroupByPayload<T extends FeedGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickEnumerable<FeedGroupByOutputType, T['by']> & {
         [P in keyof T & keyof FeedGroupByOutputType]: P extends '_count'
@@ -13782,7 +18642,7 @@ export namespace Prisma {
     >
   >;
 
-  export type feedSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type FeedSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetSelect<
       {
         id?: boolean;
@@ -13795,7 +18655,7 @@ export namespace Prisma {
       ExtArgs['result']['feed']
     >;
 
-  export type feedSelectCreateManyAndReturn<
+  export type FeedSelectCreateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
@@ -13809,7 +18669,7 @@ export namespace Prisma {
     ExtArgs['result']['feed']
   >;
 
-  export type feedSelectUpdateManyAndReturn<
+  export type FeedSelectUpdateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
@@ -13823,34 +18683,34 @@ export namespace Prisma {
     ExtArgs['result']['feed']
   >;
 
-  export type feedSelectScalar = {
+  export type FeedSelectScalar = {
     id?: boolean;
     postId?: boolean;
     userId?: boolean;
     createdAt?: boolean;
   };
 
-  export type feedOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type FeedOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetOmit<'id' | 'postId' | 'userId' | 'createdAt', ExtArgs['result']['feed']>;
-  export type feedInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FeedInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     post?: boolean | PostDefaultArgs<ExtArgs>;
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
-  export type feedIncludeCreateManyAndReturn<
+  export type FeedIncludeCreateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     post?: boolean | PostDefaultArgs<ExtArgs>;
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
-  export type feedIncludeUpdateManyAndReturn<
+  export type FeedIncludeUpdateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     post?: boolean | PostDefaultArgs<ExtArgs>;
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
 
-  export type $feedPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: 'feed';
+  export type $FeedPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: 'Feed';
     objects: {
       post: Prisma.$PostPayload<ExtArgs>;
       user: Prisma.$UserPayload<ExtArgs>;
@@ -13867,26 +18727,26 @@ export namespace Prisma {
     composites: {};
   };
 
-  type feedGetPayload<S extends boolean | null | undefined | feedDefaultArgs> = $Result.GetResult<
-    Prisma.$feedPayload,
+  type FeedGetPayload<S extends boolean | null | undefined | FeedDefaultArgs> = $Result.GetResult<
+    Prisma.$FeedPayload,
     S
   >;
 
-  type feedCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
-    feedFindManyArgs,
+  type FeedCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    FeedFindManyArgs,
     'select' | 'include' | 'distinct' | 'omit'
   > & {
     select?: FeedCountAggregateInputType | true;
   };
 
-  export interface feedDelegate<
+  export interface FeedDelegate<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['feed']; meta: { name: 'feed' } };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Feed']; meta: { name: 'Feed' } };
     /**
      * Find zero or one Feed that matches the filter.
-     * @param {feedFindUniqueArgs} args - Arguments to find a Feed
+     * @param {FeedFindUniqueArgs} args - Arguments to find a Feed
      * @example
      * // Get one Feed
      * const feed = await prisma.feed.findUnique({
@@ -13895,10 +18755,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends feedFindUniqueArgs>(
-      args: SelectSubset<T, feedFindUniqueArgs<ExtArgs>>
-    ): Prisma__feedClient<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
+    findUnique<T extends FeedFindUniqueArgs>(
+      args: SelectSubset<T, FeedFindUniqueArgs<ExtArgs>>
+    ): Prisma__FeedClient<
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -13907,7 +18767,7 @@ export namespace Prisma {
     /**
      * Find one Feed that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {feedFindUniqueOrThrowArgs} args - Arguments to find a Feed
+     * @param {FeedFindUniqueOrThrowArgs} args - Arguments to find a Feed
      * @example
      * // Get one Feed
      * const feed = await prisma.feed.findUniqueOrThrow({
@@ -13916,10 +18776,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends feedFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, feedFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__feedClient<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
+    findUniqueOrThrow<T extends FeedFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, FeedFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__FeedClient<
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -13929,7 +18789,7 @@ export namespace Prisma {
      * Find the first Feed that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {feedFindFirstArgs} args - Arguments to find a Feed
+     * @param {FeedFindFirstArgs} args - Arguments to find a Feed
      * @example
      * // Get one Feed
      * const feed = await prisma.feed.findFirst({
@@ -13938,10 +18798,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends feedFindFirstArgs>(
-      args?: SelectSubset<T, feedFindFirstArgs<ExtArgs>>
-    ): Prisma__feedClient<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
+    findFirst<T extends FeedFindFirstArgs>(
+      args?: SelectSubset<T, FeedFindFirstArgs<ExtArgs>>
+    ): Prisma__FeedClient<
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -13952,7 +18812,7 @@ export namespace Prisma {
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {feedFindFirstOrThrowArgs} args - Arguments to find a Feed
+     * @param {FeedFindFirstOrThrowArgs} args - Arguments to find a Feed
      * @example
      * // Get one Feed
      * const feed = await prisma.feed.findFirstOrThrow({
@@ -13961,10 +18821,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends feedFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, feedFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__feedClient<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
+    findFirstOrThrow<T extends FeedFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, FeedFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__FeedClient<
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -13974,7 +18834,7 @@ export namespace Prisma {
      * Find zero or more Feeds that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {feedFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {FeedFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Feeds
      * const feeds = await prisma.feed.findMany()
@@ -13986,15 +18846,15 @@ export namespace Prisma {
      * const feedWithIdOnly = await prisma.feed.findMany({ select: { id: true } })
      *
      */
-    findMany<T extends feedFindManyArgs>(
-      args?: SelectSubset<T, feedFindManyArgs<ExtArgs>>
+    findMany<T extends FeedFindManyArgs>(
+      args?: SelectSubset<T, FeedFindManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
     >;
 
     /**
      * Create a Feed.
-     * @param {feedCreateArgs} args - Arguments to create a Feed.
+     * @param {FeedCreateArgs} args - Arguments to create a Feed.
      * @example
      * // Create one Feed
      * const Feed = await prisma.feed.create({
@@ -14004,10 +18864,10 @@ export namespace Prisma {
      * })
      *
      */
-    create<T extends feedCreateArgs>(
-      args: SelectSubset<T, feedCreateArgs<ExtArgs>>
-    ): Prisma__feedClient<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+    create<T extends FeedCreateArgs>(
+      args: SelectSubset<T, FeedCreateArgs<ExtArgs>>
+    ): Prisma__FeedClient<
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -14015,7 +18875,7 @@ export namespace Prisma {
 
     /**
      * Create many Feeds.
-     * @param {feedCreateManyArgs} args - Arguments to create many Feeds.
+     * @param {FeedCreateManyArgs} args - Arguments to create many Feeds.
      * @example
      * // Create many Feeds
      * const feed = await prisma.feed.createMany({
@@ -14025,13 +18885,13 @@ export namespace Prisma {
      * })
      *
      */
-    createMany<T extends feedCreateManyArgs>(
-      args?: SelectSubset<T, feedCreateManyArgs<ExtArgs>>
+    createMany<T extends FeedCreateManyArgs>(
+      args?: SelectSubset<T, FeedCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Create many Feeds and returns the data saved in the database.
-     * @param {feedCreateManyAndReturnArgs} args - Arguments to create many Feeds.
+     * @param {FeedCreateManyAndReturnArgs} args - Arguments to create many Feeds.
      * @example
      * // Create many Feeds
      * const feed = await prisma.feed.createManyAndReturn({
@@ -14051,15 +18911,15 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      *
      */
-    createManyAndReturn<T extends feedCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, feedCreateManyAndReturnArgs<ExtArgs>>
+    createManyAndReturn<T extends FeedCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, FeedCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
     >;
 
     /**
      * Delete a Feed.
-     * @param {feedDeleteArgs} args - Arguments to delete one Feed.
+     * @param {FeedDeleteArgs} args - Arguments to delete one Feed.
      * @example
      * // Delete one Feed
      * const Feed = await prisma.feed.delete({
@@ -14069,10 +18929,10 @@ export namespace Prisma {
      * })
      *
      */
-    delete<T extends feedDeleteArgs>(
-      args: SelectSubset<T, feedDeleteArgs<ExtArgs>>
-    ): Prisma__feedClient<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+    delete<T extends FeedDeleteArgs>(
+      args: SelectSubset<T, FeedDeleteArgs<ExtArgs>>
+    ): Prisma__FeedClient<
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -14080,7 +18940,7 @@ export namespace Prisma {
 
     /**
      * Update one Feed.
-     * @param {feedUpdateArgs} args - Arguments to update one Feed.
+     * @param {FeedUpdateArgs} args - Arguments to update one Feed.
      * @example
      * // Update one Feed
      * const feed = await prisma.feed.update({
@@ -14093,10 +18953,10 @@ export namespace Prisma {
      * })
      *
      */
-    update<T extends feedUpdateArgs>(
-      args: SelectSubset<T, feedUpdateArgs<ExtArgs>>
-    ): Prisma__feedClient<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+    update<T extends FeedUpdateArgs>(
+      args: SelectSubset<T, FeedUpdateArgs<ExtArgs>>
+    ): Prisma__FeedClient<
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -14104,7 +18964,7 @@ export namespace Prisma {
 
     /**
      * Delete zero or more Feeds.
-     * @param {feedDeleteManyArgs} args - Arguments to filter Feeds to delete.
+     * @param {FeedDeleteManyArgs} args - Arguments to filter Feeds to delete.
      * @example
      * // Delete a few Feeds
      * const { count } = await prisma.feed.deleteMany({
@@ -14114,15 +18974,15 @@ export namespace Prisma {
      * })
      *
      */
-    deleteMany<T extends feedDeleteManyArgs>(
-      args?: SelectSubset<T, feedDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends FeedDeleteManyArgs>(
+      args?: SelectSubset<T, FeedDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Feeds.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {feedUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {FeedUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Feeds
      * const feed = await prisma.feed.updateMany({
@@ -14135,13 +18995,13 @@ export namespace Prisma {
      * })
      *
      */
-    updateMany<T extends feedUpdateManyArgs>(
-      args: SelectSubset<T, feedUpdateManyArgs<ExtArgs>>
+    updateMany<T extends FeedUpdateManyArgs>(
+      args: SelectSubset<T, FeedUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
      * Update zero or more Feeds and returns the data updated in the database.
-     * @param {feedUpdateManyAndReturnArgs} args - Arguments to update many Feeds.
+     * @param {FeedUpdateManyAndReturnArgs} args - Arguments to update many Feeds.
      * @example
      * // Update many Feeds
      * const feed = await prisma.feed.updateManyAndReturn({
@@ -14167,15 +19027,15 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      *
      */
-    updateManyAndReturn<T extends feedUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, feedUpdateManyAndReturnArgs<ExtArgs>>
+    updateManyAndReturn<T extends FeedUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, FeedUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
     >;
 
     /**
      * Create or update one Feed.
-     * @param {feedUpsertArgs} args - Arguments to update or create a Feed.
+     * @param {FeedUpsertArgs} args - Arguments to update or create a Feed.
      * @example
      * // Update or create a Feed
      * const feed = await prisma.feed.upsert({
@@ -14190,10 +19050,10 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends feedUpsertArgs>(
-      args: SelectSubset<T, feedUpsertArgs<ExtArgs>>
-    ): Prisma__feedClient<
-      $Result.GetResult<Prisma.$feedPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+    upsert<T extends FeedUpsertArgs>(
+      args: SelectSubset<T, FeedUpsertArgs<ExtArgs>>
+    ): Prisma__FeedClient<
+      $Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -14203,7 +19063,7 @@ export namespace Prisma {
      * Count the number of Feeds.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {feedCountArgs} args - Arguments to filter Feeds to count.
+     * @param {FeedCountArgs} args - Arguments to filter Feeds to count.
      * @example
      * // Count the number of Feeds
      * const count = await prisma.feed.count({
@@ -14212,8 +19072,8 @@ export namespace Prisma {
      *   }
      * })
      **/
-    count<T extends feedCountArgs>(
-      args?: Subset<T, feedCountArgs>
+    count<T extends FeedCountArgs>(
+      args?: Subset<T, FeedCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -14254,7 +19114,7 @@ export namespace Prisma {
      * Group by Feed.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {feedGroupByArgs} args - Group by arguments.
+     * @param {FeedGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -14269,11 +19129,11 @@ export namespace Prisma {
      *
      **/
     groupBy<
-      T extends feedGroupByArgs,
+      T extends FeedGroupByArgs,
       HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: feedGroupByArgs['orderBy'] }
-        : { orderBy?: feedGroupByArgs['orderBy'] },
+        ? { orderBy: FeedGroupByArgs['orderBy'] }
+        : { orderBy?: FeedGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -14318,21 +19178,21 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, feedGroupByArgs, OrderByArg> & InputErrors
+      args: SubsetIntersection<T, FeedGroupByArgs, OrderByArg> & InputErrors
     ): {} extends InputErrors ? GetFeedGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
-     * Fields of the feed model
+     * Fields of the Feed model
      */
-    readonly fields: feedFieldRefs;
+    readonly fields: FeedFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for feed.
+   * The delegate class that acts as a "Promise-like" for Feed.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__feedClient<
+  export interface Prisma__FeedClient<
     T,
     Null = never,
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
@@ -14385,444 +19245,3045 @@ export namespace Prisma {
   }
 
   /**
-   * Fields of the feed model
+   * Fields of the Feed model
    */
-  interface feedFieldRefs {
-    readonly id: FieldRef<'feed', 'Int'>;
-    readonly postId: FieldRef<'feed', 'Int'>;
-    readonly userId: FieldRef<'feed', 'Int'>;
-    readonly createdAt: FieldRef<'feed', 'DateTime'>;
+  interface FeedFieldRefs {
+    readonly id: FieldRef<'Feed', 'Int'>;
+    readonly postId: FieldRef<'Feed', 'Int'>;
+    readonly userId: FieldRef<'Feed', 'Int'>;
+    readonly createdAt: FieldRef<'Feed', 'DateTime'>;
   }
 
   // Custom InputTypes
   /**
-   * feed findUnique
+   * Feed findUnique
    */
-  export type feedFindUniqueArgs<
+  export type FeedFindUniqueArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelect<ExtArgs> | null;
+    select?: FeedSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedInclude<ExtArgs> | null;
+    include?: FeedInclude<ExtArgs> | null;
     /**
-     * Filter, which feed to fetch.
+     * Filter, which Feed to fetch.
      */
-    where: feedWhereUniqueInput;
+    where: FeedWhereUniqueInput;
   };
 
   /**
-   * feed findUniqueOrThrow
+   * Feed findUniqueOrThrow
    */
-  export type feedFindUniqueOrThrowArgs<
+  export type FeedFindUniqueOrThrowArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelect<ExtArgs> | null;
+    select?: FeedSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedInclude<ExtArgs> | null;
+    include?: FeedInclude<ExtArgs> | null;
     /**
-     * Filter, which feed to fetch.
+     * Filter, which Feed to fetch.
      */
-    where: feedWhereUniqueInput;
+    where: FeedWhereUniqueInput;
   };
 
   /**
-   * feed findFirst
+   * Feed findFirst
    */
-  export type feedFindFirstArgs<
+  export type FeedFindFirstArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelect<ExtArgs> | null;
+    select?: FeedSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedInclude<ExtArgs> | null;
+    include?: FeedInclude<ExtArgs> | null;
     /**
-     * Filter, which feed to fetch.
+     * Filter, which Feed to fetch.
      */
-    where?: feedWhereInput;
+    where?: FeedWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of feeds to fetch.
+     * Determine the order of Feeds to fetch.
      */
-    orderBy?: feedOrderByWithRelationInput | feedOrderByWithRelationInput[];
+    orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for searching for feeds.
+     * Sets the position for searching for Feeds.
      */
-    cursor?: feedWhereUniqueInput;
+    cursor?: FeedWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` feeds from the position of the cursor.
+     * Take `±n` Feeds from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` feeds.
+     * Skip the first `n` Feeds.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      *
-     * Filter by unique combinations of feeds.
+     * Filter by unique combinations of Feeds.
      */
     distinct?: FeedScalarFieldEnum | FeedScalarFieldEnum[];
   };
 
   /**
-   * feed findFirstOrThrow
+   * Feed findFirstOrThrow
    */
-  export type feedFindFirstOrThrowArgs<
+  export type FeedFindFirstOrThrowArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelect<ExtArgs> | null;
+    select?: FeedSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedInclude<ExtArgs> | null;
+    include?: FeedInclude<ExtArgs> | null;
     /**
-     * Filter, which feed to fetch.
+     * Filter, which Feed to fetch.
      */
-    where?: feedWhereInput;
+    where?: FeedWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of feeds to fetch.
+     * Determine the order of Feeds to fetch.
      */
-    orderBy?: feedOrderByWithRelationInput | feedOrderByWithRelationInput[];
+    orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for searching for feeds.
+     * Sets the position for searching for Feeds.
      */
-    cursor?: feedWhereUniqueInput;
+    cursor?: FeedWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` feeds from the position of the cursor.
+     * Take `±n` Feeds from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` feeds.
+     * Skip the first `n` Feeds.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      *
-     * Filter by unique combinations of feeds.
+     * Filter by unique combinations of Feeds.
      */
     distinct?: FeedScalarFieldEnum | FeedScalarFieldEnum[];
   };
 
   /**
-   * feed findMany
+   * Feed findMany
    */
-  export type feedFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type FeedFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the feed
+       * Select specific fields to fetch from the Feed
        */
-      select?: feedSelect<ExtArgs> | null;
+      select?: FeedSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the feed
+       * Omit specific fields from the Feed
        */
-      omit?: feedOmit<ExtArgs> | null;
+      omit?: FeedOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: feedInclude<ExtArgs> | null;
+      include?: FeedInclude<ExtArgs> | null;
       /**
-       * Filter, which feeds to fetch.
+       * Filter, which Feeds to fetch.
        */
-      where?: feedWhereInput;
+      where?: FeedWhereInput;
       /**
        * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
        *
-       * Determine the order of feeds to fetch.
+       * Determine the order of Feeds to fetch.
        */
-      orderBy?: feedOrderByWithRelationInput | feedOrderByWithRelationInput[];
+      orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[];
       /**
        * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
        *
-       * Sets the position for listing feeds.
+       * Sets the position for listing Feeds.
        */
-      cursor?: feedWhereUniqueInput;
+      cursor?: FeedWhereUniqueInput;
       /**
        * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
        *
-       * Take `±n` feeds from the position of the cursor.
+       * Take `±n` Feeds from the position of the cursor.
        */
       take?: number;
       /**
        * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
        *
-       * Skip the first `n` feeds.
+       * Skip the first `n` Feeds.
        */
       skip?: number;
       distinct?: FeedScalarFieldEnum | FeedScalarFieldEnum[];
     };
 
   /**
-   * feed create
+   * Feed create
    */
-  export type feedCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FeedCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelect<ExtArgs> | null;
+    select?: FeedSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedInclude<ExtArgs> | null;
+    include?: FeedInclude<ExtArgs> | null;
     /**
-     * The data needed to create a feed.
+     * The data needed to create a Feed.
      */
-    data: XOR<feedCreateInput, feedUncheckedCreateInput>;
+    data: XOR<FeedCreateInput, FeedUncheckedCreateInput>;
   };
 
   /**
-   * feed createMany
+   * Feed createMany
    */
-  export type feedCreateManyArgs<
+  export type FeedCreateManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * The data used to create many feeds.
+     * The data used to create many Feeds.
      */
-    data: feedCreateManyInput | feedCreateManyInput[];
+    data: FeedCreateManyInput | FeedCreateManyInput[];
     skipDuplicates?: boolean;
   };
 
   /**
-   * feed createManyAndReturn
+   * Feed createManyAndReturn
    */
-  export type feedCreateManyAndReturnArgs<
+  export type FeedCreateManyAndReturnArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelectCreateManyAndReturn<ExtArgs> | null;
+    select?: FeedSelectCreateManyAndReturn<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
-     * The data used to create many feeds.
+     * The data used to create many Feeds.
      */
-    data: feedCreateManyInput | feedCreateManyInput[];
+    data: FeedCreateManyInput | FeedCreateManyInput[];
     skipDuplicates?: boolean;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedIncludeCreateManyAndReturn<ExtArgs> | null;
+    include?: FeedIncludeCreateManyAndReturn<ExtArgs> | null;
   };
 
   /**
-   * feed update
+   * Feed update
    */
-  export type feedUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FeedUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelect<ExtArgs> | null;
+    select?: FeedSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedInclude<ExtArgs> | null;
+    include?: FeedInclude<ExtArgs> | null;
     /**
-     * The data needed to update a feed.
+     * The data needed to update a Feed.
      */
-    data: XOR<feedUpdateInput, feedUncheckedUpdateInput>;
+    data: XOR<FeedUpdateInput, FeedUncheckedUpdateInput>;
     /**
-     * Choose, which feed to update.
+     * Choose, which Feed to update.
      */
-    where: feedWhereUniqueInput;
+    where: FeedWhereUniqueInput;
   };
 
   /**
-   * feed updateMany
+   * Feed updateMany
    */
-  export type feedUpdateManyArgs<
+  export type FeedUpdateManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * The data used to update feeds.
+     * The data used to update Feeds.
      */
-    data: XOR<feedUpdateManyMutationInput, feedUncheckedUpdateManyInput>;
+    data: XOR<FeedUpdateManyMutationInput, FeedUncheckedUpdateManyInput>;
     /**
-     * Filter which feeds to update
+     * Filter which Feeds to update
      */
-    where?: feedWhereInput;
+    where?: FeedWhereInput;
     /**
-     * Limit how many feeds to update.
+     * Limit how many Feeds to update.
      */
     limit?: number;
   };
 
   /**
-   * feed updateManyAndReturn
+   * Feed updateManyAndReturn
    */
-  export type feedUpdateManyAndReturnArgs<
+  export type FeedUpdateManyAndReturnArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelectUpdateManyAndReturn<ExtArgs> | null;
+    select?: FeedSelectUpdateManyAndReturn<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
-     * The data used to update feeds.
+     * The data used to update Feeds.
      */
-    data: XOR<feedUpdateManyMutationInput, feedUncheckedUpdateManyInput>;
+    data: XOR<FeedUpdateManyMutationInput, FeedUncheckedUpdateManyInput>;
     /**
-     * Filter which feeds to update
+     * Filter which Feeds to update
      */
-    where?: feedWhereInput;
+    where?: FeedWhereInput;
     /**
-     * Limit how many feeds to update.
+     * Limit how many Feeds to update.
      */
     limit?: number;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedIncludeUpdateManyAndReturn<ExtArgs> | null;
+    include?: FeedIncludeUpdateManyAndReturn<ExtArgs> | null;
   };
 
   /**
-   * feed upsert
+   * Feed upsert
    */
-  export type feedUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FeedUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelect<ExtArgs> | null;
+    select?: FeedSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedInclude<ExtArgs> | null;
+    include?: FeedInclude<ExtArgs> | null;
     /**
-     * The filter to search for the feed to update in case it exists.
+     * The filter to search for the Feed to update in case it exists.
      */
-    where: feedWhereUniqueInput;
+    where: FeedWhereUniqueInput;
     /**
-     * In case the feed found by the `where` argument doesn't exist, create a new feed with this data.
+     * In case the Feed found by the `where` argument doesn't exist, create a new Feed with this data.
      */
-    create: XOR<feedCreateInput, feedUncheckedCreateInput>;
+    create: XOR<FeedCreateInput, FeedUncheckedCreateInput>;
     /**
-     * In case the feed was found with the provided `where` argument, update it with this data.
+     * In case the Feed was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<feedUpdateInput, feedUncheckedUpdateInput>;
+    update: XOR<FeedUpdateInput, FeedUncheckedUpdateInput>;
   };
 
   /**
-   * feed delete
+   * Feed delete
    */
-  export type feedDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FeedDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the feed
+     * Select specific fields to fetch from the Feed
      */
-    select?: feedSelect<ExtArgs> | null;
+    select?: FeedSelect<ExtArgs> | null;
     /**
-     * Omit specific fields from the feed
+     * Omit specific fields from the Feed
      */
-    omit?: feedOmit<ExtArgs> | null;
+    omit?: FeedOmit<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: feedInclude<ExtArgs> | null;
+    include?: FeedInclude<ExtArgs> | null;
     /**
-     * Filter which feed to delete.
+     * Filter which Feed to delete.
      */
-    where: feedWhereUniqueInput;
+    where: FeedWhereUniqueInput;
   };
 
   /**
-   * feed deleteMany
+   * Feed deleteMany
    */
-  export type feedDeleteManyArgs<
+  export type FeedDeleteManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Filter which feeds to delete
+     * Filter which Feeds to delete
      */
-    where?: feedWhereInput;
+    where?: FeedWhereInput;
     /**
-     * Limit how many feeds to delete.
+     * Limit how many Feeds to delete.
      */
     limit?: number;
   };
 
   /**
-   * feed without action
+   * Feed without action
    */
-  export type feedDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type FeedDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     {
       /**
-       * Select specific fields to fetch from the feed
+       * Select specific fields to fetch from the Feed
        */
-      select?: feedSelect<ExtArgs> | null;
+      select?: FeedSelect<ExtArgs> | null;
       /**
-       * Omit specific fields from the feed
+       * Omit specific fields from the Feed
        */
-      omit?: feedOmit<ExtArgs> | null;
+      omit?: FeedOmit<ExtArgs> | null;
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: feedInclude<ExtArgs> | null;
+      include?: FeedInclude<ExtArgs> | null;
     };
+
+  /**
+   * Model FeedTrack
+   */
+
+  export type AggregateFeedTrack = {
+    _count: FeedTrackCountAggregateOutputType | null;
+    _avg: FeedTrackAvgAggregateOutputType | null;
+    _sum: FeedTrackSumAggregateOutputType | null;
+    _min: FeedTrackMinAggregateOutputType | null;
+    _max: FeedTrackMaxAggregateOutputType | null;
+  };
+
+  export type FeedTrackAvgAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+  };
+
+  export type FeedTrackSumAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+  };
+
+  export type FeedTrackMinAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    lastSeen: Date | null;
+  };
+
+  export type FeedTrackMaxAggregateOutputType = {
+    id: number | null;
+    userId: number | null;
+    lastSeen: Date | null;
+  };
+
+  export type FeedTrackCountAggregateOutputType = {
+    id: number;
+    userId: number;
+    lastSeen: number;
+    _all: number;
+  };
+
+  export type FeedTrackAvgAggregateInputType = {
+    id?: true;
+    userId?: true;
+  };
+
+  export type FeedTrackSumAggregateInputType = {
+    id?: true;
+    userId?: true;
+  };
+
+  export type FeedTrackMinAggregateInputType = {
+    id?: true;
+    userId?: true;
+    lastSeen?: true;
+  };
+
+  export type FeedTrackMaxAggregateInputType = {
+    id?: true;
+    userId?: true;
+    lastSeen?: true;
+  };
+
+  export type FeedTrackCountAggregateInputType = {
+    id?: true;
+    userId?: true;
+    lastSeen?: true;
+    _all?: true;
+  };
+
+  export type FeedTrackAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which FeedTrack to aggregate.
+     */
+    where?: FeedTrackWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of FeedTracks to fetch.
+     */
+    orderBy?: FeedTrackOrderByWithRelationInput | FeedTrackOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: FeedTrackWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` FeedTracks from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` FeedTracks.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned FeedTracks
+     **/
+    _count?: true | FeedTrackCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+     **/
+    _avg?: FeedTrackAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: FeedTrackSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: FeedTrackMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: FeedTrackMaxAggregateInputType;
+  };
+
+  export type GetFeedTrackAggregateType<T extends FeedTrackAggregateArgs> = {
+    [P in keyof T & keyof AggregateFeedTrack]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFeedTrack[P]>
+      : GetScalarType<T[P], AggregateFeedTrack[P]>;
+  };
+
+  export type FeedTrackGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: FeedTrackWhereInput;
+    orderBy?: FeedTrackOrderByWithAggregationInput | FeedTrackOrderByWithAggregationInput[];
+    by: FeedTrackScalarFieldEnum[] | FeedTrackScalarFieldEnum;
+    having?: FeedTrackScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: FeedTrackCountAggregateInputType | true;
+    _avg?: FeedTrackAvgAggregateInputType;
+    _sum?: FeedTrackSumAggregateInputType;
+    _min?: FeedTrackMinAggregateInputType;
+    _max?: FeedTrackMaxAggregateInputType;
+  };
+
+  export type FeedTrackGroupByOutputType = {
+    id: number;
+    userId: number;
+    lastSeen: Date;
+    _count: FeedTrackCountAggregateOutputType | null;
+    _avg: FeedTrackAvgAggregateOutputType | null;
+    _sum: FeedTrackSumAggregateOutputType | null;
+    _min: FeedTrackMinAggregateOutputType | null;
+    _max: FeedTrackMaxAggregateOutputType | null;
+  };
+
+  type GetFeedTrackGroupByPayload<T extends FeedTrackGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FeedTrackGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof FeedTrackGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], FeedTrackGroupByOutputType[P]>
+          : GetScalarType<T[P], FeedTrackGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type FeedTrackSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        lastSeen?: boolean;
+        user?: boolean | UserDefaultArgs<ExtArgs>;
+      },
+      ExtArgs['result']['feedTrack']
+    >;
+
+  export type FeedTrackSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      lastSeen?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['feedTrack']
+  >;
+
+  export type FeedTrackSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      lastSeen?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['feedTrack']
+  >;
+
+  export type FeedTrackSelectScalar = {
+    id?: boolean;
+    userId?: boolean;
+    lastSeen?: boolean;
+  };
+
+  export type FeedTrackOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<'id' | 'userId' | 'lastSeen', ExtArgs['result']['feedTrack']>;
+  export type FeedTrackInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+    };
+  export type FeedTrackIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+  };
+  export type FeedTrackIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+  };
+
+  export type $FeedTrackPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'FeedTrack';
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: number;
+        userId: number;
+        lastSeen: Date;
+      },
+      ExtArgs['result']['feedTrack']
+    >;
+    composites: {};
+  };
+
+  type FeedTrackGetPayload<S extends boolean | null | undefined | FeedTrackDefaultArgs> =
+    $Result.GetResult<Prisma.$FeedTrackPayload, S>;
+
+  type FeedTrackCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FeedTrackFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FeedTrackCountAggregateInputType | true;
+    };
+
+  export interface FeedTrackDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['FeedTrack'];
+      meta: { name: 'FeedTrack' };
+    };
+    /**
+     * Find zero or one FeedTrack that matches the filter.
+     * @param {FeedTrackFindUniqueArgs} args - Arguments to find a FeedTrack
+     * @example
+     * // Get one FeedTrack
+     * const feedTrack = await prisma.feedTrack.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FeedTrackFindUniqueArgs>(
+      args: SelectSubset<T, FeedTrackFindUniqueArgs<ExtArgs>>
+    ): Prisma__FeedTrackClient<
+      $Result.GetResult<
+        Prisma.$FeedTrackPayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find one FeedTrack that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FeedTrackFindUniqueOrThrowArgs} args - Arguments to find a FeedTrack
+     * @example
+     * // Get one FeedTrack
+     * const feedTrack = await prisma.feedTrack.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FeedTrackFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, FeedTrackFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__FeedTrackClient<
+      $Result.GetResult<
+        Prisma.$FeedTrackPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first FeedTrack that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeedTrackFindFirstArgs} args - Arguments to find a FeedTrack
+     * @example
+     * // Get one FeedTrack
+     * const feedTrack = await prisma.feedTrack.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FeedTrackFindFirstArgs>(
+      args?: SelectSubset<T, FeedTrackFindFirstArgs<ExtArgs>>
+    ): Prisma__FeedTrackClient<
+      $Result.GetResult<
+        Prisma.$FeedTrackPayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first FeedTrack that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeedTrackFindFirstOrThrowArgs} args - Arguments to find a FeedTrack
+     * @example
+     * // Get one FeedTrack
+     * const feedTrack = await prisma.feedTrack.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FeedTrackFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, FeedTrackFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__FeedTrackClient<
+      $Result.GetResult<
+        Prisma.$FeedTrackPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find zero or more FeedTracks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeedTrackFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FeedTracks
+     * const feedTracks = await prisma.feedTrack.findMany()
+     *
+     * // Get first 10 FeedTracks
+     * const feedTracks = await prisma.feedTrack.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const feedTrackWithIdOnly = await prisma.feedTrack.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends FeedTrackFindManyArgs>(
+      args?: SelectSubset<T, FeedTrackFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$FeedTrackPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+    >;
+
+    /**
+     * Create a FeedTrack.
+     * @param {FeedTrackCreateArgs} args - Arguments to create a FeedTrack.
+     * @example
+     * // Create one FeedTrack
+     * const FeedTrack = await prisma.feedTrack.create({
+     *   data: {
+     *     // ... data to create a FeedTrack
+     *   }
+     * })
+     *
+     */
+    create<T extends FeedTrackCreateArgs>(
+      args: SelectSubset<T, FeedTrackCreateArgs<ExtArgs>>
+    ): Prisma__FeedTrackClient<
+      $Result.GetResult<Prisma.$FeedTrackPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Create many FeedTracks.
+     * @param {FeedTrackCreateManyArgs} args - Arguments to create many FeedTracks.
+     * @example
+     * // Create many FeedTracks
+     * const feedTrack = await prisma.feedTrack.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends FeedTrackCreateManyArgs>(
+      args?: SelectSubset<T, FeedTrackCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Create many FeedTracks and returns the data saved in the database.
+     * @param {FeedTrackCreateManyAndReturnArgs} args - Arguments to create many FeedTracks.
+     * @example
+     * // Create many FeedTracks
+     * const feedTrack = await prisma.feedTrack.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many FeedTracks and only return the `id`
+     * const feedTrackWithIdOnly = await prisma.feedTrack.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends FeedTrackCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, FeedTrackCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$FeedTrackPayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Delete a FeedTrack.
+     * @param {FeedTrackDeleteArgs} args - Arguments to delete one FeedTrack.
+     * @example
+     * // Delete one FeedTrack
+     * const FeedTrack = await prisma.feedTrack.delete({
+     *   where: {
+     *     // ... filter to delete one FeedTrack
+     *   }
+     * })
+     *
+     */
+    delete<T extends FeedTrackDeleteArgs>(
+      args: SelectSubset<T, FeedTrackDeleteArgs<ExtArgs>>
+    ): Prisma__FeedTrackClient<
+      $Result.GetResult<Prisma.$FeedTrackPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Update one FeedTrack.
+     * @param {FeedTrackUpdateArgs} args - Arguments to update one FeedTrack.
+     * @example
+     * // Update one FeedTrack
+     * const feedTrack = await prisma.feedTrack.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends FeedTrackUpdateArgs>(
+      args: SelectSubset<T, FeedTrackUpdateArgs<ExtArgs>>
+    ): Prisma__FeedTrackClient<
+      $Result.GetResult<Prisma.$FeedTrackPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Delete zero or more FeedTracks.
+     * @param {FeedTrackDeleteManyArgs} args - Arguments to filter FeedTracks to delete.
+     * @example
+     * // Delete a few FeedTracks
+     * const { count } = await prisma.feedTrack.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends FeedTrackDeleteManyArgs>(
+      args?: SelectSubset<T, FeedTrackDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more FeedTracks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeedTrackUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FeedTracks
+     * const feedTrack = await prisma.feedTrack.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends FeedTrackUpdateManyArgs>(
+      args: SelectSubset<T, FeedTrackUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more FeedTracks and returns the data updated in the database.
+     * @param {FeedTrackUpdateManyAndReturnArgs} args - Arguments to update many FeedTracks.
+     * @example
+     * // Update many FeedTracks
+     * const feedTrack = await prisma.feedTrack.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more FeedTracks and only return the `id`
+     * const feedTrackWithIdOnly = await prisma.feedTrack.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends FeedTrackUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, FeedTrackUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$FeedTrackPayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Create or update one FeedTrack.
+     * @param {FeedTrackUpsertArgs} args - Arguments to update or create a FeedTrack.
+     * @example
+     * // Update or create a FeedTrack
+     * const feedTrack = await prisma.feedTrack.upsert({
+     *   create: {
+     *     // ... data to create a FeedTrack
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FeedTrack we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FeedTrackUpsertArgs>(
+      args: SelectSubset<T, FeedTrackUpsertArgs<ExtArgs>>
+    ): Prisma__FeedTrackClient<
+      $Result.GetResult<Prisma.$FeedTrackPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Count the number of FeedTracks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeedTrackCountArgs} args - Arguments to filter FeedTracks to count.
+     * @example
+     * // Count the number of FeedTracks
+     * const count = await prisma.feedTrack.count({
+     *   where: {
+     *     // ... the filter for the FeedTracks we want to count
+     *   }
+     * })
+     **/
+    count<T extends FeedTrackCountArgs>(
+      args?: Subset<T, FeedTrackCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FeedTrackCountAggregateOutputType>
+        : number
+    >;
+
+    /**
+     * Allows you to perform aggregations operations on a FeedTrack.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeedTrackAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends FeedTrackAggregateArgs>(
+      args: Subset<T, FeedTrackAggregateArgs>
+    ): Prisma.PrismaPromise<GetFeedTrackAggregateType<T>>;
+
+    /**
+     * Group by FeedTrack.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeedTrackGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends FeedTrackGroupByArgs,
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FeedTrackGroupByArgs['orderBy'] }
+        : { orderBy?: FeedTrackGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, FeedTrackGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetFeedTrackGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the FeedTrack model
+     */
+    readonly fields: FeedTrackFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FeedTrack.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FeedTrackClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      | $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+  /**
+   * Fields of the FeedTrack model
+   */
+  interface FeedTrackFieldRefs {
+    readonly id: FieldRef<'FeedTrack', 'Int'>;
+    readonly userId: FieldRef<'FeedTrack', 'Int'>;
+    readonly lastSeen: FieldRef<'FeedTrack', 'DateTime'>;
+  }
+
+  // Custom InputTypes
+  /**
+   * FeedTrack findUnique
+   */
+  export type FeedTrackFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+    /**
+     * Filter, which FeedTrack to fetch.
+     */
+    where: FeedTrackWhereUniqueInput;
+  };
+
+  /**
+   * FeedTrack findUniqueOrThrow
+   */
+  export type FeedTrackFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+    /**
+     * Filter, which FeedTrack to fetch.
+     */
+    where: FeedTrackWhereUniqueInput;
+  };
+
+  /**
+   * FeedTrack findFirst
+   */
+  export type FeedTrackFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+    /**
+     * Filter, which FeedTrack to fetch.
+     */
+    where?: FeedTrackWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of FeedTracks to fetch.
+     */
+    orderBy?: FeedTrackOrderByWithRelationInput | FeedTrackOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for FeedTracks.
+     */
+    cursor?: FeedTrackWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` FeedTracks from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` FeedTracks.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of FeedTracks.
+     */
+    distinct?: FeedTrackScalarFieldEnum | FeedTrackScalarFieldEnum[];
+  };
+
+  /**
+   * FeedTrack findFirstOrThrow
+   */
+  export type FeedTrackFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+    /**
+     * Filter, which FeedTrack to fetch.
+     */
+    where?: FeedTrackWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of FeedTracks to fetch.
+     */
+    orderBy?: FeedTrackOrderByWithRelationInput | FeedTrackOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for FeedTracks.
+     */
+    cursor?: FeedTrackWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` FeedTracks from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` FeedTracks.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of FeedTracks.
+     */
+    distinct?: FeedTrackScalarFieldEnum | FeedTrackScalarFieldEnum[];
+  };
+
+  /**
+   * FeedTrack findMany
+   */
+  export type FeedTrackFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+    /**
+     * Filter, which FeedTracks to fetch.
+     */
+    where?: FeedTrackWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of FeedTracks to fetch.
+     */
+    orderBy?: FeedTrackOrderByWithRelationInput | FeedTrackOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing FeedTracks.
+     */
+    cursor?: FeedTrackWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` FeedTracks from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` FeedTracks.
+     */
+    skip?: number;
+    distinct?: FeedTrackScalarFieldEnum | FeedTrackScalarFieldEnum[];
+  };
+
+  /**
+   * FeedTrack create
+   */
+  export type FeedTrackCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a FeedTrack.
+     */
+    data: XOR<FeedTrackCreateInput, FeedTrackUncheckedCreateInput>;
+  };
+
+  /**
+   * FeedTrack createMany
+   */
+  export type FeedTrackCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to create many FeedTracks.
+     */
+    data: FeedTrackCreateManyInput | FeedTrackCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
+
+  /**
+   * FeedTrack createManyAndReturn
+   */
+  export type FeedTrackCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * The data used to create many FeedTracks.
+     */
+    data: FeedTrackCreateManyInput | FeedTrackCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * FeedTrack update
+   */
+  export type FeedTrackUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a FeedTrack.
+     */
+    data: XOR<FeedTrackUpdateInput, FeedTrackUncheckedUpdateInput>;
+    /**
+     * Choose, which FeedTrack to update.
+     */
+    where: FeedTrackWhereUniqueInput;
+  };
+
+  /**
+   * FeedTrack updateMany
+   */
+  export type FeedTrackUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to update FeedTracks.
+     */
+    data: XOR<FeedTrackUpdateManyMutationInput, FeedTrackUncheckedUpdateManyInput>;
+    /**
+     * Filter which FeedTracks to update
+     */
+    where?: FeedTrackWhereInput;
+    /**
+     * Limit how many FeedTracks to update.
+     */
+    limit?: number;
+  };
+
+  /**
+   * FeedTrack updateManyAndReturn
+   */
+  export type FeedTrackUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * The data used to update FeedTracks.
+     */
+    data: XOR<FeedTrackUpdateManyMutationInput, FeedTrackUncheckedUpdateManyInput>;
+    /**
+     * Filter which FeedTracks to update
+     */
+    where?: FeedTrackWhereInput;
+    /**
+     * Limit how many FeedTracks to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * FeedTrack upsert
+   */
+  export type FeedTrackUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the FeedTrack to update in case it exists.
+     */
+    where: FeedTrackWhereUniqueInput;
+    /**
+     * In case the FeedTrack found by the `where` argument doesn't exist, create a new FeedTrack with this data.
+     */
+    create: XOR<FeedTrackCreateInput, FeedTrackUncheckedCreateInput>;
+    /**
+     * In case the FeedTrack was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FeedTrackUpdateInput, FeedTrackUncheckedUpdateInput>;
+  };
+
+  /**
+   * FeedTrack delete
+   */
+  export type FeedTrackDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+    /**
+     * Filter which FeedTrack to delete.
+     */
+    where: FeedTrackWhereUniqueInput;
+  };
+
+  /**
+   * FeedTrack deleteMany
+   */
+  export type FeedTrackDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which FeedTracks to delete
+     */
+    where?: FeedTrackWhereInput;
+    /**
+     * Limit how many FeedTracks to delete.
+     */
+    limit?: number;
+  };
+
+  /**
+   * FeedTrack without action
+   */
+  export type FeedTrackDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the FeedTrack
+     */
+    select?: FeedTrackSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FeedTrack
+     */
+    omit?: FeedTrackOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeedTrackInclude<ExtArgs> | null;
+  };
+
+  /**
+   * Model Notification
+   */
+
+  export type AggregateNotification = {
+    _count: NotificationCountAggregateOutputType | null;
+    _avg: NotificationAvgAggregateOutputType | null;
+    _sum: NotificationSumAggregateOutputType | null;
+    _min: NotificationMinAggregateOutputType | null;
+    _max: NotificationMaxAggregateOutputType | null;
+  };
+
+  export type NotificationAvgAggregateOutputType = {
+    id: number | null;
+    recipientId: number | null;
+    senderId: number | null;
+  };
+
+  export type NotificationSumAggregateOutputType = {
+    id: number | null;
+    recipientId: number | null;
+    senderId: number | null;
+  };
+
+  export type NotificationMinAggregateOutputType = {
+    id: number | null;
+    recipientId: number | null;
+    senderId: number | null;
+    type: $Enums.NotificationType | null;
+    message: string | null;
+    link: string | null;
+    read: boolean | null;
+    createdAt: Date | null;
+  };
+
+  export type NotificationMaxAggregateOutputType = {
+    id: number | null;
+    recipientId: number | null;
+    senderId: number | null;
+    type: $Enums.NotificationType | null;
+    message: string | null;
+    link: string | null;
+    read: boolean | null;
+    createdAt: Date | null;
+  };
+
+  export type NotificationCountAggregateOutputType = {
+    id: number;
+    recipientId: number;
+    senderId: number;
+    type: number;
+    message: number;
+    link: number;
+    read: number;
+    createdAt: number;
+    _all: number;
+  };
+
+  export type NotificationAvgAggregateInputType = {
+    id?: true;
+    recipientId?: true;
+    senderId?: true;
+  };
+
+  export type NotificationSumAggregateInputType = {
+    id?: true;
+    recipientId?: true;
+    senderId?: true;
+  };
+
+  export type NotificationMinAggregateInputType = {
+    id?: true;
+    recipientId?: true;
+    senderId?: true;
+    type?: true;
+    message?: true;
+    link?: true;
+    read?: true;
+    createdAt?: true;
+  };
+
+  export type NotificationMaxAggregateInputType = {
+    id?: true;
+    recipientId?: true;
+    senderId?: true;
+    type?: true;
+    message?: true;
+    link?: true;
+    read?: true;
+    createdAt?: true;
+  };
+
+  export type NotificationCountAggregateInputType = {
+    id?: true;
+    recipientId?: true;
+    senderId?: true;
+    type?: true;
+    message?: true;
+    link?: true;
+    read?: true;
+    createdAt?: true;
+    _all?: true;
+  };
+
+  export type NotificationAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which Notification to aggregate.
+     */
+    where?: NotificationWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: NotificationWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Notifications.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned Notifications
+     **/
+    _count?: true | NotificationCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+     **/
+    _avg?: NotificationAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: NotificationSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: NotificationMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: NotificationMaxAggregateInputType;
+  };
+
+  export type GetNotificationAggregateType<T extends NotificationAggregateArgs> = {
+    [P in keyof T & keyof AggregateNotification]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNotification[P]>
+      : GetScalarType<T[P], AggregateNotification[P]>;
+  };
+
+  export type NotificationGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: NotificationWhereInput;
+    orderBy?: NotificationOrderByWithAggregationInput | NotificationOrderByWithAggregationInput[];
+    by: NotificationScalarFieldEnum[] | NotificationScalarFieldEnum;
+    having?: NotificationScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: NotificationCountAggregateInputType | true;
+    _avg?: NotificationAvgAggregateInputType;
+    _sum?: NotificationSumAggregateInputType;
+    _min?: NotificationMinAggregateInputType;
+    _max?: NotificationMaxAggregateInputType;
+  };
+
+  export type NotificationGroupByOutputType = {
+    id: number;
+    recipientId: number;
+    senderId: number | null;
+    type: $Enums.NotificationType;
+    message: string;
+    link: string | null;
+    read: boolean;
+    createdAt: Date;
+    _count: NotificationCountAggregateOutputType | null;
+    _avg: NotificationAvgAggregateOutputType | null;
+    _sum: NotificationSumAggregateOutputType | null;
+    _min: NotificationMinAggregateOutputType | null;
+    _max: NotificationMaxAggregateOutputType | null;
+  };
+
+  type GetNotificationGroupByPayload<T extends NotificationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NotificationGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof NotificationGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], NotificationGroupByOutputType[P]>
+          : GetScalarType<T[P], NotificationGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type NotificationSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      recipientId?: boolean;
+      senderId?: boolean;
+      type?: boolean;
+      message?: boolean;
+      link?: boolean;
+      read?: boolean;
+      createdAt?: boolean;
+      recipient?: boolean | UserDefaultArgs<ExtArgs>;
+      sender?: boolean | Notification$senderArgs<ExtArgs>;
+    },
+    ExtArgs['result']['notification']
+  >;
+
+  export type NotificationSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      recipientId?: boolean;
+      senderId?: boolean;
+      type?: boolean;
+      message?: boolean;
+      link?: boolean;
+      read?: boolean;
+      createdAt?: boolean;
+      recipient?: boolean | UserDefaultArgs<ExtArgs>;
+      sender?: boolean | Notification$senderArgs<ExtArgs>;
+    },
+    ExtArgs['result']['notification']
+  >;
+
+  export type NotificationSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      recipientId?: boolean;
+      senderId?: boolean;
+      type?: boolean;
+      message?: boolean;
+      link?: boolean;
+      read?: boolean;
+      createdAt?: boolean;
+      recipient?: boolean | UserDefaultArgs<ExtArgs>;
+      sender?: boolean | Notification$senderArgs<ExtArgs>;
+    },
+    ExtArgs['result']['notification']
+  >;
+
+  export type NotificationSelectScalar = {
+    id?: boolean;
+    recipientId?: boolean;
+    senderId?: boolean;
+    type?: boolean;
+    message?: boolean;
+    link?: boolean;
+    read?: boolean;
+    createdAt?: boolean;
+  };
+
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<
+      'id' | 'recipientId' | 'senderId' | 'type' | 'message' | 'link' | 'read' | 'createdAt',
+      ExtArgs['result']['notification']
+    >;
+  export type NotificationInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    recipient?: boolean | UserDefaultArgs<ExtArgs>;
+    sender?: boolean | Notification$senderArgs<ExtArgs>;
+  };
+  export type NotificationIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    recipient?: boolean | UserDefaultArgs<ExtArgs>;
+    sender?: boolean | Notification$senderArgs<ExtArgs>;
+  };
+  export type NotificationIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    recipient?: boolean | UserDefaultArgs<ExtArgs>;
+    sender?: boolean | Notification$senderArgs<ExtArgs>;
+  };
+
+  export type $NotificationPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'Notification';
+    objects: {
+      recipient: Prisma.$UserPayload<ExtArgs>;
+      sender: Prisma.$UserPayload<ExtArgs> | null;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: number;
+        recipientId: number;
+        senderId: number | null;
+        type: $Enums.NotificationType;
+        message: string;
+        link: string | null;
+        read: boolean;
+        createdAt: Date;
+      },
+      ExtArgs['result']['notification']
+    >;
+    composites: {};
+  };
+
+  type NotificationGetPayload<S extends boolean | null | undefined | NotificationDefaultArgs> =
+    $Result.GetResult<Prisma.$NotificationPayload, S>;
+
+  type NotificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NotificationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NotificationCountAggregateInputType | true;
+    };
+
+  export interface NotificationDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['Notification'];
+      meta: { name: 'Notification' };
+    };
+    /**
+     * Find zero or one Notification that matches the filter.
+     * @param {NotificationFindUniqueArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NotificationFindUniqueArgs>(
+      args: SelectSubset<T, NotificationFindUniqueArgs<ExtArgs>>
+    ): Prisma__NotificationClient<
+      $Result.GetResult<
+        Prisma.$NotificationPayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find one Notification that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NotificationFindUniqueOrThrowArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NotificationFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, NotificationFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__NotificationClient<
+      $Result.GetResult<
+        Prisma.$NotificationPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first Notification that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindFirstArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NotificationFindFirstArgs>(
+      args?: SelectSubset<T, NotificationFindFirstArgs<ExtArgs>>
+    ): Prisma__NotificationClient<
+      $Result.GetResult<
+        Prisma.$NotificationPayload<ExtArgs>,
+        T,
+        'findFirst',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first Notification that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindFirstOrThrowArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NotificationFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, NotificationFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__NotificationClient<
+      $Result.GetResult<
+        Prisma.$NotificationPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find zero or more Notifications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Notifications
+     * const notifications = await prisma.notification.findMany()
+     *
+     * // Get first 10 Notifications
+     * const notifications = await prisma.notification.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const notificationWithIdOnly = await prisma.notification.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends NotificationFindManyArgs>(
+      args?: SelectSubset<T, NotificationFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+    >;
+
+    /**
+     * Create a Notification.
+     * @param {NotificationCreateArgs} args - Arguments to create a Notification.
+     * @example
+     * // Create one Notification
+     * const Notification = await prisma.notification.create({
+     *   data: {
+     *     // ... data to create a Notification
+     *   }
+     * })
+     *
+     */
+    create<T extends NotificationCreateArgs>(
+      args: SelectSubset<T, NotificationCreateArgs<ExtArgs>>
+    ): Prisma__NotificationClient<
+      $Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Create many Notifications.
+     * @param {NotificationCreateManyArgs} args - Arguments to create many Notifications.
+     * @example
+     * // Create many Notifications
+     * const notification = await prisma.notification.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends NotificationCreateManyArgs>(
+      args?: SelectSubset<T, NotificationCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Create many Notifications and returns the data saved in the database.
+     * @param {NotificationCreateManyAndReturnArgs} args - Arguments to create many Notifications.
+     * @example
+     * // Create many Notifications
+     * const notification = await prisma.notification.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many Notifications and only return the `id`
+     * const notificationWithIdOnly = await prisma.notification.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends NotificationCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, NotificationCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$NotificationPayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Delete a Notification.
+     * @param {NotificationDeleteArgs} args - Arguments to delete one Notification.
+     * @example
+     * // Delete one Notification
+     * const Notification = await prisma.notification.delete({
+     *   where: {
+     *     // ... filter to delete one Notification
+     *   }
+     * })
+     *
+     */
+    delete<T extends NotificationDeleteArgs>(
+      args: SelectSubset<T, NotificationDeleteArgs<ExtArgs>>
+    ): Prisma__NotificationClient<
+      $Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Update one Notification.
+     * @param {NotificationUpdateArgs} args - Arguments to update one Notification.
+     * @example
+     * // Update one Notification
+     * const notification = await prisma.notification.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends NotificationUpdateArgs>(
+      args: SelectSubset<T, NotificationUpdateArgs<ExtArgs>>
+    ): Prisma__NotificationClient<
+      $Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Delete zero or more Notifications.
+     * @param {NotificationDeleteManyArgs} args - Arguments to filter Notifications to delete.
+     * @example
+     * // Delete a few Notifications
+     * const { count } = await prisma.notification.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends NotificationDeleteManyArgs>(
+      args?: SelectSubset<T, NotificationDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more Notifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Notifications
+     * const notification = await prisma.notification.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends NotificationUpdateManyArgs>(
+      args: SelectSubset<T, NotificationUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more Notifications and returns the data updated in the database.
+     * @param {NotificationUpdateManyAndReturnArgs} args - Arguments to update many Notifications.
+     * @example
+     * // Update many Notifications
+     * const notification = await prisma.notification.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more Notifications and only return the `id`
+     * const notificationWithIdOnly = await prisma.notification.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends NotificationUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, NotificationUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$NotificationPayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Create or update one Notification.
+     * @param {NotificationUpsertArgs} args - Arguments to update or create a Notification.
+     * @example
+     * // Update or create a Notification
+     * const notification = await prisma.notification.upsert({
+     *   create: {
+     *     // ... data to create a Notification
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Notification we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NotificationUpsertArgs>(
+      args: SelectSubset<T, NotificationUpsertArgs<ExtArgs>>
+    ): Prisma__NotificationClient<
+      $Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Count the number of Notifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationCountArgs} args - Arguments to filter Notifications to count.
+     * @example
+     * // Count the number of Notifications
+     * const count = await prisma.notification.count({
+     *   where: {
+     *     // ... the filter for the Notifications we want to count
+     *   }
+     * })
+     **/
+    count<T extends NotificationCountArgs>(
+      args?: Subset<T, NotificationCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NotificationCountAggregateOutputType>
+        : number
+    >;
+
+    /**
+     * Allows you to perform aggregations operations on a Notification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends NotificationAggregateArgs>(
+      args: Subset<T, NotificationAggregateArgs>
+    ): Prisma.PrismaPromise<GetNotificationAggregateType<T>>;
+
+    /**
+     * Group by Notification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends NotificationGroupByArgs,
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NotificationGroupByArgs['orderBy'] }
+        : { orderBy?: NotificationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`];
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, NotificationGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors
+      ? GetNotificationGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the Notification model
+     */
+    readonly fields: NotificationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Notification.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NotificationClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    recipient<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      | $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    sender<T extends Notification$senderArgs<ExtArgs> = {}>(
+      args?: Subset<T, Notification$senderArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+  /**
+   * Fields of the Notification model
+   */
+  interface NotificationFieldRefs {
+    readonly id: FieldRef<'Notification', 'Int'>;
+    readonly recipientId: FieldRef<'Notification', 'Int'>;
+    readonly senderId: FieldRef<'Notification', 'Int'>;
+    readonly type: FieldRef<'Notification', 'NotificationType'>;
+    readonly message: FieldRef<'Notification', 'String'>;
+    readonly link: FieldRef<'Notification', 'String'>;
+    readonly read: FieldRef<'Notification', 'Boolean'>;
+    readonly createdAt: FieldRef<'Notification', 'DateTime'>;
+  }
+
+  // Custom InputTypes
+  /**
+   * Notification findUnique
+   */
+  export type NotificationFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where: NotificationWhereUniqueInput;
+  };
+
+  /**
+   * Notification findUniqueOrThrow
+   */
+  export type NotificationFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where: NotificationWhereUniqueInput;
+  };
+
+  /**
+   * Notification findFirst
+   */
+  export type NotificationFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where?: NotificationWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Notifications.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of Notifications.
+     */
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[];
+  };
+
+  /**
+   * Notification findFirstOrThrow
+   */
+  export type NotificationFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where?: NotificationWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Notifications.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of Notifications.
+     */
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[];
+  };
+
+  /**
+   * Notification findMany
+   */
+  export type NotificationFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    /**
+     * Filter, which Notifications to fetch.
+     */
+    where?: NotificationWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Notifications.
+     */
+    skip?: number;
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[];
+  };
+
+  /**
+   * Notification create
+   */
+  export type NotificationCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a Notification.
+     */
+    data: XOR<NotificationCreateInput, NotificationUncheckedCreateInput>;
+  };
+
+  /**
+   * Notification createMany
+   */
+  export type NotificationCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to create many Notifications.
+     */
+    data: NotificationCreateManyInput | NotificationCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
+
+  /**
+   * Notification createManyAndReturn
+   */
+  export type NotificationCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * The data used to create many Notifications.
+     */
+    data: NotificationCreateManyInput | NotificationCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * Notification update
+   */
+  export type NotificationUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a Notification.
+     */
+    data: XOR<NotificationUpdateInput, NotificationUncheckedUpdateInput>;
+    /**
+     * Choose, which Notification to update.
+     */
+    where: NotificationWhereUniqueInput;
+  };
+
+  /**
+   * Notification updateMany
+   */
+  export type NotificationUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to update Notifications.
+     */
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput>;
+    /**
+     * Filter which Notifications to update
+     */
+    where?: NotificationWhereInput;
+    /**
+     * Limit how many Notifications to update.
+     */
+    limit?: number;
+  };
+
+  /**
+   * Notification updateManyAndReturn
+   */
+  export type NotificationUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * The data used to update Notifications.
+     */
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput>;
+    /**
+     * Filter which Notifications to update
+     */
+    where?: NotificationWhereInput;
+    /**
+     * Limit how many Notifications to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * Notification upsert
+   */
+  export type NotificationUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the Notification to update in case it exists.
+     */
+    where: NotificationWhereUniqueInput;
+    /**
+     * In case the Notification found by the `where` argument doesn't exist, create a new Notification with this data.
+     */
+    create: XOR<NotificationCreateInput, NotificationUncheckedCreateInput>;
+    /**
+     * In case the Notification was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NotificationUpdateInput, NotificationUncheckedUpdateInput>;
+  };
+
+  /**
+   * Notification delete
+   */
+  export type NotificationDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+    /**
+     * Filter which Notification to delete.
+     */
+    where: NotificationWhereUniqueInput;
+  };
+
+  /**
+   * Notification deleteMany
+   */
+  export type NotificationDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which Notifications to delete
+     */
+    where?: NotificationWhereInput;
+    /**
+     * Limit how many Notifications to delete.
+     */
+    limit?: number;
+  };
+
+  /**
+   * Notification.sender
+   */
+  export type Notification$senderArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
+    where?: UserWhereInput;
+  };
+
+  /**
+   * Notification without action
+   */
+  export type NotificationDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null;
+  };
 
   /**
    * Enums
@@ -14847,6 +22308,54 @@ export namespace Prisma {
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
+
+  export const UserProfileScalarFieldEnum: {
+    id: 'id';
+    userId: 'userId';
+    bio: 'bio';
+    company: 'company';
+    location: 'location';
+    profilePic: 'profilePic';
+    coverPic: 'coverPic';
+    birthDate: 'birthDate';
+    gender: 'gender';
+    phone: 'phone';
+    interests: 'interests';
+    github: 'github';
+    linkedin: 'linkedin';
+    twitter: 'twitter';
+    leetcode: 'leetcode';
+    instagram: 'instagram';
+    website: 'website';
+    resumeLink: 'resumeLink';
+    createdAt: 'createdAt';
+    updatedAt: 'updatedAt';
+  };
+
+  export type UserProfileScalarFieldEnum =
+    (typeof UserProfileScalarFieldEnum)[keyof typeof UserProfileScalarFieldEnum];
+
+  export const UserHeatmapScalarFieldEnum: {
+    id: 'id';
+    userId: 'userId';
+    date: 'date';
+    count: 'count';
+  };
+
+  export type UserHeatmapScalarFieldEnum =
+    (typeof UserHeatmapScalarFieldEnum)[keyof typeof UserHeatmapScalarFieldEnum];
+
+  export const UserTagStatsScalarFieldEnum: {
+    id: 'id';
+    userId: 'userId';
+    tagId: 'tagId';
+    postCount: 'postCount';
+    updatedAt: 'updatedAt';
+    createdAt: 'createdAt';
+  };
+
+  export type UserTagStatsScalarFieldEnum =
+    (typeof UserTagStatsScalarFieldEnum)[keyof typeof UserTagStatsScalarFieldEnum];
 
   export const PostScalarFieldEnum: {
     id: 'id';
@@ -14937,6 +22446,29 @@ export namespace Prisma {
 
   export type FeedScalarFieldEnum = (typeof FeedScalarFieldEnum)[keyof typeof FeedScalarFieldEnum];
 
+  export const FeedTrackScalarFieldEnum: {
+    id: 'id';
+    userId: 'userId';
+    lastSeen: 'lastSeen';
+  };
+
+  export type FeedTrackScalarFieldEnum =
+    (typeof FeedTrackScalarFieldEnum)[keyof typeof FeedTrackScalarFieldEnum];
+
+  export const NotificationScalarFieldEnum: {
+    id: 'id';
+    recipientId: 'recipientId';
+    senderId: 'senderId';
+    type: 'type';
+    message: 'message';
+    link: 'link';
+    read: 'read';
+    createdAt: 'createdAt';
+  };
+
+  export type NotificationScalarFieldEnum =
+    (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum];
+
   export const SortOrder: {
     asc: 'asc';
     desc: 'desc';
@@ -14996,6 +22528,40 @@ export namespace Prisma {
   >;
 
   /**
+   * Reference to a field of type 'Gender'
+   */
+  export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>;
+
+  /**
+   * Reference to a field of type 'Gender[]'
+   */
+  export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'Gender[]'
+  >;
+
+  /**
+   * Reference to a field of type 'NotificationType'
+   */
+  export type EnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'NotificationType'
+  >;
+
+  /**
+   * Reference to a field of type 'NotificationType[]'
+   */
+  export type ListEnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'NotificationType[]'
+  >;
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>;
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>;
@@ -15018,14 +22584,20 @@ export namespace Prisma {
     password?: StringFilter<'User'> | string;
     name?: StringNullableFilter<'User'> | string | null;
     roles?: StringNullableListFilter<'User'>;
+    userProfile?: XOR<UserProfileNullableScalarRelationFilter, UserProfileWhereInput> | null;
     post?: PostListRelationFilter;
+    tagStats?: UserTagStatsListRelationFilter;
     feed?: FeedListRelationFilter;
+    feedTrack?: FeedTrackListRelationFilter;
+    heapmap?: UserHeatmapListRelationFilter;
     like?: LikeListRelationFilter;
     comment?: CommentListRelationFilter;
     shared?: ShareListRelationFilter;
     tagFollows?: TagFollowListRelationFilter;
     followers?: FollowListRelationFilter;
     following?: FollowListRelationFilter;
+    notificationsSent?: NotificationListRelationFilter;
+    notificationsReceived?: NotificationListRelationFilter;
   };
 
   export type UserOrderByWithRelationInput = {
@@ -15034,14 +22606,20 @@ export namespace Prisma {
     password?: SortOrder;
     name?: SortOrderInput | SortOrder;
     roles?: SortOrder;
+    userProfile?: UserProfileOrderByWithRelationInput;
     post?: PostOrderByRelationAggregateInput;
-    feed?: feedOrderByRelationAggregateInput;
-    like?: likeOrderByRelationAggregateInput;
+    tagStats?: UserTagStatsOrderByRelationAggregateInput;
+    feed?: FeedOrderByRelationAggregateInput;
+    feedTrack?: FeedTrackOrderByRelationAggregateInput;
+    heapmap?: UserHeatmapOrderByRelationAggregateInput;
+    like?: LikeOrderByRelationAggregateInput;
     comment?: CommentOrderByRelationAggregateInput;
-    shared?: shareOrderByRelationAggregateInput;
+    shared?: ShareOrderByRelationAggregateInput;
     tagFollows?: TagFollowOrderByRelationAggregateInput;
     followers?: FollowOrderByRelationAggregateInput;
     following?: FollowOrderByRelationAggregateInput;
+    notificationsSent?: NotificationOrderByRelationAggregateInput;
+    notificationsReceived?: NotificationOrderByRelationAggregateInput;
   };
 
   export type UserWhereUniqueInput = Prisma.AtLeast<
@@ -15054,14 +22632,20 @@ export namespace Prisma {
       NOT?: UserWhereInput | UserWhereInput[];
       name?: StringNullableFilter<'User'> | string | null;
       roles?: StringNullableListFilter<'User'>;
+      userProfile?: XOR<UserProfileNullableScalarRelationFilter, UserProfileWhereInput> | null;
       post?: PostListRelationFilter;
+      tagStats?: UserTagStatsListRelationFilter;
       feed?: FeedListRelationFilter;
+      feedTrack?: FeedTrackListRelationFilter;
+      heapmap?: UserHeatmapListRelationFilter;
       like?: LikeListRelationFilter;
       comment?: CommentListRelationFilter;
       shared?: ShareListRelationFilter;
       tagFollows?: TagFollowListRelationFilter;
       followers?: FollowListRelationFilter;
       following?: FollowListRelationFilter;
+      notificationsSent?: NotificationListRelationFilter;
+      notificationsReceived?: NotificationListRelationFilter;
     },
     'id' | 'email' | 'password'
   >;
@@ -15088,6 +22672,266 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<'User'> | string;
     name?: StringNullableWithAggregatesFilter<'User'> | string | null;
     roles?: StringNullableListFilter<'User'>;
+  };
+
+  export type UserProfileWhereInput = {
+    AND?: UserProfileWhereInput | UserProfileWhereInput[];
+    OR?: UserProfileWhereInput[];
+    NOT?: UserProfileWhereInput | UserProfileWhereInput[];
+    id?: IntFilter<'UserProfile'> | number;
+    userId?: IntFilter<'UserProfile'> | number;
+    bio?: StringNullableFilter<'UserProfile'> | string | null;
+    company?: StringNullableFilter<'UserProfile'> | string | null;
+    location?: StringNullableFilter<'UserProfile'> | string | null;
+    profilePic?: StringNullableFilter<'UserProfile'> | string | null;
+    coverPic?: StringNullableFilter<'UserProfile'> | string | null;
+    birthDate?: DateTimeNullableFilter<'UserProfile'> | Date | string | null;
+    gender?: EnumGenderNullableFilter<'UserProfile'> | $Enums.Gender | null;
+    phone?: StringNullableFilter<'UserProfile'> | string | null;
+    interests?: StringNullableListFilter<'UserProfile'>;
+    github?: StringNullableFilter<'UserProfile'> | string | null;
+    linkedin?: StringNullableFilter<'UserProfile'> | string | null;
+    twitter?: StringNullableFilter<'UserProfile'> | string | null;
+    leetcode?: StringNullableFilter<'UserProfile'> | string | null;
+    instagram?: StringNullableFilter<'UserProfile'> | string | null;
+    website?: StringNullableFilter<'UserProfile'> | string | null;
+    resumeLink?: StringNullableFilter<'UserProfile'> | string | null;
+    createdAt?: DateTimeFilter<'UserProfile'> | Date | string;
+    updatedAt?: DateTimeFilter<'UserProfile'> | Date | string;
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>;
+  };
+
+  export type UserProfileOrderByWithRelationInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    bio?: SortOrderInput | SortOrder;
+    company?: SortOrderInput | SortOrder;
+    location?: SortOrderInput | SortOrder;
+    profilePic?: SortOrderInput | SortOrder;
+    coverPic?: SortOrderInput | SortOrder;
+    birthDate?: SortOrderInput | SortOrder;
+    gender?: SortOrderInput | SortOrder;
+    phone?: SortOrderInput | SortOrder;
+    interests?: SortOrder;
+    github?: SortOrderInput | SortOrder;
+    linkedin?: SortOrderInput | SortOrder;
+    twitter?: SortOrderInput | SortOrder;
+    leetcode?: SortOrderInput | SortOrder;
+    instagram?: SortOrderInput | SortOrder;
+    website?: SortOrderInput | SortOrder;
+    resumeLink?: SortOrderInput | SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    user?: UserOrderByWithRelationInput;
+  };
+
+  export type UserProfileWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: number;
+      userId?: number;
+      AND?: UserProfileWhereInput | UserProfileWhereInput[];
+      OR?: UserProfileWhereInput[];
+      NOT?: UserProfileWhereInput | UserProfileWhereInput[];
+      bio?: StringNullableFilter<'UserProfile'> | string | null;
+      company?: StringNullableFilter<'UserProfile'> | string | null;
+      location?: StringNullableFilter<'UserProfile'> | string | null;
+      profilePic?: StringNullableFilter<'UserProfile'> | string | null;
+      coverPic?: StringNullableFilter<'UserProfile'> | string | null;
+      birthDate?: DateTimeNullableFilter<'UserProfile'> | Date | string | null;
+      gender?: EnumGenderNullableFilter<'UserProfile'> | $Enums.Gender | null;
+      phone?: StringNullableFilter<'UserProfile'> | string | null;
+      interests?: StringNullableListFilter<'UserProfile'>;
+      github?: StringNullableFilter<'UserProfile'> | string | null;
+      linkedin?: StringNullableFilter<'UserProfile'> | string | null;
+      twitter?: StringNullableFilter<'UserProfile'> | string | null;
+      leetcode?: StringNullableFilter<'UserProfile'> | string | null;
+      instagram?: StringNullableFilter<'UserProfile'> | string | null;
+      website?: StringNullableFilter<'UserProfile'> | string | null;
+      resumeLink?: StringNullableFilter<'UserProfile'> | string | null;
+      createdAt?: DateTimeFilter<'UserProfile'> | Date | string;
+      updatedAt?: DateTimeFilter<'UserProfile'> | Date | string;
+      user?: XOR<UserScalarRelationFilter, UserWhereInput>;
+    },
+    'id' | 'userId'
+  >;
+
+  export type UserProfileOrderByWithAggregationInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    bio?: SortOrderInput | SortOrder;
+    company?: SortOrderInput | SortOrder;
+    location?: SortOrderInput | SortOrder;
+    profilePic?: SortOrderInput | SortOrder;
+    coverPic?: SortOrderInput | SortOrder;
+    birthDate?: SortOrderInput | SortOrder;
+    gender?: SortOrderInput | SortOrder;
+    phone?: SortOrderInput | SortOrder;
+    interests?: SortOrder;
+    github?: SortOrderInput | SortOrder;
+    linkedin?: SortOrderInput | SortOrder;
+    twitter?: SortOrderInput | SortOrder;
+    leetcode?: SortOrderInput | SortOrder;
+    instagram?: SortOrderInput | SortOrder;
+    website?: SortOrderInput | SortOrder;
+    resumeLink?: SortOrderInput | SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    _count?: UserProfileCountOrderByAggregateInput;
+    _avg?: UserProfileAvgOrderByAggregateInput;
+    _max?: UserProfileMaxOrderByAggregateInput;
+    _min?: UserProfileMinOrderByAggregateInput;
+    _sum?: UserProfileSumOrderByAggregateInput;
+  };
+
+  export type UserProfileScalarWhereWithAggregatesInput = {
+    AND?: UserProfileScalarWhereWithAggregatesInput | UserProfileScalarWhereWithAggregatesInput[];
+    OR?: UserProfileScalarWhereWithAggregatesInput[];
+    NOT?: UserProfileScalarWhereWithAggregatesInput | UserProfileScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<'UserProfile'> | number;
+    userId?: IntWithAggregatesFilter<'UserProfile'> | number;
+    bio?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    company?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    location?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    profilePic?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    coverPic?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    birthDate?: DateTimeNullableWithAggregatesFilter<'UserProfile'> | Date | string | null;
+    gender?: EnumGenderNullableWithAggregatesFilter<'UserProfile'> | $Enums.Gender | null;
+    phone?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    interests?: StringNullableListFilter<'UserProfile'>;
+    github?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    linkedin?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    twitter?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    leetcode?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    instagram?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    website?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    resumeLink?: StringNullableWithAggregatesFilter<'UserProfile'> | string | null;
+    createdAt?: DateTimeWithAggregatesFilter<'UserProfile'> | Date | string;
+    updatedAt?: DateTimeWithAggregatesFilter<'UserProfile'> | Date | string;
+  };
+
+  export type UserHeatmapWhereInput = {
+    AND?: UserHeatmapWhereInput | UserHeatmapWhereInput[];
+    OR?: UserHeatmapWhereInput[];
+    NOT?: UserHeatmapWhereInput | UserHeatmapWhereInput[];
+    id?: IntFilter<'UserHeatmap'> | number;
+    userId?: IntFilter<'UserHeatmap'> | number;
+    date?: DateTimeFilter<'UserHeatmap'> | Date | string;
+    count?: IntFilter<'UserHeatmap'> | number;
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>;
+  };
+
+  export type UserHeatmapOrderByWithRelationInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    date?: SortOrder;
+    count?: SortOrder;
+    user?: UserOrderByWithRelationInput;
+  };
+
+  export type UserHeatmapWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: number;
+      userId_date?: UserHeatmapUserIdDateCompoundUniqueInput;
+      AND?: UserHeatmapWhereInput | UserHeatmapWhereInput[];
+      OR?: UserHeatmapWhereInput[];
+      NOT?: UserHeatmapWhereInput | UserHeatmapWhereInput[];
+      userId?: IntFilter<'UserHeatmap'> | number;
+      date?: DateTimeFilter<'UserHeatmap'> | Date | string;
+      count?: IntFilter<'UserHeatmap'> | number;
+      user?: XOR<UserScalarRelationFilter, UserWhereInput>;
+    },
+    'id' | 'userId_date'
+  >;
+
+  export type UserHeatmapOrderByWithAggregationInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    date?: SortOrder;
+    count?: SortOrder;
+    _count?: UserHeatmapCountOrderByAggregateInput;
+    _avg?: UserHeatmapAvgOrderByAggregateInput;
+    _max?: UserHeatmapMaxOrderByAggregateInput;
+    _min?: UserHeatmapMinOrderByAggregateInput;
+    _sum?: UserHeatmapSumOrderByAggregateInput;
+  };
+
+  export type UserHeatmapScalarWhereWithAggregatesInput = {
+    AND?: UserHeatmapScalarWhereWithAggregatesInput | UserHeatmapScalarWhereWithAggregatesInput[];
+    OR?: UserHeatmapScalarWhereWithAggregatesInput[];
+    NOT?: UserHeatmapScalarWhereWithAggregatesInput | UserHeatmapScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<'UserHeatmap'> | number;
+    userId?: IntWithAggregatesFilter<'UserHeatmap'> | number;
+    date?: DateTimeWithAggregatesFilter<'UserHeatmap'> | Date | string;
+    count?: IntWithAggregatesFilter<'UserHeatmap'> | number;
+  };
+
+  export type UserTagStatsWhereInput = {
+    AND?: UserTagStatsWhereInput | UserTagStatsWhereInput[];
+    OR?: UserTagStatsWhereInput[];
+    NOT?: UserTagStatsWhereInput | UserTagStatsWhereInput[];
+    id?: IntFilter<'UserTagStats'> | number;
+    userId?: IntFilter<'UserTagStats'> | number;
+    tagId?: IntFilter<'UserTagStats'> | number;
+    postCount?: IntFilter<'UserTagStats'> | number;
+    updatedAt?: DateTimeFilter<'UserTagStats'> | Date | string;
+    createdAt?: DateTimeFilter<'UserTagStats'> | Date | string;
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>;
+    tag?: XOR<TagScalarRelationFilter, TagWhereInput>;
+  };
+
+  export type UserTagStatsOrderByWithRelationInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    tagId?: SortOrder;
+    postCount?: SortOrder;
+    updatedAt?: SortOrder;
+    createdAt?: SortOrder;
+    user?: UserOrderByWithRelationInput;
+    tag?: TagOrderByWithRelationInput;
+  };
+
+  export type UserTagStatsWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: number;
+      userId_tagId?: UserTagStatsUserIdTagIdCompoundUniqueInput;
+      AND?: UserTagStatsWhereInput | UserTagStatsWhereInput[];
+      OR?: UserTagStatsWhereInput[];
+      NOT?: UserTagStatsWhereInput | UserTagStatsWhereInput[];
+      userId?: IntFilter<'UserTagStats'> | number;
+      tagId?: IntFilter<'UserTagStats'> | number;
+      postCount?: IntFilter<'UserTagStats'> | number;
+      updatedAt?: DateTimeFilter<'UserTagStats'> | Date | string;
+      createdAt?: DateTimeFilter<'UserTagStats'> | Date | string;
+      user?: XOR<UserScalarRelationFilter, UserWhereInput>;
+      tag?: XOR<TagScalarRelationFilter, TagWhereInput>;
+    },
+    'id' | 'userId_tagId'
+  >;
+
+  export type UserTagStatsOrderByWithAggregationInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    tagId?: SortOrder;
+    postCount?: SortOrder;
+    updatedAt?: SortOrder;
+    createdAt?: SortOrder;
+    _count?: UserTagStatsCountOrderByAggregateInput;
+    _avg?: UserTagStatsAvgOrderByAggregateInput;
+    _max?: UserTagStatsMaxOrderByAggregateInput;
+    _min?: UserTagStatsMinOrderByAggregateInput;
+    _sum?: UserTagStatsSumOrderByAggregateInput;
+  };
+
+  export type UserTagStatsScalarWhereWithAggregatesInput = {
+    AND?: UserTagStatsScalarWhereWithAggregatesInput | UserTagStatsScalarWhereWithAggregatesInput[];
+    OR?: UserTagStatsScalarWhereWithAggregatesInput[];
+    NOT?: UserTagStatsScalarWhereWithAggregatesInput | UserTagStatsScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<'UserTagStats'> | number;
+    userId?: IntWithAggregatesFilter<'UserTagStats'> | number;
+    tagId?: IntWithAggregatesFilter<'UserTagStats'> | number;
+    postCount?: IntWithAggregatesFilter<'UserTagStats'> | number;
+    updatedAt?: DateTimeWithAggregatesFilter<'UserTagStats'> | Date | string;
+    createdAt?: DateTimeWithAggregatesFilter<'UserTagStats'> | Date | string;
   };
 
   export type PostWhereInput = {
@@ -15120,9 +22964,9 @@ export namespace Prisma {
     author?: UserOrderByWithRelationInput;
     tags?: PostTagOrderByRelationAggregateInput;
     comments?: CommentOrderByRelationAggregateInput;
-    likes?: likeOrderByRelationAggregateInput;
-    shares?: shareOrderByRelationAggregateInput;
-    feed?: feedOrderByRelationAggregateInput;
+    likes?: LikeOrderByRelationAggregateInput;
+    shares?: ShareOrderByRelationAggregateInput;
+    feed?: FeedOrderByRelationAggregateInput;
   };
 
   export type PostWhereUniqueInput = Prisma.AtLeast<
@@ -15242,6 +23086,7 @@ export namespace Prisma {
     name?: StringFilter<'Tag'> | string;
     createdAt?: DateTimeFilter<'Tag'> | Date | string;
     posts?: PostTagListRelationFilter;
+    users?: UserTagStatsListRelationFilter;
     followers?: TagFollowListRelationFilter;
   };
 
@@ -15250,6 +23095,7 @@ export namespace Prisma {
     name?: SortOrder;
     createdAt?: SortOrder;
     posts?: PostTagOrderByRelationAggregateInput;
+    users?: UserTagStatsOrderByRelationAggregateInput;
     followers?: TagFollowOrderByRelationAggregateInput;
   };
 
@@ -15262,6 +23108,7 @@ export namespace Prisma {
       NOT?: TagWhereInput | TagWhereInput[];
       createdAt?: DateTimeFilter<'Tag'> | Date | string;
       posts?: PostTagListRelationFilter;
+      users?: UserTagStatsListRelationFilter;
       followers?: TagFollowListRelationFilter;
     },
     'id' | 'name'
@@ -15468,19 +23315,19 @@ export namespace Prisma {
     authorId?: IntWithAggregatesFilter<'Comment'> | number;
   };
 
-  export type likeWhereInput = {
-    AND?: likeWhereInput | likeWhereInput[];
-    OR?: likeWhereInput[];
-    NOT?: likeWhereInput | likeWhereInput[];
-    id?: IntFilter<'like'> | number;
-    postId?: IntFilter<'like'> | number;
-    userId?: IntFilter<'like'> | number;
-    createdAt?: DateTimeFilter<'like'> | Date | string;
+  export type LikeWhereInput = {
+    AND?: LikeWhereInput | LikeWhereInput[];
+    OR?: LikeWhereInput[];
+    NOT?: LikeWhereInput | LikeWhereInput[];
+    id?: IntFilter<'Like'> | number;
+    postId?: IntFilter<'Like'> | number;
+    userId?: IntFilter<'Like'> | number;
+    createdAt?: DateTimeFilter<'Like'> | Date | string;
     post?: XOR<PostScalarRelationFilter, PostWhereInput>;
     user?: XOR<UserScalarRelationFilter, UserWhereInput>;
   };
 
-  export type likeOrderByWithRelationInput = {
+  export type LikeOrderByWithRelationInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
@@ -15489,57 +23336,57 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput;
   };
 
-  export type likeWhereUniqueInput = Prisma.AtLeast<
+  export type LikeWhereUniqueInput = Prisma.AtLeast<
     {
       id?: number;
-      postId_userId?: likePostIdUserIdCompoundUniqueInput;
-      AND?: likeWhereInput | likeWhereInput[];
-      OR?: likeWhereInput[];
-      NOT?: likeWhereInput | likeWhereInput[];
-      postId?: IntFilter<'like'> | number;
-      userId?: IntFilter<'like'> | number;
-      createdAt?: DateTimeFilter<'like'> | Date | string;
+      postId_userId?: LikePostIdUserIdCompoundUniqueInput;
+      AND?: LikeWhereInput | LikeWhereInput[];
+      OR?: LikeWhereInput[];
+      NOT?: LikeWhereInput | LikeWhereInput[];
+      postId?: IntFilter<'Like'> | number;
+      userId?: IntFilter<'Like'> | number;
+      createdAt?: DateTimeFilter<'Like'> | Date | string;
       post?: XOR<PostScalarRelationFilter, PostWhereInput>;
       user?: XOR<UserScalarRelationFilter, UserWhereInput>;
     },
     'id' | 'postId_userId'
   >;
 
-  export type likeOrderByWithAggregationInput = {
+  export type LikeOrderByWithAggregationInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
     createdAt?: SortOrder;
-    _count?: likeCountOrderByAggregateInput;
-    _avg?: likeAvgOrderByAggregateInput;
-    _max?: likeMaxOrderByAggregateInput;
-    _min?: likeMinOrderByAggregateInput;
-    _sum?: likeSumOrderByAggregateInput;
+    _count?: LikeCountOrderByAggregateInput;
+    _avg?: LikeAvgOrderByAggregateInput;
+    _max?: LikeMaxOrderByAggregateInput;
+    _min?: LikeMinOrderByAggregateInput;
+    _sum?: LikeSumOrderByAggregateInput;
   };
 
-  export type likeScalarWhereWithAggregatesInput = {
-    AND?: likeScalarWhereWithAggregatesInput | likeScalarWhereWithAggregatesInput[];
-    OR?: likeScalarWhereWithAggregatesInput[];
-    NOT?: likeScalarWhereWithAggregatesInput | likeScalarWhereWithAggregatesInput[];
-    id?: IntWithAggregatesFilter<'like'> | number;
-    postId?: IntWithAggregatesFilter<'like'> | number;
-    userId?: IntWithAggregatesFilter<'like'> | number;
-    createdAt?: DateTimeWithAggregatesFilter<'like'> | Date | string;
+  export type LikeScalarWhereWithAggregatesInput = {
+    AND?: LikeScalarWhereWithAggregatesInput | LikeScalarWhereWithAggregatesInput[];
+    OR?: LikeScalarWhereWithAggregatesInput[];
+    NOT?: LikeScalarWhereWithAggregatesInput | LikeScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<'Like'> | number;
+    postId?: IntWithAggregatesFilter<'Like'> | number;
+    userId?: IntWithAggregatesFilter<'Like'> | number;
+    createdAt?: DateTimeWithAggregatesFilter<'Like'> | Date | string;
   };
 
-  export type shareWhereInput = {
-    AND?: shareWhereInput | shareWhereInput[];
-    OR?: shareWhereInput[];
-    NOT?: shareWhereInput | shareWhereInput[];
-    id?: IntFilter<'share'> | number;
-    postId?: IntFilter<'share'> | number;
-    userId?: IntFilter<'share'> | number;
-    createdAt?: DateTimeFilter<'share'> | Date | string;
+  export type ShareWhereInput = {
+    AND?: ShareWhereInput | ShareWhereInput[];
+    OR?: ShareWhereInput[];
+    NOT?: ShareWhereInput | ShareWhereInput[];
+    id?: IntFilter<'Share'> | number;
+    postId?: IntFilter<'Share'> | number;
+    userId?: IntFilter<'Share'> | number;
+    createdAt?: DateTimeFilter<'Share'> | Date | string;
     post?: XOR<PostScalarRelationFilter, PostWhereInput>;
     user?: XOR<UserScalarRelationFilter, UserWhereInput>;
   };
 
-  export type shareOrderByWithRelationInput = {
+  export type ShareOrderByWithRelationInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
@@ -15548,57 +23395,57 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput;
   };
 
-  export type shareWhereUniqueInput = Prisma.AtLeast<
+  export type ShareWhereUniqueInput = Prisma.AtLeast<
     {
       id?: number;
-      postId_userId?: sharePostIdUserIdCompoundUniqueInput;
-      AND?: shareWhereInput | shareWhereInput[];
-      OR?: shareWhereInput[];
-      NOT?: shareWhereInput | shareWhereInput[];
-      postId?: IntFilter<'share'> | number;
-      userId?: IntFilter<'share'> | number;
-      createdAt?: DateTimeFilter<'share'> | Date | string;
+      postId_userId?: SharePostIdUserIdCompoundUniqueInput;
+      AND?: ShareWhereInput | ShareWhereInput[];
+      OR?: ShareWhereInput[];
+      NOT?: ShareWhereInput | ShareWhereInput[];
+      postId?: IntFilter<'Share'> | number;
+      userId?: IntFilter<'Share'> | number;
+      createdAt?: DateTimeFilter<'Share'> | Date | string;
       post?: XOR<PostScalarRelationFilter, PostWhereInput>;
       user?: XOR<UserScalarRelationFilter, UserWhereInput>;
     },
     'id' | 'postId_userId'
   >;
 
-  export type shareOrderByWithAggregationInput = {
+  export type ShareOrderByWithAggregationInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
     createdAt?: SortOrder;
-    _count?: shareCountOrderByAggregateInput;
-    _avg?: shareAvgOrderByAggregateInput;
-    _max?: shareMaxOrderByAggregateInput;
-    _min?: shareMinOrderByAggregateInput;
-    _sum?: shareSumOrderByAggregateInput;
+    _count?: ShareCountOrderByAggregateInput;
+    _avg?: ShareAvgOrderByAggregateInput;
+    _max?: ShareMaxOrderByAggregateInput;
+    _min?: ShareMinOrderByAggregateInput;
+    _sum?: ShareSumOrderByAggregateInput;
   };
 
-  export type shareScalarWhereWithAggregatesInput = {
-    AND?: shareScalarWhereWithAggregatesInput | shareScalarWhereWithAggregatesInput[];
-    OR?: shareScalarWhereWithAggregatesInput[];
-    NOT?: shareScalarWhereWithAggregatesInput | shareScalarWhereWithAggregatesInput[];
-    id?: IntWithAggregatesFilter<'share'> | number;
-    postId?: IntWithAggregatesFilter<'share'> | number;
-    userId?: IntWithAggregatesFilter<'share'> | number;
-    createdAt?: DateTimeWithAggregatesFilter<'share'> | Date | string;
+  export type ShareScalarWhereWithAggregatesInput = {
+    AND?: ShareScalarWhereWithAggregatesInput | ShareScalarWhereWithAggregatesInput[];
+    OR?: ShareScalarWhereWithAggregatesInput[];
+    NOT?: ShareScalarWhereWithAggregatesInput | ShareScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<'Share'> | number;
+    postId?: IntWithAggregatesFilter<'Share'> | number;
+    userId?: IntWithAggregatesFilter<'Share'> | number;
+    createdAt?: DateTimeWithAggregatesFilter<'Share'> | Date | string;
   };
 
-  export type feedWhereInput = {
-    AND?: feedWhereInput | feedWhereInput[];
-    OR?: feedWhereInput[];
-    NOT?: feedWhereInput | feedWhereInput[];
-    id?: IntFilter<'feed'> | number;
-    postId?: IntFilter<'feed'> | number;
-    userId?: IntFilter<'feed'> | number;
-    createdAt?: DateTimeFilter<'feed'> | Date | string;
+  export type FeedWhereInput = {
+    AND?: FeedWhereInput | FeedWhereInput[];
+    OR?: FeedWhereInput[];
+    NOT?: FeedWhereInput | FeedWhereInput[];
+    id?: IntFilter<'Feed'> | number;
+    postId?: IntFilter<'Feed'> | number;
+    userId?: IntFilter<'Feed'> | number;
+    createdAt?: DateTimeFilter<'Feed'> | Date | string;
     post?: XOR<PostScalarRelationFilter, PostWhereInput>;
     user?: XOR<UserScalarRelationFilter, UserWhereInput>;
   };
 
-  export type feedOrderByWithRelationInput = {
+  export type FeedOrderByWithRelationInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
@@ -15607,42 +23454,170 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput;
   };
 
-  export type feedWhereUniqueInput = Prisma.AtLeast<
+  export type FeedWhereUniqueInput = Prisma.AtLeast<
     {
       id?: number;
-      postId_userId?: feedPostIdUserIdCompoundUniqueInput;
-      AND?: feedWhereInput | feedWhereInput[];
-      OR?: feedWhereInput[];
-      NOT?: feedWhereInput | feedWhereInput[];
-      postId?: IntFilter<'feed'> | number;
-      userId?: IntFilter<'feed'> | number;
-      createdAt?: DateTimeFilter<'feed'> | Date | string;
+      postId_userId?: FeedPostIdUserIdCompoundUniqueInput;
+      AND?: FeedWhereInput | FeedWhereInput[];
+      OR?: FeedWhereInput[];
+      NOT?: FeedWhereInput | FeedWhereInput[];
+      postId?: IntFilter<'Feed'> | number;
+      userId?: IntFilter<'Feed'> | number;
+      createdAt?: DateTimeFilter<'Feed'> | Date | string;
       post?: XOR<PostScalarRelationFilter, PostWhereInput>;
       user?: XOR<UserScalarRelationFilter, UserWhereInput>;
     },
     'id' | 'postId_userId'
   >;
 
-  export type feedOrderByWithAggregationInput = {
+  export type FeedOrderByWithAggregationInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
     createdAt?: SortOrder;
-    _count?: feedCountOrderByAggregateInput;
-    _avg?: feedAvgOrderByAggregateInput;
-    _max?: feedMaxOrderByAggregateInput;
-    _min?: feedMinOrderByAggregateInput;
-    _sum?: feedSumOrderByAggregateInput;
+    _count?: FeedCountOrderByAggregateInput;
+    _avg?: FeedAvgOrderByAggregateInput;
+    _max?: FeedMaxOrderByAggregateInput;
+    _min?: FeedMinOrderByAggregateInput;
+    _sum?: FeedSumOrderByAggregateInput;
   };
 
-  export type feedScalarWhereWithAggregatesInput = {
-    AND?: feedScalarWhereWithAggregatesInput | feedScalarWhereWithAggregatesInput[];
-    OR?: feedScalarWhereWithAggregatesInput[];
-    NOT?: feedScalarWhereWithAggregatesInput | feedScalarWhereWithAggregatesInput[];
-    id?: IntWithAggregatesFilter<'feed'> | number;
-    postId?: IntWithAggregatesFilter<'feed'> | number;
-    userId?: IntWithAggregatesFilter<'feed'> | number;
-    createdAt?: DateTimeWithAggregatesFilter<'feed'> | Date | string;
+  export type FeedScalarWhereWithAggregatesInput = {
+    AND?: FeedScalarWhereWithAggregatesInput | FeedScalarWhereWithAggregatesInput[];
+    OR?: FeedScalarWhereWithAggregatesInput[];
+    NOT?: FeedScalarWhereWithAggregatesInput | FeedScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<'Feed'> | number;
+    postId?: IntWithAggregatesFilter<'Feed'> | number;
+    userId?: IntWithAggregatesFilter<'Feed'> | number;
+    createdAt?: DateTimeWithAggregatesFilter<'Feed'> | Date | string;
+  };
+
+  export type FeedTrackWhereInput = {
+    AND?: FeedTrackWhereInput | FeedTrackWhereInput[];
+    OR?: FeedTrackWhereInput[];
+    NOT?: FeedTrackWhereInput | FeedTrackWhereInput[];
+    id?: IntFilter<'FeedTrack'> | number;
+    userId?: IntFilter<'FeedTrack'> | number;
+    lastSeen?: DateTimeFilter<'FeedTrack'> | Date | string;
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>;
+  };
+
+  export type FeedTrackOrderByWithRelationInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    lastSeen?: SortOrder;
+    user?: UserOrderByWithRelationInput;
+  };
+
+  export type FeedTrackWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: number;
+      userId?: number;
+      AND?: FeedTrackWhereInput | FeedTrackWhereInput[];
+      OR?: FeedTrackWhereInput[];
+      NOT?: FeedTrackWhereInput | FeedTrackWhereInput[];
+      lastSeen?: DateTimeFilter<'FeedTrack'> | Date | string;
+      user?: XOR<UserScalarRelationFilter, UserWhereInput>;
+    },
+    'id' | 'userId'
+  >;
+
+  export type FeedTrackOrderByWithAggregationInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    lastSeen?: SortOrder;
+    _count?: FeedTrackCountOrderByAggregateInput;
+    _avg?: FeedTrackAvgOrderByAggregateInput;
+    _max?: FeedTrackMaxOrderByAggregateInput;
+    _min?: FeedTrackMinOrderByAggregateInput;
+    _sum?: FeedTrackSumOrderByAggregateInput;
+  };
+
+  export type FeedTrackScalarWhereWithAggregatesInput = {
+    AND?: FeedTrackScalarWhereWithAggregatesInput | FeedTrackScalarWhereWithAggregatesInput[];
+    OR?: FeedTrackScalarWhereWithAggregatesInput[];
+    NOT?: FeedTrackScalarWhereWithAggregatesInput | FeedTrackScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<'FeedTrack'> | number;
+    userId?: IntWithAggregatesFilter<'FeedTrack'> | number;
+    lastSeen?: DateTimeWithAggregatesFilter<'FeedTrack'> | Date | string;
+  };
+
+  export type NotificationWhereInput = {
+    AND?: NotificationWhereInput | NotificationWhereInput[];
+    OR?: NotificationWhereInput[];
+    NOT?: NotificationWhereInput | NotificationWhereInput[];
+    id?: IntFilter<'Notification'> | number;
+    recipientId?: IntFilter<'Notification'> | number;
+    senderId?: IntNullableFilter<'Notification'> | number | null;
+    type?: EnumNotificationTypeFilter<'Notification'> | $Enums.NotificationType;
+    message?: StringFilter<'Notification'> | string;
+    link?: StringNullableFilter<'Notification'> | string | null;
+    read?: BoolFilter<'Notification'> | boolean;
+    createdAt?: DateTimeFilter<'Notification'> | Date | string;
+    recipient?: XOR<UserScalarRelationFilter, UserWhereInput>;
+    sender?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null;
+  };
+
+  export type NotificationOrderByWithRelationInput = {
+    id?: SortOrder;
+    recipientId?: SortOrder;
+    senderId?: SortOrderInput | SortOrder;
+    type?: SortOrder;
+    message?: SortOrder;
+    link?: SortOrderInput | SortOrder;
+    read?: SortOrder;
+    createdAt?: SortOrder;
+    recipient?: UserOrderByWithRelationInput;
+    sender?: UserOrderByWithRelationInput;
+  };
+
+  export type NotificationWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: number;
+      AND?: NotificationWhereInput | NotificationWhereInput[];
+      OR?: NotificationWhereInput[];
+      NOT?: NotificationWhereInput | NotificationWhereInput[];
+      recipientId?: IntFilter<'Notification'> | number;
+      senderId?: IntNullableFilter<'Notification'> | number | null;
+      type?: EnumNotificationTypeFilter<'Notification'> | $Enums.NotificationType;
+      message?: StringFilter<'Notification'> | string;
+      link?: StringNullableFilter<'Notification'> | string | null;
+      read?: BoolFilter<'Notification'> | boolean;
+      createdAt?: DateTimeFilter<'Notification'> | Date | string;
+      recipient?: XOR<UserScalarRelationFilter, UserWhereInput>;
+      sender?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null;
+    },
+    'id'
+  >;
+
+  export type NotificationOrderByWithAggregationInput = {
+    id?: SortOrder;
+    recipientId?: SortOrder;
+    senderId?: SortOrderInput | SortOrder;
+    type?: SortOrder;
+    message?: SortOrder;
+    link?: SortOrderInput | SortOrder;
+    read?: SortOrder;
+    createdAt?: SortOrder;
+    _count?: NotificationCountOrderByAggregateInput;
+    _avg?: NotificationAvgOrderByAggregateInput;
+    _max?: NotificationMaxOrderByAggregateInput;
+    _min?: NotificationMinOrderByAggregateInput;
+    _sum?: NotificationSumOrderByAggregateInput;
+  };
+
+  export type NotificationScalarWhereWithAggregatesInput = {
+    AND?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[];
+    OR?: NotificationScalarWhereWithAggregatesInput[];
+    NOT?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<'Notification'> | number;
+    recipientId?: IntWithAggregatesFilter<'Notification'> | number;
+    senderId?: IntNullableWithAggregatesFilter<'Notification'> | number | null;
+    type?: EnumNotificationTypeWithAggregatesFilter<'Notification'> | $Enums.NotificationType;
+    message?: StringWithAggregatesFilter<'Notification'> | string;
+    link?: StringNullableWithAggregatesFilter<'Notification'> | string | null;
+    read?: BoolWithAggregatesFilter<'Notification'> | boolean;
+    createdAt?: DateTimeWithAggregatesFilter<'Notification'> | Date | string;
   };
 
   export type UserCreateInput = {
@@ -15650,14 +23625,20 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
     post?: PostCreateNestedManyWithoutAuthorInput;
-    feed?: feedCreateNestedManyWithoutUserInput;
-    like?: likeCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
     comment?: CommentCreateNestedManyWithoutAuthorInput;
-    shared?: shareCreateNestedManyWithoutUserInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
     followers?: FollowCreateNestedManyWithoutFollowerInput;
     following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserUncheckedCreateInput = {
@@ -15666,14 +23647,20 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
     post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
-    feed?: feedUncheckedCreateNestedManyWithoutUserInput;
-    like?: likeUncheckedCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
     comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
-    shared?: shareUncheckedCreateNestedManyWithoutUserInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
     followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
     following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserUpdateInput = {
@@ -15681,14 +23668,20 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
     post?: PostUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUpdateManyWithoutUserNestedInput;
-    like?: likeUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
     comment?: CommentUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUpdateManyWithoutUserNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
     followers?: FollowUpdateManyWithoutFollowerNestedInput;
     following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserUncheckedUpdateInput = {
@@ -15697,14 +23690,20 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
     post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutUserNestedInput;
-    like?: likeUncheckedUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
     comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUncheckedUpdateManyWithoutUserNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
     followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
     following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserCreateManyInput = {
@@ -15730,6 +23729,266 @@ export namespace Prisma {
     roles?: UserUpdaterolesInput | string[];
   };
 
+  export type UserProfileCreateInput = {
+    bio?: string | null;
+    company?: string | null;
+    location?: string | null;
+    profilePic?: string | null;
+    coverPic?: string | null;
+    birthDate?: Date | string | null;
+    gender?: $Enums.Gender | null;
+    phone?: string | null;
+    interests?: UserProfileCreateinterestsInput | string[];
+    github?: string | null;
+    linkedin?: string | null;
+    twitter?: string | null;
+    leetcode?: string | null;
+    instagram?: string | null;
+    website?: string | null;
+    resumeLink?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    user: UserCreateNestedOneWithoutUserProfileInput;
+  };
+
+  export type UserProfileUncheckedCreateInput = {
+    id?: number;
+    userId: number;
+    bio?: string | null;
+    company?: string | null;
+    location?: string | null;
+    profilePic?: string | null;
+    coverPic?: string | null;
+    birthDate?: Date | string | null;
+    gender?: $Enums.Gender | null;
+    phone?: string | null;
+    interests?: UserProfileCreateinterestsInput | string[];
+    github?: string | null;
+    linkedin?: string | null;
+    twitter?: string | null;
+    leetcode?: string | null;
+    instagram?: string | null;
+    website?: string | null;
+    resumeLink?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
+  export type UserProfileUpdateInput = {
+    bio?: NullableStringFieldUpdateOperationsInput | string | null;
+    company?: NullableStringFieldUpdateOperationsInput | string | null;
+    location?: NullableStringFieldUpdateOperationsInput | string | null;
+    profilePic?: NullableStringFieldUpdateOperationsInput | string | null;
+    coverPic?: NullableStringFieldUpdateOperationsInput | string | null;
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null;
+    phone?: NullableStringFieldUpdateOperationsInput | string | null;
+    interests?: UserProfileUpdateinterestsInput | string[];
+    github?: NullableStringFieldUpdateOperationsInput | string | null;
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null;
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null;
+    leetcode?: NullableStringFieldUpdateOperationsInput | string | null;
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null;
+    website?: NullableStringFieldUpdateOperationsInput | string | null;
+    resumeLink?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    user?: UserUpdateOneRequiredWithoutUserProfileNestedInput;
+  };
+
+  export type UserProfileUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    userId?: IntFieldUpdateOperationsInput | number;
+    bio?: NullableStringFieldUpdateOperationsInput | string | null;
+    company?: NullableStringFieldUpdateOperationsInput | string | null;
+    location?: NullableStringFieldUpdateOperationsInput | string | null;
+    profilePic?: NullableStringFieldUpdateOperationsInput | string | null;
+    coverPic?: NullableStringFieldUpdateOperationsInput | string | null;
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null;
+    phone?: NullableStringFieldUpdateOperationsInput | string | null;
+    interests?: UserProfileUpdateinterestsInput | string[];
+    github?: NullableStringFieldUpdateOperationsInput | string | null;
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null;
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null;
+    leetcode?: NullableStringFieldUpdateOperationsInput | string | null;
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null;
+    website?: NullableStringFieldUpdateOperationsInput | string | null;
+    resumeLink?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type UserProfileCreateManyInput = {
+    id?: number;
+    userId: number;
+    bio?: string | null;
+    company?: string | null;
+    location?: string | null;
+    profilePic?: string | null;
+    coverPic?: string | null;
+    birthDate?: Date | string | null;
+    gender?: $Enums.Gender | null;
+    phone?: string | null;
+    interests?: UserProfileCreateinterestsInput | string[];
+    github?: string | null;
+    linkedin?: string | null;
+    twitter?: string | null;
+    leetcode?: string | null;
+    instagram?: string | null;
+    website?: string | null;
+    resumeLink?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
+  export type UserProfileUpdateManyMutationInput = {
+    bio?: NullableStringFieldUpdateOperationsInput | string | null;
+    company?: NullableStringFieldUpdateOperationsInput | string | null;
+    location?: NullableStringFieldUpdateOperationsInput | string | null;
+    profilePic?: NullableStringFieldUpdateOperationsInput | string | null;
+    coverPic?: NullableStringFieldUpdateOperationsInput | string | null;
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null;
+    phone?: NullableStringFieldUpdateOperationsInput | string | null;
+    interests?: UserProfileUpdateinterestsInput | string[];
+    github?: NullableStringFieldUpdateOperationsInput | string | null;
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null;
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null;
+    leetcode?: NullableStringFieldUpdateOperationsInput | string | null;
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null;
+    website?: NullableStringFieldUpdateOperationsInput | string | null;
+    resumeLink?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type UserProfileUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    userId?: IntFieldUpdateOperationsInput | number;
+    bio?: NullableStringFieldUpdateOperationsInput | string | null;
+    company?: NullableStringFieldUpdateOperationsInput | string | null;
+    location?: NullableStringFieldUpdateOperationsInput | string | null;
+    profilePic?: NullableStringFieldUpdateOperationsInput | string | null;
+    coverPic?: NullableStringFieldUpdateOperationsInput | string | null;
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null;
+    phone?: NullableStringFieldUpdateOperationsInput | string | null;
+    interests?: UserProfileUpdateinterestsInput | string[];
+    github?: NullableStringFieldUpdateOperationsInput | string | null;
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null;
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null;
+    leetcode?: NullableStringFieldUpdateOperationsInput | string | null;
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null;
+    website?: NullableStringFieldUpdateOperationsInput | string | null;
+    resumeLink?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type UserHeatmapCreateInput = {
+    date: Date | string;
+    count: number;
+    user: UserCreateNestedOneWithoutHeapmapInput;
+  };
+
+  export type UserHeatmapUncheckedCreateInput = {
+    id?: number;
+    userId: number;
+    date: Date | string;
+    count: number;
+  };
+
+  export type UserHeatmapUpdateInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string;
+    count?: IntFieldUpdateOperationsInput | number;
+    user?: UserUpdateOneRequiredWithoutHeapmapNestedInput;
+  };
+
+  export type UserHeatmapUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    userId?: IntFieldUpdateOperationsInput | number;
+    date?: DateTimeFieldUpdateOperationsInput | Date | string;
+    count?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type UserHeatmapCreateManyInput = {
+    id?: number;
+    userId: number;
+    date: Date | string;
+    count: number;
+  };
+
+  export type UserHeatmapUpdateManyMutationInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string;
+    count?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type UserHeatmapUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    userId?: IntFieldUpdateOperationsInput | number;
+    date?: DateTimeFieldUpdateOperationsInput | Date | string;
+    count?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type UserTagStatsCreateInput = {
+    postCount?: number;
+    updatedAt?: Date | string;
+    createdAt?: Date | string;
+    user: UserCreateNestedOneWithoutTagStatsInput;
+    tag: TagCreateNestedOneWithoutUsersInput;
+  };
+
+  export type UserTagStatsUncheckedCreateInput = {
+    id?: number;
+    userId: number;
+    tagId: number;
+    postCount?: number;
+    updatedAt?: Date | string;
+    createdAt?: Date | string;
+  };
+
+  export type UserTagStatsUpdateInput = {
+    postCount?: IntFieldUpdateOperationsInput | number;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    user?: UserUpdateOneRequiredWithoutTagStatsNestedInput;
+    tag?: TagUpdateOneRequiredWithoutUsersNestedInput;
+  };
+
+  export type UserTagStatsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    userId?: IntFieldUpdateOperationsInput | number;
+    tagId?: IntFieldUpdateOperationsInput | number;
+    postCount?: IntFieldUpdateOperationsInput | number;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type UserTagStatsCreateManyInput = {
+    id?: number;
+    userId: number;
+    tagId: number;
+    postCount?: number;
+    updatedAt?: Date | string;
+    createdAt?: Date | string;
+  };
+
+  export type UserTagStatsUpdateManyMutationInput = {
+    postCount?: IntFieldUpdateOperationsInput | number;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type UserTagStatsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    userId?: IntFieldUpdateOperationsInput | number;
+    tagId?: IntFieldUpdateOperationsInput | number;
+    postCount?: IntFieldUpdateOperationsInput | number;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
   export type PostCreateInput = {
     title: string;
     content: string;
@@ -15739,9 +23998,9 @@ export namespace Prisma {
     author: UserCreateNestedOneWithoutPostInput;
     tags?: PostTagCreateNestedManyWithoutPostInput;
     comments?: CommentCreateNestedManyWithoutPostInput;
-    likes?: likeCreateNestedManyWithoutPostInput;
-    shares?: shareCreateNestedManyWithoutPostInput;
-    feed?: feedCreateNestedManyWithoutPostInput;
+    likes?: LikeCreateNestedManyWithoutPostInput;
+    shares?: ShareCreateNestedManyWithoutPostInput;
+    feed?: FeedCreateNestedManyWithoutPostInput;
   };
 
   export type PostUncheckedCreateInput = {
@@ -15754,9 +24013,9 @@ export namespace Prisma {
     commentCount?: number;
     tags?: PostTagUncheckedCreateNestedManyWithoutPostInput;
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput;
-    likes?: likeUncheckedCreateNestedManyWithoutPostInput;
-    shares?: shareUncheckedCreateNestedManyWithoutPostInput;
-    feed?: feedUncheckedCreateNestedManyWithoutPostInput;
+    likes?: LikeUncheckedCreateNestedManyWithoutPostInput;
+    shares?: ShareUncheckedCreateNestedManyWithoutPostInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutPostInput;
   };
 
   export type PostUpdateInput = {
@@ -15768,9 +24027,9 @@ export namespace Prisma {
     author?: UserUpdateOneRequiredWithoutPostNestedInput;
     tags?: PostTagUpdateManyWithoutPostNestedInput;
     comments?: CommentUpdateManyWithoutPostNestedInput;
-    likes?: likeUpdateManyWithoutPostNestedInput;
-    shares?: shareUpdateManyWithoutPostNestedInput;
-    feed?: feedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUpdateManyWithoutPostNestedInput;
+    shares?: ShareUpdateManyWithoutPostNestedInput;
+    feed?: FeedUpdateManyWithoutPostNestedInput;
   };
 
   export type PostUncheckedUpdateInput = {
@@ -15783,9 +24042,9 @@ export namespace Prisma {
     commentCount?: IntFieldUpdateOperationsInput | number;
     tags?: PostTagUncheckedUpdateManyWithoutPostNestedInput;
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput;
-    likes?: likeUncheckedUpdateManyWithoutPostNestedInput;
-    shares?: shareUncheckedUpdateManyWithoutPostNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput;
+    shares?: ShareUncheckedUpdateManyWithoutPostNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutPostNestedInput;
   };
 
   export type PostCreateManyInput = {
@@ -15864,6 +24123,7 @@ export namespace Prisma {
     name: string;
     createdAt?: Date | string;
     posts?: PostTagCreateNestedManyWithoutTagInput;
+    users?: UserTagStatsCreateNestedManyWithoutTagInput;
     followers?: TagFollowCreateNestedManyWithoutTagInput;
   };
 
@@ -15872,6 +24132,7 @@ export namespace Prisma {
     name: string;
     createdAt?: Date | string;
     posts?: PostTagUncheckedCreateNestedManyWithoutTagInput;
+    users?: UserTagStatsUncheckedCreateNestedManyWithoutTagInput;
     followers?: TagFollowUncheckedCreateNestedManyWithoutTagInput;
   };
 
@@ -15879,6 +24140,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     posts?: PostTagUpdateManyWithoutTagNestedInput;
+    users?: UserTagStatsUpdateManyWithoutTagNestedInput;
     followers?: TagFollowUpdateManyWithoutTagNestedInput;
   };
 
@@ -15887,6 +24149,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     posts?: PostTagUncheckedUpdateManyWithoutTagNestedInput;
+    users?: UserTagStatsUncheckedUpdateManyWithoutTagNestedInput;
     followers?: TagFollowUncheckedUpdateManyWithoutTagNestedInput;
   };
 
@@ -16046,135 +24309,245 @@ export namespace Prisma {
     authorId?: IntFieldUpdateOperationsInput | number;
   };
 
-  export type likeCreateInput = {
+  export type LikeCreateInput = {
     createdAt?: Date | string;
     post: PostCreateNestedOneWithoutLikesInput;
     user: UserCreateNestedOneWithoutLikeInput;
   };
 
-  export type likeUncheckedCreateInput = {
+  export type LikeUncheckedCreateInput = {
     id?: number;
     postId: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type likeUpdateInput = {
+  export type LikeUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     post?: PostUpdateOneRequiredWithoutLikesNestedInput;
     user?: UserUpdateOneRequiredWithoutLikeNestedInput;
   };
 
-  export type likeUncheckedUpdateInput = {
+  export type LikeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type likeCreateManyInput = {
+  export type LikeCreateManyInput = {
     id?: number;
     postId: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type likeUpdateManyMutationInput = {
+  export type LikeUpdateManyMutationInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type likeUncheckedUpdateManyInput = {
+  export type LikeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type shareCreateInput = {
+  export type ShareCreateInput = {
     createdAt?: Date | string;
     post: PostCreateNestedOneWithoutSharesInput;
     user: UserCreateNestedOneWithoutSharedInput;
   };
 
-  export type shareUncheckedCreateInput = {
+  export type ShareUncheckedCreateInput = {
     id?: number;
     postId: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type shareUpdateInput = {
+  export type ShareUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     post?: PostUpdateOneRequiredWithoutSharesNestedInput;
     user?: UserUpdateOneRequiredWithoutSharedNestedInput;
   };
 
-  export type shareUncheckedUpdateInput = {
+  export type ShareUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type shareCreateManyInput = {
+  export type ShareCreateManyInput = {
     id?: number;
     postId: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type shareUpdateManyMutationInput = {
+  export type ShareUpdateManyMutationInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type shareUncheckedUpdateManyInput = {
+  export type ShareUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type feedCreateInput = {
+  export type FeedCreateInput = {
     createdAt?: Date | string;
     post: PostCreateNestedOneWithoutFeedInput;
     user: UserCreateNestedOneWithoutFeedInput;
   };
 
-  export type feedUncheckedCreateInput = {
+  export type FeedUncheckedCreateInput = {
     id?: number;
     postId: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type feedUpdateInput = {
+  export type FeedUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     post?: PostUpdateOneRequiredWithoutFeedNestedInput;
     user?: UserUpdateOneRequiredWithoutFeedNestedInput;
   };
 
-  export type feedUncheckedUpdateInput = {
+  export type FeedUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type feedCreateManyInput = {
+  export type FeedCreateManyInput = {
     id?: number;
     postId: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type feedUpdateManyMutationInput = {
+  export type FeedUpdateManyMutationInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type feedUncheckedUpdateManyInput = {
+  export type FeedUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type FeedTrackCreateInput = {
+    lastSeen: Date | string;
+    user: UserCreateNestedOneWithoutFeedTrackInput;
+  };
+
+  export type FeedTrackUncheckedCreateInput = {
+    id?: number;
+    userId: number;
+    lastSeen: Date | string;
+  };
+
+  export type FeedTrackUpdateInput = {
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string;
+    user?: UserUpdateOneRequiredWithoutFeedTrackNestedInput;
+  };
+
+  export type FeedTrackUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    userId?: IntFieldUpdateOperationsInput | number;
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type FeedTrackCreateManyInput = {
+    id?: number;
+    userId: number;
+    lastSeen: Date | string;
+  };
+
+  export type FeedTrackUpdateManyMutationInput = {
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type FeedTrackUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    userId?: IntFieldUpdateOperationsInput | number;
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type NotificationCreateInput = {
+    type: $Enums.NotificationType;
+    message: string;
+    link?: string | null;
+    read?: boolean;
+    createdAt?: Date | string;
+    recipient: UserCreateNestedOneWithoutNotificationsReceivedInput;
+    sender?: UserCreateNestedOneWithoutNotificationsSentInput;
+  };
+
+  export type NotificationUncheckedCreateInput = {
+    id?: number;
+    recipientId: number;
+    senderId?: number | null;
+    type: $Enums.NotificationType;
+    message: string;
+    link?: string | null;
+    read?: boolean;
+    createdAt?: Date | string;
+  };
+
+  export type NotificationUpdateInput = {
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType;
+    message?: StringFieldUpdateOperationsInput | string;
+    link?: NullableStringFieldUpdateOperationsInput | string | null;
+    read?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    recipient?: UserUpdateOneRequiredWithoutNotificationsReceivedNestedInput;
+    sender?: UserUpdateOneWithoutNotificationsSentNestedInput;
+  };
+
+  export type NotificationUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    recipientId?: IntFieldUpdateOperationsInput | number;
+    senderId?: NullableIntFieldUpdateOperationsInput | number | null;
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType;
+    message?: StringFieldUpdateOperationsInput | string;
+    link?: NullableStringFieldUpdateOperationsInput | string | null;
+    read?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type NotificationCreateManyInput = {
+    id?: number;
+    recipientId: number;
+    senderId?: number | null;
+    type: $Enums.NotificationType;
+    message: string;
+    link?: string | null;
+    read?: boolean;
+    createdAt?: Date | string;
+  };
+
+  export type NotificationUpdateManyMutationInput = {
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType;
+    message?: StringFieldUpdateOperationsInput | string;
+    link?: NullableStringFieldUpdateOperationsInput | string | null;
+    read?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type NotificationUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    recipientId?: IntFieldUpdateOperationsInput | number;
+    senderId?: NullableIntFieldUpdateOperationsInput | number | null;
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType;
+    message?: StringFieldUpdateOperationsInput | string;
+    link?: NullableStringFieldUpdateOperationsInput | string | null;
+    read?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
@@ -16227,22 +24600,45 @@ export namespace Prisma {
     isEmpty?: boolean;
   };
 
+  export type UserProfileNullableScalarRelationFilter = {
+    is?: UserProfileWhereInput | null;
+    isNot?: UserProfileWhereInput | null;
+  };
+
   export type PostListRelationFilter = {
     every?: PostWhereInput;
     some?: PostWhereInput;
     none?: PostWhereInput;
   };
 
+  export type UserTagStatsListRelationFilter = {
+    every?: UserTagStatsWhereInput;
+    some?: UserTagStatsWhereInput;
+    none?: UserTagStatsWhereInput;
+  };
+
   export type FeedListRelationFilter = {
-    every?: feedWhereInput;
-    some?: feedWhereInput;
-    none?: feedWhereInput;
+    every?: FeedWhereInput;
+    some?: FeedWhereInput;
+    none?: FeedWhereInput;
+  };
+
+  export type FeedTrackListRelationFilter = {
+    every?: FeedTrackWhereInput;
+    some?: FeedTrackWhereInput;
+    none?: FeedTrackWhereInput;
+  };
+
+  export type UserHeatmapListRelationFilter = {
+    every?: UserHeatmapWhereInput;
+    some?: UserHeatmapWhereInput;
+    none?: UserHeatmapWhereInput;
   };
 
   export type LikeListRelationFilter = {
-    every?: likeWhereInput;
-    some?: likeWhereInput;
-    none?: likeWhereInput;
+    every?: LikeWhereInput;
+    some?: LikeWhereInput;
+    none?: LikeWhereInput;
   };
 
   export type CommentListRelationFilter = {
@@ -16252,9 +24648,9 @@ export namespace Prisma {
   };
 
   export type ShareListRelationFilter = {
-    every?: shareWhereInput;
-    some?: shareWhereInput;
-    none?: shareWhereInput;
+    every?: ShareWhereInput;
+    some?: ShareWhereInput;
+    none?: ShareWhereInput;
   };
 
   export type TagFollowListRelationFilter = {
@@ -16269,6 +24665,12 @@ export namespace Prisma {
     none?: FollowWhereInput;
   };
 
+  export type NotificationListRelationFilter = {
+    every?: NotificationWhereInput;
+    some?: NotificationWhereInput;
+    none?: NotificationWhereInput;
+  };
+
   export type SortOrderInput = {
     sort: SortOrder;
     nulls?: NullsOrder;
@@ -16278,11 +24680,23 @@ export namespace Prisma {
     _count?: SortOrder;
   };
 
-  export type feedOrderByRelationAggregateInput = {
+  export type UserTagStatsOrderByRelationAggregateInput = {
     _count?: SortOrder;
   };
 
-  export type likeOrderByRelationAggregateInput = {
+  export type FeedOrderByRelationAggregateInput = {
+    _count?: SortOrder;
+  };
+
+  export type FeedTrackOrderByRelationAggregateInput = {
+    _count?: SortOrder;
+  };
+
+  export type UserHeatmapOrderByRelationAggregateInput = {
+    _count?: SortOrder;
+  };
+
+  export type LikeOrderByRelationAggregateInput = {
     _count?: SortOrder;
   };
 
@@ -16290,7 +24704,7 @@ export namespace Prisma {
     _count?: SortOrder;
   };
 
-  export type shareOrderByRelationAggregateInput = {
+  export type ShareOrderByRelationAggregateInput = {
     _count?: SortOrder;
   };
 
@@ -16299,6 +24713,10 @@ export namespace Prisma {
   };
 
   export type FollowOrderByRelationAggregateInput = {
+    _count?: SortOrder;
+  };
+
+  export type NotificationOrderByRelationAggregateInput = {
     _count?: SortOrder;
   };
 
@@ -16384,6 +24802,24 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>;
   };
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null;
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null;
+  };
+
+  export type EnumGenderNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null;
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null;
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null;
+    not?: NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null;
+  };
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
@@ -16398,6 +24834,210 @@ export namespace Prisma {
   export type UserScalarRelationFilter = {
     is?: UserWhereInput;
     isNot?: UserWhereInput;
+  };
+
+  export type UserProfileCountOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    bio?: SortOrder;
+    company?: SortOrder;
+    location?: SortOrder;
+    profilePic?: SortOrder;
+    coverPic?: SortOrder;
+    birthDate?: SortOrder;
+    gender?: SortOrder;
+    phone?: SortOrder;
+    interests?: SortOrder;
+    github?: SortOrder;
+    linkedin?: SortOrder;
+    twitter?: SortOrder;
+    leetcode?: SortOrder;
+    instagram?: SortOrder;
+    website?: SortOrder;
+    resumeLink?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+  };
+
+  export type UserProfileAvgOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+  };
+
+  export type UserProfileMaxOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    bio?: SortOrder;
+    company?: SortOrder;
+    location?: SortOrder;
+    profilePic?: SortOrder;
+    coverPic?: SortOrder;
+    birthDate?: SortOrder;
+    gender?: SortOrder;
+    phone?: SortOrder;
+    github?: SortOrder;
+    linkedin?: SortOrder;
+    twitter?: SortOrder;
+    leetcode?: SortOrder;
+    instagram?: SortOrder;
+    website?: SortOrder;
+    resumeLink?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+  };
+
+  export type UserProfileMinOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    bio?: SortOrder;
+    company?: SortOrder;
+    location?: SortOrder;
+    profilePic?: SortOrder;
+    coverPic?: SortOrder;
+    birthDate?: SortOrder;
+    gender?: SortOrder;
+    phone?: SortOrder;
+    github?: SortOrder;
+    linkedin?: SortOrder;
+    twitter?: SortOrder;
+    leetcode?: SortOrder;
+    instagram?: SortOrder;
+    website?: SortOrder;
+    resumeLink?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+  };
+
+  export type UserProfileSumOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+  };
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null;
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>;
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>;
+  };
+
+  export type EnumGenderNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null;
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null;
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null;
+    not?: NestedEnumGenderNullableWithAggregatesFilter<$PrismaModel> | $Enums.Gender | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedEnumGenderNullableFilter<$PrismaModel>;
+    _max?: NestedEnumGenderNullableFilter<$PrismaModel>;
+  };
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedDateTimeFilter<$PrismaModel>;
+    _max?: NestedDateTimeFilter<$PrismaModel>;
+  };
+
+  export type UserHeatmapUserIdDateCompoundUniqueInput = {
+    userId: number;
+    date: Date | string;
+  };
+
+  export type UserHeatmapCountOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    date?: SortOrder;
+    count?: SortOrder;
+  };
+
+  export type UserHeatmapAvgOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    count?: SortOrder;
+  };
+
+  export type UserHeatmapMaxOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    date?: SortOrder;
+    count?: SortOrder;
+  };
+
+  export type UserHeatmapMinOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    date?: SortOrder;
+    count?: SortOrder;
+  };
+
+  export type UserHeatmapSumOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    count?: SortOrder;
+  };
+
+  export type TagScalarRelationFilter = {
+    is?: TagWhereInput;
+    isNot?: TagWhereInput;
+  };
+
+  export type UserTagStatsUserIdTagIdCompoundUniqueInput = {
+    userId: number;
+    tagId: number;
+  };
+
+  export type UserTagStatsCountOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    tagId?: SortOrder;
+    postCount?: SortOrder;
+    updatedAt?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type UserTagStatsAvgOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    tagId?: SortOrder;
+    postCount?: SortOrder;
+  };
+
+  export type UserTagStatsMaxOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    tagId?: SortOrder;
+    postCount?: SortOrder;
+    updatedAt?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type UserTagStatsMinOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    tagId?: SortOrder;
+    postCount?: SortOrder;
+    updatedAt?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type UserTagStatsSumOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    tagId?: SortOrder;
+    postCount?: SortOrder;
   };
 
   export type PostTagListRelationFilter = {
@@ -16452,20 +25092,6 @@ export namespace Prisma {
     authorId?: SortOrder;
     likeCount?: SortOrder;
     commentCount?: SortOrder;
-  };
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string;
-    _count?: NestedIntFilter<$PrismaModel>;
-    _min?: NestedDateTimeFilter<$PrismaModel>;
-    _max?: NestedDateTimeFilter<$PrismaModel>;
   };
 
   export type FollowFollowerIdFollowedIdCompoundUniqueInput = {
@@ -16535,11 +25161,6 @@ export namespace Prisma {
   export type PostScalarRelationFilter = {
     is?: PostWhereInput;
     isNot?: PostWhereInput;
-  };
-
-  export type TagScalarRelationFilter = {
-    is?: TagWhereInput;
-    isNot?: TagWhereInput;
   };
 
   export type PostTagPostIdTagIdCompoundUniqueInput = {
@@ -16654,122 +25275,263 @@ export namespace Prisma {
     authorId?: SortOrder;
   };
 
-  export type likePostIdUserIdCompoundUniqueInput = {
+  export type LikePostIdUserIdCompoundUniqueInput = {
     postId: number;
     userId: number;
   };
 
-  export type likeCountOrderByAggregateInput = {
+  export type LikeCountOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
     createdAt?: SortOrder;
   };
 
-  export type likeAvgOrderByAggregateInput = {
+  export type LikeAvgOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
   };
 
-  export type likeMaxOrderByAggregateInput = {
-    id?: SortOrder;
-    postId?: SortOrder;
-    userId?: SortOrder;
-    createdAt?: SortOrder;
-  };
-
-  export type likeMinOrderByAggregateInput = {
+  export type LikeMaxOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
     createdAt?: SortOrder;
   };
 
-  export type likeSumOrderByAggregateInput = {
+  export type LikeMinOrderByAggregateInput = {
+    id?: SortOrder;
+    postId?: SortOrder;
+    userId?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type LikeSumOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
   };
 
-  export type sharePostIdUserIdCompoundUniqueInput = {
+  export type SharePostIdUserIdCompoundUniqueInput = {
     postId: number;
     userId: number;
   };
 
-  export type shareCountOrderByAggregateInput = {
+  export type ShareCountOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
     createdAt?: SortOrder;
   };
 
-  export type shareAvgOrderByAggregateInput = {
+  export type ShareAvgOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
   };
 
-  export type shareMaxOrderByAggregateInput = {
-    id?: SortOrder;
-    postId?: SortOrder;
-    userId?: SortOrder;
-    createdAt?: SortOrder;
-  };
-
-  export type shareMinOrderByAggregateInput = {
+  export type ShareMaxOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
     createdAt?: SortOrder;
   };
 
-  export type shareSumOrderByAggregateInput = {
+  export type ShareMinOrderByAggregateInput = {
+    id?: SortOrder;
+    postId?: SortOrder;
+    userId?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type ShareSumOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
   };
 
-  export type feedPostIdUserIdCompoundUniqueInput = {
+  export type FeedPostIdUserIdCompoundUniqueInput = {
     postId: number;
     userId: number;
   };
 
-  export type feedCountOrderByAggregateInput = {
+  export type FeedCountOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
     createdAt?: SortOrder;
   };
 
-  export type feedAvgOrderByAggregateInput = {
+  export type FeedAvgOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
   };
 
-  export type feedMaxOrderByAggregateInput = {
+  export type FeedMaxOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
     createdAt?: SortOrder;
   };
 
-  export type feedMinOrderByAggregateInput = {
+  export type FeedMinOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
     createdAt?: SortOrder;
   };
 
-  export type feedSumOrderByAggregateInput = {
+  export type FeedSumOrderByAggregateInput = {
     id?: SortOrder;
     postId?: SortOrder;
     userId?: SortOrder;
+  };
+
+  export type FeedTrackCountOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    lastSeen?: SortOrder;
+  };
+
+  export type FeedTrackAvgOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+  };
+
+  export type FeedTrackMaxOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    lastSeen?: SortOrder;
+  };
+
+  export type FeedTrackMinOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+    lastSeen?: SortOrder;
+  };
+
+  export type FeedTrackSumOrderByAggregateInput = {
+    id?: SortOrder;
+    userId?: SortOrder;
+  };
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    lt?: number | IntFieldRefInput<$PrismaModel>;
+    lte?: number | IntFieldRefInput<$PrismaModel>;
+    gt?: number | IntFieldRefInput<$PrismaModel>;
+    gte?: number | IntFieldRefInput<$PrismaModel>;
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null;
+  };
+
+  export type EnumNotificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>;
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>;
+    not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType;
+  };
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolFilter<$PrismaModel> | boolean;
+  };
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null;
+    isNot?: UserWhereInput | null;
+  };
+
+  export type NotificationCountOrderByAggregateInput = {
+    id?: SortOrder;
+    recipientId?: SortOrder;
+    senderId?: SortOrder;
+    type?: SortOrder;
+    message?: SortOrder;
+    link?: SortOrder;
+    read?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type NotificationAvgOrderByAggregateInput = {
+    id?: SortOrder;
+    recipientId?: SortOrder;
+    senderId?: SortOrder;
+  };
+
+  export type NotificationMaxOrderByAggregateInput = {
+    id?: SortOrder;
+    recipientId?: SortOrder;
+    senderId?: SortOrder;
+    type?: SortOrder;
+    message?: SortOrder;
+    link?: SortOrder;
+    read?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type NotificationMinOrderByAggregateInput = {
+    id?: SortOrder;
+    recipientId?: SortOrder;
+    senderId?: SortOrder;
+    type?: SortOrder;
+    message?: SortOrder;
+    link?: SortOrder;
+    read?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type NotificationSumOrderByAggregateInput = {
+    id?: SortOrder;
+    recipientId?: SortOrder;
+    senderId?: SortOrder;
+  };
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    lt?: number | IntFieldRefInput<$PrismaModel>;
+    lte?: number | IntFieldRefInput<$PrismaModel>;
+    gt?: number | IntFieldRefInput<$PrismaModel>;
+    gte?: number | IntFieldRefInput<$PrismaModel>;
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _avg?: NestedFloatNullableFilter<$PrismaModel>;
+    _sum?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedIntNullableFilter<$PrismaModel>;
+    _max?: NestedIntNullableFilter<$PrismaModel>;
+  };
+
+  export type EnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>;
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>;
+    not?: NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedEnumNotificationTypeFilter<$PrismaModel>;
+    _max?: NestedEnumNotificationTypeFilter<$PrismaModel>;
+  };
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedBoolFilter<$PrismaModel>;
+    _max?: NestedBoolFilter<$PrismaModel>;
   };
 
   export type UserCreaterolesInput = {
     set: string[];
+  };
+
+  export type UserProfileCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserProfileCreateWithoutUserInput, UserProfileUncheckedCreateWithoutUserInput>;
+    connectOrCreate?: UserProfileCreateOrConnectWithoutUserInput;
+    connect?: UserProfileWhereUniqueInput;
   };
 
   export type PostCreateNestedManyWithoutAuthorInput = {
@@ -16784,24 +25546,60 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[];
   };
 
-  export type feedCreateNestedManyWithoutUserInput = {
+  export type UserTagStatsCreateNestedManyWithoutUserInput = {
     create?:
-      | XOR<feedCreateWithoutUserInput, feedUncheckedCreateWithoutUserInput>
-      | feedCreateWithoutUserInput[]
-      | feedUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: feedCreateOrConnectWithoutUserInput | feedCreateOrConnectWithoutUserInput[];
-    createMany?: feedCreateManyUserInputEnvelope;
-    connect?: feedWhereUniqueInput | feedWhereUniqueInput[];
+      | XOR<UserTagStatsCreateWithoutUserInput, UserTagStatsUncheckedCreateWithoutUserInput>
+      | UserTagStatsCreateWithoutUserInput[]
+      | UserTagStatsUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | UserTagStatsCreateOrConnectWithoutUserInput
+      | UserTagStatsCreateOrConnectWithoutUserInput[];
+    createMany?: UserTagStatsCreateManyUserInputEnvelope;
+    connect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
   };
 
-  export type likeCreateNestedManyWithoutUserInput = {
+  export type FeedCreateNestedManyWithoutUserInput = {
     create?:
-      | XOR<likeCreateWithoutUserInput, likeUncheckedCreateWithoutUserInput>
-      | likeCreateWithoutUserInput[]
-      | likeUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: likeCreateOrConnectWithoutUserInput | likeCreateOrConnectWithoutUserInput[];
-    createMany?: likeCreateManyUserInputEnvelope;
-    connect?: likeWhereUniqueInput | likeWhereUniqueInput[];
+      | XOR<FeedCreateWithoutUserInput, FeedUncheckedCreateWithoutUserInput>
+      | FeedCreateWithoutUserInput[]
+      | FeedUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: FeedCreateOrConnectWithoutUserInput | FeedCreateOrConnectWithoutUserInput[];
+    createMany?: FeedCreateManyUserInputEnvelope;
+    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+  };
+
+  export type FeedTrackCreateNestedManyWithoutUserInput = {
+    create?:
+      | XOR<FeedTrackCreateWithoutUserInput, FeedTrackUncheckedCreateWithoutUserInput>
+      | FeedTrackCreateWithoutUserInput[]
+      | FeedTrackUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | FeedTrackCreateOrConnectWithoutUserInput
+      | FeedTrackCreateOrConnectWithoutUserInput[];
+    createMany?: FeedTrackCreateManyUserInputEnvelope;
+    connect?: FeedTrackWhereUniqueInput | FeedTrackWhereUniqueInput[];
+  };
+
+  export type UserHeatmapCreateNestedManyWithoutUserInput = {
+    create?:
+      | XOR<UserHeatmapCreateWithoutUserInput, UserHeatmapUncheckedCreateWithoutUserInput>
+      | UserHeatmapCreateWithoutUserInput[]
+      | UserHeatmapUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | UserHeatmapCreateOrConnectWithoutUserInput
+      | UserHeatmapCreateOrConnectWithoutUserInput[];
+    createMany?: UserHeatmapCreateManyUserInputEnvelope;
+    connect?: UserHeatmapWhereUniqueInput | UserHeatmapWhereUniqueInput[];
+  };
+
+  export type LikeCreateNestedManyWithoutUserInput = {
+    create?:
+      | XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput>
+      | LikeCreateWithoutUserInput[]
+      | LikeUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[];
+    createMany?: LikeCreateManyUserInputEnvelope;
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
   };
 
   export type CommentCreateNestedManyWithoutAuthorInput = {
@@ -16816,14 +25614,14 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[];
   };
 
-  export type shareCreateNestedManyWithoutUserInput = {
+  export type ShareCreateNestedManyWithoutUserInput = {
     create?:
-      | XOR<shareCreateWithoutUserInput, shareUncheckedCreateWithoutUserInput>
-      | shareCreateWithoutUserInput[]
-      | shareUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: shareCreateOrConnectWithoutUserInput | shareCreateOrConnectWithoutUserInput[];
-    createMany?: shareCreateManyUserInputEnvelope;
-    connect?: shareWhereUniqueInput | shareWhereUniqueInput[];
+      | XOR<ShareCreateWithoutUserInput, ShareUncheckedCreateWithoutUserInput>
+      | ShareCreateWithoutUserInput[]
+      | ShareUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: ShareCreateOrConnectWithoutUserInput | ShareCreateOrConnectWithoutUserInput[];
+    createMany?: ShareCreateManyUserInputEnvelope;
+    connect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
   };
 
   export type TagFollowCreateNestedManyWithoutUserInput = {
@@ -16862,6 +25660,39 @@ export namespace Prisma {
     connect?: FollowWhereUniqueInput | FollowWhereUniqueInput[];
   };
 
+  export type NotificationCreateNestedManyWithoutSenderInput = {
+    create?:
+      | XOR<NotificationCreateWithoutSenderInput, NotificationUncheckedCreateWithoutSenderInput>
+      | NotificationCreateWithoutSenderInput[]
+      | NotificationUncheckedCreateWithoutSenderInput[];
+    connectOrCreate?:
+      | NotificationCreateOrConnectWithoutSenderInput
+      | NotificationCreateOrConnectWithoutSenderInput[];
+    createMany?: NotificationCreateManySenderInputEnvelope;
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+  };
+
+  export type NotificationCreateNestedManyWithoutRecipientInput = {
+    create?:
+      | XOR<
+          NotificationCreateWithoutRecipientInput,
+          NotificationUncheckedCreateWithoutRecipientInput
+        >
+      | NotificationCreateWithoutRecipientInput[]
+      | NotificationUncheckedCreateWithoutRecipientInput[];
+    connectOrCreate?:
+      | NotificationCreateOrConnectWithoutRecipientInput
+      | NotificationCreateOrConnectWithoutRecipientInput[];
+    createMany?: NotificationCreateManyRecipientInputEnvelope;
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+  };
+
+  export type UserProfileUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserProfileCreateWithoutUserInput, UserProfileUncheckedCreateWithoutUserInput>;
+    connectOrCreate?: UserProfileCreateOrConnectWithoutUserInput;
+    connect?: UserProfileWhereUniqueInput;
+  };
+
   export type PostUncheckedCreateNestedManyWithoutAuthorInput = {
     create?:
       | XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
@@ -16874,24 +25705,60 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[];
   };
 
-  export type feedUncheckedCreateNestedManyWithoutUserInput = {
+  export type UserTagStatsUncheckedCreateNestedManyWithoutUserInput = {
     create?:
-      | XOR<feedCreateWithoutUserInput, feedUncheckedCreateWithoutUserInput>
-      | feedCreateWithoutUserInput[]
-      | feedUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: feedCreateOrConnectWithoutUserInput | feedCreateOrConnectWithoutUserInput[];
-    createMany?: feedCreateManyUserInputEnvelope;
-    connect?: feedWhereUniqueInput | feedWhereUniqueInput[];
+      | XOR<UserTagStatsCreateWithoutUserInput, UserTagStatsUncheckedCreateWithoutUserInput>
+      | UserTagStatsCreateWithoutUserInput[]
+      | UserTagStatsUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | UserTagStatsCreateOrConnectWithoutUserInput
+      | UserTagStatsCreateOrConnectWithoutUserInput[];
+    createMany?: UserTagStatsCreateManyUserInputEnvelope;
+    connect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
   };
 
-  export type likeUncheckedCreateNestedManyWithoutUserInput = {
+  export type FeedUncheckedCreateNestedManyWithoutUserInput = {
     create?:
-      | XOR<likeCreateWithoutUserInput, likeUncheckedCreateWithoutUserInput>
-      | likeCreateWithoutUserInput[]
-      | likeUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: likeCreateOrConnectWithoutUserInput | likeCreateOrConnectWithoutUserInput[];
-    createMany?: likeCreateManyUserInputEnvelope;
-    connect?: likeWhereUniqueInput | likeWhereUniqueInput[];
+      | XOR<FeedCreateWithoutUserInput, FeedUncheckedCreateWithoutUserInput>
+      | FeedCreateWithoutUserInput[]
+      | FeedUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: FeedCreateOrConnectWithoutUserInput | FeedCreateOrConnectWithoutUserInput[];
+    createMany?: FeedCreateManyUserInputEnvelope;
+    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+  };
+
+  export type FeedTrackUncheckedCreateNestedManyWithoutUserInput = {
+    create?:
+      | XOR<FeedTrackCreateWithoutUserInput, FeedTrackUncheckedCreateWithoutUserInput>
+      | FeedTrackCreateWithoutUserInput[]
+      | FeedTrackUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | FeedTrackCreateOrConnectWithoutUserInput
+      | FeedTrackCreateOrConnectWithoutUserInput[];
+    createMany?: FeedTrackCreateManyUserInputEnvelope;
+    connect?: FeedTrackWhereUniqueInput | FeedTrackWhereUniqueInput[];
+  };
+
+  export type UserHeatmapUncheckedCreateNestedManyWithoutUserInput = {
+    create?:
+      | XOR<UserHeatmapCreateWithoutUserInput, UserHeatmapUncheckedCreateWithoutUserInput>
+      | UserHeatmapCreateWithoutUserInput[]
+      | UserHeatmapUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | UserHeatmapCreateOrConnectWithoutUserInput
+      | UserHeatmapCreateOrConnectWithoutUserInput[];
+    createMany?: UserHeatmapCreateManyUserInputEnvelope;
+    connect?: UserHeatmapWhereUniqueInput | UserHeatmapWhereUniqueInput[];
+  };
+
+  export type LikeUncheckedCreateNestedManyWithoutUserInput = {
+    create?:
+      | XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput>
+      | LikeCreateWithoutUserInput[]
+      | LikeUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[];
+    createMany?: LikeCreateManyUserInputEnvelope;
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
   };
 
   export type CommentUncheckedCreateNestedManyWithoutAuthorInput = {
@@ -16906,14 +25773,14 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[];
   };
 
-  export type shareUncheckedCreateNestedManyWithoutUserInput = {
+  export type ShareUncheckedCreateNestedManyWithoutUserInput = {
     create?:
-      | XOR<shareCreateWithoutUserInput, shareUncheckedCreateWithoutUserInput>
-      | shareCreateWithoutUserInput[]
-      | shareUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: shareCreateOrConnectWithoutUserInput | shareCreateOrConnectWithoutUserInput[];
-    createMany?: shareCreateManyUserInputEnvelope;
-    connect?: shareWhereUniqueInput | shareWhereUniqueInput[];
+      | XOR<ShareCreateWithoutUserInput, ShareUncheckedCreateWithoutUserInput>
+      | ShareCreateWithoutUserInput[]
+      | ShareUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: ShareCreateOrConnectWithoutUserInput | ShareCreateOrConnectWithoutUserInput[];
+    createMany?: ShareCreateManyUserInputEnvelope;
+    connect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
   };
 
   export type TagFollowUncheckedCreateNestedManyWithoutUserInput = {
@@ -16952,6 +25819,33 @@ export namespace Prisma {
     connect?: FollowWhereUniqueInput | FollowWhereUniqueInput[];
   };
 
+  export type NotificationUncheckedCreateNestedManyWithoutSenderInput = {
+    create?:
+      | XOR<NotificationCreateWithoutSenderInput, NotificationUncheckedCreateWithoutSenderInput>
+      | NotificationCreateWithoutSenderInput[]
+      | NotificationUncheckedCreateWithoutSenderInput[];
+    connectOrCreate?:
+      | NotificationCreateOrConnectWithoutSenderInput
+      | NotificationCreateOrConnectWithoutSenderInput[];
+    createMany?: NotificationCreateManySenderInputEnvelope;
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+  };
+
+  export type NotificationUncheckedCreateNestedManyWithoutRecipientInput = {
+    create?:
+      | XOR<
+          NotificationCreateWithoutRecipientInput,
+          NotificationUncheckedCreateWithoutRecipientInput
+        >
+      | NotificationCreateWithoutRecipientInput[]
+      | NotificationUncheckedCreateWithoutRecipientInput[];
+    connectOrCreate?:
+      | NotificationCreateOrConnectWithoutRecipientInput
+      | NotificationCreateOrConnectWithoutRecipientInput[];
+    createMany?: NotificationCreateManyRecipientInputEnvelope;
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+  };
+
   export type StringFieldUpdateOperationsInput = {
     set?: string;
   };
@@ -16963,6 +25857,19 @@ export namespace Prisma {
   export type UserUpdaterolesInput = {
     set?: string[];
     push?: string | string[];
+  };
+
+  export type UserProfileUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserProfileCreateWithoutUserInput, UserProfileUncheckedCreateWithoutUserInput>;
+    connectOrCreate?: UserProfileCreateOrConnectWithoutUserInput;
+    upsert?: UserProfileUpsertWithoutUserInput;
+    disconnect?: UserProfileWhereInput | boolean;
+    delete?: UserProfileWhereInput | boolean;
+    connect?: UserProfileWhereUniqueInput;
+    update?: XOR<
+      XOR<UserProfileUpdateToOneWithWhereWithoutUserInput, UserProfileUpdateWithoutUserInput>,
+      UserProfileUncheckedUpdateWithoutUserInput
+    >;
   };
 
   export type PostUpdateManyWithoutAuthorNestedInput = {
@@ -16990,50 +25897,125 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[];
   };
 
-  export type feedUpdateManyWithoutUserNestedInput = {
+  export type UserTagStatsUpdateManyWithoutUserNestedInput = {
     create?:
-      | XOR<feedCreateWithoutUserInput, feedUncheckedCreateWithoutUserInput>
-      | feedCreateWithoutUserInput[]
-      | feedUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: feedCreateOrConnectWithoutUserInput | feedCreateOrConnectWithoutUserInput[];
+      | XOR<UserTagStatsCreateWithoutUserInput, UserTagStatsUncheckedCreateWithoutUserInput>
+      | UserTagStatsCreateWithoutUserInput[]
+      | UserTagStatsUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | UserTagStatsCreateOrConnectWithoutUserInput
+      | UserTagStatsCreateOrConnectWithoutUserInput[];
     upsert?:
-      | feedUpsertWithWhereUniqueWithoutUserInput
-      | feedUpsertWithWhereUniqueWithoutUserInput[];
-    createMany?: feedCreateManyUserInputEnvelope;
-    set?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    disconnect?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    delete?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    connect?: feedWhereUniqueInput | feedWhereUniqueInput[];
+      | UserTagStatsUpsertWithWhereUniqueWithoutUserInput
+      | UserTagStatsUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: UserTagStatsCreateManyUserInputEnvelope;
+    set?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    disconnect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    delete?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    connect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
     update?:
-      | feedUpdateWithWhereUniqueWithoutUserInput
-      | feedUpdateWithWhereUniqueWithoutUserInput[];
+      | UserTagStatsUpdateWithWhereUniqueWithoutUserInput
+      | UserTagStatsUpdateWithWhereUniqueWithoutUserInput[];
     updateMany?:
-      | feedUpdateManyWithWhereWithoutUserInput
-      | feedUpdateManyWithWhereWithoutUserInput[];
-    deleteMany?: feedScalarWhereInput | feedScalarWhereInput[];
+      | UserTagStatsUpdateManyWithWhereWithoutUserInput
+      | UserTagStatsUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: UserTagStatsScalarWhereInput | UserTagStatsScalarWhereInput[];
   };
 
-  export type likeUpdateManyWithoutUserNestedInput = {
+  export type FeedUpdateManyWithoutUserNestedInput = {
     create?:
-      | XOR<likeCreateWithoutUserInput, likeUncheckedCreateWithoutUserInput>
-      | likeCreateWithoutUserInput[]
-      | likeUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: likeCreateOrConnectWithoutUserInput | likeCreateOrConnectWithoutUserInput[];
+      | XOR<FeedCreateWithoutUserInput, FeedUncheckedCreateWithoutUserInput>
+      | FeedCreateWithoutUserInput[]
+      | FeedUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: FeedCreateOrConnectWithoutUserInput | FeedCreateOrConnectWithoutUserInput[];
     upsert?:
-      | likeUpsertWithWhereUniqueWithoutUserInput
-      | likeUpsertWithWhereUniqueWithoutUserInput[];
-    createMany?: likeCreateManyUserInputEnvelope;
-    set?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    disconnect?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    delete?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    connect?: likeWhereUniqueInput | likeWhereUniqueInput[];
+      | FeedUpsertWithWhereUniqueWithoutUserInput
+      | FeedUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: FeedCreateManyUserInputEnvelope;
+    set?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    disconnect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    delete?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
     update?:
-      | likeUpdateWithWhereUniqueWithoutUserInput
-      | likeUpdateWithWhereUniqueWithoutUserInput[];
+      | FeedUpdateWithWhereUniqueWithoutUserInput
+      | FeedUpdateWithWhereUniqueWithoutUserInput[];
     updateMany?:
-      | likeUpdateManyWithWhereWithoutUserInput
-      | likeUpdateManyWithWhereWithoutUserInput[];
-    deleteMany?: likeScalarWhereInput | likeScalarWhereInput[];
+      | FeedUpdateManyWithWhereWithoutUserInput
+      | FeedUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: FeedScalarWhereInput | FeedScalarWhereInput[];
+  };
+
+  export type FeedTrackUpdateManyWithoutUserNestedInput = {
+    create?:
+      | XOR<FeedTrackCreateWithoutUserInput, FeedTrackUncheckedCreateWithoutUserInput>
+      | FeedTrackCreateWithoutUserInput[]
+      | FeedTrackUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | FeedTrackCreateOrConnectWithoutUserInput
+      | FeedTrackCreateOrConnectWithoutUserInput[];
+    upsert?:
+      | FeedTrackUpsertWithWhereUniqueWithoutUserInput
+      | FeedTrackUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: FeedTrackCreateManyUserInputEnvelope;
+    set?: FeedTrackWhereUniqueInput | FeedTrackWhereUniqueInput[];
+    disconnect?: FeedTrackWhereUniqueInput | FeedTrackWhereUniqueInput[];
+    delete?: FeedTrackWhereUniqueInput | FeedTrackWhereUniqueInput[];
+    connect?: FeedTrackWhereUniqueInput | FeedTrackWhereUniqueInput[];
+    update?:
+      | FeedTrackUpdateWithWhereUniqueWithoutUserInput
+      | FeedTrackUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?:
+      | FeedTrackUpdateManyWithWhereWithoutUserInput
+      | FeedTrackUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: FeedTrackScalarWhereInput | FeedTrackScalarWhereInput[];
+  };
+
+  export type UserHeatmapUpdateManyWithoutUserNestedInput = {
+    create?:
+      | XOR<UserHeatmapCreateWithoutUserInput, UserHeatmapUncheckedCreateWithoutUserInput>
+      | UserHeatmapCreateWithoutUserInput[]
+      | UserHeatmapUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | UserHeatmapCreateOrConnectWithoutUserInput
+      | UserHeatmapCreateOrConnectWithoutUserInput[];
+    upsert?:
+      | UserHeatmapUpsertWithWhereUniqueWithoutUserInput
+      | UserHeatmapUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: UserHeatmapCreateManyUserInputEnvelope;
+    set?: UserHeatmapWhereUniqueInput | UserHeatmapWhereUniqueInput[];
+    disconnect?: UserHeatmapWhereUniqueInput | UserHeatmapWhereUniqueInput[];
+    delete?: UserHeatmapWhereUniqueInput | UserHeatmapWhereUniqueInput[];
+    connect?: UserHeatmapWhereUniqueInput | UserHeatmapWhereUniqueInput[];
+    update?:
+      | UserHeatmapUpdateWithWhereUniqueWithoutUserInput
+      | UserHeatmapUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?:
+      | UserHeatmapUpdateManyWithWhereWithoutUserInput
+      | UserHeatmapUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: UserHeatmapScalarWhereInput | UserHeatmapScalarWhereInput[];
+  };
+
+  export type LikeUpdateManyWithoutUserNestedInput = {
+    create?:
+      | XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput>
+      | LikeCreateWithoutUserInput[]
+      | LikeUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[];
+    upsert?:
+      | LikeUpsertWithWhereUniqueWithoutUserInput
+      | LikeUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: LikeCreateManyUserInputEnvelope;
+    set?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    disconnect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    delete?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    update?:
+      | LikeUpdateWithWhereUniqueWithoutUserInput
+      | LikeUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?:
+      | LikeUpdateManyWithWhereWithoutUserInput
+      | LikeUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[];
   };
 
   export type CommentUpdateManyWithoutAuthorNestedInput = {
@@ -17061,27 +26043,27 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[];
   };
 
-  export type shareUpdateManyWithoutUserNestedInput = {
+  export type ShareUpdateManyWithoutUserNestedInput = {
     create?:
-      | XOR<shareCreateWithoutUserInput, shareUncheckedCreateWithoutUserInput>
-      | shareCreateWithoutUserInput[]
-      | shareUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: shareCreateOrConnectWithoutUserInput | shareCreateOrConnectWithoutUserInput[];
+      | XOR<ShareCreateWithoutUserInput, ShareUncheckedCreateWithoutUserInput>
+      | ShareCreateWithoutUserInput[]
+      | ShareUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: ShareCreateOrConnectWithoutUserInput | ShareCreateOrConnectWithoutUserInput[];
     upsert?:
-      | shareUpsertWithWhereUniqueWithoutUserInput
-      | shareUpsertWithWhereUniqueWithoutUserInput[];
-    createMany?: shareCreateManyUserInputEnvelope;
-    set?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    disconnect?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    delete?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    connect?: shareWhereUniqueInput | shareWhereUniqueInput[];
+      | ShareUpsertWithWhereUniqueWithoutUserInput
+      | ShareUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: ShareCreateManyUserInputEnvelope;
+    set?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    disconnect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    delete?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    connect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
     update?:
-      | shareUpdateWithWhereUniqueWithoutUserInput
-      | shareUpdateWithWhereUniqueWithoutUserInput[];
+      | ShareUpdateWithWhereUniqueWithoutUserInput
+      | ShareUpdateWithWhereUniqueWithoutUserInput[];
     updateMany?:
-      | shareUpdateManyWithWhereWithoutUserInput
-      | shareUpdateManyWithWhereWithoutUserInput[];
-    deleteMany?: shareScalarWhereInput | shareScalarWhereInput[];
+      | ShareUpdateManyWithWhereWithoutUserInput
+      | ShareUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: ShareScalarWhereInput | ShareScalarWhereInput[];
   };
 
   export type TagFollowUpdateManyWithoutUserNestedInput = {
@@ -17159,12 +26141,78 @@ export namespace Prisma {
     deleteMany?: FollowScalarWhereInput | FollowScalarWhereInput[];
   };
 
+  export type NotificationUpdateManyWithoutSenderNestedInput = {
+    create?:
+      | XOR<NotificationCreateWithoutSenderInput, NotificationUncheckedCreateWithoutSenderInput>
+      | NotificationCreateWithoutSenderInput[]
+      | NotificationUncheckedCreateWithoutSenderInput[];
+    connectOrCreate?:
+      | NotificationCreateOrConnectWithoutSenderInput
+      | NotificationCreateOrConnectWithoutSenderInput[];
+    upsert?:
+      | NotificationUpsertWithWhereUniqueWithoutSenderInput
+      | NotificationUpsertWithWhereUniqueWithoutSenderInput[];
+    createMany?: NotificationCreateManySenderInputEnvelope;
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    update?:
+      | NotificationUpdateWithWhereUniqueWithoutSenderInput
+      | NotificationUpdateWithWhereUniqueWithoutSenderInput[];
+    updateMany?:
+      | NotificationUpdateManyWithWhereWithoutSenderInput
+      | NotificationUpdateManyWithWhereWithoutSenderInput[];
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[];
+  };
+
+  export type NotificationUpdateManyWithoutRecipientNestedInput = {
+    create?:
+      | XOR<
+          NotificationCreateWithoutRecipientInput,
+          NotificationUncheckedCreateWithoutRecipientInput
+        >
+      | NotificationCreateWithoutRecipientInput[]
+      | NotificationUncheckedCreateWithoutRecipientInput[];
+    connectOrCreate?:
+      | NotificationCreateOrConnectWithoutRecipientInput
+      | NotificationCreateOrConnectWithoutRecipientInput[];
+    upsert?:
+      | NotificationUpsertWithWhereUniqueWithoutRecipientInput
+      | NotificationUpsertWithWhereUniqueWithoutRecipientInput[];
+    createMany?: NotificationCreateManyRecipientInputEnvelope;
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    update?:
+      | NotificationUpdateWithWhereUniqueWithoutRecipientInput
+      | NotificationUpdateWithWhereUniqueWithoutRecipientInput[];
+    updateMany?:
+      | NotificationUpdateManyWithWhereWithoutRecipientInput
+      | NotificationUpdateManyWithWhereWithoutRecipientInput[];
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[];
+  };
+
   export type IntFieldUpdateOperationsInput = {
     set?: number;
     increment?: number;
     decrement?: number;
     multiply?: number;
     divide?: number;
+  };
+
+  export type UserProfileUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserProfileCreateWithoutUserInput, UserProfileUncheckedCreateWithoutUserInput>;
+    connectOrCreate?: UserProfileCreateOrConnectWithoutUserInput;
+    upsert?: UserProfileUpsertWithoutUserInput;
+    disconnect?: UserProfileWhereInput | boolean;
+    delete?: UserProfileWhereInput | boolean;
+    connect?: UserProfileWhereUniqueInput;
+    update?: XOR<
+      XOR<UserProfileUpdateToOneWithWhereWithoutUserInput, UserProfileUpdateWithoutUserInput>,
+      UserProfileUncheckedUpdateWithoutUserInput
+    >;
   };
 
   export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
@@ -17192,50 +26240,125 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[];
   };
 
-  export type feedUncheckedUpdateManyWithoutUserNestedInput = {
+  export type UserTagStatsUncheckedUpdateManyWithoutUserNestedInput = {
     create?:
-      | XOR<feedCreateWithoutUserInput, feedUncheckedCreateWithoutUserInput>
-      | feedCreateWithoutUserInput[]
-      | feedUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: feedCreateOrConnectWithoutUserInput | feedCreateOrConnectWithoutUserInput[];
+      | XOR<UserTagStatsCreateWithoutUserInput, UserTagStatsUncheckedCreateWithoutUserInput>
+      | UserTagStatsCreateWithoutUserInput[]
+      | UserTagStatsUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | UserTagStatsCreateOrConnectWithoutUserInput
+      | UserTagStatsCreateOrConnectWithoutUserInput[];
     upsert?:
-      | feedUpsertWithWhereUniqueWithoutUserInput
-      | feedUpsertWithWhereUniqueWithoutUserInput[];
-    createMany?: feedCreateManyUserInputEnvelope;
-    set?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    disconnect?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    delete?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    connect?: feedWhereUniqueInput | feedWhereUniqueInput[];
+      | UserTagStatsUpsertWithWhereUniqueWithoutUserInput
+      | UserTagStatsUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: UserTagStatsCreateManyUserInputEnvelope;
+    set?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    disconnect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    delete?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    connect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
     update?:
-      | feedUpdateWithWhereUniqueWithoutUserInput
-      | feedUpdateWithWhereUniqueWithoutUserInput[];
+      | UserTagStatsUpdateWithWhereUniqueWithoutUserInput
+      | UserTagStatsUpdateWithWhereUniqueWithoutUserInput[];
     updateMany?:
-      | feedUpdateManyWithWhereWithoutUserInput
-      | feedUpdateManyWithWhereWithoutUserInput[];
-    deleteMany?: feedScalarWhereInput | feedScalarWhereInput[];
+      | UserTagStatsUpdateManyWithWhereWithoutUserInput
+      | UserTagStatsUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: UserTagStatsScalarWhereInput | UserTagStatsScalarWhereInput[];
   };
 
-  export type likeUncheckedUpdateManyWithoutUserNestedInput = {
+  export type FeedUncheckedUpdateManyWithoutUserNestedInput = {
     create?:
-      | XOR<likeCreateWithoutUserInput, likeUncheckedCreateWithoutUserInput>
-      | likeCreateWithoutUserInput[]
-      | likeUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: likeCreateOrConnectWithoutUserInput | likeCreateOrConnectWithoutUserInput[];
+      | XOR<FeedCreateWithoutUserInput, FeedUncheckedCreateWithoutUserInput>
+      | FeedCreateWithoutUserInput[]
+      | FeedUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: FeedCreateOrConnectWithoutUserInput | FeedCreateOrConnectWithoutUserInput[];
     upsert?:
-      | likeUpsertWithWhereUniqueWithoutUserInput
-      | likeUpsertWithWhereUniqueWithoutUserInput[];
-    createMany?: likeCreateManyUserInputEnvelope;
-    set?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    disconnect?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    delete?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    connect?: likeWhereUniqueInput | likeWhereUniqueInput[];
+      | FeedUpsertWithWhereUniqueWithoutUserInput
+      | FeedUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: FeedCreateManyUserInputEnvelope;
+    set?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    disconnect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    delete?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
     update?:
-      | likeUpdateWithWhereUniqueWithoutUserInput
-      | likeUpdateWithWhereUniqueWithoutUserInput[];
+      | FeedUpdateWithWhereUniqueWithoutUserInput
+      | FeedUpdateWithWhereUniqueWithoutUserInput[];
     updateMany?:
-      | likeUpdateManyWithWhereWithoutUserInput
-      | likeUpdateManyWithWhereWithoutUserInput[];
-    deleteMany?: likeScalarWhereInput | likeScalarWhereInput[];
+      | FeedUpdateManyWithWhereWithoutUserInput
+      | FeedUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: FeedScalarWhereInput | FeedScalarWhereInput[];
+  };
+
+  export type FeedTrackUncheckedUpdateManyWithoutUserNestedInput = {
+    create?:
+      | XOR<FeedTrackCreateWithoutUserInput, FeedTrackUncheckedCreateWithoutUserInput>
+      | FeedTrackCreateWithoutUserInput[]
+      | FeedTrackUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | FeedTrackCreateOrConnectWithoutUserInput
+      | FeedTrackCreateOrConnectWithoutUserInput[];
+    upsert?:
+      | FeedTrackUpsertWithWhereUniqueWithoutUserInput
+      | FeedTrackUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: FeedTrackCreateManyUserInputEnvelope;
+    set?: FeedTrackWhereUniqueInput | FeedTrackWhereUniqueInput[];
+    disconnect?: FeedTrackWhereUniqueInput | FeedTrackWhereUniqueInput[];
+    delete?: FeedTrackWhereUniqueInput | FeedTrackWhereUniqueInput[];
+    connect?: FeedTrackWhereUniqueInput | FeedTrackWhereUniqueInput[];
+    update?:
+      | FeedTrackUpdateWithWhereUniqueWithoutUserInput
+      | FeedTrackUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?:
+      | FeedTrackUpdateManyWithWhereWithoutUserInput
+      | FeedTrackUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: FeedTrackScalarWhereInput | FeedTrackScalarWhereInput[];
+  };
+
+  export type UserHeatmapUncheckedUpdateManyWithoutUserNestedInput = {
+    create?:
+      | XOR<UserHeatmapCreateWithoutUserInput, UserHeatmapUncheckedCreateWithoutUserInput>
+      | UserHeatmapCreateWithoutUserInput[]
+      | UserHeatmapUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | UserHeatmapCreateOrConnectWithoutUserInput
+      | UserHeatmapCreateOrConnectWithoutUserInput[];
+    upsert?:
+      | UserHeatmapUpsertWithWhereUniqueWithoutUserInput
+      | UserHeatmapUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: UserHeatmapCreateManyUserInputEnvelope;
+    set?: UserHeatmapWhereUniqueInput | UserHeatmapWhereUniqueInput[];
+    disconnect?: UserHeatmapWhereUniqueInput | UserHeatmapWhereUniqueInput[];
+    delete?: UserHeatmapWhereUniqueInput | UserHeatmapWhereUniqueInput[];
+    connect?: UserHeatmapWhereUniqueInput | UserHeatmapWhereUniqueInput[];
+    update?:
+      | UserHeatmapUpdateWithWhereUniqueWithoutUserInput
+      | UserHeatmapUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?:
+      | UserHeatmapUpdateManyWithWhereWithoutUserInput
+      | UserHeatmapUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: UserHeatmapScalarWhereInput | UserHeatmapScalarWhereInput[];
+  };
+
+  export type LikeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?:
+      | XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput>
+      | LikeCreateWithoutUserInput[]
+      | LikeUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[];
+    upsert?:
+      | LikeUpsertWithWhereUniqueWithoutUserInput
+      | LikeUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: LikeCreateManyUserInputEnvelope;
+    set?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    disconnect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    delete?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    update?:
+      | LikeUpdateWithWhereUniqueWithoutUserInput
+      | LikeUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?:
+      | LikeUpdateManyWithWhereWithoutUserInput
+      | LikeUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[];
   };
 
   export type CommentUncheckedUpdateManyWithoutAuthorNestedInput = {
@@ -17263,27 +26386,27 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[];
   };
 
-  export type shareUncheckedUpdateManyWithoutUserNestedInput = {
+  export type ShareUncheckedUpdateManyWithoutUserNestedInput = {
     create?:
-      | XOR<shareCreateWithoutUserInput, shareUncheckedCreateWithoutUserInput>
-      | shareCreateWithoutUserInput[]
-      | shareUncheckedCreateWithoutUserInput[];
-    connectOrCreate?: shareCreateOrConnectWithoutUserInput | shareCreateOrConnectWithoutUserInput[];
+      | XOR<ShareCreateWithoutUserInput, ShareUncheckedCreateWithoutUserInput>
+      | ShareCreateWithoutUserInput[]
+      | ShareUncheckedCreateWithoutUserInput[];
+    connectOrCreate?: ShareCreateOrConnectWithoutUserInput | ShareCreateOrConnectWithoutUserInput[];
     upsert?:
-      | shareUpsertWithWhereUniqueWithoutUserInput
-      | shareUpsertWithWhereUniqueWithoutUserInput[];
-    createMany?: shareCreateManyUserInputEnvelope;
-    set?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    disconnect?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    delete?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    connect?: shareWhereUniqueInput | shareWhereUniqueInput[];
+      | ShareUpsertWithWhereUniqueWithoutUserInput
+      | ShareUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: ShareCreateManyUserInputEnvelope;
+    set?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    disconnect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    delete?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    connect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
     update?:
-      | shareUpdateWithWhereUniqueWithoutUserInput
-      | shareUpdateWithWhereUniqueWithoutUserInput[];
+      | ShareUpdateWithWhereUniqueWithoutUserInput
+      | ShareUpdateWithWhereUniqueWithoutUserInput[];
     updateMany?:
-      | shareUpdateManyWithWhereWithoutUserInput
-      | shareUpdateManyWithWhereWithoutUserInput[];
-    deleteMany?: shareScalarWhereInput | shareScalarWhereInput[];
+      | ShareUpdateManyWithWhereWithoutUserInput
+      | ShareUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: ShareScalarWhereInput | ShareScalarWhereInput[];
   };
 
   export type TagFollowUncheckedUpdateManyWithoutUserNestedInput = {
@@ -17361,6 +26484,148 @@ export namespace Prisma {
     deleteMany?: FollowScalarWhereInput | FollowScalarWhereInput[];
   };
 
+  export type NotificationUncheckedUpdateManyWithoutSenderNestedInput = {
+    create?:
+      | XOR<NotificationCreateWithoutSenderInput, NotificationUncheckedCreateWithoutSenderInput>
+      | NotificationCreateWithoutSenderInput[]
+      | NotificationUncheckedCreateWithoutSenderInput[];
+    connectOrCreate?:
+      | NotificationCreateOrConnectWithoutSenderInput
+      | NotificationCreateOrConnectWithoutSenderInput[];
+    upsert?:
+      | NotificationUpsertWithWhereUniqueWithoutSenderInput
+      | NotificationUpsertWithWhereUniqueWithoutSenderInput[];
+    createMany?: NotificationCreateManySenderInputEnvelope;
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    update?:
+      | NotificationUpdateWithWhereUniqueWithoutSenderInput
+      | NotificationUpdateWithWhereUniqueWithoutSenderInput[];
+    updateMany?:
+      | NotificationUpdateManyWithWhereWithoutSenderInput
+      | NotificationUpdateManyWithWhereWithoutSenderInput[];
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[];
+  };
+
+  export type NotificationUncheckedUpdateManyWithoutRecipientNestedInput = {
+    create?:
+      | XOR<
+          NotificationCreateWithoutRecipientInput,
+          NotificationUncheckedCreateWithoutRecipientInput
+        >
+      | NotificationCreateWithoutRecipientInput[]
+      | NotificationUncheckedCreateWithoutRecipientInput[];
+    connectOrCreate?:
+      | NotificationCreateOrConnectWithoutRecipientInput
+      | NotificationCreateOrConnectWithoutRecipientInput[];
+    upsert?:
+      | NotificationUpsertWithWhereUniqueWithoutRecipientInput
+      | NotificationUpsertWithWhereUniqueWithoutRecipientInput[];
+    createMany?: NotificationCreateManyRecipientInputEnvelope;
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[];
+    update?:
+      | NotificationUpdateWithWhereUniqueWithoutRecipientInput
+      | NotificationUpdateWithWhereUniqueWithoutRecipientInput[];
+    updateMany?:
+      | NotificationUpdateManyWithWhereWithoutRecipientInput
+      | NotificationUpdateManyWithWhereWithoutRecipientInput[];
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[];
+  };
+
+  export type UserProfileCreateinterestsInput = {
+    set: string[];
+  };
+
+  export type UserCreateNestedOneWithoutUserProfileInput = {
+    create?: XOR<UserCreateWithoutUserProfileInput, UserUncheckedCreateWithoutUserProfileInput>;
+    connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
+    connect?: UserWhereUniqueInput;
+  };
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null;
+  };
+
+  export type NullableEnumGenderFieldUpdateOperationsInput = {
+    set?: $Enums.Gender | null;
+  };
+
+  export type UserProfileUpdateinterestsInput = {
+    set?: string[];
+    push?: string | string[];
+  };
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string;
+  };
+
+  export type UserUpdateOneRequiredWithoutUserProfileNestedInput = {
+    create?: XOR<UserCreateWithoutUserProfileInput, UserUncheckedCreateWithoutUserProfileInput>;
+    connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
+    upsert?: UserUpsertWithoutUserProfileInput;
+    connect?: UserWhereUniqueInput;
+    update?: XOR<
+      XOR<UserUpdateToOneWithWhereWithoutUserProfileInput, UserUpdateWithoutUserProfileInput>,
+      UserUncheckedUpdateWithoutUserProfileInput
+    >;
+  };
+
+  export type UserCreateNestedOneWithoutHeapmapInput = {
+    create?: XOR<UserCreateWithoutHeapmapInput, UserUncheckedCreateWithoutHeapmapInput>;
+    connectOrCreate?: UserCreateOrConnectWithoutHeapmapInput;
+    connect?: UserWhereUniqueInput;
+  };
+
+  export type UserUpdateOneRequiredWithoutHeapmapNestedInput = {
+    create?: XOR<UserCreateWithoutHeapmapInput, UserUncheckedCreateWithoutHeapmapInput>;
+    connectOrCreate?: UserCreateOrConnectWithoutHeapmapInput;
+    upsert?: UserUpsertWithoutHeapmapInput;
+    connect?: UserWhereUniqueInput;
+    update?: XOR<
+      XOR<UserUpdateToOneWithWhereWithoutHeapmapInput, UserUpdateWithoutHeapmapInput>,
+      UserUncheckedUpdateWithoutHeapmapInput
+    >;
+  };
+
+  export type UserCreateNestedOneWithoutTagStatsInput = {
+    create?: XOR<UserCreateWithoutTagStatsInput, UserUncheckedCreateWithoutTagStatsInput>;
+    connectOrCreate?: UserCreateOrConnectWithoutTagStatsInput;
+    connect?: UserWhereUniqueInput;
+  };
+
+  export type TagCreateNestedOneWithoutUsersInput = {
+    create?: XOR<TagCreateWithoutUsersInput, TagUncheckedCreateWithoutUsersInput>;
+    connectOrCreate?: TagCreateOrConnectWithoutUsersInput;
+    connect?: TagWhereUniqueInput;
+  };
+
+  export type UserUpdateOneRequiredWithoutTagStatsNestedInput = {
+    create?: XOR<UserCreateWithoutTagStatsInput, UserUncheckedCreateWithoutTagStatsInput>;
+    connectOrCreate?: UserCreateOrConnectWithoutTagStatsInput;
+    upsert?: UserUpsertWithoutTagStatsInput;
+    connect?: UserWhereUniqueInput;
+    update?: XOR<
+      XOR<UserUpdateToOneWithWhereWithoutTagStatsInput, UserUpdateWithoutTagStatsInput>,
+      UserUncheckedUpdateWithoutTagStatsInput
+    >;
+  };
+
+  export type TagUpdateOneRequiredWithoutUsersNestedInput = {
+    create?: XOR<TagCreateWithoutUsersInput, TagUncheckedCreateWithoutUsersInput>;
+    connectOrCreate?: TagCreateOrConnectWithoutUsersInput;
+    upsert?: TagUpsertWithoutUsersInput;
+    connect?: TagWhereUniqueInput;
+    update?: XOR<
+      XOR<TagUpdateToOneWithWhereWithoutUsersInput, TagUpdateWithoutUsersInput>,
+      TagUncheckedUpdateWithoutUsersInput
+    >;
+  };
+
   export type UserCreateNestedOneWithoutPostInput = {
     create?: XOR<UserCreateWithoutPostInput, UserUncheckedCreateWithoutPostInput>;
     connectOrCreate?: UserCreateOrConnectWithoutPostInput;
@@ -17391,34 +26656,34 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[];
   };
 
-  export type likeCreateNestedManyWithoutPostInput = {
+  export type LikeCreateNestedManyWithoutPostInput = {
     create?:
-      | XOR<likeCreateWithoutPostInput, likeUncheckedCreateWithoutPostInput>
-      | likeCreateWithoutPostInput[]
-      | likeUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: likeCreateOrConnectWithoutPostInput | likeCreateOrConnectWithoutPostInput[];
-    createMany?: likeCreateManyPostInputEnvelope;
-    connect?: likeWhereUniqueInput | likeWhereUniqueInput[];
+      | XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput>
+      | LikeCreateWithoutPostInput[]
+      | LikeUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: LikeCreateOrConnectWithoutPostInput | LikeCreateOrConnectWithoutPostInput[];
+    createMany?: LikeCreateManyPostInputEnvelope;
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
   };
 
-  export type shareCreateNestedManyWithoutPostInput = {
+  export type ShareCreateNestedManyWithoutPostInput = {
     create?:
-      | XOR<shareCreateWithoutPostInput, shareUncheckedCreateWithoutPostInput>
-      | shareCreateWithoutPostInput[]
-      | shareUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: shareCreateOrConnectWithoutPostInput | shareCreateOrConnectWithoutPostInput[];
-    createMany?: shareCreateManyPostInputEnvelope;
-    connect?: shareWhereUniqueInput | shareWhereUniqueInput[];
+      | XOR<ShareCreateWithoutPostInput, ShareUncheckedCreateWithoutPostInput>
+      | ShareCreateWithoutPostInput[]
+      | ShareUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: ShareCreateOrConnectWithoutPostInput | ShareCreateOrConnectWithoutPostInput[];
+    createMany?: ShareCreateManyPostInputEnvelope;
+    connect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
   };
 
-  export type feedCreateNestedManyWithoutPostInput = {
+  export type FeedCreateNestedManyWithoutPostInput = {
     create?:
-      | XOR<feedCreateWithoutPostInput, feedUncheckedCreateWithoutPostInput>
-      | feedCreateWithoutPostInput[]
-      | feedUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: feedCreateOrConnectWithoutPostInput | feedCreateOrConnectWithoutPostInput[];
-    createMany?: feedCreateManyPostInputEnvelope;
-    connect?: feedWhereUniqueInput | feedWhereUniqueInput[];
+      | XOR<FeedCreateWithoutPostInput, FeedUncheckedCreateWithoutPostInput>
+      | FeedCreateWithoutPostInput[]
+      | FeedUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: FeedCreateOrConnectWithoutPostInput | FeedCreateOrConnectWithoutPostInput[];
+    createMany?: FeedCreateManyPostInputEnvelope;
+    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
   };
 
   export type PostTagUncheckedCreateNestedManyWithoutPostInput = {
@@ -17445,38 +26710,34 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[];
   };
 
-  export type likeUncheckedCreateNestedManyWithoutPostInput = {
+  export type LikeUncheckedCreateNestedManyWithoutPostInput = {
     create?:
-      | XOR<likeCreateWithoutPostInput, likeUncheckedCreateWithoutPostInput>
-      | likeCreateWithoutPostInput[]
-      | likeUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: likeCreateOrConnectWithoutPostInput | likeCreateOrConnectWithoutPostInput[];
-    createMany?: likeCreateManyPostInputEnvelope;
-    connect?: likeWhereUniqueInput | likeWhereUniqueInput[];
+      | XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput>
+      | LikeCreateWithoutPostInput[]
+      | LikeUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: LikeCreateOrConnectWithoutPostInput | LikeCreateOrConnectWithoutPostInput[];
+    createMany?: LikeCreateManyPostInputEnvelope;
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
   };
 
-  export type shareUncheckedCreateNestedManyWithoutPostInput = {
+  export type ShareUncheckedCreateNestedManyWithoutPostInput = {
     create?:
-      | XOR<shareCreateWithoutPostInput, shareUncheckedCreateWithoutPostInput>
-      | shareCreateWithoutPostInput[]
-      | shareUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: shareCreateOrConnectWithoutPostInput | shareCreateOrConnectWithoutPostInput[];
-    createMany?: shareCreateManyPostInputEnvelope;
-    connect?: shareWhereUniqueInput | shareWhereUniqueInput[];
+      | XOR<ShareCreateWithoutPostInput, ShareUncheckedCreateWithoutPostInput>
+      | ShareCreateWithoutPostInput[]
+      | ShareUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: ShareCreateOrConnectWithoutPostInput | ShareCreateOrConnectWithoutPostInput[];
+    createMany?: ShareCreateManyPostInputEnvelope;
+    connect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
   };
 
-  export type feedUncheckedCreateNestedManyWithoutPostInput = {
+  export type FeedUncheckedCreateNestedManyWithoutPostInput = {
     create?:
-      | XOR<feedCreateWithoutPostInput, feedUncheckedCreateWithoutPostInput>
-      | feedCreateWithoutPostInput[]
-      | feedUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: feedCreateOrConnectWithoutPostInput | feedCreateOrConnectWithoutPostInput[];
-    createMany?: feedCreateManyPostInputEnvelope;
-    connect?: feedWhereUniqueInput | feedWhereUniqueInput[];
-  };
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string;
+      | XOR<FeedCreateWithoutPostInput, FeedUncheckedCreateWithoutPostInput>
+      | FeedCreateWithoutPostInput[]
+      | FeedUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: FeedCreateOrConnectWithoutPostInput | FeedCreateOrConnectWithoutPostInput[];
+    createMany?: FeedCreateManyPostInputEnvelope;
+    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
   };
 
   export type UserUpdateOneRequiredWithoutPostNestedInput = {
@@ -17540,73 +26801,73 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[];
   };
 
-  export type likeUpdateManyWithoutPostNestedInput = {
+  export type LikeUpdateManyWithoutPostNestedInput = {
     create?:
-      | XOR<likeCreateWithoutPostInput, likeUncheckedCreateWithoutPostInput>
-      | likeCreateWithoutPostInput[]
-      | likeUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: likeCreateOrConnectWithoutPostInput | likeCreateOrConnectWithoutPostInput[];
+      | XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput>
+      | LikeCreateWithoutPostInput[]
+      | LikeUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: LikeCreateOrConnectWithoutPostInput | LikeCreateOrConnectWithoutPostInput[];
     upsert?:
-      | likeUpsertWithWhereUniqueWithoutPostInput
-      | likeUpsertWithWhereUniqueWithoutPostInput[];
-    createMany?: likeCreateManyPostInputEnvelope;
-    set?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    disconnect?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    delete?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    connect?: likeWhereUniqueInput | likeWhereUniqueInput[];
+      | LikeUpsertWithWhereUniqueWithoutPostInput
+      | LikeUpsertWithWhereUniqueWithoutPostInput[];
+    createMany?: LikeCreateManyPostInputEnvelope;
+    set?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    disconnect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    delete?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
     update?:
-      | likeUpdateWithWhereUniqueWithoutPostInput
-      | likeUpdateWithWhereUniqueWithoutPostInput[];
+      | LikeUpdateWithWhereUniqueWithoutPostInput
+      | LikeUpdateWithWhereUniqueWithoutPostInput[];
     updateMany?:
-      | likeUpdateManyWithWhereWithoutPostInput
-      | likeUpdateManyWithWhereWithoutPostInput[];
-    deleteMany?: likeScalarWhereInput | likeScalarWhereInput[];
+      | LikeUpdateManyWithWhereWithoutPostInput
+      | LikeUpdateManyWithWhereWithoutPostInput[];
+    deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[];
   };
 
-  export type shareUpdateManyWithoutPostNestedInput = {
+  export type ShareUpdateManyWithoutPostNestedInput = {
     create?:
-      | XOR<shareCreateWithoutPostInput, shareUncheckedCreateWithoutPostInput>
-      | shareCreateWithoutPostInput[]
-      | shareUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: shareCreateOrConnectWithoutPostInput | shareCreateOrConnectWithoutPostInput[];
+      | XOR<ShareCreateWithoutPostInput, ShareUncheckedCreateWithoutPostInput>
+      | ShareCreateWithoutPostInput[]
+      | ShareUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: ShareCreateOrConnectWithoutPostInput | ShareCreateOrConnectWithoutPostInput[];
     upsert?:
-      | shareUpsertWithWhereUniqueWithoutPostInput
-      | shareUpsertWithWhereUniqueWithoutPostInput[];
-    createMany?: shareCreateManyPostInputEnvelope;
-    set?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    disconnect?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    delete?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    connect?: shareWhereUniqueInput | shareWhereUniqueInput[];
+      | ShareUpsertWithWhereUniqueWithoutPostInput
+      | ShareUpsertWithWhereUniqueWithoutPostInput[];
+    createMany?: ShareCreateManyPostInputEnvelope;
+    set?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    disconnect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    delete?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    connect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
     update?:
-      | shareUpdateWithWhereUniqueWithoutPostInput
-      | shareUpdateWithWhereUniqueWithoutPostInput[];
+      | ShareUpdateWithWhereUniqueWithoutPostInput
+      | ShareUpdateWithWhereUniqueWithoutPostInput[];
     updateMany?:
-      | shareUpdateManyWithWhereWithoutPostInput
-      | shareUpdateManyWithWhereWithoutPostInput[];
-    deleteMany?: shareScalarWhereInput | shareScalarWhereInput[];
+      | ShareUpdateManyWithWhereWithoutPostInput
+      | ShareUpdateManyWithWhereWithoutPostInput[];
+    deleteMany?: ShareScalarWhereInput | ShareScalarWhereInput[];
   };
 
-  export type feedUpdateManyWithoutPostNestedInput = {
+  export type FeedUpdateManyWithoutPostNestedInput = {
     create?:
-      | XOR<feedCreateWithoutPostInput, feedUncheckedCreateWithoutPostInput>
-      | feedCreateWithoutPostInput[]
-      | feedUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: feedCreateOrConnectWithoutPostInput | feedCreateOrConnectWithoutPostInput[];
+      | XOR<FeedCreateWithoutPostInput, FeedUncheckedCreateWithoutPostInput>
+      | FeedCreateWithoutPostInput[]
+      | FeedUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: FeedCreateOrConnectWithoutPostInput | FeedCreateOrConnectWithoutPostInput[];
     upsert?:
-      | feedUpsertWithWhereUniqueWithoutPostInput
-      | feedUpsertWithWhereUniqueWithoutPostInput[];
-    createMany?: feedCreateManyPostInputEnvelope;
-    set?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    disconnect?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    delete?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    connect?: feedWhereUniqueInput | feedWhereUniqueInput[];
+      | FeedUpsertWithWhereUniqueWithoutPostInput
+      | FeedUpsertWithWhereUniqueWithoutPostInput[];
+    createMany?: FeedCreateManyPostInputEnvelope;
+    set?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    disconnect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    delete?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
     update?:
-      | feedUpdateWithWhereUniqueWithoutPostInput
-      | feedUpdateWithWhereUniqueWithoutPostInput[];
+      | FeedUpdateWithWhereUniqueWithoutPostInput
+      | FeedUpdateWithWhereUniqueWithoutPostInput[];
     updateMany?:
-      | feedUpdateManyWithWhereWithoutPostInput
-      | feedUpdateManyWithWhereWithoutPostInput[];
-    deleteMany?: feedScalarWhereInput | feedScalarWhereInput[];
+      | FeedUpdateManyWithWhereWithoutPostInput
+      | FeedUpdateManyWithWhereWithoutPostInput[];
+    deleteMany?: FeedScalarWhereInput | FeedScalarWhereInput[];
   };
 
   export type PostTagUncheckedUpdateManyWithoutPostNestedInput = {
@@ -17659,73 +26920,73 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[];
   };
 
-  export type likeUncheckedUpdateManyWithoutPostNestedInput = {
+  export type LikeUncheckedUpdateManyWithoutPostNestedInput = {
     create?:
-      | XOR<likeCreateWithoutPostInput, likeUncheckedCreateWithoutPostInput>
-      | likeCreateWithoutPostInput[]
-      | likeUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: likeCreateOrConnectWithoutPostInput | likeCreateOrConnectWithoutPostInput[];
+      | XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput>
+      | LikeCreateWithoutPostInput[]
+      | LikeUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: LikeCreateOrConnectWithoutPostInput | LikeCreateOrConnectWithoutPostInput[];
     upsert?:
-      | likeUpsertWithWhereUniqueWithoutPostInput
-      | likeUpsertWithWhereUniqueWithoutPostInput[];
-    createMany?: likeCreateManyPostInputEnvelope;
-    set?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    disconnect?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    delete?: likeWhereUniqueInput | likeWhereUniqueInput[];
-    connect?: likeWhereUniqueInput | likeWhereUniqueInput[];
+      | LikeUpsertWithWhereUniqueWithoutPostInput
+      | LikeUpsertWithWhereUniqueWithoutPostInput[];
+    createMany?: LikeCreateManyPostInputEnvelope;
+    set?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    disconnect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    delete?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[];
     update?:
-      | likeUpdateWithWhereUniqueWithoutPostInput
-      | likeUpdateWithWhereUniqueWithoutPostInput[];
+      | LikeUpdateWithWhereUniqueWithoutPostInput
+      | LikeUpdateWithWhereUniqueWithoutPostInput[];
     updateMany?:
-      | likeUpdateManyWithWhereWithoutPostInput
-      | likeUpdateManyWithWhereWithoutPostInput[];
-    deleteMany?: likeScalarWhereInput | likeScalarWhereInput[];
+      | LikeUpdateManyWithWhereWithoutPostInput
+      | LikeUpdateManyWithWhereWithoutPostInput[];
+    deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[];
   };
 
-  export type shareUncheckedUpdateManyWithoutPostNestedInput = {
+  export type ShareUncheckedUpdateManyWithoutPostNestedInput = {
     create?:
-      | XOR<shareCreateWithoutPostInput, shareUncheckedCreateWithoutPostInput>
-      | shareCreateWithoutPostInput[]
-      | shareUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: shareCreateOrConnectWithoutPostInput | shareCreateOrConnectWithoutPostInput[];
+      | XOR<ShareCreateWithoutPostInput, ShareUncheckedCreateWithoutPostInput>
+      | ShareCreateWithoutPostInput[]
+      | ShareUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: ShareCreateOrConnectWithoutPostInput | ShareCreateOrConnectWithoutPostInput[];
     upsert?:
-      | shareUpsertWithWhereUniqueWithoutPostInput
-      | shareUpsertWithWhereUniqueWithoutPostInput[];
-    createMany?: shareCreateManyPostInputEnvelope;
-    set?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    disconnect?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    delete?: shareWhereUniqueInput | shareWhereUniqueInput[];
-    connect?: shareWhereUniqueInput | shareWhereUniqueInput[];
+      | ShareUpsertWithWhereUniqueWithoutPostInput
+      | ShareUpsertWithWhereUniqueWithoutPostInput[];
+    createMany?: ShareCreateManyPostInputEnvelope;
+    set?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    disconnect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    delete?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
+    connect?: ShareWhereUniqueInput | ShareWhereUniqueInput[];
     update?:
-      | shareUpdateWithWhereUniqueWithoutPostInput
-      | shareUpdateWithWhereUniqueWithoutPostInput[];
+      | ShareUpdateWithWhereUniqueWithoutPostInput
+      | ShareUpdateWithWhereUniqueWithoutPostInput[];
     updateMany?:
-      | shareUpdateManyWithWhereWithoutPostInput
-      | shareUpdateManyWithWhereWithoutPostInput[];
-    deleteMany?: shareScalarWhereInput | shareScalarWhereInput[];
+      | ShareUpdateManyWithWhereWithoutPostInput
+      | ShareUpdateManyWithWhereWithoutPostInput[];
+    deleteMany?: ShareScalarWhereInput | ShareScalarWhereInput[];
   };
 
-  export type feedUncheckedUpdateManyWithoutPostNestedInput = {
+  export type FeedUncheckedUpdateManyWithoutPostNestedInput = {
     create?:
-      | XOR<feedCreateWithoutPostInput, feedUncheckedCreateWithoutPostInput>
-      | feedCreateWithoutPostInput[]
-      | feedUncheckedCreateWithoutPostInput[];
-    connectOrCreate?: feedCreateOrConnectWithoutPostInput | feedCreateOrConnectWithoutPostInput[];
+      | XOR<FeedCreateWithoutPostInput, FeedUncheckedCreateWithoutPostInput>
+      | FeedCreateWithoutPostInput[]
+      | FeedUncheckedCreateWithoutPostInput[];
+    connectOrCreate?: FeedCreateOrConnectWithoutPostInput | FeedCreateOrConnectWithoutPostInput[];
     upsert?:
-      | feedUpsertWithWhereUniqueWithoutPostInput
-      | feedUpsertWithWhereUniqueWithoutPostInput[];
-    createMany?: feedCreateManyPostInputEnvelope;
-    set?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    disconnect?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    delete?: feedWhereUniqueInput | feedWhereUniqueInput[];
-    connect?: feedWhereUniqueInput | feedWhereUniqueInput[];
+      | FeedUpsertWithWhereUniqueWithoutPostInput
+      | FeedUpsertWithWhereUniqueWithoutPostInput[];
+    createMany?: FeedCreateManyPostInputEnvelope;
+    set?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    disconnect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    delete?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
+    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[];
     update?:
-      | feedUpdateWithWhereUniqueWithoutPostInput
-      | feedUpdateWithWhereUniqueWithoutPostInput[];
+      | FeedUpdateWithWhereUniqueWithoutPostInput
+      | FeedUpdateWithWhereUniqueWithoutPostInput[];
     updateMany?:
-      | feedUpdateManyWithWhereWithoutPostInput
-      | feedUpdateManyWithWhereWithoutPostInput[];
-    deleteMany?: feedScalarWhereInput | feedScalarWhereInput[];
+      | FeedUpdateManyWithWhereWithoutPostInput
+      | FeedUpdateManyWithWhereWithoutPostInput[];
+    deleteMany?: FeedScalarWhereInput | FeedScalarWhereInput[];
   };
 
   export type UserCreateNestedOneWithoutFollowersInput = {
@@ -17774,6 +27035,18 @@ export namespace Prisma {
     connect?: PostTagWhereUniqueInput | PostTagWhereUniqueInput[];
   };
 
+  export type UserTagStatsCreateNestedManyWithoutTagInput = {
+    create?:
+      | XOR<UserTagStatsCreateWithoutTagInput, UserTagStatsUncheckedCreateWithoutTagInput>
+      | UserTagStatsCreateWithoutTagInput[]
+      | UserTagStatsUncheckedCreateWithoutTagInput[];
+    connectOrCreate?:
+      | UserTagStatsCreateOrConnectWithoutTagInput
+      | UserTagStatsCreateOrConnectWithoutTagInput[];
+    createMany?: UserTagStatsCreateManyTagInputEnvelope;
+    connect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+  };
+
   export type TagFollowCreateNestedManyWithoutTagInput = {
     create?:
       | XOR<TagFollowCreateWithoutTagInput, TagFollowUncheckedCreateWithoutTagInput>
@@ -17796,6 +27069,18 @@ export namespace Prisma {
       | PostTagCreateOrConnectWithoutTagInput[];
     createMany?: PostTagCreateManyTagInputEnvelope;
     connect?: PostTagWhereUniqueInput | PostTagWhereUniqueInput[];
+  };
+
+  export type UserTagStatsUncheckedCreateNestedManyWithoutTagInput = {
+    create?:
+      | XOR<UserTagStatsCreateWithoutTagInput, UserTagStatsUncheckedCreateWithoutTagInput>
+      | UserTagStatsCreateWithoutTagInput[]
+      | UserTagStatsUncheckedCreateWithoutTagInput[];
+    connectOrCreate?:
+      | UserTagStatsCreateOrConnectWithoutTagInput
+      | UserTagStatsCreateOrConnectWithoutTagInput[];
+    createMany?: UserTagStatsCreateManyTagInputEnvelope;
+    connect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
   };
 
   export type TagFollowUncheckedCreateNestedManyWithoutTagInput = {
@@ -17833,6 +27118,31 @@ export namespace Prisma {
       | PostTagUpdateManyWithWhereWithoutTagInput
       | PostTagUpdateManyWithWhereWithoutTagInput[];
     deleteMany?: PostTagScalarWhereInput | PostTagScalarWhereInput[];
+  };
+
+  export type UserTagStatsUpdateManyWithoutTagNestedInput = {
+    create?:
+      | XOR<UserTagStatsCreateWithoutTagInput, UserTagStatsUncheckedCreateWithoutTagInput>
+      | UserTagStatsCreateWithoutTagInput[]
+      | UserTagStatsUncheckedCreateWithoutTagInput[];
+    connectOrCreate?:
+      | UserTagStatsCreateOrConnectWithoutTagInput
+      | UserTagStatsCreateOrConnectWithoutTagInput[];
+    upsert?:
+      | UserTagStatsUpsertWithWhereUniqueWithoutTagInput
+      | UserTagStatsUpsertWithWhereUniqueWithoutTagInput[];
+    createMany?: UserTagStatsCreateManyTagInputEnvelope;
+    set?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    disconnect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    delete?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    connect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    update?:
+      | UserTagStatsUpdateWithWhereUniqueWithoutTagInput
+      | UserTagStatsUpdateWithWhereUniqueWithoutTagInput[];
+    updateMany?:
+      | UserTagStatsUpdateManyWithWhereWithoutTagInput
+      | UserTagStatsUpdateManyWithWhereWithoutTagInput[];
+    deleteMany?: UserTagStatsScalarWhereInput | UserTagStatsScalarWhereInput[];
   };
 
   export type TagFollowUpdateManyWithoutTagNestedInput = {
@@ -17883,6 +27193,31 @@ export namespace Prisma {
       | PostTagUpdateManyWithWhereWithoutTagInput
       | PostTagUpdateManyWithWhereWithoutTagInput[];
     deleteMany?: PostTagScalarWhereInput | PostTagScalarWhereInput[];
+  };
+
+  export type UserTagStatsUncheckedUpdateManyWithoutTagNestedInput = {
+    create?:
+      | XOR<UserTagStatsCreateWithoutTagInput, UserTagStatsUncheckedCreateWithoutTagInput>
+      | UserTagStatsCreateWithoutTagInput[]
+      | UserTagStatsUncheckedCreateWithoutTagInput[];
+    connectOrCreate?:
+      | UserTagStatsCreateOrConnectWithoutTagInput
+      | UserTagStatsCreateOrConnectWithoutTagInput[];
+    upsert?:
+      | UserTagStatsUpsertWithWhereUniqueWithoutTagInput
+      | UserTagStatsUpsertWithWhereUniqueWithoutTagInput[];
+    createMany?: UserTagStatsCreateManyTagInputEnvelope;
+    set?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    disconnect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    delete?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    connect?: UserTagStatsWhereUniqueInput | UserTagStatsWhereUniqueInput[];
+    update?:
+      | UserTagStatsUpdateWithWhereUniqueWithoutTagInput
+      | UserTagStatsUpdateWithWhereUniqueWithoutTagInput[];
+    updateMany?:
+      | UserTagStatsUpdateManyWithWhereWithoutTagInput
+      | UserTagStatsUpdateManyWithWhereWithoutTagInput[];
+    deleteMany?: UserTagStatsScalarWhereInput | UserTagStatsScalarWhereInput[];
   };
 
   export type TagFollowUncheckedUpdateManyWithoutTagNestedInput = {
@@ -18114,6 +27449,93 @@ export namespace Prisma {
     >;
   };
 
+  export type UserCreateNestedOneWithoutFeedTrackInput = {
+    create?: XOR<UserCreateWithoutFeedTrackInput, UserUncheckedCreateWithoutFeedTrackInput>;
+    connectOrCreate?: UserCreateOrConnectWithoutFeedTrackInput;
+    connect?: UserWhereUniqueInput;
+  };
+
+  export type UserUpdateOneRequiredWithoutFeedTrackNestedInput = {
+    create?: XOR<UserCreateWithoutFeedTrackInput, UserUncheckedCreateWithoutFeedTrackInput>;
+    connectOrCreate?: UserCreateOrConnectWithoutFeedTrackInput;
+    upsert?: UserUpsertWithoutFeedTrackInput;
+    connect?: UserWhereUniqueInput;
+    update?: XOR<
+      XOR<UserUpdateToOneWithWhereWithoutFeedTrackInput, UserUpdateWithoutFeedTrackInput>,
+      UserUncheckedUpdateWithoutFeedTrackInput
+    >;
+  };
+
+  export type UserCreateNestedOneWithoutNotificationsReceivedInput = {
+    create?: XOR<
+      UserCreateWithoutNotificationsReceivedInput,
+      UserUncheckedCreateWithoutNotificationsReceivedInput
+    >;
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationsReceivedInput;
+    connect?: UserWhereUniqueInput;
+  };
+
+  export type UserCreateNestedOneWithoutNotificationsSentInput = {
+    create?: XOR<
+      UserCreateWithoutNotificationsSentInput,
+      UserUncheckedCreateWithoutNotificationsSentInput
+    >;
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationsSentInput;
+    connect?: UserWhereUniqueInput;
+  };
+
+  export type EnumNotificationTypeFieldUpdateOperationsInput = {
+    set?: $Enums.NotificationType;
+  };
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean;
+  };
+
+  export type UserUpdateOneRequiredWithoutNotificationsReceivedNestedInput = {
+    create?: XOR<
+      UserCreateWithoutNotificationsReceivedInput,
+      UserUncheckedCreateWithoutNotificationsReceivedInput
+    >;
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationsReceivedInput;
+    upsert?: UserUpsertWithoutNotificationsReceivedInput;
+    connect?: UserWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        UserUpdateToOneWithWhereWithoutNotificationsReceivedInput,
+        UserUpdateWithoutNotificationsReceivedInput
+      >,
+      UserUncheckedUpdateWithoutNotificationsReceivedInput
+    >;
+  };
+
+  export type UserUpdateOneWithoutNotificationsSentNestedInput = {
+    create?: XOR<
+      UserCreateWithoutNotificationsSentInput,
+      UserUncheckedCreateWithoutNotificationsSentInput
+    >;
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationsSentInput;
+    upsert?: UserUpsertWithoutNotificationsSentInput;
+    disconnect?: UserWhereInput | boolean;
+    delete?: UserWhereInput | boolean;
+    connect?: UserWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        UserUpdateToOneWithWhereWithoutNotificationsSentInput,
+        UserUpdateWithoutNotificationsSentInput
+      >,
+      UserUncheckedUpdateWithoutNotificationsSentInput
+    >;
+  };
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null;
+    increment?: number;
+    decrement?: number;
+    multiply?: number;
+    divide?: number;
+  };
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>;
     in?: number[] | ListIntFieldRefInput<$PrismaModel>;
@@ -18225,6 +27647,24 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null;
   };
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null;
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null;
+  };
+
+  export type NestedEnumGenderNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null;
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null;
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null;
+    not?: NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null;
+  };
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
@@ -18234,6 +27674,30 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string;
+  };
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null;
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>;
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>;
+  };
+
+  export type NestedEnumGenderNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null;
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null;
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null;
+    not?: NestedEnumGenderNullableWithAggregatesFilter<$PrismaModel> | $Enums.Gender | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedEnumGenderNullableFilter<$PrismaModel>;
+    _max?: NestedEnumGenderNullableFilter<$PrismaModel>;
   };
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -18250,6 +27714,111 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>;
   };
 
+  export type NestedEnumNotificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>;
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>;
+    not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType;
+  };
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolFilter<$PrismaModel> | boolean;
+  };
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    lt?: number | IntFieldRefInput<$PrismaModel>;
+    lte?: number | IntFieldRefInput<$PrismaModel>;
+    gt?: number | IntFieldRefInput<$PrismaModel>;
+    gte?: number | IntFieldRefInput<$PrismaModel>;
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _avg?: NestedFloatNullableFilter<$PrismaModel>;
+    _sum?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedIntNullableFilter<$PrismaModel>;
+    _max?: NestedIntNullableFilter<$PrismaModel>;
+  };
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null;
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null;
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null;
+    lt?: number | FloatFieldRefInput<$PrismaModel>;
+    lte?: number | FloatFieldRefInput<$PrismaModel>;
+    gt?: number | FloatFieldRefInput<$PrismaModel>;
+    gte?: number | FloatFieldRefInput<$PrismaModel>;
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null;
+  };
+
+  export type NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>;
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>;
+    not?: NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedEnumNotificationTypeFilter<$PrismaModel>;
+    _max?: NestedEnumNotificationTypeFilter<$PrismaModel>;
+  };
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedBoolFilter<$PrismaModel>;
+    _max?: NestedBoolFilter<$PrismaModel>;
+  };
+
+  export type UserProfileCreateWithoutUserInput = {
+    bio?: string | null;
+    company?: string | null;
+    location?: string | null;
+    profilePic?: string | null;
+    coverPic?: string | null;
+    birthDate?: Date | string | null;
+    gender?: $Enums.Gender | null;
+    phone?: string | null;
+    interests?: UserProfileCreateinterestsInput | string[];
+    github?: string | null;
+    linkedin?: string | null;
+    twitter?: string | null;
+    leetcode?: string | null;
+    instagram?: string | null;
+    website?: string | null;
+    resumeLink?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
+  export type UserProfileUncheckedCreateWithoutUserInput = {
+    id?: number;
+    bio?: string | null;
+    company?: string | null;
+    location?: string | null;
+    profilePic?: string | null;
+    coverPic?: string | null;
+    birthDate?: Date | string | null;
+    gender?: $Enums.Gender | null;
+    phone?: string | null;
+    interests?: UserProfileCreateinterestsInput | string[];
+    github?: string | null;
+    linkedin?: string | null;
+    twitter?: string | null;
+    leetcode?: string | null;
+    instagram?: string | null;
+    website?: string | null;
+    resumeLink?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
+  export type UserProfileCreateOrConnectWithoutUserInput = {
+    where: UserProfileWhereUniqueInput;
+    create: XOR<UserProfileCreateWithoutUserInput, UserProfileUncheckedCreateWithoutUserInput>;
+  };
+
   export type PostCreateWithoutAuthorInput = {
     title: string;
     content: string;
@@ -18258,9 +27827,9 @@ export namespace Prisma {
     commentCount?: number;
     tags?: PostTagCreateNestedManyWithoutPostInput;
     comments?: CommentCreateNestedManyWithoutPostInput;
-    likes?: likeCreateNestedManyWithoutPostInput;
-    shares?: shareCreateNestedManyWithoutPostInput;
-    feed?: feedCreateNestedManyWithoutPostInput;
+    likes?: LikeCreateNestedManyWithoutPostInput;
+    shares?: ShareCreateNestedManyWithoutPostInput;
+    feed?: FeedCreateNestedManyWithoutPostInput;
   };
 
   export type PostUncheckedCreateWithoutAuthorInput = {
@@ -18272,9 +27841,9 @@ export namespace Prisma {
     commentCount?: number;
     tags?: PostTagUncheckedCreateNestedManyWithoutPostInput;
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput;
-    likes?: likeUncheckedCreateNestedManyWithoutPostInput;
-    shares?: shareUncheckedCreateNestedManyWithoutPostInput;
-    feed?: feedUncheckedCreateNestedManyWithoutPostInput;
+    likes?: LikeUncheckedCreateNestedManyWithoutPostInput;
+    shares?: ShareUncheckedCreateNestedManyWithoutPostInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutPostInput;
   };
 
   export type PostCreateOrConnectWithoutAuthorInput = {
@@ -18287,45 +27856,110 @@ export namespace Prisma {
     skipDuplicates?: boolean;
   };
 
-  export type feedCreateWithoutUserInput = {
+  export type UserTagStatsCreateWithoutUserInput = {
+    postCount?: number;
+    updatedAt?: Date | string;
+    createdAt?: Date | string;
+    tag: TagCreateNestedOneWithoutUsersInput;
+  };
+
+  export type UserTagStatsUncheckedCreateWithoutUserInput = {
+    id?: number;
+    tagId: number;
+    postCount?: number;
+    updatedAt?: Date | string;
+    createdAt?: Date | string;
+  };
+
+  export type UserTagStatsCreateOrConnectWithoutUserInput = {
+    where: UserTagStatsWhereUniqueInput;
+    create: XOR<UserTagStatsCreateWithoutUserInput, UserTagStatsUncheckedCreateWithoutUserInput>;
+  };
+
+  export type UserTagStatsCreateManyUserInputEnvelope = {
+    data: UserTagStatsCreateManyUserInput | UserTagStatsCreateManyUserInput[];
+    skipDuplicates?: boolean;
+  };
+
+  export type FeedCreateWithoutUserInput = {
     createdAt?: Date | string;
     post: PostCreateNestedOneWithoutFeedInput;
   };
 
-  export type feedUncheckedCreateWithoutUserInput = {
+  export type FeedUncheckedCreateWithoutUserInput = {
     id?: number;
     postId: number;
     createdAt?: Date | string;
   };
 
-  export type feedCreateOrConnectWithoutUserInput = {
-    where: feedWhereUniqueInput;
-    create: XOR<feedCreateWithoutUserInput, feedUncheckedCreateWithoutUserInput>;
+  export type FeedCreateOrConnectWithoutUserInput = {
+    where: FeedWhereUniqueInput;
+    create: XOR<FeedCreateWithoutUserInput, FeedUncheckedCreateWithoutUserInput>;
   };
 
-  export type feedCreateManyUserInputEnvelope = {
-    data: feedCreateManyUserInput | feedCreateManyUserInput[];
+  export type FeedCreateManyUserInputEnvelope = {
+    data: FeedCreateManyUserInput | FeedCreateManyUserInput[];
     skipDuplicates?: boolean;
   };
 
-  export type likeCreateWithoutUserInput = {
+  export type FeedTrackCreateWithoutUserInput = {
+    lastSeen: Date | string;
+  };
+
+  export type FeedTrackUncheckedCreateWithoutUserInput = {
+    id?: number;
+    lastSeen: Date | string;
+  };
+
+  export type FeedTrackCreateOrConnectWithoutUserInput = {
+    where: FeedTrackWhereUniqueInput;
+    create: XOR<FeedTrackCreateWithoutUserInput, FeedTrackUncheckedCreateWithoutUserInput>;
+  };
+
+  export type FeedTrackCreateManyUserInputEnvelope = {
+    data: FeedTrackCreateManyUserInput | FeedTrackCreateManyUserInput[];
+    skipDuplicates?: boolean;
+  };
+
+  export type UserHeatmapCreateWithoutUserInput = {
+    date: Date | string;
+    count: number;
+  };
+
+  export type UserHeatmapUncheckedCreateWithoutUserInput = {
+    id?: number;
+    date: Date | string;
+    count: number;
+  };
+
+  export type UserHeatmapCreateOrConnectWithoutUserInput = {
+    where: UserHeatmapWhereUniqueInput;
+    create: XOR<UserHeatmapCreateWithoutUserInput, UserHeatmapUncheckedCreateWithoutUserInput>;
+  };
+
+  export type UserHeatmapCreateManyUserInputEnvelope = {
+    data: UserHeatmapCreateManyUserInput | UserHeatmapCreateManyUserInput[];
+    skipDuplicates?: boolean;
+  };
+
+  export type LikeCreateWithoutUserInput = {
     createdAt?: Date | string;
     post: PostCreateNestedOneWithoutLikesInput;
   };
 
-  export type likeUncheckedCreateWithoutUserInput = {
+  export type LikeUncheckedCreateWithoutUserInput = {
     id?: number;
     postId: number;
     createdAt?: Date | string;
   };
 
-  export type likeCreateOrConnectWithoutUserInput = {
-    where: likeWhereUniqueInput;
-    create: XOR<likeCreateWithoutUserInput, likeUncheckedCreateWithoutUserInput>;
+  export type LikeCreateOrConnectWithoutUserInput = {
+    where: LikeWhereUniqueInput;
+    create: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput>;
   };
 
-  export type likeCreateManyUserInputEnvelope = {
-    data: likeCreateManyUserInput | likeCreateManyUserInput[];
+  export type LikeCreateManyUserInputEnvelope = {
+    data: LikeCreateManyUserInput | LikeCreateManyUserInput[];
     skipDuplicates?: boolean;
   };
 
@@ -18352,24 +27986,24 @@ export namespace Prisma {
     skipDuplicates?: boolean;
   };
 
-  export type shareCreateWithoutUserInput = {
+  export type ShareCreateWithoutUserInput = {
     createdAt?: Date | string;
     post: PostCreateNestedOneWithoutSharesInput;
   };
 
-  export type shareUncheckedCreateWithoutUserInput = {
+  export type ShareUncheckedCreateWithoutUserInput = {
     id?: number;
     postId: number;
     createdAt?: Date | string;
   };
 
-  export type shareCreateOrConnectWithoutUserInput = {
-    where: shareWhereUniqueInput;
-    create: XOR<shareCreateWithoutUserInput, shareUncheckedCreateWithoutUserInput>;
+  export type ShareCreateOrConnectWithoutUserInput = {
+    where: ShareWhereUniqueInput;
+    create: XOR<ShareCreateWithoutUserInput, ShareUncheckedCreateWithoutUserInput>;
   };
 
-  export type shareCreateManyUserInputEnvelope = {
-    data: shareCreateManyUserInput | shareCreateManyUserInput[];
+  export type ShareCreateManyUserInputEnvelope = {
+    data: ShareCreateManyUserInput | ShareCreateManyUserInput[];
     skipDuplicates?: boolean;
   };
 
@@ -18436,6 +28070,124 @@ export namespace Prisma {
     skipDuplicates?: boolean;
   };
 
+  export type NotificationCreateWithoutSenderInput = {
+    type: $Enums.NotificationType;
+    message: string;
+    link?: string | null;
+    read?: boolean;
+    createdAt?: Date | string;
+    recipient: UserCreateNestedOneWithoutNotificationsReceivedInput;
+  };
+
+  export type NotificationUncheckedCreateWithoutSenderInput = {
+    id?: number;
+    recipientId: number;
+    type: $Enums.NotificationType;
+    message: string;
+    link?: string | null;
+    read?: boolean;
+    createdAt?: Date | string;
+  };
+
+  export type NotificationCreateOrConnectWithoutSenderInput = {
+    where: NotificationWhereUniqueInput;
+    create: XOR<
+      NotificationCreateWithoutSenderInput,
+      NotificationUncheckedCreateWithoutSenderInput
+    >;
+  };
+
+  export type NotificationCreateManySenderInputEnvelope = {
+    data: NotificationCreateManySenderInput | NotificationCreateManySenderInput[];
+    skipDuplicates?: boolean;
+  };
+
+  export type NotificationCreateWithoutRecipientInput = {
+    type: $Enums.NotificationType;
+    message: string;
+    link?: string | null;
+    read?: boolean;
+    createdAt?: Date | string;
+    sender?: UserCreateNestedOneWithoutNotificationsSentInput;
+  };
+
+  export type NotificationUncheckedCreateWithoutRecipientInput = {
+    id?: number;
+    senderId?: number | null;
+    type: $Enums.NotificationType;
+    message: string;
+    link?: string | null;
+    read?: boolean;
+    createdAt?: Date | string;
+  };
+
+  export type NotificationCreateOrConnectWithoutRecipientInput = {
+    where: NotificationWhereUniqueInput;
+    create: XOR<
+      NotificationCreateWithoutRecipientInput,
+      NotificationUncheckedCreateWithoutRecipientInput
+    >;
+  };
+
+  export type NotificationCreateManyRecipientInputEnvelope = {
+    data: NotificationCreateManyRecipientInput | NotificationCreateManyRecipientInput[];
+    skipDuplicates?: boolean;
+  };
+
+  export type UserProfileUpsertWithoutUserInput = {
+    update: XOR<UserProfileUpdateWithoutUserInput, UserProfileUncheckedUpdateWithoutUserInput>;
+    create: XOR<UserProfileCreateWithoutUserInput, UserProfileUncheckedCreateWithoutUserInput>;
+    where?: UserProfileWhereInput;
+  };
+
+  export type UserProfileUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserProfileWhereInput;
+    data: XOR<UserProfileUpdateWithoutUserInput, UserProfileUncheckedUpdateWithoutUserInput>;
+  };
+
+  export type UserProfileUpdateWithoutUserInput = {
+    bio?: NullableStringFieldUpdateOperationsInput | string | null;
+    company?: NullableStringFieldUpdateOperationsInput | string | null;
+    location?: NullableStringFieldUpdateOperationsInput | string | null;
+    profilePic?: NullableStringFieldUpdateOperationsInput | string | null;
+    coverPic?: NullableStringFieldUpdateOperationsInput | string | null;
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null;
+    phone?: NullableStringFieldUpdateOperationsInput | string | null;
+    interests?: UserProfileUpdateinterestsInput | string[];
+    github?: NullableStringFieldUpdateOperationsInput | string | null;
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null;
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null;
+    leetcode?: NullableStringFieldUpdateOperationsInput | string | null;
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null;
+    website?: NullableStringFieldUpdateOperationsInput | string | null;
+    resumeLink?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type UserProfileUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    bio?: NullableStringFieldUpdateOperationsInput | string | null;
+    company?: NullableStringFieldUpdateOperationsInput | string | null;
+    location?: NullableStringFieldUpdateOperationsInput | string | null;
+    profilePic?: NullableStringFieldUpdateOperationsInput | string | null;
+    coverPic?: NullableStringFieldUpdateOperationsInput | string | null;
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null;
+    phone?: NullableStringFieldUpdateOperationsInput | string | null;
+    interests?: UserProfileUpdateinterestsInput | string[];
+    github?: NullableStringFieldUpdateOperationsInput | string | null;
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null;
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null;
+    leetcode?: NullableStringFieldUpdateOperationsInput | string | null;
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null;
+    website?: NullableStringFieldUpdateOperationsInput | string | null;
+    resumeLink?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
   export type PostUpsertWithWhereUniqueWithoutAuthorInput = {
     where: PostWhereUniqueInput;
     update: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>;
@@ -18465,56 +28217,135 @@ export namespace Prisma {
     commentCount?: IntFilter<'Post'> | number;
   };
 
-  export type feedUpsertWithWhereUniqueWithoutUserInput = {
-    where: feedWhereUniqueInput;
-    update: XOR<feedUpdateWithoutUserInput, feedUncheckedUpdateWithoutUserInput>;
-    create: XOR<feedCreateWithoutUserInput, feedUncheckedCreateWithoutUserInput>;
+  export type UserTagStatsUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserTagStatsWhereUniqueInput;
+    update: XOR<UserTagStatsUpdateWithoutUserInput, UserTagStatsUncheckedUpdateWithoutUserInput>;
+    create: XOR<UserTagStatsCreateWithoutUserInput, UserTagStatsUncheckedCreateWithoutUserInput>;
   };
 
-  export type feedUpdateWithWhereUniqueWithoutUserInput = {
-    where: feedWhereUniqueInput;
-    data: XOR<feedUpdateWithoutUserInput, feedUncheckedUpdateWithoutUserInput>;
+  export type UserTagStatsUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserTagStatsWhereUniqueInput;
+    data: XOR<UserTagStatsUpdateWithoutUserInput, UserTagStatsUncheckedUpdateWithoutUserInput>;
   };
 
-  export type feedUpdateManyWithWhereWithoutUserInput = {
-    where: feedScalarWhereInput;
-    data: XOR<feedUpdateManyMutationInput, feedUncheckedUpdateManyWithoutUserInput>;
+  export type UserTagStatsUpdateManyWithWhereWithoutUserInput = {
+    where: UserTagStatsScalarWhereInput;
+    data: XOR<UserTagStatsUpdateManyMutationInput, UserTagStatsUncheckedUpdateManyWithoutUserInput>;
   };
 
-  export type feedScalarWhereInput = {
-    AND?: feedScalarWhereInput | feedScalarWhereInput[];
-    OR?: feedScalarWhereInput[];
-    NOT?: feedScalarWhereInput | feedScalarWhereInput[];
-    id?: IntFilter<'feed'> | number;
-    postId?: IntFilter<'feed'> | number;
-    userId?: IntFilter<'feed'> | number;
-    createdAt?: DateTimeFilter<'feed'> | Date | string;
+  export type UserTagStatsScalarWhereInput = {
+    AND?: UserTagStatsScalarWhereInput | UserTagStatsScalarWhereInput[];
+    OR?: UserTagStatsScalarWhereInput[];
+    NOT?: UserTagStatsScalarWhereInput | UserTagStatsScalarWhereInput[];
+    id?: IntFilter<'UserTagStats'> | number;
+    userId?: IntFilter<'UserTagStats'> | number;
+    tagId?: IntFilter<'UserTagStats'> | number;
+    postCount?: IntFilter<'UserTagStats'> | number;
+    updatedAt?: DateTimeFilter<'UserTagStats'> | Date | string;
+    createdAt?: DateTimeFilter<'UserTagStats'> | Date | string;
   };
 
-  export type likeUpsertWithWhereUniqueWithoutUserInput = {
-    where: likeWhereUniqueInput;
-    update: XOR<likeUpdateWithoutUserInput, likeUncheckedUpdateWithoutUserInput>;
-    create: XOR<likeCreateWithoutUserInput, likeUncheckedCreateWithoutUserInput>;
+  export type FeedUpsertWithWhereUniqueWithoutUserInput = {
+    where: FeedWhereUniqueInput;
+    update: XOR<FeedUpdateWithoutUserInput, FeedUncheckedUpdateWithoutUserInput>;
+    create: XOR<FeedCreateWithoutUserInput, FeedUncheckedCreateWithoutUserInput>;
   };
 
-  export type likeUpdateWithWhereUniqueWithoutUserInput = {
-    where: likeWhereUniqueInput;
-    data: XOR<likeUpdateWithoutUserInput, likeUncheckedUpdateWithoutUserInput>;
+  export type FeedUpdateWithWhereUniqueWithoutUserInput = {
+    where: FeedWhereUniqueInput;
+    data: XOR<FeedUpdateWithoutUserInput, FeedUncheckedUpdateWithoutUserInput>;
   };
 
-  export type likeUpdateManyWithWhereWithoutUserInput = {
-    where: likeScalarWhereInput;
-    data: XOR<likeUpdateManyMutationInput, likeUncheckedUpdateManyWithoutUserInput>;
+  export type FeedUpdateManyWithWhereWithoutUserInput = {
+    where: FeedScalarWhereInput;
+    data: XOR<FeedUpdateManyMutationInput, FeedUncheckedUpdateManyWithoutUserInput>;
   };
 
-  export type likeScalarWhereInput = {
-    AND?: likeScalarWhereInput | likeScalarWhereInput[];
-    OR?: likeScalarWhereInput[];
-    NOT?: likeScalarWhereInput | likeScalarWhereInput[];
-    id?: IntFilter<'like'> | number;
-    postId?: IntFilter<'like'> | number;
-    userId?: IntFilter<'like'> | number;
-    createdAt?: DateTimeFilter<'like'> | Date | string;
+  export type FeedScalarWhereInput = {
+    AND?: FeedScalarWhereInput | FeedScalarWhereInput[];
+    OR?: FeedScalarWhereInput[];
+    NOT?: FeedScalarWhereInput | FeedScalarWhereInput[];
+    id?: IntFilter<'Feed'> | number;
+    postId?: IntFilter<'Feed'> | number;
+    userId?: IntFilter<'Feed'> | number;
+    createdAt?: DateTimeFilter<'Feed'> | Date | string;
+  };
+
+  export type FeedTrackUpsertWithWhereUniqueWithoutUserInput = {
+    where: FeedTrackWhereUniqueInput;
+    update: XOR<FeedTrackUpdateWithoutUserInput, FeedTrackUncheckedUpdateWithoutUserInput>;
+    create: XOR<FeedTrackCreateWithoutUserInput, FeedTrackUncheckedCreateWithoutUserInput>;
+  };
+
+  export type FeedTrackUpdateWithWhereUniqueWithoutUserInput = {
+    where: FeedTrackWhereUniqueInput;
+    data: XOR<FeedTrackUpdateWithoutUserInput, FeedTrackUncheckedUpdateWithoutUserInput>;
+  };
+
+  export type FeedTrackUpdateManyWithWhereWithoutUserInput = {
+    where: FeedTrackScalarWhereInput;
+    data: XOR<FeedTrackUpdateManyMutationInput, FeedTrackUncheckedUpdateManyWithoutUserInput>;
+  };
+
+  export type FeedTrackScalarWhereInput = {
+    AND?: FeedTrackScalarWhereInput | FeedTrackScalarWhereInput[];
+    OR?: FeedTrackScalarWhereInput[];
+    NOT?: FeedTrackScalarWhereInput | FeedTrackScalarWhereInput[];
+    id?: IntFilter<'FeedTrack'> | number;
+    userId?: IntFilter<'FeedTrack'> | number;
+    lastSeen?: DateTimeFilter<'FeedTrack'> | Date | string;
+  };
+
+  export type UserHeatmapUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserHeatmapWhereUniqueInput;
+    update: XOR<UserHeatmapUpdateWithoutUserInput, UserHeatmapUncheckedUpdateWithoutUserInput>;
+    create: XOR<UserHeatmapCreateWithoutUserInput, UserHeatmapUncheckedCreateWithoutUserInput>;
+  };
+
+  export type UserHeatmapUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserHeatmapWhereUniqueInput;
+    data: XOR<UserHeatmapUpdateWithoutUserInput, UserHeatmapUncheckedUpdateWithoutUserInput>;
+  };
+
+  export type UserHeatmapUpdateManyWithWhereWithoutUserInput = {
+    where: UserHeatmapScalarWhereInput;
+    data: XOR<UserHeatmapUpdateManyMutationInput, UserHeatmapUncheckedUpdateManyWithoutUserInput>;
+  };
+
+  export type UserHeatmapScalarWhereInput = {
+    AND?: UserHeatmapScalarWhereInput | UserHeatmapScalarWhereInput[];
+    OR?: UserHeatmapScalarWhereInput[];
+    NOT?: UserHeatmapScalarWhereInput | UserHeatmapScalarWhereInput[];
+    id?: IntFilter<'UserHeatmap'> | number;
+    userId?: IntFilter<'UserHeatmap'> | number;
+    date?: DateTimeFilter<'UserHeatmap'> | Date | string;
+    count?: IntFilter<'UserHeatmap'> | number;
+  };
+
+  export type LikeUpsertWithWhereUniqueWithoutUserInput = {
+    where: LikeWhereUniqueInput;
+    update: XOR<LikeUpdateWithoutUserInput, LikeUncheckedUpdateWithoutUserInput>;
+    create: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput>;
+  };
+
+  export type LikeUpdateWithWhereUniqueWithoutUserInput = {
+    where: LikeWhereUniqueInput;
+    data: XOR<LikeUpdateWithoutUserInput, LikeUncheckedUpdateWithoutUserInput>;
+  };
+
+  export type LikeUpdateManyWithWhereWithoutUserInput = {
+    where: LikeScalarWhereInput;
+    data: XOR<LikeUpdateManyMutationInput, LikeUncheckedUpdateManyWithoutUserInput>;
+  };
+
+  export type LikeScalarWhereInput = {
+    AND?: LikeScalarWhereInput | LikeScalarWhereInput[];
+    OR?: LikeScalarWhereInput[];
+    NOT?: LikeScalarWhereInput | LikeScalarWhereInput[];
+    id?: IntFilter<'Like'> | number;
+    postId?: IntFilter<'Like'> | number;
+    userId?: IntFilter<'Like'> | number;
+    createdAt?: DateTimeFilter<'Like'> | Date | string;
   };
 
   export type CommentUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -18544,30 +28375,30 @@ export namespace Prisma {
     authorId?: IntFilter<'Comment'> | number;
   };
 
-  export type shareUpsertWithWhereUniqueWithoutUserInput = {
-    where: shareWhereUniqueInput;
-    update: XOR<shareUpdateWithoutUserInput, shareUncheckedUpdateWithoutUserInput>;
-    create: XOR<shareCreateWithoutUserInput, shareUncheckedCreateWithoutUserInput>;
+  export type ShareUpsertWithWhereUniqueWithoutUserInput = {
+    where: ShareWhereUniqueInput;
+    update: XOR<ShareUpdateWithoutUserInput, ShareUncheckedUpdateWithoutUserInput>;
+    create: XOR<ShareCreateWithoutUserInput, ShareUncheckedCreateWithoutUserInput>;
   };
 
-  export type shareUpdateWithWhereUniqueWithoutUserInput = {
-    where: shareWhereUniqueInput;
-    data: XOR<shareUpdateWithoutUserInput, shareUncheckedUpdateWithoutUserInput>;
+  export type ShareUpdateWithWhereUniqueWithoutUserInput = {
+    where: ShareWhereUniqueInput;
+    data: XOR<ShareUpdateWithoutUserInput, ShareUncheckedUpdateWithoutUserInput>;
   };
 
-  export type shareUpdateManyWithWhereWithoutUserInput = {
-    where: shareScalarWhereInput;
-    data: XOR<shareUpdateManyMutationInput, shareUncheckedUpdateManyWithoutUserInput>;
+  export type ShareUpdateManyWithWhereWithoutUserInput = {
+    where: ShareScalarWhereInput;
+    data: XOR<ShareUpdateManyMutationInput, ShareUncheckedUpdateManyWithoutUserInput>;
   };
 
-  export type shareScalarWhereInput = {
-    AND?: shareScalarWhereInput | shareScalarWhereInput[];
-    OR?: shareScalarWhereInput[];
-    NOT?: shareScalarWhereInput | shareScalarWhereInput[];
-    id?: IntFilter<'share'> | number;
-    postId?: IntFilter<'share'> | number;
-    userId?: IntFilter<'share'> | number;
-    createdAt?: DateTimeFilter<'share'> | Date | string;
+  export type ShareScalarWhereInput = {
+    AND?: ShareScalarWhereInput | ShareScalarWhereInput[];
+    OR?: ShareScalarWhereInput[];
+    NOT?: ShareScalarWhereInput | ShareScalarWhereInput[];
+    id?: IntFilter<'Share'> | number;
+    postId?: IntFilter<'Share'> | number;
+    userId?: IntFilter<'Share'> | number;
+    createdAt?: DateTimeFilter<'Share'> | Date | string;
   };
 
   export type TagFollowUpsertWithWhereUniqueWithoutUserInput = {
@@ -18638,18 +28469,431 @@ export namespace Prisma {
     data: XOR<FollowUpdateManyMutationInput, FollowUncheckedUpdateManyWithoutFollowedInput>;
   };
 
+  export type NotificationUpsertWithWhereUniqueWithoutSenderInput = {
+    where: NotificationWhereUniqueInput;
+    update: XOR<
+      NotificationUpdateWithoutSenderInput,
+      NotificationUncheckedUpdateWithoutSenderInput
+    >;
+    create: XOR<
+      NotificationCreateWithoutSenderInput,
+      NotificationUncheckedCreateWithoutSenderInput
+    >;
+  };
+
+  export type NotificationUpdateWithWhereUniqueWithoutSenderInput = {
+    where: NotificationWhereUniqueInput;
+    data: XOR<NotificationUpdateWithoutSenderInput, NotificationUncheckedUpdateWithoutSenderInput>;
+  };
+
+  export type NotificationUpdateManyWithWhereWithoutSenderInput = {
+    where: NotificationScalarWhereInput;
+    data: XOR<
+      NotificationUpdateManyMutationInput,
+      NotificationUncheckedUpdateManyWithoutSenderInput
+    >;
+  };
+
+  export type NotificationScalarWhereInput = {
+    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[];
+    OR?: NotificationScalarWhereInput[];
+    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[];
+    id?: IntFilter<'Notification'> | number;
+    recipientId?: IntFilter<'Notification'> | number;
+    senderId?: IntNullableFilter<'Notification'> | number | null;
+    type?: EnumNotificationTypeFilter<'Notification'> | $Enums.NotificationType;
+    message?: StringFilter<'Notification'> | string;
+    link?: StringNullableFilter<'Notification'> | string | null;
+    read?: BoolFilter<'Notification'> | boolean;
+    createdAt?: DateTimeFilter<'Notification'> | Date | string;
+  };
+
+  export type NotificationUpsertWithWhereUniqueWithoutRecipientInput = {
+    where: NotificationWhereUniqueInput;
+    update: XOR<
+      NotificationUpdateWithoutRecipientInput,
+      NotificationUncheckedUpdateWithoutRecipientInput
+    >;
+    create: XOR<
+      NotificationCreateWithoutRecipientInput,
+      NotificationUncheckedCreateWithoutRecipientInput
+    >;
+  };
+
+  export type NotificationUpdateWithWhereUniqueWithoutRecipientInput = {
+    where: NotificationWhereUniqueInput;
+    data: XOR<
+      NotificationUpdateWithoutRecipientInput,
+      NotificationUncheckedUpdateWithoutRecipientInput
+    >;
+  };
+
+  export type NotificationUpdateManyWithWhereWithoutRecipientInput = {
+    where: NotificationScalarWhereInput;
+    data: XOR<
+      NotificationUpdateManyMutationInput,
+      NotificationUncheckedUpdateManyWithoutRecipientInput
+    >;
+  };
+
+  export type UserCreateWithoutUserProfileInput = {
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    post?: PostCreateNestedManyWithoutAuthorInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
+    comment?: CommentCreateNestedManyWithoutAuthorInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
+    followers?: FollowCreateNestedManyWithoutFollowerInput;
+    following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
+  };
+
+  export type UserUncheckedCreateWithoutUserProfileInput = {
+    id?: number;
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
+    comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
+    followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
+    following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
+  };
+
+  export type UserCreateOrConnectWithoutUserProfileInput = {
+    where: UserWhereUniqueInput;
+    create: XOR<UserCreateWithoutUserProfileInput, UserUncheckedCreateWithoutUserProfileInput>;
+  };
+
+  export type UserUpsertWithoutUserProfileInput = {
+    update: XOR<UserUpdateWithoutUserProfileInput, UserUncheckedUpdateWithoutUserProfileInput>;
+    create: XOR<UserCreateWithoutUserProfileInput, UserUncheckedCreateWithoutUserProfileInput>;
+    where?: UserWhereInput;
+  };
+
+  export type UserUpdateToOneWithWhereWithoutUserProfileInput = {
+    where?: UserWhereInput;
+    data: XOR<UserUpdateWithoutUserProfileInput, UserUncheckedUpdateWithoutUserProfileInput>;
+  };
+
+  export type UserUpdateWithoutUserProfileInput = {
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    post?: PostUpdateManyWithoutAuthorNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
+    comment?: CommentUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
+    followers?: FollowUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
+  };
+
+  export type UserUncheckedUpdateWithoutUserProfileInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
+    comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
+    followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
+  };
+
+  export type UserCreateWithoutHeapmapInput = {
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
+    post?: PostCreateNestedManyWithoutAuthorInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
+    comment?: CommentCreateNestedManyWithoutAuthorInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
+    followers?: FollowCreateNestedManyWithoutFollowerInput;
+    following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
+  };
+
+  export type UserUncheckedCreateWithoutHeapmapInput = {
+    id?: number;
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
+    post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
+    comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
+    followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
+    following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
+  };
+
+  export type UserCreateOrConnectWithoutHeapmapInput = {
+    where: UserWhereUniqueInput;
+    create: XOR<UserCreateWithoutHeapmapInput, UserUncheckedCreateWithoutHeapmapInput>;
+  };
+
+  export type UserUpsertWithoutHeapmapInput = {
+    update: XOR<UserUpdateWithoutHeapmapInput, UserUncheckedUpdateWithoutHeapmapInput>;
+    create: XOR<UserCreateWithoutHeapmapInput, UserUncheckedCreateWithoutHeapmapInput>;
+    where?: UserWhereInput;
+  };
+
+  export type UserUpdateToOneWithWhereWithoutHeapmapInput = {
+    where?: UserWhereInput;
+    data: XOR<UserUpdateWithoutHeapmapInput, UserUncheckedUpdateWithoutHeapmapInput>;
+  };
+
+  export type UserUpdateWithoutHeapmapInput = {
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
+    post?: PostUpdateManyWithoutAuthorNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
+    comment?: CommentUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
+    followers?: FollowUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
+  };
+
+  export type UserUncheckedUpdateWithoutHeapmapInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
+    post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
+    comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
+    followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
+  };
+
+  export type UserCreateWithoutTagStatsInput = {
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
+    post?: PostCreateNestedManyWithoutAuthorInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
+    comment?: CommentCreateNestedManyWithoutAuthorInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
+    followers?: FollowCreateNestedManyWithoutFollowerInput;
+    following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
+  };
+
+  export type UserUncheckedCreateWithoutTagStatsInput = {
+    id?: number;
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
+    post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
+    comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
+    followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
+    following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
+  };
+
+  export type UserCreateOrConnectWithoutTagStatsInput = {
+    where: UserWhereUniqueInput;
+    create: XOR<UserCreateWithoutTagStatsInput, UserUncheckedCreateWithoutTagStatsInput>;
+  };
+
+  export type TagCreateWithoutUsersInput = {
+    name: string;
+    createdAt?: Date | string;
+    posts?: PostTagCreateNestedManyWithoutTagInput;
+    followers?: TagFollowCreateNestedManyWithoutTagInput;
+  };
+
+  export type TagUncheckedCreateWithoutUsersInput = {
+    id?: number;
+    name: string;
+    createdAt?: Date | string;
+    posts?: PostTagUncheckedCreateNestedManyWithoutTagInput;
+    followers?: TagFollowUncheckedCreateNestedManyWithoutTagInput;
+  };
+
+  export type TagCreateOrConnectWithoutUsersInput = {
+    where: TagWhereUniqueInput;
+    create: XOR<TagCreateWithoutUsersInput, TagUncheckedCreateWithoutUsersInput>;
+  };
+
+  export type UserUpsertWithoutTagStatsInput = {
+    update: XOR<UserUpdateWithoutTagStatsInput, UserUncheckedUpdateWithoutTagStatsInput>;
+    create: XOR<UserCreateWithoutTagStatsInput, UserUncheckedCreateWithoutTagStatsInput>;
+    where?: UserWhereInput;
+  };
+
+  export type UserUpdateToOneWithWhereWithoutTagStatsInput = {
+    where?: UserWhereInput;
+    data: XOR<UserUpdateWithoutTagStatsInput, UserUncheckedUpdateWithoutTagStatsInput>;
+  };
+
+  export type UserUpdateWithoutTagStatsInput = {
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
+    post?: PostUpdateManyWithoutAuthorNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
+    comment?: CommentUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
+    followers?: FollowUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
+  };
+
+  export type UserUncheckedUpdateWithoutTagStatsInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
+    post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
+    comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
+    followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
+  };
+
+  export type TagUpsertWithoutUsersInput = {
+    update: XOR<TagUpdateWithoutUsersInput, TagUncheckedUpdateWithoutUsersInput>;
+    create: XOR<TagCreateWithoutUsersInput, TagUncheckedCreateWithoutUsersInput>;
+    where?: TagWhereInput;
+  };
+
+  export type TagUpdateToOneWithWhereWithoutUsersInput = {
+    where?: TagWhereInput;
+    data: XOR<TagUpdateWithoutUsersInput, TagUncheckedUpdateWithoutUsersInput>;
+  };
+
+  export type TagUpdateWithoutUsersInput = {
+    name?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    posts?: PostTagUpdateManyWithoutTagNestedInput;
+    followers?: TagFollowUpdateManyWithoutTagNestedInput;
+  };
+
+  export type TagUncheckedUpdateWithoutUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    name?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    posts?: PostTagUncheckedUpdateManyWithoutTagNestedInput;
+    followers?: TagFollowUncheckedUpdateManyWithoutTagNestedInput;
+  };
+
   export type UserCreateWithoutPostInput = {
     email: string;
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
-    feed?: feedCreateNestedManyWithoutUserInput;
-    like?: likeCreateNestedManyWithoutUserInput;
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
     comment?: CommentCreateNestedManyWithoutAuthorInput;
-    shared?: shareCreateNestedManyWithoutUserInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
     followers?: FollowCreateNestedManyWithoutFollowerInput;
     following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserUncheckedCreateWithoutPostInput = {
@@ -18658,13 +28902,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
-    feed?: feedUncheckedCreateNestedManyWithoutUserInput;
-    like?: likeUncheckedCreateNestedManyWithoutUserInput;
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
     comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
-    shared?: shareUncheckedCreateNestedManyWithoutUserInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
     followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
     following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserCreateOrConnectWithoutPostInput = {
@@ -18716,66 +28966,66 @@ export namespace Prisma {
     skipDuplicates?: boolean;
   };
 
-  export type likeCreateWithoutPostInput = {
+  export type LikeCreateWithoutPostInput = {
     createdAt?: Date | string;
     user: UserCreateNestedOneWithoutLikeInput;
   };
 
-  export type likeUncheckedCreateWithoutPostInput = {
+  export type LikeUncheckedCreateWithoutPostInput = {
     id?: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type likeCreateOrConnectWithoutPostInput = {
-    where: likeWhereUniqueInput;
-    create: XOR<likeCreateWithoutPostInput, likeUncheckedCreateWithoutPostInput>;
+  export type LikeCreateOrConnectWithoutPostInput = {
+    where: LikeWhereUniqueInput;
+    create: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput>;
   };
 
-  export type likeCreateManyPostInputEnvelope = {
-    data: likeCreateManyPostInput | likeCreateManyPostInput[];
+  export type LikeCreateManyPostInputEnvelope = {
+    data: LikeCreateManyPostInput | LikeCreateManyPostInput[];
     skipDuplicates?: boolean;
   };
 
-  export type shareCreateWithoutPostInput = {
+  export type ShareCreateWithoutPostInput = {
     createdAt?: Date | string;
     user: UserCreateNestedOneWithoutSharedInput;
   };
 
-  export type shareUncheckedCreateWithoutPostInput = {
+  export type ShareUncheckedCreateWithoutPostInput = {
     id?: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type shareCreateOrConnectWithoutPostInput = {
-    where: shareWhereUniqueInput;
-    create: XOR<shareCreateWithoutPostInput, shareUncheckedCreateWithoutPostInput>;
+  export type ShareCreateOrConnectWithoutPostInput = {
+    where: ShareWhereUniqueInput;
+    create: XOR<ShareCreateWithoutPostInput, ShareUncheckedCreateWithoutPostInput>;
   };
 
-  export type shareCreateManyPostInputEnvelope = {
-    data: shareCreateManyPostInput | shareCreateManyPostInput[];
+  export type ShareCreateManyPostInputEnvelope = {
+    data: ShareCreateManyPostInput | ShareCreateManyPostInput[];
     skipDuplicates?: boolean;
   };
 
-  export type feedCreateWithoutPostInput = {
+  export type FeedCreateWithoutPostInput = {
     createdAt?: Date | string;
     user: UserCreateNestedOneWithoutFeedInput;
   };
 
-  export type feedUncheckedCreateWithoutPostInput = {
+  export type FeedUncheckedCreateWithoutPostInput = {
     id?: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type feedCreateOrConnectWithoutPostInput = {
-    where: feedWhereUniqueInput;
-    create: XOR<feedCreateWithoutPostInput, feedUncheckedCreateWithoutPostInput>;
+  export type FeedCreateOrConnectWithoutPostInput = {
+    where: FeedWhereUniqueInput;
+    create: XOR<FeedCreateWithoutPostInput, FeedUncheckedCreateWithoutPostInput>;
   };
 
-  export type feedCreateManyPostInputEnvelope = {
-    data: feedCreateManyPostInput | feedCreateManyPostInput[];
+  export type FeedCreateManyPostInputEnvelope = {
+    data: FeedCreateManyPostInput | FeedCreateManyPostInput[];
     skipDuplicates?: boolean;
   };
 
@@ -18795,13 +29045,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
-    feed?: feedUpdateManyWithoutUserNestedInput;
-    like?: likeUpdateManyWithoutUserNestedInput;
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
     comment?: CommentUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUpdateManyWithoutUserNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
     followers?: FollowUpdateManyWithoutFollowerNestedInput;
     following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutPostInput = {
@@ -18810,13 +29066,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
-    feed?: feedUncheckedUpdateManyWithoutUserNestedInput;
-    like?: likeUncheckedUpdateManyWithoutUserNestedInput;
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
     comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUncheckedUpdateManyWithoutUserNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
     followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
     following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
   };
 
   export type PostTagUpsertWithWhereUniqueWithoutPostInput = {
@@ -18861,52 +29123,52 @@ export namespace Prisma {
     data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutPostInput>;
   };
 
-  export type likeUpsertWithWhereUniqueWithoutPostInput = {
-    where: likeWhereUniqueInput;
-    update: XOR<likeUpdateWithoutPostInput, likeUncheckedUpdateWithoutPostInput>;
-    create: XOR<likeCreateWithoutPostInput, likeUncheckedCreateWithoutPostInput>;
+  export type LikeUpsertWithWhereUniqueWithoutPostInput = {
+    where: LikeWhereUniqueInput;
+    update: XOR<LikeUpdateWithoutPostInput, LikeUncheckedUpdateWithoutPostInput>;
+    create: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput>;
   };
 
-  export type likeUpdateWithWhereUniqueWithoutPostInput = {
-    where: likeWhereUniqueInput;
-    data: XOR<likeUpdateWithoutPostInput, likeUncheckedUpdateWithoutPostInput>;
+  export type LikeUpdateWithWhereUniqueWithoutPostInput = {
+    where: LikeWhereUniqueInput;
+    data: XOR<LikeUpdateWithoutPostInput, LikeUncheckedUpdateWithoutPostInput>;
   };
 
-  export type likeUpdateManyWithWhereWithoutPostInput = {
-    where: likeScalarWhereInput;
-    data: XOR<likeUpdateManyMutationInput, likeUncheckedUpdateManyWithoutPostInput>;
+  export type LikeUpdateManyWithWhereWithoutPostInput = {
+    where: LikeScalarWhereInput;
+    data: XOR<LikeUpdateManyMutationInput, LikeUncheckedUpdateManyWithoutPostInput>;
   };
 
-  export type shareUpsertWithWhereUniqueWithoutPostInput = {
-    where: shareWhereUniqueInput;
-    update: XOR<shareUpdateWithoutPostInput, shareUncheckedUpdateWithoutPostInput>;
-    create: XOR<shareCreateWithoutPostInput, shareUncheckedCreateWithoutPostInput>;
+  export type ShareUpsertWithWhereUniqueWithoutPostInput = {
+    where: ShareWhereUniqueInput;
+    update: XOR<ShareUpdateWithoutPostInput, ShareUncheckedUpdateWithoutPostInput>;
+    create: XOR<ShareCreateWithoutPostInput, ShareUncheckedCreateWithoutPostInput>;
   };
 
-  export type shareUpdateWithWhereUniqueWithoutPostInput = {
-    where: shareWhereUniqueInput;
-    data: XOR<shareUpdateWithoutPostInput, shareUncheckedUpdateWithoutPostInput>;
+  export type ShareUpdateWithWhereUniqueWithoutPostInput = {
+    where: ShareWhereUniqueInput;
+    data: XOR<ShareUpdateWithoutPostInput, ShareUncheckedUpdateWithoutPostInput>;
   };
 
-  export type shareUpdateManyWithWhereWithoutPostInput = {
-    where: shareScalarWhereInput;
-    data: XOR<shareUpdateManyMutationInput, shareUncheckedUpdateManyWithoutPostInput>;
+  export type ShareUpdateManyWithWhereWithoutPostInput = {
+    where: ShareScalarWhereInput;
+    data: XOR<ShareUpdateManyMutationInput, ShareUncheckedUpdateManyWithoutPostInput>;
   };
 
-  export type feedUpsertWithWhereUniqueWithoutPostInput = {
-    where: feedWhereUniqueInput;
-    update: XOR<feedUpdateWithoutPostInput, feedUncheckedUpdateWithoutPostInput>;
-    create: XOR<feedCreateWithoutPostInput, feedUncheckedCreateWithoutPostInput>;
+  export type FeedUpsertWithWhereUniqueWithoutPostInput = {
+    where: FeedWhereUniqueInput;
+    update: XOR<FeedUpdateWithoutPostInput, FeedUncheckedUpdateWithoutPostInput>;
+    create: XOR<FeedCreateWithoutPostInput, FeedUncheckedCreateWithoutPostInput>;
   };
 
-  export type feedUpdateWithWhereUniqueWithoutPostInput = {
-    where: feedWhereUniqueInput;
-    data: XOR<feedUpdateWithoutPostInput, feedUncheckedUpdateWithoutPostInput>;
+  export type FeedUpdateWithWhereUniqueWithoutPostInput = {
+    where: FeedWhereUniqueInput;
+    data: XOR<FeedUpdateWithoutPostInput, FeedUncheckedUpdateWithoutPostInput>;
   };
 
-  export type feedUpdateManyWithWhereWithoutPostInput = {
-    where: feedScalarWhereInput;
-    data: XOR<feedUpdateManyMutationInput, feedUncheckedUpdateManyWithoutPostInput>;
+  export type FeedUpdateManyWithWhereWithoutPostInput = {
+    where: FeedScalarWhereInput;
+    data: XOR<FeedUpdateManyMutationInput, FeedUncheckedUpdateManyWithoutPostInput>;
   };
 
   export type UserCreateWithoutFollowersInput = {
@@ -18914,13 +29176,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
     post?: PostCreateNestedManyWithoutAuthorInput;
-    feed?: feedCreateNestedManyWithoutUserInput;
-    like?: likeCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
     comment?: CommentCreateNestedManyWithoutAuthorInput;
-    shared?: shareCreateNestedManyWithoutUserInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
     following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserUncheckedCreateWithoutFollowersInput = {
@@ -18929,13 +29197,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
     post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
-    feed?: feedUncheckedCreateNestedManyWithoutUserInput;
-    like?: likeUncheckedCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
     comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
-    shared?: shareUncheckedCreateNestedManyWithoutUserInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
     following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserCreateOrConnectWithoutFollowersInput = {
@@ -18948,13 +29222,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
     post?: PostCreateNestedManyWithoutAuthorInput;
-    feed?: feedCreateNestedManyWithoutUserInput;
-    like?: likeCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
     comment?: CommentCreateNestedManyWithoutAuthorInput;
-    shared?: shareCreateNestedManyWithoutUserInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
     followers?: FollowCreateNestedManyWithoutFollowerInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserUncheckedCreateWithoutFollowingInput = {
@@ -18963,13 +29243,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
     post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
-    feed?: feedUncheckedCreateNestedManyWithoutUserInput;
-    like?: likeUncheckedCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
     comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
-    shared?: shareUncheckedCreateNestedManyWithoutUserInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
     followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserCreateOrConnectWithoutFollowingInput = {
@@ -18993,13 +29279,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
     post?: PostUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUpdateManyWithoutUserNestedInput;
-    like?: likeUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
     comment?: CommentUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUpdateManyWithoutUserNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
     following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutFollowersInput = {
@@ -19008,13 +29300,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
     post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutUserNestedInput;
-    like?: likeUncheckedUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
     comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUncheckedUpdateManyWithoutUserNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
     following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserUpsertWithoutFollowingInput = {
@@ -19033,13 +29331,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
     post?: PostUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUpdateManyWithoutUserNestedInput;
-    like?: likeUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
     comment?: CommentUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUpdateManyWithoutUserNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
     followers?: FollowUpdateManyWithoutFollowerNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutFollowingInput = {
@@ -19048,13 +29352,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
     post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutUserNestedInput;
-    like?: likeUncheckedUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
     comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUncheckedUpdateManyWithoutUserNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
     followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
   };
 
   export type PostTagCreateWithoutTagInput = {
@@ -19075,6 +29385,31 @@ export namespace Prisma {
 
   export type PostTagCreateManyTagInputEnvelope = {
     data: PostTagCreateManyTagInput | PostTagCreateManyTagInput[];
+    skipDuplicates?: boolean;
+  };
+
+  export type UserTagStatsCreateWithoutTagInput = {
+    postCount?: number;
+    updatedAt?: Date | string;
+    createdAt?: Date | string;
+    user: UserCreateNestedOneWithoutTagStatsInput;
+  };
+
+  export type UserTagStatsUncheckedCreateWithoutTagInput = {
+    id?: number;
+    userId: number;
+    postCount?: number;
+    updatedAt?: Date | string;
+    createdAt?: Date | string;
+  };
+
+  export type UserTagStatsCreateOrConnectWithoutTagInput = {
+    where: UserTagStatsWhereUniqueInput;
+    create: XOR<UserTagStatsCreateWithoutTagInput, UserTagStatsUncheckedCreateWithoutTagInput>;
+  };
+
+  export type UserTagStatsCreateManyTagInputEnvelope = {
+    data: UserTagStatsCreateManyTagInput | UserTagStatsCreateManyTagInput[];
     skipDuplicates?: boolean;
   };
 
@@ -19115,6 +29450,22 @@ export namespace Prisma {
     data: XOR<PostTagUpdateManyMutationInput, PostTagUncheckedUpdateManyWithoutTagInput>;
   };
 
+  export type UserTagStatsUpsertWithWhereUniqueWithoutTagInput = {
+    where: UserTagStatsWhereUniqueInput;
+    update: XOR<UserTagStatsUpdateWithoutTagInput, UserTagStatsUncheckedUpdateWithoutTagInput>;
+    create: XOR<UserTagStatsCreateWithoutTagInput, UserTagStatsUncheckedCreateWithoutTagInput>;
+  };
+
+  export type UserTagStatsUpdateWithWhereUniqueWithoutTagInput = {
+    where: UserTagStatsWhereUniqueInput;
+    data: XOR<UserTagStatsUpdateWithoutTagInput, UserTagStatsUncheckedUpdateWithoutTagInput>;
+  };
+
+  export type UserTagStatsUpdateManyWithWhereWithoutTagInput = {
+    where: UserTagStatsScalarWhereInput;
+    data: XOR<UserTagStatsUpdateManyMutationInput, UserTagStatsUncheckedUpdateManyWithoutTagInput>;
+  };
+
   export type TagFollowUpsertWithWhereUniqueWithoutTagInput = {
     where: TagFollowWhereUniqueInput;
     update: XOR<TagFollowUpdateWithoutTagInput, TagFollowUncheckedUpdateWithoutTagInput>;
@@ -19139,9 +29490,9 @@ export namespace Prisma {
     commentCount?: number;
     author: UserCreateNestedOneWithoutPostInput;
     comments?: CommentCreateNestedManyWithoutPostInput;
-    likes?: likeCreateNestedManyWithoutPostInput;
-    shares?: shareCreateNestedManyWithoutPostInput;
-    feed?: feedCreateNestedManyWithoutPostInput;
+    likes?: LikeCreateNestedManyWithoutPostInput;
+    shares?: ShareCreateNestedManyWithoutPostInput;
+    feed?: FeedCreateNestedManyWithoutPostInput;
   };
 
   export type PostUncheckedCreateWithoutTagsInput = {
@@ -19153,9 +29504,9 @@ export namespace Prisma {
     likeCount?: number;
     commentCount?: number;
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput;
-    likes?: likeUncheckedCreateNestedManyWithoutPostInput;
-    shares?: shareUncheckedCreateNestedManyWithoutPostInput;
-    feed?: feedUncheckedCreateNestedManyWithoutPostInput;
+    likes?: LikeUncheckedCreateNestedManyWithoutPostInput;
+    shares?: ShareUncheckedCreateNestedManyWithoutPostInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutPostInput;
   };
 
   export type PostCreateOrConnectWithoutTagsInput = {
@@ -19166,6 +29517,7 @@ export namespace Prisma {
   export type TagCreateWithoutPostsInput = {
     name: string;
     createdAt?: Date | string;
+    users?: UserTagStatsCreateNestedManyWithoutTagInput;
     followers?: TagFollowCreateNestedManyWithoutTagInput;
   };
 
@@ -19173,6 +29525,7 @@ export namespace Prisma {
     id?: number;
     name: string;
     createdAt?: Date | string;
+    users?: UserTagStatsUncheckedCreateNestedManyWithoutTagInput;
     followers?: TagFollowUncheckedCreateNestedManyWithoutTagInput;
   };
 
@@ -19200,9 +29553,9 @@ export namespace Prisma {
     commentCount?: IntFieldUpdateOperationsInput | number;
     author?: UserUpdateOneRequiredWithoutPostNestedInput;
     comments?: CommentUpdateManyWithoutPostNestedInput;
-    likes?: likeUpdateManyWithoutPostNestedInput;
-    shares?: shareUpdateManyWithoutPostNestedInput;
-    feed?: feedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUpdateManyWithoutPostNestedInput;
+    shares?: ShareUpdateManyWithoutPostNestedInput;
+    feed?: FeedUpdateManyWithoutPostNestedInput;
   };
 
   export type PostUncheckedUpdateWithoutTagsInput = {
@@ -19214,9 +29567,9 @@ export namespace Prisma {
     likeCount?: IntFieldUpdateOperationsInput | number;
     commentCount?: IntFieldUpdateOperationsInput | number;
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput;
-    likes?: likeUncheckedUpdateManyWithoutPostNestedInput;
-    shares?: shareUncheckedUpdateManyWithoutPostNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput;
+    shares?: ShareUncheckedUpdateManyWithoutPostNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutPostNestedInput;
   };
 
   export type TagUpsertWithoutPostsInput = {
@@ -19233,6 +29586,7 @@ export namespace Prisma {
   export type TagUpdateWithoutPostsInput = {
     name?: StringFieldUpdateOperationsInput | string;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    users?: UserTagStatsUpdateManyWithoutTagNestedInput;
     followers?: TagFollowUpdateManyWithoutTagNestedInput;
   };
 
@@ -19240,6 +29594,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    users?: UserTagStatsUncheckedUpdateManyWithoutTagNestedInput;
     followers?: TagFollowUncheckedUpdateManyWithoutTagNestedInput;
   };
 
@@ -19247,6 +29602,7 @@ export namespace Prisma {
     name: string;
     createdAt?: Date | string;
     posts?: PostTagCreateNestedManyWithoutTagInput;
+    users?: UserTagStatsCreateNestedManyWithoutTagInput;
   };
 
   export type TagUncheckedCreateWithoutFollowersInput = {
@@ -19254,6 +29610,7 @@ export namespace Prisma {
     name: string;
     createdAt?: Date | string;
     posts?: PostTagUncheckedCreateNestedManyWithoutTagInput;
+    users?: UserTagStatsUncheckedCreateNestedManyWithoutTagInput;
   };
 
   export type TagCreateOrConnectWithoutFollowersInput = {
@@ -19266,13 +29623,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
     post?: PostCreateNestedManyWithoutAuthorInput;
-    feed?: feedCreateNestedManyWithoutUserInput;
-    like?: likeCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
     comment?: CommentCreateNestedManyWithoutAuthorInput;
-    shared?: shareCreateNestedManyWithoutUserInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
     followers?: FollowCreateNestedManyWithoutFollowerInput;
     following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserUncheckedCreateWithoutTagFollowsInput = {
@@ -19281,13 +29644,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
     post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
-    feed?: feedUncheckedCreateNestedManyWithoutUserInput;
-    like?: likeUncheckedCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
     comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
-    shared?: shareUncheckedCreateNestedManyWithoutUserInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
     followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
     following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserCreateOrConnectWithoutTagFollowsInput = {
@@ -19310,6 +29679,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     posts?: PostTagUpdateManyWithoutTagNestedInput;
+    users?: UserTagStatsUpdateManyWithoutTagNestedInput;
   };
 
   export type TagUncheckedUpdateWithoutFollowersInput = {
@@ -19317,6 +29687,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     posts?: PostTagUncheckedUpdateManyWithoutTagNestedInput;
+    users?: UserTagStatsUncheckedUpdateManyWithoutTagNestedInput;
   };
 
   export type UserUpsertWithoutTagFollowsInput = {
@@ -19335,13 +29706,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
     post?: PostUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUpdateManyWithoutUserNestedInput;
-    like?: likeUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
     comment?: CommentUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUpdateManyWithoutUserNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
     followers?: FollowUpdateManyWithoutFollowerNestedInput;
     following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutTagFollowsInput = {
@@ -19350,13 +29727,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
     post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutUserNestedInput;
-    like?: likeUncheckedUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
     comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUncheckedUpdateManyWithoutUserNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
     followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
     following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
   };
 
   export type PostCreateWithoutCommentsInput = {
@@ -19367,9 +29750,9 @@ export namespace Prisma {
     commentCount?: number;
     author: UserCreateNestedOneWithoutPostInput;
     tags?: PostTagCreateNestedManyWithoutPostInput;
-    likes?: likeCreateNestedManyWithoutPostInput;
-    shares?: shareCreateNestedManyWithoutPostInput;
-    feed?: feedCreateNestedManyWithoutPostInput;
+    likes?: LikeCreateNestedManyWithoutPostInput;
+    shares?: ShareCreateNestedManyWithoutPostInput;
+    feed?: FeedCreateNestedManyWithoutPostInput;
   };
 
   export type PostUncheckedCreateWithoutCommentsInput = {
@@ -19381,9 +29764,9 @@ export namespace Prisma {
     likeCount?: number;
     commentCount?: number;
     tags?: PostTagUncheckedCreateNestedManyWithoutPostInput;
-    likes?: likeUncheckedCreateNestedManyWithoutPostInput;
-    shares?: shareUncheckedCreateNestedManyWithoutPostInput;
-    feed?: feedUncheckedCreateNestedManyWithoutPostInput;
+    likes?: LikeUncheckedCreateNestedManyWithoutPostInput;
+    shares?: ShareUncheckedCreateNestedManyWithoutPostInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutPostInput;
   };
 
   export type PostCreateOrConnectWithoutCommentsInput = {
@@ -19396,13 +29779,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
     post?: PostCreateNestedManyWithoutAuthorInput;
-    feed?: feedCreateNestedManyWithoutUserInput;
-    like?: likeCreateNestedManyWithoutUserInput;
-    shared?: shareCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
     followers?: FollowCreateNestedManyWithoutFollowerInput;
     following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserUncheckedCreateWithoutCommentInput = {
@@ -19411,13 +29800,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
     post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
-    feed?: feedUncheckedCreateNestedManyWithoutUserInput;
-    like?: likeUncheckedCreateNestedManyWithoutUserInput;
-    shared?: shareUncheckedCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
     followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
     following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserCreateOrConnectWithoutCommentInput = {
@@ -19444,9 +29839,9 @@ export namespace Prisma {
     commentCount?: IntFieldUpdateOperationsInput | number;
     author?: UserUpdateOneRequiredWithoutPostNestedInput;
     tags?: PostTagUpdateManyWithoutPostNestedInput;
-    likes?: likeUpdateManyWithoutPostNestedInput;
-    shares?: shareUpdateManyWithoutPostNestedInput;
-    feed?: feedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUpdateManyWithoutPostNestedInput;
+    shares?: ShareUpdateManyWithoutPostNestedInput;
+    feed?: FeedUpdateManyWithoutPostNestedInput;
   };
 
   export type PostUncheckedUpdateWithoutCommentsInput = {
@@ -19458,9 +29853,9 @@ export namespace Prisma {
     likeCount?: IntFieldUpdateOperationsInput | number;
     commentCount?: IntFieldUpdateOperationsInput | number;
     tags?: PostTagUncheckedUpdateManyWithoutPostNestedInput;
-    likes?: likeUncheckedUpdateManyWithoutPostNestedInput;
-    shares?: shareUncheckedUpdateManyWithoutPostNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput;
+    shares?: ShareUncheckedUpdateManyWithoutPostNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutPostNestedInput;
   };
 
   export type UserUpsertWithoutCommentInput = {
@@ -19479,13 +29874,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
     post?: PostUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUpdateManyWithoutUserNestedInput;
-    like?: likeUpdateManyWithoutUserNestedInput;
-    shared?: shareUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
     followers?: FollowUpdateManyWithoutFollowerNestedInput;
     following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutCommentInput = {
@@ -19494,13 +29895,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
     post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutUserNestedInput;
-    like?: likeUncheckedUpdateManyWithoutUserNestedInput;
-    shared?: shareUncheckedUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
     followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
     following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
   };
 
   export type PostCreateWithoutLikesInput = {
@@ -19512,8 +29919,8 @@ export namespace Prisma {
     author: UserCreateNestedOneWithoutPostInput;
     tags?: PostTagCreateNestedManyWithoutPostInput;
     comments?: CommentCreateNestedManyWithoutPostInput;
-    shares?: shareCreateNestedManyWithoutPostInput;
-    feed?: feedCreateNestedManyWithoutPostInput;
+    shares?: ShareCreateNestedManyWithoutPostInput;
+    feed?: FeedCreateNestedManyWithoutPostInput;
   };
 
   export type PostUncheckedCreateWithoutLikesInput = {
@@ -19526,8 +29933,8 @@ export namespace Prisma {
     commentCount?: number;
     tags?: PostTagUncheckedCreateNestedManyWithoutPostInput;
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput;
-    shares?: shareUncheckedCreateNestedManyWithoutPostInput;
-    feed?: feedUncheckedCreateNestedManyWithoutPostInput;
+    shares?: ShareUncheckedCreateNestedManyWithoutPostInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutPostInput;
   };
 
   export type PostCreateOrConnectWithoutLikesInput = {
@@ -19540,13 +29947,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
     post?: PostCreateNestedManyWithoutAuthorInput;
-    feed?: feedCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
     comment?: CommentCreateNestedManyWithoutAuthorInput;
-    shared?: shareCreateNestedManyWithoutUserInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
     followers?: FollowCreateNestedManyWithoutFollowerInput;
     following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserUncheckedCreateWithoutLikeInput = {
@@ -19555,13 +29968,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
     post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
-    feed?: feedUncheckedCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
     comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
-    shared?: shareUncheckedCreateNestedManyWithoutUserInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
     followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
     following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserCreateOrConnectWithoutLikeInput = {
@@ -19589,8 +30008,8 @@ export namespace Prisma {
     author?: UserUpdateOneRequiredWithoutPostNestedInput;
     tags?: PostTagUpdateManyWithoutPostNestedInput;
     comments?: CommentUpdateManyWithoutPostNestedInput;
-    shares?: shareUpdateManyWithoutPostNestedInput;
-    feed?: feedUpdateManyWithoutPostNestedInput;
+    shares?: ShareUpdateManyWithoutPostNestedInput;
+    feed?: FeedUpdateManyWithoutPostNestedInput;
   };
 
   export type PostUncheckedUpdateWithoutLikesInput = {
@@ -19603,8 +30022,8 @@ export namespace Prisma {
     commentCount?: IntFieldUpdateOperationsInput | number;
     tags?: PostTagUncheckedUpdateManyWithoutPostNestedInput;
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput;
-    shares?: shareUncheckedUpdateManyWithoutPostNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutPostNestedInput;
+    shares?: ShareUncheckedUpdateManyWithoutPostNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutPostNestedInput;
   };
 
   export type UserUpsertWithoutLikeInput = {
@@ -19623,13 +30042,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
     post?: PostUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
     comment?: CommentUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUpdateManyWithoutUserNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
     followers?: FollowUpdateManyWithoutFollowerNestedInput;
     following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutLikeInput = {
@@ -19638,13 +30063,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
     post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
     comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUncheckedUpdateManyWithoutUserNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
     followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
     following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
   };
 
   export type PostCreateWithoutSharesInput = {
@@ -19656,8 +30087,8 @@ export namespace Prisma {
     author: UserCreateNestedOneWithoutPostInput;
     tags?: PostTagCreateNestedManyWithoutPostInput;
     comments?: CommentCreateNestedManyWithoutPostInput;
-    likes?: likeCreateNestedManyWithoutPostInput;
-    feed?: feedCreateNestedManyWithoutPostInput;
+    likes?: LikeCreateNestedManyWithoutPostInput;
+    feed?: FeedCreateNestedManyWithoutPostInput;
   };
 
   export type PostUncheckedCreateWithoutSharesInput = {
@@ -19670,8 +30101,8 @@ export namespace Prisma {
     commentCount?: number;
     tags?: PostTagUncheckedCreateNestedManyWithoutPostInput;
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput;
-    likes?: likeUncheckedCreateNestedManyWithoutPostInput;
-    feed?: feedUncheckedCreateNestedManyWithoutPostInput;
+    likes?: LikeUncheckedCreateNestedManyWithoutPostInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutPostInput;
   };
 
   export type PostCreateOrConnectWithoutSharesInput = {
@@ -19684,13 +30115,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
     post?: PostCreateNestedManyWithoutAuthorInput;
-    feed?: feedCreateNestedManyWithoutUserInput;
-    like?: likeCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
     comment?: CommentCreateNestedManyWithoutAuthorInput;
     tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
     followers?: FollowCreateNestedManyWithoutFollowerInput;
     following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserUncheckedCreateWithoutSharedInput = {
@@ -19699,13 +30136,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
     post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
-    feed?: feedUncheckedCreateNestedManyWithoutUserInput;
-    like?: likeUncheckedCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
     comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
     tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
     followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
     following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserCreateOrConnectWithoutSharedInput = {
@@ -19733,8 +30176,8 @@ export namespace Prisma {
     author?: UserUpdateOneRequiredWithoutPostNestedInput;
     tags?: PostTagUpdateManyWithoutPostNestedInput;
     comments?: CommentUpdateManyWithoutPostNestedInput;
-    likes?: likeUpdateManyWithoutPostNestedInput;
-    feed?: feedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUpdateManyWithoutPostNestedInput;
+    feed?: FeedUpdateManyWithoutPostNestedInput;
   };
 
   export type PostUncheckedUpdateWithoutSharesInput = {
@@ -19747,8 +30190,8 @@ export namespace Prisma {
     commentCount?: IntFieldUpdateOperationsInput | number;
     tags?: PostTagUncheckedUpdateManyWithoutPostNestedInput;
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput;
-    likes?: likeUncheckedUpdateManyWithoutPostNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutPostNestedInput;
   };
 
   export type UserUpsertWithoutSharedInput = {
@@ -19767,13 +30210,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
     post?: PostUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUpdateManyWithoutUserNestedInput;
-    like?: likeUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
     comment?: CommentUpdateManyWithoutAuthorNestedInput;
     tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
     followers?: FollowUpdateManyWithoutFollowerNestedInput;
     following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutSharedInput = {
@@ -19782,13 +30231,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
     post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutUserNestedInput;
-    like?: likeUncheckedUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
     comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
     tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
     followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
     following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
   };
 
   export type PostCreateWithoutFeedInput = {
@@ -19800,8 +30255,8 @@ export namespace Prisma {
     author: UserCreateNestedOneWithoutPostInput;
     tags?: PostTagCreateNestedManyWithoutPostInput;
     comments?: CommentCreateNestedManyWithoutPostInput;
-    likes?: likeCreateNestedManyWithoutPostInput;
-    shares?: shareCreateNestedManyWithoutPostInput;
+    likes?: LikeCreateNestedManyWithoutPostInput;
+    shares?: ShareCreateNestedManyWithoutPostInput;
   };
 
   export type PostUncheckedCreateWithoutFeedInput = {
@@ -19814,8 +30269,8 @@ export namespace Prisma {
     commentCount?: number;
     tags?: PostTagUncheckedCreateNestedManyWithoutPostInput;
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput;
-    likes?: likeUncheckedCreateNestedManyWithoutPostInput;
-    shares?: shareUncheckedCreateNestedManyWithoutPostInput;
+    likes?: LikeUncheckedCreateNestedManyWithoutPostInput;
+    shares?: ShareUncheckedCreateNestedManyWithoutPostInput;
   };
 
   export type PostCreateOrConnectWithoutFeedInput = {
@@ -19828,13 +30283,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
     post?: PostCreateNestedManyWithoutAuthorInput;
-    like?: likeCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
     comment?: CommentCreateNestedManyWithoutAuthorInput;
-    shared?: shareCreateNestedManyWithoutUserInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
     followers?: FollowCreateNestedManyWithoutFollowerInput;
     following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserUncheckedCreateWithoutFeedInput = {
@@ -19843,13 +30304,19 @@ export namespace Prisma {
     password: string;
     name?: string | null;
     roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
     post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
-    like?: likeUncheckedCreateNestedManyWithoutUserInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
     comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
-    shared?: shareUncheckedCreateNestedManyWithoutUserInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
     tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
     followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
     following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
   };
 
   export type UserCreateOrConnectWithoutFeedInput = {
@@ -19877,8 +30344,8 @@ export namespace Prisma {
     author?: UserUpdateOneRequiredWithoutPostNestedInput;
     tags?: PostTagUpdateManyWithoutPostNestedInput;
     comments?: CommentUpdateManyWithoutPostNestedInput;
-    likes?: likeUpdateManyWithoutPostNestedInput;
-    shares?: shareUpdateManyWithoutPostNestedInput;
+    likes?: LikeUpdateManyWithoutPostNestedInput;
+    shares?: ShareUpdateManyWithoutPostNestedInput;
   };
 
   export type PostUncheckedUpdateWithoutFeedInput = {
@@ -19891,8 +30358,8 @@ export namespace Prisma {
     commentCount?: IntFieldUpdateOperationsInput | number;
     tags?: PostTagUncheckedUpdateManyWithoutPostNestedInput;
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput;
-    likes?: likeUncheckedUpdateManyWithoutPostNestedInput;
-    shares?: shareUncheckedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput;
+    shares?: ShareUncheckedUpdateManyWithoutPostNestedInput;
   };
 
   export type UserUpsertWithoutFeedInput = {
@@ -19911,13 +30378,19 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
     post?: PostUpdateManyWithoutAuthorNestedInput;
-    like?: likeUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
     comment?: CommentUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUpdateManyWithoutUserNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
     followers?: FollowUpdateManyWithoutFollowerNestedInput;
     following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutFeedInput = {
@@ -19926,13 +30399,337 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string;
     name?: NullableStringFieldUpdateOperationsInput | string | null;
     roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
     post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
-    like?: likeUncheckedUpdateManyWithoutUserNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
     comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
-    shared?: shareUncheckedUpdateManyWithoutUserNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
     tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
     followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
     following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
+  };
+
+  export type UserCreateWithoutFeedTrackInput = {
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
+    post?: PostCreateNestedManyWithoutAuthorInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
+    comment?: CommentCreateNestedManyWithoutAuthorInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
+    followers?: FollowCreateNestedManyWithoutFollowerInput;
+    following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
+  };
+
+  export type UserUncheckedCreateWithoutFeedTrackInput = {
+    id?: number;
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
+    post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
+    comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
+    followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
+    following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
+  };
+
+  export type UserCreateOrConnectWithoutFeedTrackInput = {
+    where: UserWhereUniqueInput;
+    create: XOR<UserCreateWithoutFeedTrackInput, UserUncheckedCreateWithoutFeedTrackInput>;
+  };
+
+  export type UserUpsertWithoutFeedTrackInput = {
+    update: XOR<UserUpdateWithoutFeedTrackInput, UserUncheckedUpdateWithoutFeedTrackInput>;
+    create: XOR<UserCreateWithoutFeedTrackInput, UserUncheckedCreateWithoutFeedTrackInput>;
+    where?: UserWhereInput;
+  };
+
+  export type UserUpdateToOneWithWhereWithoutFeedTrackInput = {
+    where?: UserWhereInput;
+    data: XOR<UserUpdateWithoutFeedTrackInput, UserUncheckedUpdateWithoutFeedTrackInput>;
+  };
+
+  export type UserUpdateWithoutFeedTrackInput = {
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
+    post?: PostUpdateManyWithoutAuthorNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
+    comment?: CommentUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
+    followers?: FollowUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
+  };
+
+  export type UserUncheckedUpdateWithoutFeedTrackInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
+    post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
+    comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
+    followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
+  };
+
+  export type UserCreateWithoutNotificationsReceivedInput = {
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
+    post?: PostCreateNestedManyWithoutAuthorInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
+    comment?: CommentCreateNestedManyWithoutAuthorInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
+    followers?: FollowCreateNestedManyWithoutFollowerInput;
+    following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationCreateNestedManyWithoutSenderInput;
+  };
+
+  export type UserUncheckedCreateWithoutNotificationsReceivedInput = {
+    id?: number;
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
+    post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
+    comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
+    followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
+    following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsSent?: NotificationUncheckedCreateNestedManyWithoutSenderInput;
+  };
+
+  export type UserCreateOrConnectWithoutNotificationsReceivedInput = {
+    where: UserWhereUniqueInput;
+    create: XOR<
+      UserCreateWithoutNotificationsReceivedInput,
+      UserUncheckedCreateWithoutNotificationsReceivedInput
+    >;
+  };
+
+  export type UserCreateWithoutNotificationsSentInput = {
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileCreateNestedOneWithoutUserInput;
+    post?: PostCreateNestedManyWithoutAuthorInput;
+    tagStats?: UserTagStatsCreateNestedManyWithoutUserInput;
+    feed?: FeedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapCreateNestedManyWithoutUserInput;
+    like?: LikeCreateNestedManyWithoutUserInput;
+    comment?: CommentCreateNestedManyWithoutAuthorInput;
+    shared?: ShareCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowCreateNestedManyWithoutUserInput;
+    followers?: FollowCreateNestedManyWithoutFollowerInput;
+    following?: FollowCreateNestedManyWithoutFollowedInput;
+    notificationsReceived?: NotificationCreateNestedManyWithoutRecipientInput;
+  };
+
+  export type UserUncheckedCreateWithoutNotificationsSentInput = {
+    id?: number;
+    email: string;
+    password: string;
+    name?: string | null;
+    roles?: UserCreaterolesInput | string[];
+    userProfile?: UserProfileUncheckedCreateNestedOneWithoutUserInput;
+    post?: PostUncheckedCreateNestedManyWithoutAuthorInput;
+    tagStats?: UserTagStatsUncheckedCreateNestedManyWithoutUserInput;
+    feed?: FeedUncheckedCreateNestedManyWithoutUserInput;
+    feedTrack?: FeedTrackUncheckedCreateNestedManyWithoutUserInput;
+    heapmap?: UserHeatmapUncheckedCreateNestedManyWithoutUserInput;
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput;
+    comment?: CommentUncheckedCreateNestedManyWithoutAuthorInput;
+    shared?: ShareUncheckedCreateNestedManyWithoutUserInput;
+    tagFollows?: TagFollowUncheckedCreateNestedManyWithoutUserInput;
+    followers?: FollowUncheckedCreateNestedManyWithoutFollowerInput;
+    following?: FollowUncheckedCreateNestedManyWithoutFollowedInput;
+    notificationsReceived?: NotificationUncheckedCreateNestedManyWithoutRecipientInput;
+  };
+
+  export type UserCreateOrConnectWithoutNotificationsSentInput = {
+    where: UserWhereUniqueInput;
+    create: XOR<
+      UserCreateWithoutNotificationsSentInput,
+      UserUncheckedCreateWithoutNotificationsSentInput
+    >;
+  };
+
+  export type UserUpsertWithoutNotificationsReceivedInput = {
+    update: XOR<
+      UserUpdateWithoutNotificationsReceivedInput,
+      UserUncheckedUpdateWithoutNotificationsReceivedInput
+    >;
+    create: XOR<
+      UserCreateWithoutNotificationsReceivedInput,
+      UserUncheckedCreateWithoutNotificationsReceivedInput
+    >;
+    where?: UserWhereInput;
+  };
+
+  export type UserUpdateToOneWithWhereWithoutNotificationsReceivedInput = {
+    where?: UserWhereInput;
+    data: XOR<
+      UserUpdateWithoutNotificationsReceivedInput,
+      UserUncheckedUpdateWithoutNotificationsReceivedInput
+    >;
+  };
+
+  export type UserUpdateWithoutNotificationsReceivedInput = {
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
+    post?: PostUpdateManyWithoutAuthorNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
+    comment?: CommentUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
+    followers?: FollowUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUpdateManyWithoutSenderNestedInput;
+  };
+
+  export type UserUncheckedUpdateWithoutNotificationsReceivedInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
+    post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
+    comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
+    followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsSent?: NotificationUncheckedUpdateManyWithoutSenderNestedInput;
+  };
+
+  export type UserUpsertWithoutNotificationsSentInput = {
+    update: XOR<
+      UserUpdateWithoutNotificationsSentInput,
+      UserUncheckedUpdateWithoutNotificationsSentInput
+    >;
+    create: XOR<
+      UserCreateWithoutNotificationsSentInput,
+      UserUncheckedCreateWithoutNotificationsSentInput
+    >;
+    where?: UserWhereInput;
+  };
+
+  export type UserUpdateToOneWithWhereWithoutNotificationsSentInput = {
+    where?: UserWhereInput;
+    data: XOR<
+      UserUpdateWithoutNotificationsSentInput,
+      UserUncheckedUpdateWithoutNotificationsSentInput
+    >;
+  };
+
+  export type UserUpdateWithoutNotificationsSentInput = {
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUpdateOneWithoutUserNestedInput;
+    post?: PostUpdateManyWithoutAuthorNestedInput;
+    tagStats?: UserTagStatsUpdateManyWithoutUserNestedInput;
+    feed?: FeedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUpdateManyWithoutUserNestedInput;
+    like?: LikeUpdateManyWithoutUserNestedInput;
+    comment?: CommentUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUpdateManyWithoutUserNestedInput;
+    followers?: FollowUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUpdateManyWithoutFollowedNestedInput;
+    notificationsReceived?: NotificationUpdateManyWithoutRecipientNestedInput;
+  };
+
+  export type UserUncheckedUpdateWithoutNotificationsSentInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    email?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    roles?: UserUpdaterolesInput | string[];
+    userProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput;
+    post?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
+    tagStats?: UserTagStatsUncheckedUpdateManyWithoutUserNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutUserNestedInput;
+    feedTrack?: FeedTrackUncheckedUpdateManyWithoutUserNestedInput;
+    heapmap?: UserHeatmapUncheckedUpdateManyWithoutUserNestedInput;
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput;
+    comment?: CommentUncheckedUpdateManyWithoutAuthorNestedInput;
+    shared?: ShareUncheckedUpdateManyWithoutUserNestedInput;
+    tagFollows?: TagFollowUncheckedUpdateManyWithoutUserNestedInput;
+    followers?: FollowUncheckedUpdateManyWithoutFollowerNestedInput;
+    following?: FollowUncheckedUpdateManyWithoutFollowedNestedInput;
+    notificationsReceived?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput;
   };
 
   export type PostCreateManyAuthorInput = {
@@ -19944,13 +30741,32 @@ export namespace Prisma {
     commentCount?: number;
   };
 
-  export type feedCreateManyUserInput = {
+  export type UserTagStatsCreateManyUserInput = {
+    id?: number;
+    tagId: number;
+    postCount?: number;
+    updatedAt?: Date | string;
+    createdAt?: Date | string;
+  };
+
+  export type FeedCreateManyUserInput = {
     id?: number;
     postId: number;
     createdAt?: Date | string;
   };
 
-  export type likeCreateManyUserInput = {
+  export type FeedTrackCreateManyUserInput = {
+    id?: number;
+    lastSeen: Date | string;
+  };
+
+  export type UserHeatmapCreateManyUserInput = {
+    id?: number;
+    date: Date | string;
+    count: number;
+  };
+
+  export type LikeCreateManyUserInput = {
     id?: number;
     postId: number;
     createdAt?: Date | string;
@@ -19963,7 +30779,7 @@ export namespace Prisma {
     postId: number;
   };
 
-  export type shareCreateManyUserInput = {
+  export type ShareCreateManyUserInput = {
     id?: number;
     postId: number;
     createdAt?: Date | string;
@@ -19987,6 +30803,26 @@ export namespace Prisma {
     createdAt?: Date | string;
   };
 
+  export type NotificationCreateManySenderInput = {
+    id?: number;
+    recipientId: number;
+    type: $Enums.NotificationType;
+    message: string;
+    link?: string | null;
+    read?: boolean;
+    createdAt?: Date | string;
+  };
+
+  export type NotificationCreateManyRecipientInput = {
+    id?: number;
+    senderId?: number | null;
+    type: $Enums.NotificationType;
+    message: string;
+    link?: string | null;
+    read?: boolean;
+    createdAt?: Date | string;
+  };
+
   export type PostUpdateWithoutAuthorInput = {
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
@@ -19995,9 +30831,9 @@ export namespace Prisma {
     commentCount?: IntFieldUpdateOperationsInput | number;
     tags?: PostTagUpdateManyWithoutPostNestedInput;
     comments?: CommentUpdateManyWithoutPostNestedInput;
-    likes?: likeUpdateManyWithoutPostNestedInput;
-    shares?: shareUpdateManyWithoutPostNestedInput;
-    feed?: feedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUpdateManyWithoutPostNestedInput;
+    shares?: ShareUpdateManyWithoutPostNestedInput;
+    feed?: FeedUpdateManyWithoutPostNestedInput;
   };
 
   export type PostUncheckedUpdateWithoutAuthorInput = {
@@ -20009,9 +30845,9 @@ export namespace Prisma {
     commentCount?: IntFieldUpdateOperationsInput | number;
     tags?: PostTagUncheckedUpdateManyWithoutPostNestedInput;
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput;
-    likes?: likeUncheckedUpdateManyWithoutPostNestedInput;
-    shares?: shareUncheckedUpdateManyWithoutPostNestedInput;
-    feed?: feedUncheckedUpdateManyWithoutPostNestedInput;
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput;
+    shares?: ShareUncheckedUpdateManyWithoutPostNestedInput;
+    feed?: FeedUncheckedUpdateManyWithoutPostNestedInput;
   };
 
   export type PostUncheckedUpdateManyWithoutAuthorInput = {
@@ -20023,35 +30859,89 @@ export namespace Prisma {
     commentCount?: IntFieldUpdateOperationsInput | number;
   };
 
-  export type feedUpdateWithoutUserInput = {
+  export type UserTagStatsUpdateWithoutUserInput = {
+    postCount?: IntFieldUpdateOperationsInput | number;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    tag?: TagUpdateOneRequiredWithoutUsersNestedInput;
+  };
+
+  export type UserTagStatsUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    tagId?: IntFieldUpdateOperationsInput | number;
+    postCount?: IntFieldUpdateOperationsInput | number;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type UserTagStatsUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    tagId?: IntFieldUpdateOperationsInput | number;
+    postCount?: IntFieldUpdateOperationsInput | number;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type FeedUpdateWithoutUserInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     post?: PostUpdateOneRequiredWithoutFeedNestedInput;
   };
 
-  export type feedUncheckedUpdateWithoutUserInput = {
+  export type FeedUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type feedUncheckedUpdateManyWithoutUserInput = {
+  export type FeedUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type likeUpdateWithoutUserInput = {
+  export type FeedTrackUpdateWithoutUserInput = {
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type FeedTrackUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type FeedTrackUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type UserHeatmapUpdateWithoutUserInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string;
+    count?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type UserHeatmapUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    date?: DateTimeFieldUpdateOperationsInput | Date | string;
+    count?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type UserHeatmapUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    date?: DateTimeFieldUpdateOperationsInput | Date | string;
+    count?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type LikeUpdateWithoutUserInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     post?: PostUpdateOneRequiredWithoutLikesNestedInput;
   };
 
-  export type likeUncheckedUpdateWithoutUserInput = {
+  export type LikeUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type likeUncheckedUpdateManyWithoutUserInput = {
+  export type LikeUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -20077,18 +30967,18 @@ export namespace Prisma {
     postId?: IntFieldUpdateOperationsInput | number;
   };
 
-  export type shareUpdateWithoutUserInput = {
+  export type ShareUpdateWithoutUserInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     post?: PostUpdateOneRequiredWithoutSharesNestedInput;
   };
 
-  export type shareUncheckedUpdateWithoutUserInput = {
+  export type ShareUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type shareUncheckedUpdateManyWithoutUserInput = {
+  export type ShareUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -20145,6 +31035,64 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
+  export type NotificationUpdateWithoutSenderInput = {
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType;
+    message?: StringFieldUpdateOperationsInput | string;
+    link?: NullableStringFieldUpdateOperationsInput | string | null;
+    read?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    recipient?: UserUpdateOneRequiredWithoutNotificationsReceivedNestedInput;
+  };
+
+  export type NotificationUncheckedUpdateWithoutSenderInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    recipientId?: IntFieldUpdateOperationsInput | number;
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType;
+    message?: StringFieldUpdateOperationsInput | string;
+    link?: NullableStringFieldUpdateOperationsInput | string | null;
+    read?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type NotificationUncheckedUpdateManyWithoutSenderInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    recipientId?: IntFieldUpdateOperationsInput | number;
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType;
+    message?: StringFieldUpdateOperationsInput | string;
+    link?: NullableStringFieldUpdateOperationsInput | string | null;
+    read?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type NotificationUpdateWithoutRecipientInput = {
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType;
+    message?: StringFieldUpdateOperationsInput | string;
+    link?: NullableStringFieldUpdateOperationsInput | string | null;
+    read?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    sender?: UserUpdateOneWithoutNotificationsSentNestedInput;
+  };
+
+  export type NotificationUncheckedUpdateWithoutRecipientInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    senderId?: NullableIntFieldUpdateOperationsInput | number | null;
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType;
+    message?: StringFieldUpdateOperationsInput | string;
+    link?: NullableStringFieldUpdateOperationsInput | string | null;
+    read?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type NotificationUncheckedUpdateManyWithoutRecipientInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    senderId?: NullableIntFieldUpdateOperationsInput | number | null;
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType;
+    message?: StringFieldUpdateOperationsInput | string;
+    link?: NullableStringFieldUpdateOperationsInput | string | null;
+    read?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
   export type PostTagCreateManyPostInput = {
     id?: number;
     tagId: number;
@@ -20158,19 +31106,19 @@ export namespace Prisma {
     authorId: number;
   };
 
-  export type likeCreateManyPostInput = {
+  export type LikeCreateManyPostInput = {
     id?: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type shareCreateManyPostInput = {
+  export type ShareCreateManyPostInput = {
     id?: number;
     userId: number;
     createdAt?: Date | string;
   };
 
-  export type feedCreateManyPostInput = {
+  export type FeedCreateManyPostInput = {
     id?: number;
     userId: number;
     createdAt?: Date | string;
@@ -20213,52 +31161,52 @@ export namespace Prisma {
     authorId?: IntFieldUpdateOperationsInput | number;
   };
 
-  export type likeUpdateWithoutPostInput = {
+  export type LikeUpdateWithoutPostInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneRequiredWithoutLikeNestedInput;
   };
 
-  export type likeUncheckedUpdateWithoutPostInput = {
+  export type LikeUncheckedUpdateWithoutPostInput = {
     id?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type likeUncheckedUpdateManyWithoutPostInput = {
+  export type LikeUncheckedUpdateManyWithoutPostInput = {
     id?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type shareUpdateWithoutPostInput = {
+  export type ShareUpdateWithoutPostInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneRequiredWithoutSharedNestedInput;
   };
 
-  export type shareUncheckedUpdateWithoutPostInput = {
+  export type ShareUncheckedUpdateWithoutPostInput = {
     id?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type shareUncheckedUpdateManyWithoutPostInput = {
+  export type ShareUncheckedUpdateManyWithoutPostInput = {
     id?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type feedUpdateWithoutPostInput = {
+  export type FeedUpdateWithoutPostInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneRequiredWithoutFeedNestedInput;
   };
 
-  export type feedUncheckedUpdateWithoutPostInput = {
+  export type FeedUncheckedUpdateWithoutPostInput = {
     id?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type feedUncheckedUpdateManyWithoutPostInput = {
+  export type FeedUncheckedUpdateManyWithoutPostInput = {
     id?: IntFieldUpdateOperationsInput | number;
     userId?: IntFieldUpdateOperationsInput | number;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -20267,6 +31215,14 @@ export namespace Prisma {
   export type PostTagCreateManyTagInput = {
     id?: number;
     postId: number;
+    createdAt?: Date | string;
+  };
+
+  export type UserTagStatsCreateManyTagInput = {
+    id?: number;
+    userId: number;
+    postCount?: number;
+    updatedAt?: Date | string;
     createdAt?: Date | string;
   };
 
@@ -20290,6 +31246,29 @@ export namespace Prisma {
   export type PostTagUncheckedUpdateManyWithoutTagInput = {
     id?: IntFieldUpdateOperationsInput | number;
     postId?: IntFieldUpdateOperationsInput | number;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type UserTagStatsUpdateWithoutTagInput = {
+    postCount?: IntFieldUpdateOperationsInput | number;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    user?: UserUpdateOneRequiredWithoutTagStatsNestedInput;
+  };
+
+  export type UserTagStatsUncheckedUpdateWithoutTagInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    userId?: IntFieldUpdateOperationsInput | number;
+    postCount?: IntFieldUpdateOperationsInput | number;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type UserTagStatsUncheckedUpdateManyWithoutTagInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    userId?: IntFieldUpdateOperationsInput | number;
+    postCount?: IntFieldUpdateOperationsInput | number;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 

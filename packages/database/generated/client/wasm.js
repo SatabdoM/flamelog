@@ -121,6 +121,45 @@ exports.Prisma.UserScalarFieldEnum = {
   roles: 'roles',
 };
 
+exports.Prisma.UserProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  bio: 'bio',
+  company: 'company',
+  location: 'location',
+  profilePic: 'profilePic',
+  coverPic: 'coverPic',
+  birthDate: 'birthDate',
+  gender: 'gender',
+  phone: 'phone',
+  interests: 'interests',
+  github: 'github',
+  linkedin: 'linkedin',
+  twitter: 'twitter',
+  leetcode: 'leetcode',
+  instagram: 'instagram',
+  website: 'website',
+  resumeLink: 'resumeLink',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+};
+
+exports.Prisma.UserHeatmapScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  count: 'count',
+};
+
+exports.Prisma.UserTagStatsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tagId: 'tagId',
+  postCount: 'postCount',
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt',
+};
+
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -187,6 +226,23 @@ exports.Prisma.FeedScalarFieldEnum = {
   createdAt: 'createdAt',
 };
 
+exports.Prisma.FeedTrackScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  lastSeen: 'lastSeen',
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  recipientId: 'recipientId',
+  senderId: 'senderId',
+  type: 'type',
+  message: 'message',
+  link: 'link',
+  read: 'read',
+  createdAt: 'createdAt',
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc',
@@ -201,18 +257,40 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last',
 };
+exports.Gender = exports.$Enums.Gender = {
+  MALE: 'MALE',
+  FEMLALE: 'FEMLALE',
+  OTHER: 'OTHER',
+  PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY',
+};
+
+exports.NotificationType = exports.$Enums.NotificationType = {
+  FOLLOW: 'FOLLOW',
+  LIKE: 'LIKE',
+  COMMENT: 'COMMENT',
+  TAG_FOLLOWED: 'TAG_FOLLOWED',
+  POST_TAGGED: 'POST_TAGGED',
+  MENTION: 'MENTION',
+  REPLY: 'REPLY',
+  SHARE: 'SHARE',
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
+  UserProfile: 'UserProfile',
+  UserHeatmap: 'UserHeatmap',
+  UserTagStats: 'UserTagStats',
   Post: 'Post',
   Follow: 'Follow',
   Tag: 'Tag',
   PostTag: 'PostTag',
   TagFollow: 'TagFollow',
   Comment: 'Comment',
-  like: 'like',
-  share: 'share',
-  feed: 'feed',
+  Like: 'Like',
+  Share: 'Share',
+  Feed: 'Feed',
+  FeedTrack: 'FeedTrack',
+  Notification: 'Notification',
 };
 
 /**
