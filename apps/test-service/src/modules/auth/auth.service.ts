@@ -16,12 +16,12 @@ const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 // };
 
 export async function signup(data: signupSchema) {
-  const existingUser = await prisma.testUser.findUnique({ where: { email: data?.email } });
+  const existingUser = await prisma.user.findUnique({ where: { email: data?.email } });
   if (existingUser) throw new Error('User exists');
 
   const hashedPassword = await bcrypt.hash(data.password, 10);
 
-  const user = await prisma.testUser.create({
+  const user = await prisma.user.create({
     data: {
       email: data.email,
       password: hashedPassword,
@@ -33,7 +33,7 @@ export async function signup(data: signupSchema) {
 }
 
 export async function login(data: loginSchema) {
-  const user = await prisma.testUser.findUnique({ where: { email: data?.email } });
+  const user = await prisma.user.findUnique({ where: { email: data?.email } });
   if (!user) throw new Error('User does not exist');
 
   const passwordMatched = await bcrypt.compare(data?.password, user.password);

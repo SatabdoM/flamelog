@@ -116,12 +116,6 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  name: 'name',
-};
-
-exports.Prisma.TestUserScalarFieldEnum = {
-  id: 'id',
-  email: 'email',
   password: 'password',
   name: 'name',
   roles: 'roles',
@@ -133,12 +127,63 @@ exports.Prisma.PostScalarFieldEnum = {
   content: 'content',
   createdAt: 'createdAt',
   authorId: 'authorId',
+  likeCount: 'likeCount',
+  commentCount: 'commentCount',
 };
 
 exports.Prisma.FollowScalarFieldEnum = {
   id: 'id',
   followerId: 'followerId',
   followedId: 'followedId',
+  createdAt: 'createdAt',
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+};
+
+exports.Prisma.PostTagScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  tagId: 'tagId',
+  createdAt: 'createdAt',
+};
+
+exports.Prisma.TagFollowScalarFieldEnum = {
+  id: 'id',
+  tagId: 'tagId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  createdAt: 'createdAt',
+  postId: 'postId',
+  authorId: 'authorId',
+};
+
+exports.Prisma.LikeScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+};
+
+exports.Prisma.ShareScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+};
+
+exports.Prisma.FeedScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
   createdAt: 'createdAt',
 };
 
@@ -159,9 +204,15 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  TestUser: 'TestUser',
   Post: 'Post',
   Follow: 'Follow',
+  Tag: 'Tag',
+  PostTag: 'PostTag',
+  TagFollow: 'TagFollow',
+  Comment: 'Comment',
+  like: 'like',
+  share: 'share',
+  feed: 'feed',
 };
 
 /**

@@ -12,7 +12,7 @@ export const requireAuth = async (req: AuthentictedRequest, res: Response, next:
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'supersecret') as { id: string };
     console.log('Decoded token:', decoded);
 
-    const user = await prisma.testUser.findUnique({ where: { id: Number(decoded.id) } });
+    const user = await prisma.user.findUnique({ where: { id: Number(decoded.id) } });
     if (!user) {
       res.status(401).json({ message: 'Unauthorized user. Please Log in/Sign Up' });
     }
