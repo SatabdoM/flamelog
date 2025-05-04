@@ -53,3 +53,7 @@ yarn-error.log*
 
 # Vercel
 .vercel
+
+#Prisma 
+prisma/migrations
+generated/client
