@@ -11,6 +11,7 @@ router.get('/', (_, res) => {
   });
 });
 
+//route-->middleware-->controller-->service--->db
 router.post('/create', requireAuth, createPost);
 router.get('/user', requireAuth, getPostsByUserId);
 router.post('/:id', requireAuth, deletePostById);

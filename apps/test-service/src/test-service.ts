@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import router from './routes';
 import { handleDBConnection } from './lib/dbconnect';
+import { connectProducers } from './lib/kafka/producers';
 dotenv.config();
 
 const app = express();
@@ -19,5 +20,8 @@ app.get('/', (_, res) => {
 
 app.listen(PORT, async () => {
   console.log(`Flamelog Test-Service running on http://localhost:${PORT}`);
+  //Prisma Daabase Connection
   handleDBConnection();
+  //Kafka Producer Connection
+  connectProducers();
 });
