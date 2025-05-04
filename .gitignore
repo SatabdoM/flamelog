@@ -55,5 +55,6 @@ yarn-error.log*
 .vercel
 
 #Prisma 
-prisma/migrations
-generated/client
+# Ignore database-level folders
+packages/database/prisma/migrations/
+packages/database/generated/client/
