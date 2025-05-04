@@ -31,6 +31,7 @@ export async function login(req: Request, res: Response) {
 export async function getMe(req: AuthentictedRequest, res: Response) {
   if (!req.user) {
     res.status(401).json({ message: 'Unauthorized user. Please Log in/Sign Up' });
+    res.status(401).json({ message: 'Unauthorized user. Please Log in/Sign Up' });
   }
   res.json({ user: req?.user });
 }
