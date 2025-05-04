@@ -1,0 +1,57 @@
+[33m76f48f4[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/post-endpoints[m[33m)[m HEAD@{0}: commit (merge): Merged Branch feature/test-service-post
+[33mcb44ec6[m[33m ([m[1;31morigin/featute/prisma-client-setup[m[33m, [m[1;32mfeatute/prisma-client-setup[m[33m)[m HEAD@{1}: checkout: moving from featute/prisma-client-setup to feature/post-endpoints
+[33mcb44ec6[m[33m ([m[1;31morigin/featute/prisma-client-setup[m[33m, [m[1;32mfeatute/prisma-client-setup[m[33m)[m HEAD@{2}: pull: Merge made by the 'ort' strategy.
+[33me43b367[m HEAD@{3}: commit: Added User Roles and Fixed Authenticated User Types
+[33m20b16a7[m[33m ([m[1;31mflamelog-sm/main[m[33m)[m HEAD@{4}: commit: Auth Login
+[33mfc46b77[m HEAD@{5}: commit: Signup User exists
+[33m41d141f[m HEAD@{6}: commit: signup route working
+[33m97d10b7[m HEAD@{7}: checkout: moving from feature/test-service to featute/prisma-client-setup
+[33m32a6b18[m[33m ([m[1;31morigin/feature/test-service[m[33m, [m[1;32mfeature/test-service[m[33m)[m HEAD@{8}: reset: moving to HEAD
+[33m32a6b18[m[33m ([m[1;31morigin/feature/test-service[m[33m, [m[1;32mfeature/test-service[m[33m)[m HEAD@{9}: checkout: moving from featute/prisma-client-setup to feature/test-service
+[33m97d10b7[m HEAD@{10}: checkout: moving from feature/test-service to featute/prisma-client-setup
+[33m32a6b18[m[33m ([m[1;31morigin/feature/test-service[m[33m, [m[1;32mfeature/test-service[m[33m)[m HEAD@{11}: commit: Merge Conflicts
+[33m57df0b5[m HEAD@{12}: commit (merge): Merge branch 'feature/test-service' of https://github.com/SatabdoM/flamelog into feature/test-service
+[33mdcba650[m HEAD@{13}: commit: Aux Changes
+[33m14a0686[m HEAD@{14}: checkout: moving from featute/prisma-client-setup to feature/test-service
+[33m97d10b7[m HEAD@{15}: commit: Fixed prisma client imports generated new prisma client
+[33m14a0686[m HEAD@{16}: checkout: moving from feature/test-service to featute/prisma-client-setup
+[33m14a0686[m HEAD@{17}: reset: moving to HEAD
+[33m14a0686[m HEAD@{18}: commit: Eslint changes
+[33m50fd2ee[m HEAD@{19}: commit: Auth controllers added
+[33m94502d3[m HEAD@{20}: reset: moving to HEAD
+[33m94502d3[m HEAD@{21}: reset: moving to HEAD
+[33m94502d3[m HEAD@{22}: reset: moving to HEAD
+[33m94502d3[m HEAD@{23}: reset: moving to HEAD
+[33m94502d3[m HEAD@{24}: commit: Added primsa migrations and added auth.service for signup and login
+[33m378ba3a[m HEAD@{25}: commit: Test commit
+[33ma2800a9[m HEAD@{26}: commit: Test commit
+[33m1f51a0a[m HEAD@{27}: commit: Test commit
+[33m44eabcb[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{28}: checkout: moving from main to feature/test-service
+[33m44eabcb[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{29}: pull: Fast-forward
+[33m6780d1d[m HEAD@{30}: checkout: moving from feature/migration-changes to main
+[33mec3c955[m[33m ([m[1;31morigin/feature/migration-changes[m[33m, [m[1;32mmaster[m[33m, [m[1;32mfeature/migration-changes[m[33m)[m HEAD@{31}: checkout: moving from master to feature/migration-changes
+[33mec3c955[m[33m ([m[1;31morigin/feature/migration-changes[m[33m, [m[1;32mmaster[m[33m, [m[1;32mfeature/migration-changes[m[33m)[m HEAD@{32}: commit: Aux commit
+[33m3be1f4a[m HEAD@{33}: checkout: moving from main to master
+[33m6780d1d[m HEAD@{34}: checkout: moving from master to main
+[33m3be1f4a[m HEAD@{35}: checkout: moving from main to master
+[33m6780d1d[m HEAD@{36}: checkout: moving from master to main
+[33m3be1f4a[m HEAD@{37}: commit: Turborepo Setup for Flamelog
+[33me51ac90[m HEAD@{38}: pull: Fast-forward
+[33mf0b25fc[m HEAD@{39}: checkout: moving from feature/test-service-auth to master
+[33m5a71688[m[33m ([m[1;32mtest-service[m[33m, [m[1;32mfeature/test-service-auth[m[33m)[m HEAD@{40}: checkout: moving from test-service to feature/test-service-auth
+[33m5a71688[m[33m ([m[1;32mtest-service[m[33m, [m[1;32mfeature/test-service-auth[m[33m)[m HEAD@{41}: commit: Auth setup
+[33m2c2ff0a[m HEAD@{42}: commit: Added routes and app router
+[33m7b42974[m HEAD@{43}: commit: Added global prisma client
+[33m104e8cb[m HEAD@{44}: commit: Added primsa client to global repo
+[33m6780d1d[m HEAD@{45}: checkout: moving from main to test-service
+[33m6780d1d[m HEAD@{46}: checkout: moving from test-service to main
+[33m6780d1d[m HEAD@{47}: commit: Added test-service config inside Turbo.json
+[33m3cebcee[m HEAD@{48}: commit: test-service-setup
+[33mb962f1f[m HEAD@{49}: commit: test-service file structure
+[33mf6692c4[m HEAD@{50}: commit: added index.ts
+[33m3662bec[m[33m ([m[1;32mfeature/server-config[m[33m)[m HEAD@{51}: checkout: moving from feature/server-config to test-service
+[33m3662bec[m[33m ([m[1;32mfeature/server-config[m[33m)[m HEAD@{52}: commit: aux changes
+[33mc72a14e[m HEAD@{53}: commit: Primsa config and primsa client added
+[33mf0b25fc[m HEAD@{54}: checkout: moving from feature/server-config to feature/server-config
+[33mf0b25fc[m HEAD@{55}: checkout: moving from master to feature/server-config
+[33mf0b25fc[m HEAD@{56}: clone: from https://github.com/SatabdoM/flamelog.git

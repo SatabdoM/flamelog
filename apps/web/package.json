@@ -17,8 +17,22 @@
     "format:lint": "npm run format && npm run lint:fix"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.8",
     "@hookform/resolvers": "^5.0.1",
     "@tanstack/react-query": "^5.28.4",
+    "@tiptap/extension-highlight": "^2.11.7",
+    "@tiptap/extension-image": "^2.11.7",
+    "@tiptap/extension-link": "^2.11.7",
+    "@tiptap/extension-subscript": "^2.11.7",
+    "@tiptap/extension-superscript": "^2.11.7",
+    "@tiptap/extension-task-item": "^2.11.7",
+    "@tiptap/extension-task-list": "^2.11.7",
+    "@tiptap/extension-text-align": "^2.11.7",
+    "@tiptap/extension-typography": "^2.11.7",
+    "@tiptap/extension-underline": "^2.11.7",
+    "@tiptap/pm": "^2.11.7",
+    "@tiptap/react": "^2.11.7",
+    "@tiptap/starter-kit": "^2.11.7",
     "@workspace/schemas": "workspace:*",
     "@workspace/ui": "workspace:*",
     "axios": "^1.6.7",
@@ -37,6 +51,7 @@
     "@types/react-dom": "^19",
     "@workspace/eslint-config": "workspace:^",
     "@workspace/typescript-config": "workspace:*",
+    "sass": "^1.87.0",
     "typescript": "^5.7.3"
   }
 }

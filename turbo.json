@@ -12,6 +12,14 @@
         "apps/test-service/dist/**"
       ]
     },
+    "db:generate": { "cache": true },
+    "db:migrate": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:deploy": {
+      "cache": false
+    },
     "check-types": {
       "dependsOn": ["^check-types"]
     },

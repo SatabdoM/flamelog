@@ -19,7 +19,7 @@ import {
 } from '@workspace/ui/components/form';
 import { loginSchema, type LoginFormData } from '@workspace/schemas';
 import { useAuthStore } from '@/store/auth';
-import { api } from '@/lib/axios';
+// import { api } from '@/lib/services/axios';
 
 export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>) => {
   const router = useRouter();
@@ -35,8 +35,16 @@ export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>)
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      const response = await api.post('/auth/login', data);
-      const { user, token } = response.data;
+      // const response = await api.post('/auth/login', data);/
+      const { user, token } = {
+        user: {
+          id: 'some random id',
+          email: data.email,
+          name: 'Test User',
+          roles: ['admin', 'user'],
+        },
+        token: '98709870979',
+      };
 
       // Set auth state
       setAuth(user, token);
