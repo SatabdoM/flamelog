@@ -1,13 +1,27 @@
 import { Request, Response } from 'express';
 import { AuthentictedRequest } from '../../types/auth';
 import * as PostService from './post.service';
-import { kafka } from '../../lib/kafka';
+import { postProducer } from '../../lib/kafka/producers';
 
 export async function createPost(req: AuthentictedRequest, res: Response) {
   try {
     console.log('Creating post with data:', req.body);
     const post = await PostService.createPost(req);
     //Send Kafka message to topic 'post'
+
+    console.log('Post created:', post);
+
+    const message = {
+      topic: 'post-created',
+      messages: [
+        {
+          key: post.id.toString(),
+          value: JSON.stringify(post),
+        },
+      ],
+    };
+    await postProducer.send(message);
+    console.log('Post created and message sent to Kafka:', post);
 
     res.status(201).json({ post });
   } catch (error: any) {
