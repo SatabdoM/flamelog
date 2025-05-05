@@ -20,8 +20,12 @@ export async function createPost(req: AuthentictedRequest, res: Response) {
         },
       ],
     };
-    await postProducer.send(message);
-    console.log('Post created and message sent to Kafka:', post);
+    try {
+      await postProducer.send(message);
+      console.log('Message sent to Kafka:', message);
+    } catch (error) {
+      console.error('Error sending message to Kafka:', error);
+    }
 
     res.status(201).json({ post });
   } catch (error: any) {
