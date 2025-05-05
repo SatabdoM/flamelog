@@ -4,14 +4,14 @@ import dotenv from 'dotenv';
 import router from './routes';
 import { handleDBConnection } from './lib/dbconnect';
 import { connectProducers } from './lib/kafka/producers';
-dotenv.config();
+import { connectPostConsumer } from './lib/kafka/consumers/postConsumer';
 
+dotenv.config();
 const app = express();
 const PORT = 5001;
 
 app.use(cors());
 app.use(express.json());
-
 app.use('/api', router);
 
 app.get('/', (_, res) => {
@@ -23,5 +23,7 @@ app.listen(PORT, async () => {
   //Prisma Daabase Connection
   handleDBConnection();
   //Kafka Producer Connection
-  connectProducers();
+  connectProducers().catch(console.error);
+  //Kafka Consumer Connection
+  connectPostConsumer().catch(console.error);
 });
