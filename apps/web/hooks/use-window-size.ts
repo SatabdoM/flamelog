@@ -1,15 +1,15 @@
 'use client';
 
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 
-export function useWindowSize() {
-  const [windowSize, setWindowSize] = React.useState({
+export const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
     width: 0,
     height: 0,
     offsetTop: 0,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       if (typeof window !== 'undefined') {
         const width = window.visualViewport?.width || 0;
@@ -29,6 +29,8 @@ export function useWindowSize() {
     window.visualViewport?.addEventListener('resize', handleResize);
     window.visualViewport?.addEventListener('scroll', handleResize);
 
+    handleResize();
+
     return () => {
       window.visualViewport?.removeEventListener('resize', handleResize);
       window.visualViewport?.removeEventListener('scroll', handleResize);
@@ -36,4 +38,4 @@ export function useWindowSize() {
   }, []);
 
   return windowSize;
-}
+};
