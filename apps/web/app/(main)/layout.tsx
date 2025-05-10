@@ -56,7 +56,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
       </div>
 
       {/* Main content */}
-      <main className="container py-4">
+      <main className="layout-container py-4">
         <AnimatePresence mode="wait">
           {isMobile && isMobileSearchOpen ? (
             <motion.div

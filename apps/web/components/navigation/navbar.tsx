@@ -24,7 +24,7 @@ export const Navbar = () => {
   const { isAuthenticated } = useAuthStore();
 
   return (
-    <div className="container flex h-full items-center justify-between gap-4">
+    <div className="layout-container flex h-full items-center justify-between gap-4">
       <Logo shape="circle" href="/" />
 
       <div className="hidden lg:flex">
