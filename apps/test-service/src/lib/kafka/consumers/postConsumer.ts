@@ -1,6 +1,6 @@
-import logger from 'apps/test-service/src/utils/log/logger';
 import { moderatePost } from '../../../modules/gpt/gpt';
 import { kafka } from '../client';
+import logger from '../../../utils/log/logger';
 
 const consumer = kafka.consumer({ groupId: 'moderation-group' });
 
