@@ -1,3 +1,4 @@
+import { moderatePost } from '../../../modules/gpt/gpt';
 import { kafka } from '../client';
 
 const consumer = kafka.consumer({ groupId: 'moderation-group' });
@@ -10,9 +11,11 @@ export const connectPostConsumer = async () => {
     eachMessage: async ({ message }) => {
       try {
         const post = JSON.parse(message.value?.toString() || '{}');
-        console.log('Picked up by post consumer:', post);
+        console.log('Picked up by post consumer:', post, typeof post);
+        //const parsedPost = JSON.parse(post);
+        moderatePost(post);
       } catch (error) {
-        console.error('Error processing message:', error);
+        console.error('Error processing message:  ', error);
       }
     },
   });

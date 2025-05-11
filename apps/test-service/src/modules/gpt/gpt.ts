@@ -5,9 +5,6 @@ import { prisma } from '@workspace/db';
 import { z } from 'zod';
 import { CreatePostSchema } from '../post/post.schema';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 const MAX_RETRIES = 3;
 const systemPrompt = `
 You are a strict moderator for an educational learning platform called Flamelog where users log their coding progress of the day.
@@ -36,40 +33,42 @@ ${ALLOWED_TAGS.map((tag) => `- ${tag}`).join('\n')}
 `.trim();
 
 export const moderatePost = async (post: CreatePostSchema) => {
-  let retries = 0;
-  while (retries < MAX_RETRIES) {
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+  try {
+    console.log('Moderating post:  ', post, typeof post);
+    const response = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      temperature: 0.2,
+      messages: [
+        { role: 'system', content: systemPrompt.trim() },
+        {
+          role: 'user',
+          content: `Title: "${post.title}"\nContent: """${post.content}"""`,
+        },
+      ],
+    });
+    const responseText = response.choices[0].message.content;
+    if (!responseText) {
+      throw new Error('Empty response from OpenAI');
+    }
+    let gptResponse: GptResponseSchema | null = null;
     try {
-      const response = await openai.chat.completions.create({
-        model: 'gpt-4',
-        messages: [
-          { role: 'system', content: systemPrompt.trim() },
-          {
-            role: 'user',
-            content: `Title: "${post.title}"\nContent: """${post.content}"""`,
-          },
-        ],
-      });
-      const responseText = response.choices[0].message.content;
-      if (!responseText) {
-        throw new Error('Empty response from OpenAI');
-      }
-      let gptResponse: GptResponseSchema | null = null;
-      try {
-        const parsedResponse = JSON.parse(responseText);
-        const parsedResult = gptResponseSchema.safeParse(parsedResponse);
+      const parsedResponse = JSON.parse(responseText);
+      const parsedResult = gptResponseSchema.safeParse(parsedResponse);
 
-        if (parsedResult.success) {
-          gptResponse = parsedResult.data;
-        } else {
-          console.error('Invalid response format from OpenAI:', parsedResult.error);
-          throw new Error('Invalid response format from OpenAI');
-        }
-      } catch (error) {
-        console.error('Error parsing GPT response:', error);
+      if (parsedResult.success) {
+        gptResponse = parsedResult.data;
+      } else {
+        console.error('Invalid response format from OpenAI:', parsedResult.error);
         throw new Error('Invalid response format from OpenAI');
       }
     } catch (error) {
-      console.log('Error parsing/moderating post', error);
+      console.error('Error parsing GPT response:', error);
+      throw new Error('Invalid response format from OpenAI');
     }
+  } catch (error) {
+    console.log('Error parsing/moderating post', error);
   }
 };
