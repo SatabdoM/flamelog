@@ -40,7 +40,7 @@ export const SearchBar = () => {
   }, [closeMobileSearch]);
 
   return (
-    <div className="container flex h-full items-center justify-between gap-2">
+    <div className="layout-container flex h-full items-center justify-between gap-2">
       <Button variant="ghost" size="icon" className="rounded-full" onClick={closeMobileSearch}>
         <ArrowLeft className="size-5" />
       </Button>

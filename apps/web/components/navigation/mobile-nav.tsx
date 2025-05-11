@@ -5,7 +5,7 @@ import { mobileNavMenus } from '@/constants/nav-menus';
 export const MobileNav = () => {
   return (
     <footer className="bg-background/95 supports-[backdrop-filter]:bg-background/60 fixed bottom-0 z-50 h-16 w-full border-t backdrop-blur lg:hidden">
-      <div className="container flex h-full items-center justify-between gap-2">
+      <div className="layout-container flex h-full items-center justify-between gap-2">
         {mobileNavMenus.map((menu) => (
           <Link
             key={menu.label}

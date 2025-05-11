@@ -9,6 +9,8 @@ import { Navbar } from '@/components/navigation/navbar';
 import { SearchBar } from '@/components/search/search-bar';
 import { SearchResult } from '@/components/search/search-result';
 import { MobileNav } from '@/components/navigation/mobile-nav';
+import { PrimarySidebar } from '@/components/navigation/primary-sidebar';
+import { SecondarySidebar } from '@/components/navigation/secondary-sidebar';
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
   const [isFirstRender, setIsFirstRender] = useState(true);
@@ -24,7 +26,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {/* Top Bar */}
-      <div className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 h-15 w-full border-b backdrop-blur">
+      <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 h-15 w-full border-b backdrop-blur">
         <AnimatePresence mode="wait">
           {isMobile && isMobileSearchOpen ? (
             <motion.div
@@ -53,10 +55,10 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </header>
 
       {/* Main content */}
-      <main className="container py-4">
+      <div className="layout-container relative min-h-[calc(100vh-60px)] py-4">
         <AnimatePresence mode="wait">
           {isMobile && isMobileSearchOpen ? (
             <motion.div
@@ -78,12 +80,20 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
+              className="flex justify-between gap-8"
             >
-              {children}
+              {/* height = 100vh - header height - padding of the parent container */}
+              <aside className="sticky top-[calc(60px+16px)] hidden h-[calc(100vh-60px-32px)] lg:block">
+                <PrimarySidebar />
+              </aside>
+              <main className="flex-grow-1">{children}</main>
+              <aside className="sticky top-[calc(60px+16px)] hidden h-[calc(100vh-60px-32px)] lg:block">
+                <SecondarySidebar />
+              </aside>
             </motion.div>
           )}
         </AnimatePresence>
-      </main>
+      </div>
 
       {/* Bottom menu bar (mobile only) */}
       <MobileNav />
