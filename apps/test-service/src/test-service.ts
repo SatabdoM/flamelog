@@ -5,6 +5,8 @@ import router from './routes';
 import { handleDBConnection } from './lib/database/dbconnect';
 import { connectProducers } from './lib/kafka/producers';
 import { connectPostConsumer } from './lib/kafka/consumers/postConsumer';
+import logger from './utils/log/logger';
+import { error } from 'console';
 
 dotenv.config();
 const app = express();
@@ -19,11 +21,13 @@ app.get('/', (_, res) => {
 });
 
 app.listen(PORT, async () => {
-  console.log(`Flamelog Test-Service running on http://localhost:${PORT}`);
+  logger.info(`Flamelog Test-Service running on http://localhost:${PORT}`);
   //Prisma Daabase Connection
   handleDBConnection();
   //Kafka Producer Connection
-  connectProducers().catch(console.error);
+  connectProducers().catch((error) => logger.error('Error connecting to Kafka producers:', error));
   //Kafka Consumer Connection
-  connectPostConsumer().catch(console.error);
+  connectPostConsumer().catch((error) =>
+    logger.error('Error connecting to Kafka consumer:', error)
+  );
 });

@@ -5,7 +5,7 @@ import { prisma } from '@workspace/db';
 import { z } from 'zod';
 import { CreatePostSchema } from '../post/post.schema';
 
-const MAX_RETRIES = 3;
+const MAX_RETRIES = 3; //ToDo: add retry logic
 const systemPrompt = `
 You are a strict moderator for an educational learning platform called Flamelog where users log their coding progress of the day.
 Your job is to decide if a post is acceptable and return only broad general-purpose tags from a fixed list.
@@ -39,7 +39,7 @@ export const moderatePost = async (post: CreatePostSchema) => {
   try {
     console.log('Moderating post:  ', post, typeof post);
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4.1-mini',
       temperature: 0.2,
       messages: [
         { role: 'system', content: systemPrompt.trim() },
@@ -49,7 +49,9 @@ export const moderatePost = async (post: CreatePostSchema) => {
         },
       ],
     });
+    console.log('Response from OpenAI: ', response);
     const responseText = response.choices[0].message.content;
+    console.log('Response text: ', responseText);
     if (!responseText) {
       throw new Error('Empty response from OpenAI');
     }

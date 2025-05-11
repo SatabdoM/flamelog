@@ -1,3 +1,4 @@
+import logger from 'apps/test-service/src/utils/log/logger';
 import { moderatePost } from '../../../modules/gpt/gpt';
 import { kafka } from '../client';
 
@@ -11,11 +12,10 @@ export const connectPostConsumer = async () => {
     eachMessage: async ({ message }) => {
       try {
         const post = JSON.parse(message.value?.toString() || '{}');
-        console.log('Picked up by post consumer:', post, typeof post);
-        //const parsedPost = JSON.parse(post);
+        logger.info('Picked up by post consumer:', post, typeof post);
         moderatePost(post);
       } catch (error) {
-        console.error('Error processing message:  ', error);
+        logger.error('Error processing message:  ', error);
       }
     },
   });
