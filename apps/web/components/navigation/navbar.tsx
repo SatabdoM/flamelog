@@ -27,9 +27,9 @@ export const Navbar = () => {
     <div className="layout-container flex h-full items-center justify-between gap-4">
       <Logo shape="circle" href="/" />
 
-      <div className="hidden lg:flex">
+      <nav className="hidden lg:flex">
         <NavMenus />
-      </div>
+      </nav>
 
       <div className="flex flex-grow items-center justify-end gap-2 lg:ml-6">
         <div className="w-[min(100%,500px)] max-w-[500px] flex-grow sm:block">

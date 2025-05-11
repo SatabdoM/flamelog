@@ -1,14 +1,11 @@
-'use client';
+import { getPosts } from '@/data/get-posts';
 
-import { useUIStore } from '@/store/ui';
-
-const FeedPage = () => {
-  const isMobileSearchOpen = useUIStore((state) => state.isMobileSearchOpen);
+const FeedPage = async () => {
+  const posts = await getPosts();
 
   return (
-    <div>
+    <div className="space-y-6">
       <p>Feed Page</p>
-      <p>Is Mobile Search: {isMobileSearchOpen ? 'true' : 'false'}</p>
     </div>
   );
 };
