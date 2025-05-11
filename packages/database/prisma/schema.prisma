@@ -9,13 +9,238 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id          Int            @id @default(autoincrement())
+  email       String         @unique
+  password    String         @unique
+  userProfile UserProfile?
+  name        String?
+  roles       String[]
+  post        Post[]
+  tagStats    UserTagStats[]
+  feed        Feed[]
+  feedTrack   FeedTrack[]
+  heapmap     UserHeatmap[]
+  like        Like[]
+  comment     Comment[]
+  shared      Share[]
+  tagFollows  TagFollow[]
+
+  followers             Follow[]       @relation("Followers")
+  following             Follow[]       @relation("Following")
+  notificationsSent     Notification[] @relation("SenderNotifications")
+  notificationsReceived Notification[] @relation("UserNotifications")
 }
-model TestUser {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  password String @unique
-  name  String?
+
+enum Gender {
+  MALE
+  FEMLALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+model UserProfile {
+  id       Int     @id @default(autoincrement())
+  user     User    @relation(fields: [userId], references: [id])
+  userId   Int     @unique
+  bio      String?
+  company  String?
+  location String?
+
+  profilePic String?
+  coverPic   String?
+
+  birthDate DateTime?
+  gender    Gender?
+  phone     String?
+  interests String[]
+
+  github     String?
+  linkedin   String?
+  twitter    String?
+  leetcode   String?
+  instagram  String?
+  website    String?
+  resumeLink String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserHeatmap {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  date  DateTime
+  count Int
+
+  @@unique([userId, date])
+}
+
+model UserTagStats {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  tag    Tag  @relation(fields: [tagId], references: [id])
+  tagId  Int
+
+  postCount Int @default(0) // Number of posts user has made with this tag
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@unique([userId, tagId]) // 1 row per user+tag combo
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime  @default(now())
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  Int
+  tags      PostTag[]
+  comments  Comment[]
+
+  likes  Like[]
+  shares Share[]
+  feed   Feed[]
+
+  likeCount    Int @default(0)
+  commentCount Int @default(0)
+}
+
+model Follow {
+  id         Int @id @default(autoincrement())
+  followerId Int
+  followedId Int
+
+  follower User @relation("Followers", fields: [followerId], references: [id])
+  followed User @relation("Following", fields: [followedId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([followerId, followedId])
+  @@index([followerId])
+  @@index([followedId])
+}
+
+model Tag {
+  id        Int            @id @default(autoincrement())
+  name      String         @unique
+  posts     PostTag[]
+  users     UserTagStats[]
+  followers TagFollow[]
+  createdAt DateTime       @default(now())
+}
+
+model PostTag {
+  id Int @id @default(autoincrement())
+
+  post   Post @relation(fields: [postId], references: [id])
+  postId Int
+  tag    Tag  @relation(fields: [tagId], references: [id])
+  tagId  Int
+
+  createdAt DateTime @default(now())
+
+  @@unique([postId, tagId])
+  @@index([postId])
+  @@index([tagId])
+}
+
+model TagFollow {
+  id Int @id @default(autoincrement())
+
+  tag    Tag  @relation(fields: [tagId], references: [id])
+  tagId  Int
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  createdAt DateTime @default(now())
+
+  @@unique([tagId, userId])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+
+  @@index([postId])
+  @@index([authorId])
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+  @@index([postId])
+  @@index([userId])
+}
+
+model Share {
+  id        Int      @id @default(autoincrement())
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+}
+
+model Feed {
+  id        Int      @id @default(autoincrement())
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+  @@index([userId, createdAt])
+}
+
+model FeedTrack {
+  id       Int      @id @default(autoincrement())
+  user     User     @relation(fields: [userId], references: [id])
+  userId   Int      @unique
+  lastSeen DateTime
+}
+
+enum NotificationType {
+  FOLLOW
+  LIKE
+  COMMENT
+  TAG_FOLLOWED
+  POST_TAGGED
+  MENTION
+  REPLY
+  SHARE
+}
+
+model Notification {
+  id          Int  @id @default(autoincrement())
+  recipient   User @relation("UserNotifications", fields: [recipientId], references: [id])
+  recipientId Int
+
+  sender   User? @relation("SenderNotifications", fields: [senderId], references: [id])
+  senderId Int?
+
+  type    NotificationType
+  message String
+  link    String? // Optional link (e.g., to post, comment, profile)
+  read    Boolean          @default(false)
+
+  createdAt DateTime @default(now())
 }
