@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import router from './routes';
-import { handleDBConnection } from './lib/dbconnect';
+import { handleDBConnection } from './lib/database/dbconnect';
 import { connectProducers } from './lib/kafka/producers';
 import { connectPostConsumer } from './lib/kafka/consumers/postConsumer';
 
