@@ -13,28 +13,32 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@workspace/ui/components/navigation-menu';
-
 import { Logo } from '@workspace/ui/components/logo';
-import { UserButton } from './auth/user-button';
+import { UserButton } from '../auth/user-button';
 import { useAuthStore } from '@/store/auth';
 import { Button } from '@workspace/ui/components/button';
-import { ThemeToggle } from './theme-toggle';
+import { ThemeToggle } from '../theme-toggle';
+import { SearchBox } from '../search/search-box';
 
 export const Navbar = () => {
   const { isAuthenticated } = useAuthStore();
 
   return (
-    <div className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 flex h-15 w-full items-center justify-between border-b px-10 backdrop-blur">
-      <div>
-        <Logo text="Flamelog" href="/" />
-      </div>
+    <div className="layout-container flex h-full items-center justify-between gap-4">
+      <Logo shape="circle" href="/" />
 
-      <div className="absolute right-0 left-0 -z-1 flex items-center justify-center">
+      <nav className="hidden lg:flex">
         <NavMenus />
-      </div>
+      </nav>
 
-      <div className="flex items-center gap-2">
-        <ThemeToggle />
+      <div className="flex flex-grow items-center justify-end gap-2 lg:ml-6">
+        <div className="w-[min(100%,500px)] max-w-[500px] flex-grow sm:block">
+          <SearchBox />
+        </div>
+
+        <div className="block">
+          <ThemeToggle />
+        </div>
 
         {isAuthenticated ? (
           <UserButton />
@@ -132,11 +136,9 @@ const NavMenus = () => {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/docs" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Documentation
-            </NavigationMenuLink>
-          </Link>
+          <NavigationMenuLink href="/docs" className={navigationMenuTriggerStyle()}>
+            Documentation
+          </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
