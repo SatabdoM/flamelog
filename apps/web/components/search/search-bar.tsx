@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { ArrowLeft, SearchIcon } from 'lucide-react';
 
-import { useUIStore } from '@/store/ui';
+import { useUIStore } from '@/stores/ui-store';
 import { useWindowSize } from '@/hooks/use-window-size';
 import { Button } from '@workspace/ui/components/button';
 

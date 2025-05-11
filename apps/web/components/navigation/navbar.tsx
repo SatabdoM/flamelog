@@ -15,13 +15,15 @@ import {
 } from '@workspace/ui/components/navigation-menu';
 import { Logo } from '@workspace/ui/components/logo';
 import { UserButton } from '../auth/user-button';
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore } from '@/stores/auth-store';
 import { Button } from '@workspace/ui/components/button';
 import { ThemeToggle } from '../theme-toggle';
 import { SearchBox } from '../search/search-box';
+import { Bell } from 'lucide-react';
 
 export const Navbar = () => {
   const { isAuthenticated } = useAuthStore();
+  const notificationCount = 2;
 
   return (
     <div className="layout-container flex h-full items-center justify-between gap-4">
@@ -38,6 +40,18 @@ export const Navbar = () => {
 
         <div className="block">
           <ThemeToggle />
+        </div>
+
+        <div className="relative block">
+          {!!notificationCount && (
+            <span className="bg-destructive absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full text-[0.65rem] font-bold text-white">
+              {notificationCount}
+            </span>
+          )}
+
+          <Button variant="outline" size="icon" className="rounded-full">
+            <Bell />
+          </Button>
         </div>
 
         {isAuthenticated ? (

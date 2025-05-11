@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore } from '@/stores/auth-store';
 
 export const UserButton = () => {
   const { isAuthenticated, user, clearAuth } = useAuthStore();

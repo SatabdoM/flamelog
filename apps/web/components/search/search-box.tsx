@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { SearchIcon } from 'lucide-react';
 
-import { useUIStore } from '@/store/ui';
+import { useUIStore } from '@/stores/ui-store';
 import { useWindowSize } from '@/hooks/use-window-size';
 import { Input } from '@workspace/ui/components/input';
 

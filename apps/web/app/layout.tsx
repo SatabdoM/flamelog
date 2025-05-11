@@ -6,6 +6,7 @@ import '@workspace/ui/globals.css';
 import { cn } from '@workspace/ui/lib/utils';
 import { QueryProvider } from '@/providers/query-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
+import { Modal } from '@/components/modal';
 
 const fontSans = Geist({
   subsets: ['latin'],
@@ -34,7 +35,10 @@ const RootLayout = ({
       </head>
       <body className={cn('font-sans antialiased', fontSans.variable, fontMono.variable)}>
         <QueryProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            {children}
+            <Modal />
+          </ThemeProvider>
         </QueryProvider>
       </body>
     </html>
