@@ -14,15 +14,15 @@ export const Modal = () => {
       }}
     >
       <DialogContent
-        className="sm:max-w-[425px]"
         onInteractOutside={(e) => {
           if (options.closeOnOutsideClick) return;
           e.preventDefault();
         }}
         onEscapeKeyDown={(e) => {
-          if (!options.closeOnEscKeyPress) return;
+          if (options.closeOnEscKeyPress) return;
           e.preventDefault();
         }}
+        showDefaultClose={options.showDefaultClose ?? true}
       >
         <DialogHeader className="hidden">
           <DialogTitle>Modal</DialogTitle>

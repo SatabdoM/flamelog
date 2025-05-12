@@ -1,11 +1,13 @@
 import { create } from 'zustand';
 
 type ModalOptions = {
+  showDefaultClose?: boolean;
   closeOnOutsideClick?: boolean;
   closeOnEscKeyPress?: boolean;
 };
 
 const defaultOptions: ModalOptions = {
+  showDefaultClose: true,
   closeOnOutsideClick: false,
   closeOnEscKeyPress: true,
 };
