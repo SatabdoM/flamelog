@@ -6,7 +6,7 @@ import { SidebarNavItem } from '../sidebar-nav-item';
 import { Button } from '@workspace/ui/components/button';
 import { Bell, BookMarked, Plus, Settings } from 'lucide-react';
 import { useModalStore } from '@/stores/modal-store';
-import { LogComposer } from '@/components/log-composer';
+import { LogComposeModal } from '@/components/modals/log-compose-modal';
 
 export const PrimarySidebar = () => {
   const openModal = useModalStore((state) => state.openModal);
@@ -16,7 +16,7 @@ export const PrimarySidebar = () => {
       <ProfileCard />
 
       <div className="m-2">
-        <Button className="w-full rounded-lg" onClick={() => openModal(<LogComposer />)}>
+        <Button className="w-full rounded-lg" onClick={() => openModal(<LogComposeModal />)}>
           <Plus className="size-5" />
           New Log
         </Button>

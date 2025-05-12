@@ -27,7 +27,7 @@ export const Navbar = () => {
 
   return (
     <div className="layout-container flex h-full items-center justify-between gap-4">
-      <Logo shape="circle" href="/" />
+      <Logo shape="squircle" href="/" />
 
       <nav className="hidden lg:flex">
         <NavMenus />
@@ -49,7 +49,7 @@ export const Navbar = () => {
             </span>
           )}
 
-          <Button variant="outline" size="icon" className="rounded-full">
+          <Button variant="outline" size="icon">
             <Bell />
           </Button>
         </div>

@@ -4,7 +4,7 @@ import { PencilLine } from 'lucide-react';
 
 import { Button } from '@workspace/ui/components/button';
 import { useModalStore } from '@/stores/modal-store';
-import { LogComposer } from '@/components/log-composer';
+import { LogComposeModal } from '@/components/modals/log-compose-modal';
 
 export const LogComposeTrigger = () => {
   const openModal = useModalStore((state) => state.openModal);
@@ -14,7 +14,7 @@ export const LogComposeTrigger = () => {
       <Button
         variant="secondary"
         className="w-full rounded-md"
-        onClick={() => openModal(<LogComposer />)}
+        onClick={() => openModal(<LogComposeModal />)}
       >
         <PencilLine className="size-5" />
         <p>Log today&apos;s learning</p>
