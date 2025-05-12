@@ -49,9 +49,9 @@ export const moderatePost = async (post: CreatePostSchema) => {
         },
       ],
     });
-    console.log('Response from OpenAI: ', response);
+    //console.log('Response from OpenAI: ', response);
     const responseText = response.choices[0].message.content;
-    console.log('Response text: ', responseText);
+    //console.log('Response text: ', responseText);
     if (!responseText) {
       throw new Error('Empty response from OpenAI');
     }
