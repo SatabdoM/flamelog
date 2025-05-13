@@ -1,0 +1,7 @@
+
+### Logger levels
+logger.error('DB connection failed');       // Critical issue
+logger.warn('Password is weak');            // Caution
+logger.info('User signed in');              // Normal event
+logger.verbose('Processing batch #42');     // Extra details
+logger.debug('Post payload: ' + JSON.stringify(post)); // For dev only
