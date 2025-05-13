@@ -18,7 +18,7 @@ import { Button } from '@workspace/ui/components/button';
 import { Form, FormControl, FormField, FormItem } from '@workspace/ui/components/form';
 import { LogSchema } from './schema';
 
-export const LogComposeModal = (options: DialogOptions) => {
+export const LogComposeModal = ({ options = {} }: { options?: DialogOptions }) => {
   const closeModal = useModalStore((state) => state.closeModal);
 
   const form = useForm<LogSchema>({
