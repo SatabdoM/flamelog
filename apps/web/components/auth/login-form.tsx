@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from '@workspace/ui/components/form';
 import { loginSchema, type LoginFormData } from '@workspace/schemas';
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore } from '@/stores/auth-store';
 // import { api } from '@/lib/services/axios';
 
 export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>) => {

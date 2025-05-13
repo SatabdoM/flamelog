@@ -3,7 +3,7 @@
 import { UserIcon } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore } from '@/stores/auth-store';
 
 export const ProfileCard = () => {
   const { user } = useAuthStore();
