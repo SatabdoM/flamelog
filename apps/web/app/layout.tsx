@@ -7,6 +7,7 @@ import { cn } from '@workspace/ui/lib/utils';
 import { QueryProvider } from '@/providers/query-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { Modal } from '@/components/modal';
+import { Toaster } from '@workspace/ui/components/sonner';
 
 const fontSans = Geist({
   subsets: ['latin'],
@@ -38,6 +39,7 @@ const RootLayout = ({
           <ThemeProvider>
             {children}
             <Modal />
+            <Toaster richColors />
           </ThemeProvider>
         </QueryProvider>
       </body>
