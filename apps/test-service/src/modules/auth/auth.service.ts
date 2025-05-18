@@ -1,19 +1,8 @@
-import { prisma } from '@workspace/db';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+
+import { prisma } from '@workspace/db';
 import { signupSchema, loginSchema } from './auth.schema';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
-
-// type signupData = {
-//   email: string;
-//   password: string;
-//   name?: string;
-// };
-// type loginData = {
-//   email: string;
-//   password: string;
-// };
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../../utils/jwt';
 
 export async function signup(data: signupSchema) {
   const existingUser = await prisma.user.findUnique({ where: { email: data?.email } });
@@ -29,7 +18,11 @@ export async function signup(data: signupSchema) {
       roles: ['USER'],
     },
   });
-  return user;
+
+  const accessToken = generateAccessToken(user.id);
+  const refreshToken = generateRefreshToken(user.id);
+
+  return { accessToken, refreshToken, user };
 }
 
 export async function login(data: loginSchema) {
@@ -39,7 +32,28 @@ export async function login(data: loginSchema) {
   const passwordMatched = await bcrypt.compare(data?.password, user.password);
   if (!passwordMatched) throw new Error('Incorrect Password!');
 
-  const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '7d' });
+  const accessToken = generateAccessToken(user.id);
+  const refreshToken = generateRefreshToken(user.id);
 
-  return { token, user };
+  return { accessToken, refreshToken, user };
+}
+
+export async function refresh(token: string) {
+  try {
+    const decoded = verifyRefreshToken(token);
+
+    const user = await prisma.user.findUnique({ where: { id: decoded.userId } });
+    if (!user) throw new Error('User not found');
+
+    const accessToken = generateAccessToken(user.id);
+
+    console.log('New access token generated');
+
+    // Optionally rotate refresh token
+    // const newRefreshToken = generateRefreshToken(user.id);
+
+    return { accessToken };
+  } catch (err) {
+    throw new Error('Invalid refresh token');
+  }
 }
