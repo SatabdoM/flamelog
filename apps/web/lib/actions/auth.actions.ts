@@ -1,4 +1,4 @@
-import { baseApi } from '@/lib/axios';
+import { api, baseApi } from '@/lib/axios';
 import { User } from '@/types/user';
 
 export const authActions = {
@@ -11,5 +11,9 @@ export const authActions = {
   },
   refreshAccessToken: async () => {
     await baseApi.post('/auth/refresh');
+  },
+  getMe: async () => {
+    const response = await api.get<{ user: User }>('/auth/me');
+    return response.data;
   },
 };

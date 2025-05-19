@@ -22,7 +22,7 @@ import { SearchBox } from '../search/search-box';
 import { Bell } from 'lucide-react';
 
 export const Navbar = () => {
-  const { isAuthenticated } = useAuthStore();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const notificationCount = 2;
 
   return (

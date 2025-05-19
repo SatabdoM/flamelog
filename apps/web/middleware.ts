@@ -2,19 +2,44 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 import { LOGIN_PATH_URL, pathnameMatches, ROUTE_CONFIGS } from './route-config';
-import { getAuthToken, verifyAuthToken } from '@/lib/services/auth';
+import { User } from './types/user';
+
+async function verifyUser(request: NextRequest) {
+  // Get cookies and make headers
+  const cookies = request.cookies.getAll();
+  const cookieHeader = cookies.map((c) => `${c.name}=${c.value}`).join('; ');
+  const accessToken = request.cookies.get('accessToken')?.value;
+
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL || 'http:localhost:5001'}/api/auth/me`,
+      {
+        headers: {
+          Cookie: cookieHeader,
+          Authorization: `Bearer ${accessToken}`,
+        },
+        credentials: 'include',
+      }
+    );
+
+    if (!response.ok) throw new Error('Unauthorized');
+
+    const user: User = await response.json();
+    return user;
+  } catch (error) {
+    console.log('User verification failed');
+    return null;
+  }
+}
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Get authentication token (flexible for cookies or headers)
-  const authToken = getAuthToken(request);
-
   // Verify authentication
-  const { isAuthenticated, user } = await verifyAuthToken(authToken);
+  const user = await verifyUser(request);
 
   // Handle authenticated users
-  if (isAuthenticated) {
+  if (user) {
     // Redirect authenticated users away from auth routes
     if (pathname.startsWith('/auth')) {
       return NextResponse.redirect(new URL('/feed', request.url));
@@ -38,12 +63,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (!isAuthenticated) {
-    // Redirect to login or return 401 based on route
-    if (pathname.startsWith('/api')) {
-      return new NextResponse('Unauthorized', { status: 401 });
-    }
-
+  if (!user) {
     // Build callback URL with query params
     let callbackUrl = pathname;
     if (request.nextUrl.search) {
@@ -64,19 +84,6 @@ export async function middleware(request: NextRequest) {
     if (!hasRequiredRole) {
       return new NextResponse('Forbidden', { status: 403 });
     }
-  }
-
-  // Add user data to request headers for API routes
-  if (pathname.startsWith('/api')) {
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set('x-user-id', user?.id || '');
-    requestHeaders.set('x-user-roles', user?.roles?.join(',') || '');
-
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
   }
 
   return NextResponse.next();

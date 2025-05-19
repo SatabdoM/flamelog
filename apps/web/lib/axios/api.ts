@@ -18,7 +18,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const newAccessToken = await useAuthStore.getState().refreshAccessToken();
+        await useAuthStore.getState().refreshAccessToken();
         // Retry the original request with new token
         return api(originalRequest);
       } catch (refreshError) {
