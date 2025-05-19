@@ -64,6 +64,17 @@ export async function login(req: Request, res: Response) {
   }
 }
 
+export async function logout(req: Request, res: Response) {
+  // Invalidate refresh token in database
+  // Right now we don't have any methods to do so, so it's fine
+
+  // Clear cookies
+  res.clearCookie('accessToken');
+  res.clearCookie('refreshToken');
+
+  res.sendStatus(204);
+}
+
 export async function refresh(req: Request, res: Response) {
   try {
     const refreshToken = req.cookies.refreshToken;
