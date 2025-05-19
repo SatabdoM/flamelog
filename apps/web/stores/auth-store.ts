@@ -9,6 +9,7 @@ interface AuthState {
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
+  signup: (data: { name: string; email: string; password: string }) => Promise<void>;
   login: (credentials: { email: string; password: string }) => Promise<void>;
   logout: () => Promise<void>;
   refreshAccessToken: () => Promise<void>;
@@ -22,6 +23,16 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       loading: false,
       error: null,
+      signup: async (data) => {
+        set({ loading: true, error: null });
+        try {
+          const { user } = await authActions.signup(data);
+          set({ user, isAuthenticated: true, loading: false });
+        } catch (error: any) {
+          set({ error: error.response?.data?.message || 'Signup failed', loading: false });
+          throw error;
+        }
+      },
       login: async (credentials) => {
         set({ loading: true, error: null });
         try {
