@@ -1,18 +1,18 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface User {
-  id: string;
-  roles: string[];
-  [key: string]: any;
-}
+import { User } from '@/types/user';
+import { authActions } from '@/lib/actions/auth.actions';
 
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
-  token: string | null;
-  setAuth: (user: User, token: string) => void;
-  clearAuth: () => void;
+  loading: boolean;
+  error: string | null;
+  login: (credentials: { email: string; password: string }) => Promise<void>;
+  logout: () => Promise<void>;
+  refreshAccessToken: () => Promise<void>;
+  hydrateAuth: (user: any) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -20,26 +20,43 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
       isAuthenticated: false,
-      token: null,
-      setAuth: (user, token) => {
-        set({ user, isAuthenticated: true, token });
-        // Set cookie for middleware
-        document.cookie = `authToken=${token}; path=/`;
+      loading: false,
+      error: null,
+      login: async (credentials) => {
+        set({ loading: true, error: null });
+        try {
+          const data = await authActions.login(credentials);
+          set({ user: data.user, isAuthenticated: true, loading: false });
+        } catch (error: any) {
+          set({ error: error.response?.data?.message || 'Login failed', loading: false });
+          throw error;
+        }
       },
-      clearAuth: () => {
-        set({ user: null, isAuthenticated: false, token: null });
-        // Set cookie for middleware
-        document.cookie = `authToken=; path=/`;
+      logout: async () => {
+        set({ loading: true });
+        try {
+          await authActions.logout();
+        } catch (error) {
+          console.error('Logout API error:', error);
+        } finally {
+          set({ user: null, isAuthenticated: false, loading: false });
+        }
+      },
+      refreshAccessToken: async () => {
+        try {
+          await authActions.refreshAccessToken();
+        } catch (error) {
+          useAuthStore.getState().logout();
+          throw error;
+        }
+      },
+      hydrateAuth: (user: User | null) => {
+        set({ user, isAuthenticated: !!user });
       },
     }),
     {
       name: 'auth-storage',
-      // Only persist these fields
-      partialize: (state) => ({
-        token: state.token,
-        user: state.user,
-        isAuthenticated: state.isAuthenticated,
-      }),
+      partialize: (state) => ({ user: state.user, isAuthenticated: state.isAuthenticated }),
     }
   )
 );
