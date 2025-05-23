@@ -54,7 +54,7 @@ export async function verifyAuth(request: NextRequest) {
     }
     throw new Error('Unauthorized');
   } catch (error) {
-    console.log('User verification failed, attempting token refresh...');
+    // console.log('User verification failed, attempting token refresh...');
   }
 
   // If initial /auth/me fails, try refreshing the token
