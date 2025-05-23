@@ -1,0 +1,23 @@
+import { api, baseApi } from '@/lib/axios';
+import { User } from '@/types/user';
+
+export const authActions = {
+  signup: async (data: { name: string; email: string; password: string }) => {
+    const response = await baseApi.post<{ user: User }>('/auth/signup', data);
+    return response.data;
+  },
+  login: async (credentials: { email: string; password: string }) => {
+    const response = await baseApi.post<{ user: User }>('/auth/login', credentials);
+    return response.data;
+  },
+  logout: async () => {
+    await baseApi.post('/auth/logout');
+  },
+  refreshAccessToken: async () => {
+    await baseApi.post('/auth/refresh');
+  },
+  getMe: async () => {
+    const response = await api.get<{ user: User }>('/auth/me');
+    return response.data;
+  },
+};

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description: 'FlameLog',
 };
 
-const RootLayout = ({
+const RootLayout = async ({
   children,
 }: Readonly<{
   children: ReactNode;

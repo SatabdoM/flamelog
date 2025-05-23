@@ -2,48 +2,55 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 import { LOGIN_PATH_URL, pathnameMatches, ROUTE_CONFIGS } from './route-config';
-import { getAuthToken, verifyAuthToken } from '@/lib/services/auth';
+import { verifyAuth } from './lib/services/auth';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Get authentication token (flexible for cookies or headers)
-  const authToken = getAuthToken(request);
-
   // Verify authentication
-  const { isAuthenticated, user } = await verifyAuthToken(authToken);
+  const { user, newAccessToken } = await verifyAuth(request);
+
+  // Create a response object we can modify
+  let response: NextResponse;
+
+  // If a new accessToken was generated, set it in the response
+  if (newAccessToken) {
+    response = NextResponse.next(); // Default response (can be overridden later)
+    response.cookies.set('accessToken', newAccessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 15 * 60, // 15 minutes
+      sameSite: 'lax',
+      path: '/',
+    });
+  } else {
+    response = NextResponse.next(); // Default response if no new token
+  }
 
   // Handle authenticated users
-  if (isAuthenticated) {
+  if (user) {
     // Redirect authenticated users away from auth routes
     if (pathname.startsWith('/auth')) {
-      return NextResponse.redirect(new URL('/feed', request.url));
+      response = NextResponse.redirect(new URL('/feed', request.url));
     }
-
     // Redirect authenticated users from home to feed
-    if (pathname === '/') {
-      return NextResponse.redirect(new URL('/feed', request.url));
+    else if (pathname === '/') {
+      response = NextResponse.redirect(new URL('/feed', request.url));
     }
   }
 
-  // Find matching route configuration
+  // Public routes don't require authentication
   const routeConfig = ROUTE_CONFIGS.find((config) =>
     Array.isArray(config.matcher)
       ? config.matcher.some((pattern) => pathnameMatches(pattern, pathname))
       : pathnameMatches(config.matcher, pathname)
   );
 
-  // Public routes don't require authentication
   if (routeConfig?.public) {
-    return NextResponse.next();
+    return response; // Return the response (with new cookie if applicable)
   }
 
-  if (!isAuthenticated) {
-    // Redirect to login or return 401 based on route
-    if (pathname.startsWith('/api')) {
-      return new NextResponse('Unauthorized', { status: 401 });
-    }
-
+  if (!user) {
     // Build callback URL with query params
     let callbackUrl = pathname;
     if (request.nextUrl.search) {
@@ -54,32 +61,18 @@ export async function middleware(request: NextRequest) {
     const loginUrl = new URL(LOGIN_PATH_URL, request.url);
     loginUrl.searchParams.set('callbackUrl', encodeURIComponent(callbackUrl));
 
-    return NextResponse.redirect(loginUrl);
+    response = NextResponse.redirect(loginUrl);
   }
 
   // Check roles if required by route
   if (routeConfig?.roles && routeConfig.roles.length > 0) {
     const hasRequiredRole = routeConfig.roles.some((role) => user?.roles?.includes(role));
-
     if (!hasRequiredRole) {
-      return new NextResponse('Forbidden', { status: 403 });
+      response = new NextResponse('Forbidden', { status: 403 });
     }
   }
 
-  // Add user data to request headers for API routes
-  if (pathname.startsWith('/api')) {
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set('x-user-id', user?.id || '');
-    requestHeaders.set('x-user-roles', user?.roles?.join(',') || '');
-
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-  }
-
-  return NextResponse.next();
+  return response; // Final response (with new cookie if applicable)
 }
 
 // Config for the middleware - can be adjusted based on needs
