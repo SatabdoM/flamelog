@@ -12,18 +12,19 @@ import {
 } from '@workspace/ui/components/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
 import { useAuthStore } from '@/stores/auth-store';
+import { User } from '@/types/user';
 
-export const UserButton = () => {
-  const { isAuthenticated, user, logout } = useAuthStore();
+interface UserButtonProps {
+  user: User | null;
+}
+
+export const UserButton = ({ user }: UserButtonProps) => {
+  const { logout } = useAuthStore();
   const router = useRouter();
-
-  if (!isAuthenticated || !user) {
-    return null;
-  }
 
   const onLogoutClick = async () => {
     await logout();
-    router.push('/');
+    router.refresh();
   };
 
   return (
@@ -46,8 +47,8 @@ export const UserButton = () => {
             </AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-sm font-semibold">{user.name}</p>
-            <p className="text-muted-foreground text-sm">{user.email}</p>
+            <p className="text-sm font-semibold">{user?.name}</p>
+            <p className="text-muted-foreground text-sm">{user?.email}</p>
           </div>
         </div>
 
