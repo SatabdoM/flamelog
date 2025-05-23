@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface UIState {
   isMobileSearchOpen: boolean;
@@ -6,8 +7,10 @@ interface UIState {
   closeMobileSearch: () => void;
 }
 
-export const useUIStore = create<UIState>()((set) => ({
-  isMobileSearchOpen: false,
-  openMobileSearch: () => set({ isMobileSearchOpen: true }),
-  closeMobileSearch: () => set({ isMobileSearchOpen: false }),
-}));
+export const useUIStore = create<UIState>()(
+  devtools((set) => ({
+    isMobileSearchOpen: false,
+    openMobileSearch: () => set({ isMobileSearchOpen: true }),
+    closeMobileSearch: () => set({ isMobileSearchOpen: false }),
+  }))
+);
