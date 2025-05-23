@@ -8,8 +8,6 @@ import { QueryProvider } from '@/providers/query-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { Modal } from '@/components/modal';
 import { Toaster } from '@workspace/ui/components/sonner';
-import { getAuthServerSide } from '@/lib/services/auth';
-import { AuthProvider } from '@/providers/auth-provider';
 
 const fontSans = Geist({
   subsets: ['latin'],
@@ -31,8 +29,6 @@ const RootLayout = async ({
 }: Readonly<{
   children: ReactNode;
 }>) => {
-  const { user } = await getAuthServerSide();
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -41,11 +37,9 @@ const RootLayout = async ({
       <body className={cn('font-sans antialiased', fontSans.variable, fontMono.variable)}>
         <QueryProvider>
           <ThemeProvider>
-            <AuthProvider user={user}>
-              {children}
-              <Modal />
-              <Toaster richColors />
-            </AuthProvider>
+            {children}
+            <Modal />
+            <Toaster richColors />
           </ThemeProvider>
         </QueryProvider>
       </body>
