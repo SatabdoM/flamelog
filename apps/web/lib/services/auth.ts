@@ -87,7 +87,6 @@ export async function verifyAuth(request: NextRequest) {
     const user: User = await retryResponse.json();
     return { user, newAccessToken }; // Return the new token to set in the browser
   } catch (error) {
-    console.log('Token refresh failed, user is not authenticated');
     return { user: null, newAccessToken: null };
   }
 }
