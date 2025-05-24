@@ -13,7 +13,7 @@ export const ProfileCard = () => {
       <div className="from-accent/20 to-accent relative h-20 bg-gradient-to-b">
         <div className="absolute right-0 -bottom-19 left-0 flex flex-col items-center gap-2 text-center">
           <Avatar className="size-14">
-            <AvatarImage src={user?.image || ''} />
+            <AvatarImage src={''} />
             <AvatarFallback className="bg-muted h-full w-full">
               <UserIcon className="size-5" />
             </AvatarFallback>

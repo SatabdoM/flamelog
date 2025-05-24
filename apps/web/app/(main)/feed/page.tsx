@@ -1,18 +1,26 @@
-import { getAuthServerSide } from '@/lib/services/auth';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+
+import { getQueryClient } from '@/lib/react-query';
 import { LogComposeTrigger } from './_components/log-compose-trigger';
-import { Hello } from './_components/hello';
+import { getPosts } from './get-posts';
+import { Posts } from './_components/posts';
 
 const FeedPage = async () => {
-  const { user } = await getAuthServerSide();
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['posts'],
+    queryFn: getPosts,
+  });
 
   return (
-    <div className="space-y-6">
-      <LogComposeTrigger />
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div className="space-y-6">
+        <LogComposeTrigger />
 
-      <p>Feed</p>
-      <p>{user?.email}</p>
-      <Hello />
-    </div>
+        <Posts />
+      </div>
+    </HydrationBoundary>
   );
 };
 
