@@ -93,7 +93,7 @@ export const MainLayoutClient = ({
               <aside className="sticky top-[calc(60px+16px)] hidden h-[calc(100vh-60px-32px)] lg:block">
                 <PrimarySidebar />
               </aside>
-              <main className="flex-grow-1">{children}</main>
+              <main className="flex-grow-1 pb-16 lg:pb-4">{children}</main>
               <aside className="sticky top-[calc(60px+16px)] hidden h-[calc(100vh-60px-32px)] lg:block">
                 <SecondarySidebar />
               </aside>

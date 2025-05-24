@@ -1,8 +1,9 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import { getPosts } from '../get-posts';
+
+import { getPosts } from '@/lib/actions/posts/get-posts';
+import { LogCard } from '@/components/log-card';
 
 export const Posts = () => {
   const { data: posts } = useQuery({
@@ -11,14 +12,6 @@ export const Posts = () => {
   });
 
   return (
-    <div>
-      {posts?.map((post) => (
-        <p key={post.id} className="border-b py-2">
-          <span>{post.title}</span>
-          <br />
-          <span>{post.content}</span>
-        </p>
-      ))}
-    </div>
+    <div className="space-y-4">{posts?.map((post) => <LogCard key={post.id} log={post} />)}</div>
   );
 };
