@@ -9,7 +9,7 @@ export async function createPost(req: AuthentictedRequest, res: Response) {
     const post = await PostService.createPost(req);
     //Send Kafka message to topic 'post'
 
-    console.log('Post created:', post);
+    console.log('🤘Post created:', post);
 
     const message = {
       topic: 'post-created',

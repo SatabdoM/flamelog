@@ -1,5 +1,6 @@
 import { prisma } from '@workspace/db';
 import { AuthentictedRequest } from '../../types/auth';
+import logger from '../../utils/log/logger';
 
 export async function createPost(req: AuthentictedRequest) {
   console.log('Creating post with data:', req.body);
@@ -11,6 +12,7 @@ export async function createPost(req: AuthentictedRequest) {
       authorId: req.user.id,
     },
   });
+  //logger.info('Post created inside DB:', post);
   //TODO: add tags to post and metadata
   if (!post) {
     throw new Error('Post creation failed');

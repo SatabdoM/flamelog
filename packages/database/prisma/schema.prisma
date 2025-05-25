@@ -102,6 +102,10 @@ model Post {
   tags      PostTag[]
   comments  Comment[]
 
+  isValid Boolean @default(false)
+  rationale String?
+  gptMessage String?
+  
   likes  Like[]
   shares Share[]
   feed   Feed[]

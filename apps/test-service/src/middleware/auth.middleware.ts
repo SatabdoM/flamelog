@@ -17,7 +17,7 @@ export const requireAuth = async (req: AuthentictedRequest, res: Response, next:
     req.user = user;
     next();
   } catch (error) {
-    console.error('Error verifying token:', error);
+    console.error('Error verifying token: ', error);
     res.status(401).json({ message: 'Unauthorized user. Please Log in/Sign Up' });
   }
 };
