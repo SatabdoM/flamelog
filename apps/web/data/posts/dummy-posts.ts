@@ -79,7 +79,7 @@ export function generateDummyPosts(count: number = 20): Post[] {
   const oneDay = 24 * 60 * 60 * 1000; // milliseconds in one day
 
   for (let i = 0; i < count; i++) {
-    const randomUser = dummyUsers[Math.floor(Math.random() * dummyUsers.length)] as User;
+    const randomUser = dummyUsers[i % dummyUsers.length] as User;
     const randomDaysAgo = Math.floor(Math.random() * 30); // Random day in last 30 days
     const randomHoursAgo = Math.floor(Math.random() * 24); // Random hour in day
     const randomMinutesAgo = Math.floor(Math.random() * 60); // Random minute in hour

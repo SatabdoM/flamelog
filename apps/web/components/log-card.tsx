@@ -25,7 +25,7 @@ export const LogCard = ({ log }: LogCardProps) => {
       <CardHeader>
         <div className="flex items-center gap-3">
           <Avatar>
-            <AvatarImage src={log.author.image || ''} alt="avatar" />
+            <AvatarImage src={log.author.image || ''} alt="avatar" className="object-cover" />
             <AvatarFallback>{log.author.name?.substring(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
 

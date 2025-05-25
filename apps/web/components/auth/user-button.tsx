@@ -31,7 +31,13 @@ export const UserButton = ({ user }: UserButtonProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger className="flex cursor-pointer items-center justify-center rounded-full p-0.5 outline-none">
         <Avatar className="size-8">
-          <AvatarImage src={''} alt="user" />
+          <AvatarImage
+            src={
+              'https://images.pexels.com/photos/1115697/pexels-photo-1115697.jpeg?auto=compress&cs=tinysrgb&w=600'
+            }
+            className="object-cover"
+            alt="user"
+          />
           <AvatarFallback className="bg-muted h-full w-full">
             <UserIcon className="size-5" />
           </AvatarFallback>
@@ -41,7 +47,12 @@ export const UserButton = ({ user }: UserButtonProps) => {
       <DropdownMenuContent className="bg-card relative z-[999] mr-5 w-80 px-2.5 py-4 shadow-2xl">
         <div className="mb-4 flex items-center gap-3 px-2 pr-5">
           <Avatar className="size-9.5">
-            <AvatarImage src={''} />
+            <AvatarImage
+              src={
+                'https://images.pexels.com/photos/1115697/pexels-photo-1115697.jpeg?auto=compress&cs=tinysrgb&w=600'
+              }
+              className="object-cover"
+            />
             <AvatarFallback className="bg-muted h-full w-full">
               <UserIcon className="size-5" />
             </AvatarFallback>

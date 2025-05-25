@@ -42,8 +42,8 @@ export const MainLayoutClient = ({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{
-                duration: 0.15,
-                ease: 'easeInOut',
+                duration: 0.1,
+                ease: 'easeIn',
               }}
               className="absolute inset-0 origin-top"
             >
@@ -55,7 +55,7 @@ export const MainLayoutClient = ({
               initial={isFirstRender ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.15 }}
+              transition={{ duration: 0.1 }}
               className="absolute inset-0"
             >
               <Navbar user={user} />
