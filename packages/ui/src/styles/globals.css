@@ -174,9 +174,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
-.layout-container {
-  width: 100%;
-  max-width: min(94%, 1600px);
-  margin: 0 auto;
-}

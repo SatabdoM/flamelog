@@ -13,7 +13,7 @@ export function formatTimeAgo(date: Date): string {
 
   // Format as actual date for anything older than 1 week
   const day = date.getDate();
-  const month = date.toLocaleString('default', { month: 'long' });
+  const month = date.toLocaleString('default', { month: 'short' });
   const year = date.getFullYear() % 100;
   const ordinal =
     day % 10 === 1 && day !== 11

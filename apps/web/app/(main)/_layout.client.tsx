@@ -3,6 +3,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import './layout.css';
 import { useUIStore } from '@/stores/ui-store';
 import { useWindowSize } from '@/hooks/use-window-size';
 import { Navbar } from '@/components/navigation/navbar';
@@ -69,7 +70,7 @@ export const MainLayoutClient = ({
         <AnimatePresence mode="wait">
           {isMobile && isMobileSearchOpen ? (
             <motion.div
-              key="searchbar"
+              key="search-result"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
@@ -82,7 +83,7 @@ export const MainLayoutClient = ({
             </motion.div>
           ) : (
             <motion.div
-              key="navbar"
+              key="main-content"
               initial={isFirstRender ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

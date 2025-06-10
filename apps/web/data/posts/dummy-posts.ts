@@ -1,4 +1,4 @@
-import { Post } from '@/types/post';
+import { TPost } from '@/types/post';
 import { User } from '@/types/user';
 import { dummyUsers } from '../user/dummy-users';
 
@@ -11,7 +11,7 @@ export function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
-export function generateDummyPosts(count: number = 20): Post[] {
+export function generateDummyPosts(count: number = 20): TPost[] {
   const loremIpsum = [
     // Ultra short fragments
     'Lorem ipsum.',
@@ -74,7 +74,7 @@ export function generateDummyPosts(count: number = 20): Post[] {
     'Career Growth in Tech',
   ];
 
-  const posts: Post[] = [];
+  const posts: TPost[] = [];
   const now = new Date();
   const oneDay = 24 * 60 * 60 * 1000; // milliseconds in one day
 

@@ -1,58 +1,59 @@
 'use client';
 
-import { Send } from 'lucide-react';
-
-import { Button } from '@workspace/ui/components/button';
-import { Input } from '@workspace/ui/components/input';
 import { Avatar, AvatarImage } from '@workspace/ui/components/avatar';
 import { Comment } from './comment';
-import { useEffect, useRef } from 'react';
 import { getRandomComments } from '@/data/posts/dummy-comments';
+import { cn } from '@workspace/ui/lib/utils';
+import { CommentInput } from './comment-input';
 
-interface CommentsSection {
+type CommentsSectionProps = {
   postId: number;
-}
+  commentId?: number;
+};
 
-export const CommentsSection = ({ postId }: CommentsSection) => {
+export const CommentsSection = ({ postId, commentId }: CommentsSectionProps) => {
+  const isSubCommentSection = !!commentId;
+
   const comments = getRandomComments();
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (inputRef && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [inputRef]);
 
   return (
-    <div className="mt-2 w-full space-y-4 border-t p-2 pt-3">
-      <div className="flex items-center gap-2">
-        <Avatar>
+    <div className={cn('mt-2 w-full space-y-4 pt-2', !isSubCommentSection && 'border-t p-2 pt-3')}>
+      <div className="flex items-start gap-2">
+        <Avatar className={cn(isSubCommentSection && 'size-6.5')}>
           <AvatarImage
             src={
               'https://images.pexels.com/photos/1115697/pexels-photo-1115697.jpeg?auto=compress&cs=tinysrgb&w=600'
             }
           />
         </Avatar>
-        <Input ref={inputRef} placeholder="What do you think about the post?" />
-        <Button variant="secondary" size="icon">
-          <Send />
-        </Button>
+
+        <CommentInput postId={postId} commentId={commentId} />
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-muted-foreground font-medium">
-          Comments <span>({comments.length})</span>
+        <h3
+          className={cn(
+            'text-muted-foreground font-medium',
+            isSubCommentSection ? 'hidden text-sm' : 'text-[0.9rem]'
+          )}
+        >
+          {isSubCommentSection ? 'Replies' : 'Comments'} <span>({comments.length})</span>
         </h3>
 
         {comments.length ? (
           <div className="space-y-5 pb-4">
             {comments.map((comment) => (
-              <Comment key={comment.id} comment={comment} />
+              <Comment
+                key={comment.id}
+                postId={postId}
+                comment={comment}
+                isReplyComment={isSubCommentSection}
+              />
             ))}
           </div>
         ) : (
-          <p className="text-muted-foreground text-center text-sm">
-            No comments yet. Start the conversation
+          <p className={cn('text-muted-foreground text-sm', !isSubCommentSection && 'text-center')}>
+            {isSubCommentSection ? 'No replies' : 'No comments yet. Start the conversation'}
           </p>
         )}
       </div>

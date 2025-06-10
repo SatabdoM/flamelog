@@ -3,7 +3,7 @@
 import { generateDummyPosts } from '@/data/posts/dummy-posts';
 import { api } from '@/lib/axios';
 import { sleep } from '@/lib/utils';
-import { Post } from '@/types/post';
+import { TPost } from '@/types/post';
 
 export const getPosts = async () => {
   // const res = await api.get<{ posts: Post[] }>(`/post/user`);

@@ -19,8 +19,8 @@ export const MobileNav = () => {
               className="hover:bg-accent flex w-12 flex-grow cursor-pointer flex-col items-center gap-1 rounded-md p-2 transition-all"
               onClick={() => openModal(<LogComposeModal />)}
             >
-              <menu.icon className="size-5" />
-              <span className="line-clamp-1 text-[10px] font-light">{menu.label}</span>
+              <menu.icon className="size-5.5" />
+              <span className="line-clamp-1 text-[10px]">{menu.label}</span>
             </button>
           ) : (
             <Link
@@ -28,8 +28,8 @@ export const MobileNav = () => {
               href={menu.url}
               className="hover:bg-accent flex w-12 flex-grow flex-col items-center gap-1 rounded-md p-2 transition-all"
             >
-              <menu.icon className="size-5" />
-              <span className="line-clamp-1 text-[10px] font-light">{menu.label}</span>
+              <menu.icon className="size-5.5" />
+              <span className="line-clamp-1 text-[10px]">{menu.label}</span>
             </Link>
           )
         )}
