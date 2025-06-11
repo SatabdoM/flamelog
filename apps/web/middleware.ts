@@ -8,6 +8,7 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Verify authentication
+  // Here, we can use authAction.getMe to get the user but here it's better to use fetch instead of axios because we're getting some error with axios here, and generally fetch is recommended with next js server side
   const { user, newAccessToken } = await verifyAuth(request);
 
   // Create a response object we can modify
