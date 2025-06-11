@@ -62,7 +62,9 @@ export const Comment = ({ postId, comment, isReplyComment = false }: CommentProp
           )}
         </div>
 
-        {isSubCommentSectionOpen && <CommentsSection postId={postId} commentId={2} />}
+        {!isReplyComment && isSubCommentSectionOpen && (
+          <CommentsSection postId={postId} commentId={2} />
+        )}
       </div>
     </div>
   );
