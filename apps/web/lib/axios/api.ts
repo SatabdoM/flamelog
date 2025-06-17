@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useAuthStore } from '@/stores/auth-store';
+
+import { useAuthStore } from '@/stores/auth.store';
 
 const isServer = () => typeof window === 'undefined';
 const apiDomainUri = process.env.NEXT_PUBLIC_API_URL || 'http:localhost:5001';
@@ -9,21 +10,22 @@ export const api = axios.create({
   withCredentials: true,
 });
 
-api.interceptors.request.use(async (config) => {
-  let token: string | undefined;
-
+// Helper function for token handling
+const getAccessToken = async () => {
   if (isServer()) {
-    // Server-side: use next/headers cookies
     const { cookies } = await import('next/headers');
     const cookieStore = await cookies();
-    token = cookieStore.get('accessToken')?.value;
+    return cookieStore.get('accessToken')?.value;
   } else {
-    // Client-side: use document.cookie
-    token = document.cookie
+    return document.cookie
       .split('; ')
       .find((row) => row.startsWith('accessToken='))
       ?.split('=')[1];
   }
+};
+
+api.interceptors.request.use(async (config) => {
+  const token = await getAccessToken();
 
   if (token) {
     config.headers.setAuthorization(`Bearer ${token}`);
@@ -91,12 +93,22 @@ api.interceptors.response.use(
         }
       } else {
         try {
-          await useAuthStore.getState().refreshAccessToken();
+          // Attempt to refresh token
+          await axios.post(`${apiDomainUri}/api/auth/refresh`, {}, { withCredentials: true });
+
           // Retry the original request with new token
           return api(originalRequest);
         } catch (refreshError) {
           // Refresh token failed - log user out
-          await useAuthStore.getState().logout();
+          const authStore = useAuthStore.getState();
+          authStore.clearAuth();
+
+          try {
+            await axios.post(`${apiDomainUri}/api/auth/logout`, {}, { withCredentials: true });
+          } catch (error: any) {
+            console.log('Some error happened with the logout api', error);
+          }
+
           return Promise.reject(refreshError);
         }
       }

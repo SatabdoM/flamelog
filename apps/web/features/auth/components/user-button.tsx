@@ -11,15 +11,14 @@ import {
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
-import { useAuthStore } from '@/stores/auth-store';
 import { User } from '@/types/user';
+import { logout } from '@/features/auth/actions/client';
 
 interface UserButtonProps {
   user: User | null;
 }
 
 export const UserButton = ({ user }: UserButtonProps) => {
-  const { logout } = useAuthStore();
   const router = useRouter();
 
   const onLogoutClick = async () => {

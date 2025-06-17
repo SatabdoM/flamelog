@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { mobileNavMenus } from '@/constants/nav-menus';
-import { useModalStore } from '@/stores/modal-store';
+import { useModalStore } from '@/stores/modal.store';
 import { LogComposeModal } from '@/components/modals/log-compose-modal';
 
 export const MobileNav = () => {

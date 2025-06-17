@@ -1,7 +1,7 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 import { getQueryClient } from '@/lib/react-query';
-import { getPosts } from '@/lib/actions/posts/get-posts';
+import { getPosts } from '@/features/post/actions/get-posts';
 import { LogComposeTrigger } from './_components/log-compose-trigger';
 import { Posts } from './_components/posts';
 

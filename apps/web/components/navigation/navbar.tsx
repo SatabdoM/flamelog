@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Bell } from 'lucide-react';
 
 import { Logo } from '@workspace/ui/components/logo';
-import { UserButton } from '../auth/user-button';
+import { UserButton } from '@/features/auth/components/user-button';
 import { Button } from '@workspace/ui/components/button';
 import { ThemeToggle } from '../theme-toggle';
 import { SearchBox } from '../search/search-box';

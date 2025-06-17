@@ -2,8 +2,8 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-import { getPosts } from '@/lib/actions/posts/get-posts';
-import { Post } from '@/components/post';
+import { getPosts } from '@/features/post/actions/get-posts';
+import { Post } from '@/features/post/components';
 
 export const Posts = () => {
   const { data: posts } = useQuery({

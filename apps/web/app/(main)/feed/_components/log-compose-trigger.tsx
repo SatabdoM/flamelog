@@ -3,7 +3,7 @@
 import { PencilLine } from 'lucide-react';
 
 import { Button } from '@workspace/ui/components/button';
-import { useModalStore } from '@/stores/modal-store';
+import { useModalStore } from '@/stores/modal.store';
 import { LogComposeModal } from '@/components/modals/log-compose-modal';
 
 export const LogComposeTrigger = () => {

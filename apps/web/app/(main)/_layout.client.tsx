@@ -4,7 +4,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import './layout.css';
-import { useUIStore } from '@/stores/ui-store';
+import { useUIStore } from '@/stores/ui.store';
 import { useWindowSize } from '@/hooks/use-window-size';
 import { Navbar } from '@/components/navigation/navbar';
 import { SearchBar } from '@/components/search/search-bar';

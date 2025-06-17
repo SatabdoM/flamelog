@@ -19,50 +19,34 @@ import {
   FormLabel,
   FormMessage,
 } from '@workspace/ui/components/form';
-import { registerSchema, type RegisterFormData } from '@workspace/schemas';
-import { useAuthStore } from '@/stores/auth-store';
+import { loginSchema, type LoginFormData } from '@workspace/schemas';
+import { login } from '@/features/auth/actions/client';
 
-export const RegisterForm = ({ className, ...props }: React.ComponentProps<'form'>) => {
+export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const signup = useAuthStore((state) => state.signup);
 
   const [isPending, startTransition] = useTransition();
 
   const callbackUrl = searchParams.get('callbackUrl') || '/feed';
 
-  const form = useForm<RegisterFormData>({
-    resolver: zodResolver(registerSchema),
+  const form = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
-      name: '',
       email: '',
       password: '',
-      confirmPassword: '',
-      terms: false,
     },
   });
 
-  const onSubmit = (data: RegisterFormData) => {
-    const { name, email, password, confirmPassword, terms } = data;
-    if (password !== confirmPassword) {
-      toast.error("Passwords don't match");
-      return;
-    }
-
-    if (!terms) {
-      toast.error('Agree to the terms and conditions to signup');
-      return;
-    }
-
+  const onSubmit = async (data: LoginFormData) => {
     startTransition(async () => {
       try {
-        await signup({ name, email, password });
-        toast.success('Signup successful');
+        await login(data);
 
         // Redirect to callback url
         router.push(decodeURIComponent(callbackUrl));
       } catch (error) {
-        console.error('Signup failed:', error);
+        console.error('Login failed:', error);
         toast.error('Something went wrong!');
       }
     });
@@ -76,27 +60,13 @@ export const RegisterForm = ({ className, ...props }: React.ComponentProps<'form
         {...props}
       >
         <div className="flex flex-col items-center gap-2 text-center">
-          <h1 className="text-2xl font-bold">Create an account</h1>
+          <h1 className="text-2xl font-bold">Login to your account</h1>
           <p className="text-muted-foreground text-sm text-balance">
-            Enter your information below to create your account
+            Enter your email below to login to your account
           </p>
         </div>
 
         <div className="grid gap-6">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Full Name</FormLabel>
-                <FormControl>
-                  <Input type="text" placeholder="John Doe" disabled={isPending} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
           <FormField
             control={form.control}
             name="email"
@@ -116,52 +86,19 @@ export const RegisterForm = ({ className, ...props }: React.ComponentProps<'form
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" disabled={isPending} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm Password</FormLabel>
-                <FormControl>
-                  <Input type="password" disabled={isPending} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="terms"
-            render={({ field }) => (
-              <FormItem className="flex items-center space-x-2">
-                <FormControl>
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300"
-                    checked={field.value}
-                    onChange={field.onChange}
-                  />
-                </FormControl>
-                <FormLabel className="text-sm">
-                  I agree to the{' '}
-                  <Link href="/" className="underline underline-offset-4">
-                    Terms of Service
-                  </Link>{' '}
-                  and{' '}
-                  <Link href="/" className="underline underline-offset-4">
-                    Privacy Policy
+                <div className="flex items-center">
+                  <FormLabel>Password</FormLabel>
+                  <Link
+                    href="/"
+                    className="ml-auto text-sm underline-offset-4 hover:underline"
+                    tabIndex={-1}
+                  >
+                    Forgot your password?
                   </Link>
-                </FormLabel>
+                </div>
+                <FormControl>
+                  <Input type="password" disabled={isPending} {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -169,7 +106,7 @@ export const RegisterForm = ({ className, ...props }: React.ComponentProps<'form
 
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending && <Loader2 className="size-4 animate-spin" />}
-            Create Account
+            Login
           </Button>
 
           <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
@@ -185,14 +122,14 @@ export const RegisterForm = ({ className, ...props }: React.ComponentProps<'form
                 fill="currentColor"
               />
             </svg>
-            Sign up with GitHub
+            Login with GitHub
           </Button>
         </div>
 
         <div className="text-center text-sm">
-          Already have an account?{' '}
-          <Link href="/auth/login" className="underline underline-offset-4">
-            Sign in
+          Don&apos;t have an account?{' '}
+          <Link href="/auth/register" className="underline underline-offset-4">
+            Sign up
           </Link>
         </div>
       </form>

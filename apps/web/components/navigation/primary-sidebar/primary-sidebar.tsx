@@ -5,7 +5,7 @@ import { ProfileCard } from './profile-card';
 import { SidebarNavItem } from '../sidebar-nav-item';
 import { Button } from '@workspace/ui/components/button';
 import { Bell, BookMarked, Plus, Settings } from 'lucide-react';
-import { useModalStore } from '@/stores/modal-store';
+import { useModalStore } from '@/stores/modal.store';
 import { LogComposeModal } from '@/components/modals/log-compose-modal';
 
 export const PrimarySidebar = () => {

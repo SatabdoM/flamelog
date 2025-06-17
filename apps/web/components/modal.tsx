@@ -1,6 +1,6 @@
 'use client';
 
-import { useModalStore } from '@/stores/modal-store';
+import { useModalStore } from '@/stores/modal.store';
 import { Dialog } from '@workspace/ui/components/dialog';
 
 export const Modal = () => {

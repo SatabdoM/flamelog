@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 
-import { useModalStore } from '@/stores/modal-store';
+import { useModalStore } from '@/stores/modal.store';
 import {
   DialogContent,
   DialogDescription,
