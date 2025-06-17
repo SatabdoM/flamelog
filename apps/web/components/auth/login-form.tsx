@@ -89,7 +89,11 @@ export const LoginForm = ({ className, ...props }: React.ComponentProps<'form'>)
               <FormItem>
                 <div className="flex items-center">
                   <FormLabel>Password</FormLabel>
-                  <Link href="/" className="ml-auto text-sm underline-offset-4 hover:underline">
+                  <Link
+                    href="/"
+                    className="ml-auto text-sm underline-offset-4 hover:underline"
+                    tabIndex={-1}
+                  >
                     Forgot your password?
                   </Link>
                 </div>

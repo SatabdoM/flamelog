@@ -5,7 +5,7 @@ export const sidebarNavMenus: NavMenu[] = [
   {
     label: 'Home',
     icon: Home,
-    url: '/',
+    url: '/feed',
   },
   {
     label: 'Explore',
@@ -20,6 +20,6 @@ export const sidebarNavMenus: NavMenu[] = [
   {
     label: 'My Logs',
     icon: BookUser,
-    url: '/my-logs',
+    url: '/my-space/logs',
   },
 ];

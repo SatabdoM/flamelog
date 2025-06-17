@@ -28,7 +28,6 @@ export const getAuthServerSide = async () => {
 
     return { user };
   } catch (error) {
-    console.log('Error getting auth data in server');
     return { user: null };
   }
 };
