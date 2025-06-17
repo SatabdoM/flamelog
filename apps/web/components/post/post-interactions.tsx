@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { BookMarked, MessageCircleMore, Share2 } from 'lucide-react';
+import { Bookmark, MessageCircleMore, Share2, ThumbsUp } from 'lucide-react';
 
 import { Button } from '@workspace/ui/components/button';
 import { CommentsSection } from './comment-section';
@@ -19,9 +19,9 @@ export const PostInteractions = ({ postId, likeCount, commentCount }: PostIntera
     <>
       <div className="flex w-full items-center justify-between">
         <Button variant="ghost" size="sm" className="h-9 flex-1 rounded-lg">
-          <span>🔥</span>
-          <span className="text-primary -ml-1">{likeCount}</span>
-          <span className="hidden md:flex">Like</span>
+          <ThumbsUp className="size-4.5" />
+          <span className="ml-1">{likeCount}</span>
+          <span className="hidden">Like</span>
         </Button>
 
         <Button
@@ -31,18 +31,18 @@ export const PostInteractions = ({ postId, likeCount, commentCount }: PostIntera
           onClick={() => setIsCommentSectionOpen((prev) => !prev)}
         >
           <MessageCircleMore className="size-4.5" />
-          <span className="-ml-0.5">{commentCount}</span>
-          <span className="hidden md:flex">Comments</span>
+          <span className="ml-1">{commentCount}</span>
+          <span className="hidden">Comments</span>
         </Button>
 
         <Button variant="ghost" size="sm" className="h-9 flex-1 rounded-lg">
           <Share2 className="size-4.5" />
-          <span className="hidden md:flex">Share</span>
+          <span className="hidden">Share</span>
         </Button>
 
         <Button variant="ghost" size="sm" className="h-9 flex-1 rounded-lg">
-          <BookMarked className="size-4.5" />
-          <span className="hidden md:flex">Save</span>
+          <Bookmark className="size-4.5" />
+          <span className="hidden">Save</span>
         </Button>
       </div>
 
