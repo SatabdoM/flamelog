@@ -1,7 +1,7 @@
 'use client';
 
-import { Post } from '@/components/post';
-import { getPosts } from '@/lib/actions/posts/get-posts';
+import { PostCard } from '@/features/post/components/post-card';
+import { getPosts } from '@/features/feed/actions/get-posts';
 import { useQuery } from '@tanstack/react-query';
 
 const MyLogsPage = () => {
@@ -19,7 +19,7 @@ const MyLogsPage = () => {
   }
 
   return (
-    <div className="space-y-4">{posts?.map((post) => <Post key={post.id} post={post} />)}</div>
+    <div className="space-y-4">{posts?.map((post) => <PostCard key={post.id} post={post} />)}</div>
   );
 };
 

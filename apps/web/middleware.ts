@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 import { LOGIN_PATH_URL, pathnameMatches, ROUTE_CONFIGS } from './route-config';
-import { verifyAuth } from './lib/services/auth';
+import { verifyAuth } from '@/features/auth/actions/server';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

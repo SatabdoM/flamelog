@@ -1,18 +1,18 @@
 'use client';
 
-import { sidebarNavMenus } from '@/constants/sidebar-menus';
+import { sidebarNavMenus } from '@/components/navigation/constants/sidebar-menus';
 import { ProfileCard } from './profile-card';
 import { SidebarNavItem } from '../sidebar-nav-item';
 import { Button } from '@workspace/ui/components/button';
 import { Bell, BookMarked, Plus, Settings } from 'lucide-react';
-import { useModalStore } from '@/stores/modal-store';
+import { useModalStore } from '@/stores/modal.store';
 import { LogComposeModal } from '@/components/modals/log-compose-modal';
 
 export const PrimarySidebar = () => {
   const openModal = useModalStore((state) => state.openModal);
 
   return (
-    <div className="flex h-full w-[280px] flex-col overflow-y-auto border">
+    <div className="flex h-full w-[280px] flex-col overflow-y-auto rounded-md border">
       <ProfileCard />
 
       <div className="m-2">
@@ -22,7 +22,7 @@ export const PrimarySidebar = () => {
         </Button>
       </div>
 
-      <ul className="group">
+      <ul className="group divide-y border-t border-b">
         {sidebarNavMenus.map((menu) => (
           <SidebarNavItem key={menu.label} navMenu={menu} />
         ))}
