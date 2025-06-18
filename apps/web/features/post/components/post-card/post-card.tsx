@@ -13,11 +13,11 @@ import {
 import { formatTimeAgo } from '@/lib/utils/date';
 import { PostInteractions } from './post-interactions';
 
-interface PostProps {
+interface PostCardProps {
   post: TPost;
 }
 
-export const Post = ({ post }: PostProps) => {
+export const PostCard = ({ post }: PostCardProps) => {
   return (
     <Card className="gap-2 pb-0">
       <CardHeader>
