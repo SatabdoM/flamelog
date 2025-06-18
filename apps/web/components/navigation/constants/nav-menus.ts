@@ -1,4 +1,4 @@
-import type { MobileNavMenu } from '@/app/types/nav-menu';
+import type { MobileNavMenu } from '@/components/navigation/types/nav-menu';
 import { BookUser, Home, LibraryBig, Sparkles, SquarePlus } from 'lucide-react';
 
 export const mobileNavMenus: MobileNavMenu[] = [

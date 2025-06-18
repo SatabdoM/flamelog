@@ -1,4 +1,4 @@
-import type { NavMenu } from '@/app/types/nav-menu';
+import type { NavMenu } from '@/components/navigation/types/nav-menu';
 import { BookUser, Home, LibraryBig, Sparkles } from 'lucide-react';
 
 export const sidebarNavMenus: NavMenu[] = [

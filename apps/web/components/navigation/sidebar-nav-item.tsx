@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { NavMenu } from '@/app/types/nav-menu';
+import { NavMenu } from '@/components/navigation/types/nav-menu';
 
 interface SidebarNavItemProps {
   navMenu: NavMenu;

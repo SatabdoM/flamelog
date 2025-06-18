@@ -1,6 +1,6 @@
 'use server';
 
-import { getRandomComments } from '@/data/posts/dummy-comments';
+import { getRandomComments } from '@/features/post/data/dummy-comments';
 import { sleep } from '@/lib/utils';
 
 export const getPostComments = async (postId: string, pageNo?: string) => {

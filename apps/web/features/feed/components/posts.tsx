@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-import { getPosts } from '@/features/post/actions/get-posts';
+import { getPosts } from '@/features/feed/actions/get-posts';
 import { Post } from '@/features/post/components';
 
 export const Posts = () => {

@@ -1,6 +1,6 @@
 'use client';
 
-import { sidebarNavMenus } from '@/constants/sidebar-menus';
+import { sidebarNavMenus } from '@/components/navigation/constants/sidebar-menus';
 import { ProfileCard } from './profile-card';
 import { SidebarNavItem } from '../sidebar-nav-item';
 import { Button } from '@workspace/ui/components/button';

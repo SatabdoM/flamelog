@@ -1,7 +1,7 @@
 'use client';
 
 import { Post } from '@/features/post/components';
-import { getPosts } from '@/features/post/actions/get-posts';
+import { getPosts } from '@/features/feed/actions/get-posts';
 import { useQuery } from '@tanstack/react-query';
 
 const MyLogsPage = () => {

@@ -1,9 +1,9 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 import { getQueryClient } from '@/lib/react-query';
-import { getPosts } from '@/features/post/actions/get-posts';
-import { LogComposeTrigger } from './_components/log-compose-trigger';
-import { Posts } from './_components/posts';
+import { getPosts } from '@/features/feed/actions/get-posts';
+import { LogComposeTrigger } from '@/features/feed/components/log-compose-trigger';
+import { Posts } from '@/features/feed/components/posts';
 
 const FeedPage = async () => {
   const queryClient = getQueryClient();

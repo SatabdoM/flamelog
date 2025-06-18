@@ -1,6 +1,6 @@
 'use server';
 
-import { generateDummyPosts } from '@/data/posts/dummy-posts';
+import { generateDummyPosts } from '@/features/feed/data/dummy-posts';
 import { api } from '@/lib/axios';
 import { sleep } from '@/lib/utils';
 import { TPost } from '@/types/post';

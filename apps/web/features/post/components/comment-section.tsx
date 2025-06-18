@@ -2,7 +2,7 @@
 
 import { Avatar, AvatarImage } from '@workspace/ui/components/avatar';
 import { Comment } from './comment';
-import { getRandomComments } from '@/data/posts/dummy-comments';
+import { getRandomComments } from '@/features/post/data/dummy-comments';
 import { cn } from '@workspace/ui/lib/utils';
 import { CommentInput } from './comment-input';
 

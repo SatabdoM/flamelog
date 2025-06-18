@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { mobileNavMenus } from '@/constants/nav-menus';
+import { mobileNavMenus } from '@/components/navigation/constants/nav-menus';
 import { useModalStore } from '@/stores/modal.store';
 import { LogComposeModal } from '@/components/modals/log-compose-modal';
 
