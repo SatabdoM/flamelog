@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getPosts } from '@/features/feed/actions/get-posts';
 import { PostCard } from '@/features/post/components/post-card';
 
-export const Feed = () => {
+export const FeedPosts = () => {
   const { data: posts } = useQuery({
     queryKey: ['posts'],
     queryFn: getPosts,
