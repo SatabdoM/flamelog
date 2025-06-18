@@ -12,7 +12,7 @@ export const PrimarySidebar = () => {
   const openModal = useModalStore((state) => state.openModal);
 
   return (
-    <div className="flex h-full w-[280px] flex-col overflow-y-auto border">
+    <div className="flex h-full w-[280px] flex-col overflow-y-auto rounded-md border">
       <ProfileCard />
 
       <div className="m-2">
@@ -22,7 +22,7 @@ export const PrimarySidebar = () => {
         </Button>
       </div>
 
-      <ul className="group">
+      <ul className="group divide-y border-t border-b">
         {sidebarNavMenus.map((menu) => (
           <SidebarNavItem key={menu.label} navMenu={menu} />
         ))}

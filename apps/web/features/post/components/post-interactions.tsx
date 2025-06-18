@@ -20,7 +20,7 @@ export const PostInteractions = ({ postId, likeCount, commentCount }: PostIntera
       <div className="flex w-full items-center justify-between">
         <Button variant="ghost" size="sm" className="h-9 flex-1 rounded-lg">
           <ThumbsUp className="size-4.5" />
-          <span className="ml-1">{likeCount}</span>
+          <span className="ml-0.5">{likeCount}</span>
           <span className="hidden">Like</span>
         </Button>
 
@@ -31,7 +31,7 @@ export const PostInteractions = ({ postId, likeCount, commentCount }: PostIntera
           onClick={() => setIsCommentSectionOpen((prev) => !prev)}
         >
           <MessageCircleMore className="size-4.5" />
-          <span className="ml-1">{commentCount}</span>
+          <span className="ml-0.5">{commentCount}</span>
           <span className="hidden">Comments</span>
         </Button>
 

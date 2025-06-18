@@ -43,7 +43,7 @@
   --font-sans: Geist, sans-serif;
   --font-serif: "Times New Roman", Times, serif;
   --font-mono: Geist Mono, monospace;
-  --radius: 0.25rem;
+  --radius: 0.625rem;
   --shadow-2xs: 1px 4px 5px 0px hsl(0 0% 0% / 0.03);
   --shadow-xs: 1px 4px 5px 0px hsl(0 0% 0% / 0.03);
   --shadow-sm: 1px 4px 5px 0px hsl(0 0% 0% / 0.05), 1px 1px 2px -1px hsl(0 0% 0% / 0.05);
@@ -91,7 +91,7 @@
   --font-sans: Geist, sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: Geist Mono, monospace;
-  --radius: 0.25rem;
+  --radius: 0.625rem;
   --shadow-2xs: 1px 4px 5px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 1px 4px 5px 0px hsl(0 0% 0% / 0.05);
   --shadow-sm: 1px 4px 5px 0px hsl(0 0% 0% / 0.1), 1px 1px 2px -1px hsl(0 0% 0% / 0.1);

@@ -10,7 +10,7 @@ export const LogComposeTrigger = () => {
   const openModal = useModalStore((state) => state.openModal);
 
   return (
-    <div className="space-y-2 border p-2">
+    <div className="space-y-2 rounded-md border p-2">
       <Button
         variant="secondary"
         className="w-full rounded-md"
