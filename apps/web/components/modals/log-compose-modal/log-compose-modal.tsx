@@ -17,6 +17,7 @@ import { Textarea } from '@workspace/ui/components/textarea';
 import { Button } from '@workspace/ui/components/button';
 import { Form, FormControl, FormField, FormItem } from '@workspace/ui/components/form';
 import { LogSchema } from './schema';
+import Editor from '@/components/editor/editor';
 
 export const LogComposeModal = ({ options = {} }: { options?: DialogOptions }) => {
   const closeModal = useModalStore((state) => state.closeModal);
@@ -56,7 +57,12 @@ export const LogComposeModal = ({ options = {} }: { options?: DialogOptions }) =
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea placeholder="Today I've learned..." className="h-32" {...field} />
+                    <Editor
+                      content={field.value}
+                      onChange={field.onChange}
+                      placeholder="What did you learn today?"
+                      autoFocus="end"
+                    />
                   </FormControl>
                 </FormItem>
               )}
