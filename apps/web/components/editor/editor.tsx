@@ -4,26 +4,16 @@ import { useEffect, useState } from 'react';
 import { useEditor, EditorContent, FocusPosition } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link'; // For links
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'; // For colorful code blocks
 import Placeholder from '@tiptap/extension-placeholder'; // For placeholder text
-import css from 'highlight.js/lib/languages/css';
-import js from 'highlight.js/lib/languages/javascript';
-import ts from 'highlight.js/lib/languages/typescript';
-import html from 'highlight.js/lib/languages/xml';
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'; // For colorful code blocks
 import { all, createLowlight } from 'lowlight'; // For syntax highlighting
-import { Toolbar } from './toolbar';
 
-import './styles.css';
+import './styles/editor.css';
+import { cn } from '@workspace/ui/lib/utils';
+import { Toolbar } from './toolbar';
 
 // Initialize lowlight with common languages for syntax highlighting
 const lowlight = createLowlight(all);
-
-// This is only an example, all supported languages are already loaded above
-// but you can also register only specific languages to reduce bundle-size
-lowlight.register('html', html);
-lowlight.register('css', css);
-lowlight.register('js', js);
-lowlight.register('ts', ts);
 
 interface EditorProps {
   content: string;
@@ -55,8 +45,14 @@ const Editor = ({ content, onChange, placeholder, autoFocus = false }: EditorPro
     content,
     editorProps: {
       attributes: {
-        class:
-          'prose dark:prose-invert max-w-none border-input placeholder:text-muted-foreground focus-visible:ring-ring focus-visible:border-ring aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 field-sizing-content min-h-16 max-h-80 overflow-y-auto w-full rounded-b-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+        class: cn(
+          // tailwind prose class to apply basic typography stilings
+          'prose dark:prose-invert',
+          // max-w-none to fix styling override by prose, and giving overall max-h to the editor
+          'max-w-none max-h-80 overflow-y-auto',
+          // textarea ui component classes to make it look the same
+          'border-input placeholder:text-muted-foreground focus-visible:ring-ring focus-visible:border-ring aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 field-sizing-content min-h-16 w-full rounded-b-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50'
+        ),
         'data-slot': 'textarea',
       },
     },

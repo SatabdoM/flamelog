@@ -57,12 +57,7 @@ export const LogComposeModal = ({ options = {} }: { options?: DialogOptions }) =
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Editor
-                      content={field.value}
-                      onChange={field.onChange}
-                      placeholder="What did you learn today?"
-                      autoFocus="end"
-                    />
+                    <Editor content={field.value} onChange={field.onChange} autoFocus="end" />
                   </FormControl>
                 </FormItem>
               )}

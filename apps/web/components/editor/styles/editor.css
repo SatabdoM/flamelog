@@ -1,0 +1,75 @@
+/* Import a highlight.js theme for colorful code blocks */
+@import "highlight.js/styles/atom-one-dark.css";
+
+.prose :where(li):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: -8px;
+  margin-bottom: 0.5em;
+}
+.prose :where(li > :first-child):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 0px;
+  margin-bottom: 0.5em;
+}
+
+/* Basic styling for the editor when it's empty */
+.ProseMirror.is-empty::before {
+  content: attr(data-placeholder); /* Get content from data-placeholder attribute */
+  float: left; /* Helps with layout */
+  color: var(--muted-foreground, #6b7280); /* Tailwind's muted-foreground default */
+  pointer-events: none; /* Allows clicks to pass through to the actual editor content */
+  height: 0; /* Important to prevent it from taking up space */
+  font-size: 0.9rem; /* Match your editor's base font size */
+  line-height: 1.5rem; /* Match your editor's base line height */
+}
+
+/* Ensure the placeholder appears correctly within the p tag if default is paragraph */
+/* This is a common pattern for Tiptap placeholder */
+.ProseMirror p.is-empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--muted-foreground, #6b7280);
+  pointer-events: none;
+  height: 0;
+  /* Additional styling if needed for alignment within the paragraph */
+}
+
+/* If you're using Tailwind's dark mode, you might need specific dark mode styles */
+.dark .ProseMirror.is-empty::before,
+.dark .ProseMirror p.is-empty::before {
+  color: var(
+    --muted-foreground-dark,
+    #a0a0a0
+  ); /* Adjust for dark mode if you have a custom variable */
+}
+
+/* Ensure images (if you were to add them) and other Tiptap elements are responsive and styled */
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Helps with alignment */
+  margin: 1em 0;
+}
+
+/* Base styles for code blocks */
+.ProseMirror pre {
+  background: #24282f; /* Dark background matching atom-one-dark */
+  color: #abb2bf; /* Default text color */
+  font-family: "Fira Code", "JetBrains Mono", monospace;
+}
+
+.ProseMirror pre code {
+  /* Ensure the code element itself doesn't add conflicting styles */
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+/* Style for links created by Tiptap */
+.ProseMirror a {
+  color: #4ba5ee; /* A vibrant blue for links */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ProseMirror a:hover {
+  text-decoration: none;
+}
