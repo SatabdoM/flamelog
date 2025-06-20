@@ -7,18 +7,20 @@ import {
   LinkIcon,
   ListIcon,
   ListOrderedIcon,
-  // SmileIcon,
+  SmileIcon,
   UndoIcon,
   RedoIcon,
 } from 'lucide-react';
 
 import { Button } from '@workspace/ui/components/button';
+import { cn } from '@workspace/ui/lib/utils';
 
 interface ToolbarProps {
   editor: Editor | null;
+  className?: string;
 }
 
-export const Toolbar = ({ editor }: ToolbarProps) => {
+export const Toolbar = ({ editor, className }: ToolbarProps) => {
   // const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   // const emojis = ['👍', '✨', '🔥', '🚀', '💡', '🤔', '🎉', '💻', '📚', '😀'];
 
@@ -48,21 +50,24 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
   // };
 
   // Helper for consistent button styling
-  // Shadcn Button's 'variant' and 'size' props will handle most styling
-  // We'll use 'outline' or 'ghost' variant for inactive, and custom class for active state
-  const buttonVariant = (isActive: boolean) => (isActive ? 'default' : 'outline'); // Or 'ghost' for a less prominent look
+  const buttonVariant = (isActive: boolean) => (isActive ? 'editor-tool' : 'editor-tool-inactive');
 
   return (
-    <div className="sticky top-0 z-10 flex flex-wrap gap-2 border-b p-2">
+    <div
+      className={cn(
+        'sticky top-0 z-10 flex h-[42px] flex-wrap items-center gap-1 rounded-t-md border-b px-2',
+        className
+      )}
+    >
       {/* CodeBlock Button */}
       <Button
         type="button"
         variant={buttonVariant(editor.isActive('codeBlock'))}
-        size="icon" // Make it an icon button
+        size="xs" // Make it an icon button
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
       >
-        <CodeIcon className="h-4 w-4" />
+        <CodeIcon className="size-4" />
         <span className="sr-only">Code Block</span> {/* For accessibility */}
       </Button>
 
@@ -70,10 +75,10 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
       <Button
         type="button"
         variant={buttonVariant(editor.isActive('link'))}
-        size="icon"
+        size="xs"
         onClick={setLink}
       >
-        <LinkIcon className="h-4 w-4" /> {/* Using the renamed Link icon */}
+        <LinkIcon className="size-4" /> {/* Using the renamed Link icon */}
         <span className="sr-only">{editor.isActive('link') ? 'Unset Link' : 'Set Link'}</span>
       </Button>
 
@@ -81,11 +86,11 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
       <Button
         type="button"
         variant={buttonVariant(editor.isActive('bulletList'))}
-        size="icon"
+        size="xs"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         disabled={!editor.can().chain().focus().toggleBulletList().run()}
       >
-        <ListIcon className="h-4 w-4" />
+        <ListIcon className="size-4" />
         <span className="sr-only">Bullet List</span>
       </Button>
 
@@ -93,11 +98,11 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
       <Button
         type="button"
         variant={buttonVariant(editor.isActive('orderedList'))}
-        size="icon"
+        size="xs"
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         disabled={!editor.can().chain().focus().toggleOrderedList().run()}
       >
-        <ListOrderedIcon className="h-4 w-4" />
+        <ListOrderedIcon className="size-4" />
         <span className="sr-only">Ordered List</span>
       </Button>
 
@@ -106,14 +111,15 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
         <Button
           type="button"
           variant={buttonVariant(showEmojiPicker)}
-          size="icon"
+          size="xs"
           onClick={() => setShowEmojiPicker(!showEmojiPicker)}
         >
-          <SmileIcon className="h-4 w-4" />
+          <SmileIcon className="size-4" />
           <span className="sr-only">Emoji</span>
         </Button>
+
         {showEmojiPicker && (
-          <div className="absolute top-full left-0 z-20 mt-1 flex w-48 flex-wrap gap-1 rounded-md border border-gray-300 bg-card p-2 shadow-lg">
+          <div className="bg-card border-input absolute top-full left-0 z-20 mt-1 flex w-48 flex-wrap gap-1 rounded-md border p-2 shadow-lg">
             {emojis.map((emoji) => (
               <Button
                 type="button"
@@ -121,7 +127,7 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
                 variant="ghost" // Use ghost variant for emoji buttons
                 size="sm" // Smaller size for emoji buttons
                 onClick={() => insertEmoji(emoji)}
-                className="p-1 text-xl" // Override text size for emoji itself
+                className="hover:bg-accent p-1 text-xl" // Override text size for emoji itself
               >
                 {emoji}
               </Button>
@@ -133,12 +139,13 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
       {/* Undo Button */}
       <Button
         type="button"
-        variant="outline" // Always outline for undo/redo
-        size="icon"
+        variant="outline"
+        size="xs"
         onClick={() => editor.chain().focus().undo().run()}
         disabled={!editor.can().chain().focus().undo().run()}
+        className="ml-auto"
       >
-        <UndoIcon className="h-4 w-4" />
+        <UndoIcon className="size-4" />
         <span className="sr-only">Undo</span>
       </Button>
 
@@ -146,11 +153,11 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
       <Button
         type="button"
         variant="outline"
-        size="icon"
+        size="xs"
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().chain().focus().redo().run()}
       >
-        <RedoIcon className="h-4 w-4" />
+        <RedoIcon className="size-4" />
         <span className="sr-only">Redo</span>
       </Button>
     </div>

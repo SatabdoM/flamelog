@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, type ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import './layout.css';
@@ -13,6 +14,7 @@ import { MobileNav } from '@/components/navigation/mobile-nav';
 import { PrimarySidebar } from '@/components/navigation/primary-sidebar';
 import { SecondarySidebar } from '@/components/navigation/secondary-sidebar';
 import { User } from '@/types/user';
+import { cn } from '@workspace/ui/lib/utils';
 
 export const MainLayoutClient = ({
   user,
@@ -21,6 +23,7 @@ export const MainLayoutClient = ({
   user: User | null;
   children: ReactNode;
 }) => {
+  const pathname = usePathname();
   const [isFirstRender, setIsFirstRender] = useState(true);
   const isMobileSearchOpen = useUIStore((state) => state.isMobileSearchOpen);
 
@@ -31,42 +34,53 @@ export const MainLayoutClient = ({
     setIsFirstRender(false);
   }, []);
 
+  const isPostPage = pathname === '/post';
+  const routesToNotUseLayoutContainer = ['/post'];
+
   return (
     <>
       {/* Top Bar */}
-      <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 h-15 w-full border-b backdrop-blur">
-        <AnimatePresence mode="wait">
-          {isMobile && isMobileSearchOpen ? (
-            <motion.div
-              key="searchbar"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{
-                duration: 0.1,
-                ease: 'easeIn',
-              }}
-              className="absolute inset-0 origin-top"
-            >
-              <SearchBar />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="navbar"
-              initial={isFirstRender ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.1 }}
-              className="absolute inset-0"
-            >
-              <Navbar user={user} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
+      {(!isMobile || !isPostPage) && (
+        <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 h-15 w-full border-b backdrop-blur">
+          <AnimatePresence mode="wait">
+            {isMobile && isMobileSearchOpen ? (
+              <motion.div
+                key="searchbar"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{
+                  duration: 0.1,
+                  ease: 'easeIn',
+                }}
+                className="absolute inset-0 origin-top"
+              >
+                <SearchBar />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="navbar"
+                initial={isFirstRender ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.1 }}
+                className="absolute inset-0"
+              >
+                <Navbar user={user} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </header>
+      )}
 
       {/* Main content */}
-      <div className="layout-container relative min-h-[calc(100vh-60px)] py-4">
+      <div
+        className={cn(
+          'relative min-h-[calc(100vh-60px)]',
+          !isMobile && 'layout-container',
+          !routesToNotUseLayoutContainer.includes(pathname) && 'py-4'
+        )}
+      >
         <AnimatePresence mode="wait">
           {isMobile && isMobileSearchOpen ? (
             <motion.div
@@ -94,7 +108,9 @@ export const MainLayoutClient = ({
               <aside className="sticky top-[calc(60px+16px)] hidden h-[calc(100vh-60px-32px)] lg:block">
                 <PrimarySidebar />
               </aside>
-              <main className="flex-grow-1 pb-16 lg:pb-4">{children}</main>
+              <main className={cn('flex-grow-1', (!isMobile || !isPostPage) && 'pb-16 lg:pb-4')}>
+                {children}
+              </main>
               <aside className="sticky top-[calc(60px+16px)] hidden h-[calc(100vh-60px-32px)] lg:block">
                 <SecondarySidebar />
               </aside>
@@ -104,7 +120,7 @@ export const MainLayoutClient = ({
       </div>
 
       {/* Bottom menu bar (mobile only) */}
-      <MobileNav />
+      {!isPostPage && <MobileNav />}
     </>
   );
 };

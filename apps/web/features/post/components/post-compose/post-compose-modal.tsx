@@ -13,13 +13,16 @@ import {
   DialogTitle,
   type DialogOptions,
 } from '@workspace/ui/components/dialog';
-import { Textarea } from '@workspace/ui/components/textarea';
 import { Button } from '@workspace/ui/components/button';
 import { Form, FormControl, FormField, FormItem } from '@workspace/ui/components/form';
 import { LogSchema } from './schema';
-import Editor from '@/components/editor/editor';
+import { Editor } from '@/components/editor/editor';
 
-export const LogComposeModal = ({ options = {} }: { options?: DialogOptions }) => {
+interface PostComposeModalProps {
+  options?: DialogOptions;
+}
+
+export const PostComposeModal = ({ options = {} }: PostComposeModalProps) => {
   const closeModal = useModalStore((state) => state.closeModal);
 
   const form = useForm<LogSchema>({
@@ -42,15 +45,16 @@ export const LogComposeModal = ({ options = {} }: { options?: DialogOptions }) =
   return (
     <DialogContent options={options}>
       <DialogHeader>
-        <DialogTitle>Jot down what you learned today — it&apos;ll be priceless later.</DialogTitle>
-        <DialogDescription className="text-secondary dark:text-secondary-foreground font-semibold">
-          TL;DR: Small wins count too!
+        <DialogTitle>Capture Today&apos;s Learnings</DialogTitle>
+        <DialogDescription className="text-muted dark:text-muted-foreground font-semibold">
+          Don't let valuable insights slip away, documenting even small wins helps build your
+          knowledge.
         </DialogDescription>
       </DialogHeader>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="mb-4">
+          <div className="mt-1.5 mb-4">
             <FormField
               control={form.control}
               name="content"
@@ -66,7 +70,7 @@ export const LogComposeModal = ({ options = {} }: { options?: DialogOptions }) =
 
           <DialogFooter>
             <Button type="submit">Create log</Button>
-            <Button type="button" variant="secondary" onClick={closeModal}>
+            <Button type="button" variant="outline" onClick={closeModal}>
               Cancel
             </Button>
           </DialogFooter>

@@ -2,7 +2,7 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 import { getQueryClient } from '@/lib/react-query';
 import { getPosts } from '@/features/feed/actions/get-posts';
-import { LogComposeTrigger } from '@/features/feed/components/log-compose-trigger';
+import { PostComposeTrigger } from '@/features/feed/components/post-compose-trigger';
 import { FeedPosts } from '@/features/feed/components/feed-posts';
 
 const FeedPage = async () => {
@@ -17,7 +17,7 @@ const FeedPage = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="space-y-6">
-        <LogComposeTrigger />
+        <PostComposeTrigger />
         <FeedPosts />
       </div>
     </HydrationBoundary>
