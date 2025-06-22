@@ -3,3 +3,9 @@
   max-width: min(94%, 1600px);
   margin: 0 auto;
 }
+
+@media (max-width: 460px) {
+  .main-content-container {
+    max-width: none;
+  }
+}
