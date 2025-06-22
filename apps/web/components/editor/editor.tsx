@@ -38,7 +38,7 @@ export const Editor = ({
 
   const editor = useEditor({
     extensions: [
-      StarterKit.configure({ codeBlock: false }),
+      StarterKit.configure({ codeBlock: false, italic: false, strike: false }),
       Link.configure({ openOnClick: false, autolink: true }),
       CodeBlockLowlight.configure({ lowlight }),
       Placeholder.configure({ placeholder }),
