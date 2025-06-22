@@ -3,11 +3,13 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import '@workspace/ui/globals.css';
+import './layout.css';
 import { cn } from '@workspace/ui/lib/utils';
 import { QueryProvider } from '@/providers/query-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { Modal } from '@/components/modal';
 import { Toaster } from '@workspace/ui/components/sonner';
+import { UploadthingSSRPlugin } from '@/providers/uploadthing-ssr-plugin';
 
 const fontSans = Geist({
   subsets: ['latin'],
@@ -35,6 +37,8 @@ const RootLayout = async ({
         <meta name="apple-mobile-web-app-title" content="FlameLog" />
       </head>
       <body className={cn('font-sans antialiased', fontSans.variable, fontMono.variable)}>
+        <UploadthingSSRPlugin />
+
         <QueryProvider>
           <ThemeProvider>
             {children}

@@ -27,6 +27,7 @@
     "@tiptap/pm": "^2.14.0",
     "@tiptap/react": "^2.14.0",
     "@tiptap/starter-kit": "^2.14.0",
+    "@uploadthing/react": "^7.3.1",
     "@workspace/schemas": "workspace:*",
     "@workspace/ui": "workspace:*",
     "axios": "^1.6.7",
@@ -40,6 +41,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
+    "uploadthing": "^7.7.2",
     "zod": "^3.24.2",
     "zustand": "^5.0.3"
   },
