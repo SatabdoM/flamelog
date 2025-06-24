@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
 
-import { Editor } from '@/components/editor/editor';
+import { PostContentEditor } from '@/features/post/components/post-composer/editor/content-editor';
 import { Button } from '@workspace/ui/components/button';
 import { useWindowSize } from '@/hooks/use-window-size';
 import { cn } from '@workspace/ui/lib/utils';
@@ -38,10 +38,10 @@ const PostPage = () => {
       )}
 
       <div className={cn(isMobile ? 'h-[calc(100dvh-60px)]' : 'mt-2')}>
-        <Editor
+        <PostContentEditor
           content={value}
           onChange={setValue}
-          layoutVariant={isMobile ? 'page' : 'modal'}
+          variant="page"
           className={!isMobile ? 'max-w-none' : ''}
         />
       </div>

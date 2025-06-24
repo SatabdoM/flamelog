@@ -9,7 +9,7 @@ export const REGISTER_PATH_URL = '/auth/register';
 
 export const ROUTE_CONFIGS: RouteConfig[] = [
   {
-    matcher: ['/', '/api/auth/:path*', '/auth/:path*'],
+    matcher: ['/', '/api/auth/:path*', '/auth/:path*', '/api/uploadthing'],
     public: true,
   },
   {
