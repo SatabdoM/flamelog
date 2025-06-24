@@ -6,7 +6,7 @@ import { SidebarNavItem } from '../sidebar-nav-item';
 import { Button } from '@workspace/ui/components/button';
 import { Bell, BookMarked, Plus, Settings } from 'lucide-react';
 import { useModalStore } from '@/stores/modal.store';
-import { PostComposeModal } from '@/features/post/components/post-compose';
+import { PostComposeModal } from '@/features/post/components/post-composer';
 
 export const PrimarySidebar = () => {
   const openModal = useModalStore((state) => state.openModal);

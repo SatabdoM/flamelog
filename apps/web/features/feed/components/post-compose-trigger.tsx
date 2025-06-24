@@ -4,7 +4,7 @@ import { PencilLine } from 'lucide-react';
 
 import { Button } from '@workspace/ui/components/button';
 import { useModalStore } from '@/stores/modal.store';
-import { PostComposeModal } from '@/features/post/components/post-compose/post-compose-modal';
+import { PostComposeModal } from '@/features/post/components/post-composer/post-compose-modal';
 
 export const PostComposeTrigger = () => {
   const openModal = useModalStore((state) => state.openModal);
