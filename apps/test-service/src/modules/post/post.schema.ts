@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { prisma, Prisma } from '@workspace/db';
 
 export const createPostSchema = z.object({
   title: z.string().min(5),
@@ -17,3 +18,16 @@ export const PostSchema = z.object({
   commentCount: z.number(),
 });
 export type PostSchema = z.infer<typeof PostSchema>;
+
+const postWithAllRelations = Prisma.validator<Prisma.PostDefaultArgs>()({
+  include: {
+    author: true,
+    tags: { include: { tag: true } }, // includes the actual Tag object
+    comments: true,
+    likes: true,
+    shares: true,
+    feed: true,
+  },
+});
+
+export type PostWithAllRelations = Prisma.PostGetPayload<typeof postWithAllRelations>;

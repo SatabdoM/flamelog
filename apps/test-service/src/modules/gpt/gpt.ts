@@ -3,8 +3,9 @@ import { gptResponseSchema, GptResponseSchema } from './gpt.schema';
 import { ALLOWED_TAGS } from './lib/tagList';
 import { prisma } from '@workspace/db';
 import { z } from 'zod';
-import { CreatePostSchema, PostSchema } from '../post/post.schema';
+import { CreatePostSchema, PostSchema, PostWithAllRelations } from '../post/post.schema';
 import logger from '../../utils/log/logger';
+import { fanOutPostToFollowers } from '../feed/feed.service';
 
 const systemPrompt = `
 You are a strict moderator for an educational learning platform called Flamelog where users log their coding progress of the day.
@@ -55,8 +56,20 @@ const addModeratedPostInDB = async (post: PostSchema, gptResponse: GptResponseSc
         : undefined,
       gptMessage: isValid ? message : '',
     },
+    include: {
+      author: true,
+      tags: { include: { tag: true } },
+      comments: true,
+      likes: true,
+      shares: true,
+      feed: true,
+    },
   });
-  console.log(' 👌    Updated Post  :      ', updatedPost);
+  //console.log(' 👌    Updated Post  :      ', updatedPost);
+
+  if (isValid) {
+    await fanOutPostToFollowers(updatedPost);
+  }
 };
 
 export const moderatePost = async (post: PostSchema) => {
@@ -92,6 +105,7 @@ export const moderatePost = async (post: PostSchema) => {
 
       if (parsedResult.success) {
         gptResponse = parsedResult.data;
+        //Add the moderated post in DB
         addModeratedPostInDB(post, gptResponse);
       } else {
         console.error('Invalid response format from OpenAI:', parsedResult.error);

@@ -24,4 +24,7 @@ export const ALLOWED_TAGS = [
   'authorization',
   'security',
   'performance',
+  'C++',
+  'python',
+  'java',
 ];

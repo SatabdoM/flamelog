@@ -54,6 +54,7 @@ yarn-error.log*
 .DS_Store
 *.pem
 *.log
+seed.ts
 
 # Vercel
 .vercel
