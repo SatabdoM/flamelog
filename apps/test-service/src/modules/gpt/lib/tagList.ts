@@ -27,4 +27,11 @@ export const ALLOWED_TAGS = [
   'C++',
   'python',
   'java',
+  'DSA',
+  'algorithms',
+  'data structures',
+  'machine learning',
+  'AI',
+  'cloud computing',
+  'big data',
 ];

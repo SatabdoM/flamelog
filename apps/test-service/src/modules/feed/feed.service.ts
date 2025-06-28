@@ -87,7 +87,6 @@ export async function fanOutPostToFollowers(post: PostWithAllRelations) {
 
   await prisma.$transaction(InsertToFeed);
 }
-
 export async function getUserFeedHandler(userId: number) {
   try {
     // Fetch the user's feed
