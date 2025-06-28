@@ -12,7 +12,7 @@ datasource db {
 model User {
   id          Int            @id @default(autoincrement())
   email       String         @unique
-  password    String         @unique
+  password    String
   userProfile UserProfile?
   name        String?
   roles       String[]
@@ -102,6 +102,10 @@ model Post {
   authorId  Int
   tags      PostTag[]
   comments  Comment[]
+
+  isValid    Boolean @default(false)
+  rationale  String?
+  gptMessage String?
 
   likes  Like[]
   shares Share[]
@@ -207,8 +211,9 @@ model Feed {
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
   createdAt DateTime @default(now())
+  rank      Float
 
-  @@unique([postId, userId])
+  @@unique([postId, userId], name: "userId_postId")
   @@index([userId, createdAt])
 }
 
