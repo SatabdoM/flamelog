@@ -4,10 +4,18 @@
   "scripts": {
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev --skip-generate",
-    "db:deploy": "prisma migrate deploy"
+    "db:reset": "prisma migrate reset ",
+    "db:deploy": "prisma migrate deploy",
+    "db:studio": "prisma studio",
+    "db:seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "devDependencies": {
-    "prisma": "^6.6.0"
+    "prisma": "^6.6.0",
+    "@types/node": "^24.0.7",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "@prisma/client": "^6.6.0"

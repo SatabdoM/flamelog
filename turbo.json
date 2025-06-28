@@ -17,8 +17,16 @@
       "cache": false,
       "persistent": true
     },
+    "db:reset": {
+      "cache": false,
+      "persistent": true
+    },
     "db:deploy": {
       "cache": false
+    },
+    "db:studio": {
+      "cache": false,
+      "persistent": true
     },
     "check-types": {
       "dependsOn": ["^check-types"]
