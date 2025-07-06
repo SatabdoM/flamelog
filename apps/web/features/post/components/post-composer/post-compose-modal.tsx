@@ -18,7 +18,7 @@ import {
 import { Button } from '@workspace/ui/components/button';
 import { Form, FormControl, FormField, FormItem } from '@workspace/ui/components/form';
 import { PostComposeSchema } from '@/features/post/schemas/post-compose-schema';
-import { createPost } from '@/features/post/actions/create-post';
+import { createPost } from '@/features/post/actions/server/create-post';
 import { PostContentEditor } from './editor';
 import { PostImagesEditor } from './editor/images-editor';
 import { ImageUploadButton } from './editor/image-upload-button';
@@ -85,7 +85,7 @@ export const PostComposeModal = ({ options = {} }: PostComposeModalProps) => {
     <DialogContent options={options}>
       <DialogHeader>
         <DialogTitle>Capture Today&apos;s Learnings</DialogTitle>
-        <DialogDescription className="text-secondary dark:text-muted-foreground font-semibold">
+        <DialogDescription className="text-muted-foreground font-semibold">
           Don't let valuable insights slip away, documenting even small wins helps build your
           knowledge.
         </DialogDescription>
@@ -138,7 +138,7 @@ export const PostComposeModal = ({ options = {} }: PostComposeModalProps) => {
               Discard
             </Button>
 
-            <div className="my-auto mr-auto max-w-max">
+            <div className="my-auto mb-2 text-center sm:mr-auto md:text-left">
               <p className="text-muted-foreground text-sm">You can only upload a max of 4 files</p>
             </div>
             <ImageUploadButton
