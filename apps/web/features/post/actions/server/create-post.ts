@@ -1,7 +1,7 @@
 'use server';
 
 import { api } from '@/lib/axios';
-import { PostComposeSchema } from '../schemas/post-compose-schema';
+import { PostComposeSchema } from '../../schemas/post-compose-schema';
 
 export const createPost = async (values: PostComposeSchema) => {
   try {
@@ -16,7 +16,7 @@ export const createPost = async (values: PostComposeSchema) => {
       };
     }
 
-    const res = await api.post('/post/create', { ...values, title: 'Test' });
+    const res = await api.post('/post/create', { ...values });
     const post = res.data.post;
 
     console.log({ post });

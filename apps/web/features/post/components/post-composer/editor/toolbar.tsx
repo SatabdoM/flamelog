@@ -56,7 +56,7 @@ export const Toolbar = ({ editor, className }: ToolbarProps) => {
   return (
     <div
       className={cn(
-        'sticky top-0 z-10 flex h-[42px] flex-wrap items-center gap-1 rounded-t-md border-b px-2',
+        'sticky top-0 z-10 flex h-[42px] flex-wrap items-center gap-1 rounded-t-md border px-2',
         className
       )}
     >

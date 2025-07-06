@@ -15,7 +15,7 @@ const editorVariants = cva(
     // tailwind prose class to apply basic typography stilings
     'prose dark:prose-invert max-w-none overflow-y-auto',
     // textarea ui component classes to make it look the same
-    'border-input placeholder:text-muted-foreground focus-visible:ring-ring focus-visible:border-ring aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 min-h-16 w-full border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50'
+    'border-input placeholder:text-muted-foreground aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 min-h-16 w-full border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50'
   ),
   {
     variants: {
@@ -39,7 +39,7 @@ interface PostContentEditorProps extends VariantProps<typeof editorVariants> {
 }
 
 export const PostContentEditor = ({
-  variant,
+  variant = 'modal',
   content,
   onChange,
   placeholder,
@@ -72,9 +72,12 @@ export const PostContentEditor = ({
   }
 
   return (
-    <div className="relative rounded-md border shadow-sm">
-      <Toolbar editor={editor} />
-      <EditorContent editor={editor} className="rounded-b-md" />
+    <div className={cn('relative border shadow-sm', variant === 'modal' && 'rounded-md')}>
+      <Toolbar
+        editor={editor}
+        className={cn('border-input', variant === 'page' && 'rounded-t-none')}
+      />
+      <EditorContent editor={editor} className={cn(variant === 'modal' && 'rounded-b-md')} />
     </div>
   );
 };

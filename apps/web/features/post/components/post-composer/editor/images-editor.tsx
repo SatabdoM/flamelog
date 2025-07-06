@@ -21,7 +21,6 @@ export const PostImagesEditor = ({
   isUploading,
   progress,
 }: PostImagesEditorProps) => {
-  console.log({ images });
   return (
     <div className="max-h-48 space-y-3 overflow-y-auto">
       {progress ? (

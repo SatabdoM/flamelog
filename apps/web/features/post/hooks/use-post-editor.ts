@@ -20,7 +20,7 @@ export const usePostEditor = ({
   editorClassName,
 }: {
   content: string;
-  onChange: (e: any) => void;
+  onChange: (...event: any[]) => void;
   placeholder?: string;
   autoFocus?: FocusPosition;
   editorClassName?: string;
