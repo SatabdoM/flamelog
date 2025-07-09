@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from '@workspace/ui/components/card';
 import { formatTimeAgo } from '@/lib/utils/date';
+import { PostOptions } from './post-options';
 import { PostInteractions } from './post-interactions';
 
 interface PostCardProps {
@@ -19,7 +20,7 @@ interface PostCardProps {
 
 export const PostCard = ({ post }: PostCardProps) => {
   return (
-    <Card className="gap-2 pb-0">
+    <Card className="group/post-card to-muted/50 dark:from-muted/20 dark:to-muted gap-2 bg-gradient-to-tl from-transparent pb-0">
       <CardHeader>
         <div className="flex items-center gap-3">
           <Avatar className="size-9">
@@ -33,12 +34,14 @@ export const PostCard = ({ post }: PostCardProps) => {
               {formatTimeAgo(new Date(post.createdAt))}
             </CardDescription>
           </div>
+
+          <PostOptions postId={post.id} />
         </div>
       </CardHeader>
 
       <CardContent className="text-[0.95rem] text-pretty">{post.content}</CardContent>
 
-      <CardFooter className="mt-2 w-full flex-col border-t px-1.5 !py-1.5">
+      <CardFooter className="mt-1 border-t !py-1.5">
         <PostInteractions
           postId={post.id}
           likeCount={post.likeCount}

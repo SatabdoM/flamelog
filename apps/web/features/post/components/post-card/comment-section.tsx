@@ -19,7 +19,7 @@ export const CommentsSection = ({ postId, commentId }: CommentsSectionProps) => 
   return (
     <div className={cn('mt-2 w-full space-y-4 pt-2', !isSubCommentSection && 'border-t p-2 pt-3')}>
       <div className="flex items-start gap-2">
-        <Avatar className={cn(isSubCommentSection && 'size-6.5')}>
+        <Avatar className={cn('size-6.5')}>
           <AvatarImage
             src={
               'https://images.pexels.com/photos/1115697/pexels-photo-1115697.jpeg?auto=compress&cs=tinysrgb&w=600'

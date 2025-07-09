@@ -21,7 +21,7 @@ export const Comment = ({ postId, comment, isReplyComment = false }: CommentProp
 
   return (
     <div className="flex gap-3">
-      <Avatar className={cn(isReplyComment && 'size-6.5')}>
+      <Avatar className={cn('size-6')}>
         <AvatarImage src={comment.author?.image || ''} alt="avatar" className="object-cover" />
         <AvatarFallback>{comment.author?.name?.substring(0, 2).toUpperCase()}</AvatarFallback>
       </Avatar>
