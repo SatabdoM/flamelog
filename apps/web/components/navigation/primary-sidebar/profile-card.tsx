@@ -24,8 +24,8 @@ export const ProfileCard = () => {
             </AvatarFallback>
           </Avatar>
 
-          <div className="space-y-1.5">
-            <p className="text-sm font-semibold">{user?.name || 'Loading...'}</p>
+          <div className="space-y-1">
+            <p className="text-base font-semibold">{user?.name || 'Loading...'}</p>
             <div className="text-muted-foreground flex items-center gap-2 font-mono text-xs">
               <span>🪵40 logs</span>
               <span>🔥2 days streak</span>

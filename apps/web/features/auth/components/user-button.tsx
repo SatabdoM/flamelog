@@ -62,14 +62,14 @@ export const UserButton = ({ user }: UserButtonProps) => {
           </div>
         </div>
 
-        <DropdownMenuItem asChild className="cursor-pointer">
+        <DropdownMenuItem asChild className="cursor-pointer rounded-md">
           <Link href="/" className="px-3 py-2.5">
             <Settings className="size-4" />
             <span>Manage Account</span>
           </Link>
         </DropdownMenuItem>
 
-        <DropdownMenuItem asChild onClick={onLogoutClick} className="cursor-pointer">
+        <DropdownMenuItem asChild onClick={onLogoutClick} className="cursor-pointer rounded-md">
           <div className="px-3 py-2.5">
             <LogOut className="size-4" />
             <span>Logout</span>

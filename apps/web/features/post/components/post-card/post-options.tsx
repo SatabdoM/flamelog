@@ -1,6 +1,7 @@
 'use client';
 
-import { Ellipsis, FileWarning, MinusCircle, Share2 } from 'lucide-react';
+import { toast } from 'sonner';
+import { Ellipsis, FileWarning, MinusCircle } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -15,6 +16,14 @@ interface PostOptionsProps {
 }
 
 export const PostOptions = ({ postId }: PostOptionsProps) => {
+  const reportPost = () => {
+    toast.info('Post reported!');
+  };
+
+  const markPostAsNotInterested = () => {
+    toast.info('Got it, we will not show this type of posts to you');
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="text-muted-foreground hover:bg-accent mb-auto ml-auto cursor-pointer rounded-md p-1">
@@ -22,18 +31,14 @@ export const PostOptions = ({ postId }: PostOptionsProps) => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="bg-background">
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem className="cursor-pointer" onClick={markPostAsNotInterested}>
           <MinusCircle className="size-4" />
           Not Interested
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem className="cursor-pointer" onClick={reportPost}>
           <FileWarning className="size-4" />
           Report
-        </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">
-          <Share2 className="size-4" />
-          Share
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

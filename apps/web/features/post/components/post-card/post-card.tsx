@@ -20,7 +20,7 @@ interface PostCardProps {
 
 export const PostCard = ({ post }: PostCardProps) => {
   return (
-    <Card className="group/post-card to-muted/50 dark:from-muted/20 dark:to-muted gap-2 bg-gradient-to-tl from-transparent pb-0">
+    <Card className="group/post-card gap-3 pb-0">
       <CardHeader>
         <div className="flex items-center gap-3">
           <Avatar className="size-9">

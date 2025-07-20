@@ -4,7 +4,7 @@ import { sidebarNavMenus } from '@/components/navigation/constants/sidebar-menus
 import { ProfileCard } from './profile-card';
 import { SidebarNavItem } from '../sidebar-nav-item';
 import { Button } from '@workspace/ui/components/button';
-import { Bell, BookMarked, Plus, Settings } from 'lucide-react';
+import { BookMarked, Plus, Settings } from 'lucide-react';
 import { useModalStore } from '@/stores/modal.store';
 import { PostComposeModal } from '@/features/post/components/post-composer';
 
@@ -16,7 +16,11 @@ export const PrimarySidebar = () => {
       <ProfileCard />
 
       <div className="m-2">
-        <Button className="w-full rounded-lg" onClick={() => openModal(<PostComposeModal />)}>
+        <Button
+          variant="secondary"
+          className="w-full rounded-lg"
+          onClick={() => openModal(<PostComposeModal />)}
+        >
           <Plus className="size-5" />
           New Log
         </Button>
@@ -29,13 +33,6 @@ export const PrimarySidebar = () => {
       </ul>
 
       <div className="mt-auto space-y-1 pb-2">
-        <div className="mx-2">
-          <Button variant="outline" size="lg" className="w-full justify-start rounded-md">
-            <Bell />
-            Notifications
-          </Button>
-        </div>
-
         <div className="mx-2">
           <Button variant="outline" size="lg" className="w-full justify-start rounded-md">
             <BookMarked />

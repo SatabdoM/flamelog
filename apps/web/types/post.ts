@@ -9,4 +9,5 @@ export type TPost = {
   authorId: number;
   likeCount: number;
   commentCount: number;
+  images: string[];
 };
