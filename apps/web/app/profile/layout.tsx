@@ -7,7 +7,7 @@ const MainLayout = async ({ children }: { children: ReactNode }) => {
   const { user } = await auth();
 
   return (
-    <LayoutClient user={user} variant="main">
+    <LayoutClient user={user} variant="profile">
       {children}
     </LayoutClient>
   );

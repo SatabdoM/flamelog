@@ -1,5 +1,6 @@
-import type { NavMenu } from '@/components/navigation/types/nav-menu';
 import { BookUser, Home, LibraryBig, Sparkles } from 'lucide-react';
+
+import { NavMenu } from '../types/nav-menu';
 
 export const sidebarNavMenus: NavMenu[] = [
   {
@@ -20,6 +21,6 @@ export const sidebarNavMenus: NavMenu[] = [
   {
     label: 'My Logs',
     icon: BookUser,
-    url: '/my-space/logs',
+    url: '/profile/logs',
   },
 ];

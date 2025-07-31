@@ -1,5 +1,6 @@
-import type { MobileNavMenu } from '@/components/navigation/types/nav-menu';
 import { BookUser, Home, LibraryBig, Sparkles, SquarePlus } from 'lucide-react';
+
+import type { MobileNavMenu } from '@/components/navigation/types/nav-menu';
 
 export const mobileNavMenus: MobileNavMenu[] = [
   {
@@ -25,6 +26,6 @@ export const mobileNavMenus: MobileNavMenu[] = [
   {
     label: 'My Logs',
     icon: BookUser,
-    url: '/my-logs',
+    url: '/profile/logs',
   },
 ];

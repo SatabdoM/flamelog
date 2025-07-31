@@ -1,8 +1,10 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+
 import { PostCard } from '@/features/post/components/post-card';
 import { getPosts } from '@/features/feed/actions/get-posts';
-import { useQuery } from '@tanstack/react-query';
+import { Loading } from '@/components/loading';
 
 const MyLogsPage = () => {
   const { isPending, data: posts } = useQuery({
@@ -12,7 +14,8 @@ const MyLogsPage = () => {
 
   if (isPending) {
     return (
-      <div>
+      <div className="text-center">
+        <Loading />
         <p>Loading posts...</p>
       </div>
     );

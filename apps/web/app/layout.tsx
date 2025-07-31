@@ -43,7 +43,7 @@ const RootLayout = async ({
           <ThemeProvider>
             {children}
             <Modal />
-            <Toaster richColors />
+            <Toaster position="bottom-left" richColors />
           </ThemeProvider>
         </QueryProvider>
       </body>

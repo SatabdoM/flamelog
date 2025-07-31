@@ -1,10 +1,12 @@
 'use client';
 
-import { sidebarNavMenus } from '@/components/navigation/constants/sidebar-menus';
+import Link from 'next/link';
+import { BookMarked, Plus, Settings } from 'lucide-react';
+
 import { ProfileCard } from './profile-card';
+import { sidebarNavMenus } from '../constants/sidebar-menus';
 import { SidebarNavItem } from '../sidebar-nav-item';
 import { Button } from '@workspace/ui/components/button';
-import { BookMarked, Plus, Settings } from 'lucide-react';
 import { useModalStore } from '@/stores/modal.store';
 import { PostComposeModal } from '@/features/post/components/post-composer';
 
@@ -34,16 +36,20 @@ export const PrimarySidebar = () => {
 
       <div className="mt-auto space-y-1 pb-2">
         <div className="mx-2">
-          <Button variant="outline" size="lg" className="w-full justify-start rounded-md">
-            <BookMarked />
-            Saved Posts
+          <Button variant="outline" size="lg" className="w-full justify-start rounded-md" asChild>
+            <Link href="/profile/saved">
+              <BookMarked />
+              Saved Posts
+            </Link>
           </Button>
         </div>
 
         <div className="mx-2">
-          <Button variant="outline" size="lg" className="w-full justify-start rounded-md">
-            <Settings />
-            Settings and privacy
+          <Button variant="outline" size="lg" className="w-full justify-start rounded-md" asChild>
+            <Link href="/settings">
+              <Settings />
+              Settings and privacy
+            </Link>
           </Button>
         </div>
       </div>

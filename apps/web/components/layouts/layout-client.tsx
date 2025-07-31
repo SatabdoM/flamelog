@@ -5,21 +5,24 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { useUIStore } from '@/stores/ui.store';
 import { useWindowSize } from '@/hooks/use-window-size';
+import { User } from '@/types/user';
+import { cn } from '@workspace/ui/lib/utils';
 import { Navbar } from '@/components/navigation/navbar';
 import { SearchBar } from '@/components/search/search-bar';
 import { SearchResult } from '@/components/search/search-result';
 import { MobileNav } from '@/components/navigation/mobile-nav';
-import { PrimarySidebar } from '@/components/navigation/primary-sidebar';
-import { SecondarySidebar } from '@/components/navigation/secondary-sidebar';
-import { User } from '@/types/user';
-import { cn } from '@workspace/ui/lib/utils';
+import { PrimarySidebar } from '@/components/sidebars/primary-sidebar';
+import { SecondarySidebar } from '@/components/sidebars/secondary-sidebar';
+import { ProfileSidebar } from '@/features/profile/components/profile-sidebar';
 
-export const MainLayoutClient = ({
+export const LayoutClient = ({
   user,
   children,
+  variant = 'main',
 }: {
   user: User | null;
   children: ReactNode;
+  variant?: 'main' | 'profile';
 }) => {
   const [isFirstRender, setIsFirstRender] = useState(true);
   const isMobileSearchOpen = useUIStore((state) => state.isMobileSearchOpen);
@@ -92,16 +95,18 @@ export const MainLayoutClient = ({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              className="flex justify-between gap-8"
+              className="flex justify-between gap-5"
             >
               {/* height = 100vh - header height - padding of the parent container */}
               <aside className="sticky top-[calc(60px+16px)] hidden h-[calc(100vh-60px-32px)] lg:block">
-                <PrimarySidebar />
+                {variant === 'main' ? <PrimarySidebar /> : <ProfileSidebar />}
               </aside>
               <main className={cn('flex-grow-1 pb-16 lg:pb-4')}>{children}</main>
-              <aside className="sticky top-[calc(60px+16px)] hidden h-[calc(100vh-60px-32px)] lg:block">
-                <SecondarySidebar />
-              </aside>
+              {variant === 'main' && (
+                <aside className="sticky top-[calc(60px+16px)] hidden h-[calc(100vh-60px-32px)] lg:block">
+                  <SecondarySidebar />
+                </aside>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

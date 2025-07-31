@@ -5,9 +5,9 @@ import { Bell } from 'lucide-react';
 import { Logo } from '@workspace/ui/components/logo';
 import { UserButton } from '@/features/auth/components/user-button';
 import { Button } from '@workspace/ui/components/button';
-import { ThemeToggle } from '../theme-toggle';
-import { SearchBox } from '../search/search-box';
-import { NavMenus } from './navbar/nav-menus';
+import { ThemeToggle } from '../../theme-toggle';
+import { SearchBox } from '../../search/search-box';
+import { NavMenus } from './nav-menus';
 import { User } from '@/types/user';
 
 interface NavbarProps {
