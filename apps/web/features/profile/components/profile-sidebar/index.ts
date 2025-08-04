@@ -1,3 +1,1 @@
-import { ProfileSidebar } from './profile-sidebar';
-
-export { ProfileSidebar };
+export { ProfileSidebar } from './profile-sidebar';

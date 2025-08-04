@@ -57,19 +57,21 @@ export const UserButton = ({ user }: UserButtonProps) => {
             </AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-sm font-semibold">{user?.name}</p>
+            <p className="text-sm font-semibold">
+              <Link href="/profile">{user?.name}</Link>
+            </p>
             <p className="text-muted-foreground text-sm">{user?.email}</p>
           </div>
         </div>
 
-        <DropdownMenuItem asChild className="cursor-pointer rounded-md">
-          <Link href="/" className="px-3 py-2.5">
+        <DropdownMenuItem asChild className="cursor-pointer rounded-lg">
+          <Link href="/settings/account" className="px-3 py-2.5">
             <Settings className="size-4" />
             <span>Manage Account</span>
           </Link>
         </DropdownMenuItem>
 
-        <DropdownMenuItem asChild onClick={onLogoutClick} className="cursor-pointer rounded-md">
+        <DropdownMenuItem asChild onClick={onLogoutClick} className="cursor-pointer rounded-lg">
           <div className="px-3 py-2.5">
             <LogOut className="size-4" />
             <span>Logout</span>

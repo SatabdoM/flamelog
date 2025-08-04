@@ -1,16 +1,31 @@
 import type { ReactNode } from 'react';
 
 import { auth } from '@/features/auth/actions/server';
-import { LayoutClient } from '@/components/layouts/layout-client';
+import { Header } from '@/components/layout/header';
+import { LayoutShell } from '@/components/layout/layout-shell';
+import { SidebarFrame } from '@/components/layout/sidebar-frame';
+import { ProfileSidebar } from '@/features/profile/components/profile-sidebar';
+import { MainFrame } from '@/components/layout/main-frame';
+import { MobileNav } from '@/components/navigation/mobile-nav';
 
-const MainLayout = async ({ children }: { children: ReactNode }) => {
+const ProfileLayout = async ({ children }: { children: ReactNode }) => {
   const { user } = await auth();
 
   return (
-    <LayoutClient user={user} variant="profile">
-      {children}
-    </LayoutClient>
+    <>
+      <Header user={user} />
+
+      <LayoutShell>
+        <SidebarFrame>
+          <ProfileSidebar username={user?.username!} />
+        </SidebarFrame>
+
+        <MainFrame>{children}</MainFrame>
+      </LayoutShell>
+
+      <MobileNav />
+    </>
   );
 };
 
-export default MainLayout;
+export default ProfileLayout;

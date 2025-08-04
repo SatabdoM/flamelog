@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import { getProfileByUsername } from '@/features/profile/actions/server/get-profile';
+import { getProfile } from '@/features/profile/actions/server/get-profile';
 
 interface ProfilePageProps {
   params: Promise<{
@@ -10,9 +10,6 @@ interface ProfilePageProps {
 
 const ProfilePage = async ({ params }: ProfilePageProps) => {
   const username = (await params).username;
-
-  const user = await getProfileByUsername(username);
-  if (!user) return notFound();
 
   return (
     <div>

@@ -2,7 +2,7 @@
 
 import { api } from '@/lib/axios';
 
-export const getProfileByUsername = async (username: string) => {
+export const getProfile = async (username: string) => {
   try {
     // const res = await api.get(`/profile/${username}`);
     // return res.data;
